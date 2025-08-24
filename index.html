@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sécurité Montpellier - Protection Professionnelle</title>
+    <title>4S Sécurité Privée - Montpellier | Gardiennage & Surveillance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #0d3b66;
@@ -24,6 +25,7 @@
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
         
         .container {
@@ -33,6 +35,7 @@
             padding: 0 15px;
         }
         
+        /* Header */
         header {
             background: var(--primary);
             color: white;
@@ -51,7 +54,7 @@
         }
         
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -59,7 +62,7 @@
         
         .logo span {
             margin-right: 10px;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
         
         nav ul {
@@ -75,20 +78,24 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
         }
         
         nav a:hover {
             color: var(--secondary);
         }
         
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(13, 59, 102, 0.85), rgba(13, 59, 102, 0.85));
+            background: linear-gradient(rgba(13, 59, 102, 0.85), rgba(13, 59, 102, 0.85)), url('https://images.unsplash.com/photo-1586449480530-53f78dee0e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
             height: 100vh;
             color: white;
             display: flex;
             align-items: center;
             text-align: center;
-            padding-top: 70px;
+            padding-top: 80px;
         }
         
         .hero-content {
@@ -97,18 +104,20 @@
         }
         
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
         
         .btn {
             display: inline-block;
-            padding: 14px 30px;
+            padding: 15px 35px;
             background: var(--secondary);
             color: var(--dark);
             border: none;
@@ -116,101 +125,253 @@
             font-weight: 600;
             text-decoration: none;
             margin: 10px 8px;
+            transition: all 0.3s;
         }
         
         .btn:hover {
             background: var(--accent);
             color: white;
+            transform: translateY(-3px);
         }
         
+        /* Sections */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
         
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 50px;
             color: var(--primary);
+            position: relative;
         }
         
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+        }
+        
+        /* Services */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
         
         .service-card {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 25px;
         }
         
         .service-icon {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--primary);
         }
         
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .sub-services {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .sub-services li {
+            margin-bottom: 8px;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .sub-services li:before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        /* About Section */
         .about {
             background: #f1f5f9;
         }
         
         .about-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             text-align: center;
         }
         
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Section */
         .contact-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 500;
+            color: var(--primary);
         }
         
         .form-control {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
         }
         
         textarea.form-control {
             min-height: 150px;
+            resize: vertical;
         }
         
+        .contact-info {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .contact-item {
+            display: inline-block;
+            margin: 0 25px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        /* Footer */
         footer {
             background: var(--primary);
             color: white;
-            padding: 40px 0 20px;
+            padding: 50px 0 20px;
             text-align: center;
         }
         
-        .footer-links {
-            margin: 20px 0;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
         }
         
         .footer-links a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
+            transition: color 0.3s;
         }
         
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            margin: 0 8px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -232,6 +393,15 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .contact-item {
+                display: block;
+                margin: 15px 0;
+            }
+            
+            .footer-content {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -239,14 +409,14 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <span>🔒</span> Sécurité Montpellier
+                <span>🔒</span> 4S Sécurité Privée
             </div>
             <nav>
                 <ul>
                     <li><a href="#accueil">Accueil</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">À propos</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact">Contact & Devis</a></li>
                 </ul>
             </nav>
         </div>
@@ -254,10 +424,10 @@
 
     <section id="accueil" class="hero">
         <div class="container hero-content">
-            <h1>Votre sécurité, notre expertise</h1>
-            <p>Services de sécurité professionnels sur Montpellier et toute la région Occitanie</p>
+            <h1>4S Sécurité Privée - Expertise Montpelliéraine</h1>
+            <p>Votre partenaire de confiance pour la sécurité en Occitanie depuis 2024</p>
             <div>
-                <a href="#contact" class="btn">Demander un devis</a>
+                <a href="#contact" class="btn">Demander un devis gratuit</a>
                 <a href="#services" class="btn">Découvrir nos services</a>
             </div>
         </div>
@@ -265,113 +435,193 @@
 
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">Nos Services</h2>
+            <h2 class="section-title">Nos Services Professionnels</h2>
             <div class="services-grid">
+                
+                <!-- Service 1: Gardiennage et Surveillance -->
                 <div class="service-card">
-                    <div class="service-icon">🏢</div>
-                    <h3>Surveillance d'établissements</h3>
-                    <p>Services de gardiennage et surveillance pour entreprises, bureaux et sites industriels avec des agents formés et expérimentés.</p>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1586449480530-53f78dee0e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="service-content">
+                        <div class="service-icon">🏢</div>
+                        <h3>Gardiennage & Surveillance Humaine</h3>
+                        <p>Services complets de surveillance et protection par nos agents qualifiés</p>
+                        <ul class="sub-services">
+                            <li>Agents de sécurité diplômés et habilités</li>
+                            <li>Surveillance 24h/24 et 7j/7</li>
+                            <li>Contrôle d'accès strict</li>
+                            <li>Protection des biens et personnes</li>
+                            <li>Postes de surveillance fixes et mobiles</li>
+                            <li>Rapports d'activité quotidiens</li>
+                        </ul>
+                    </div>
                 </div>
                 
+                <!-- Service 2: Rondes et Interventions -->
                 <div class="service-card">
-                    <div class="service-icon">🎪</div>
-                    <h3>Sécurité d'événements</h3>
-                    <p>Gestion de la sécurité pour événements publics et privés : concerts, festivals, salons professionnels et manifestations sportives.</p>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1586348943529-beaae6c28db9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="service-content">
+                        <div class="service-icon">🚔</div>
+                        <h3>Rondes & Interventions</h3>
+                        <p>Services de patrouille et intervention rapide sur Montpellier</p>
+                        <ul class="sub-services">
+                            <li>Rondes régulières programmées</li>
+                            <li>Intervention d'urgence 24h/24</li>
+                            <li>Véhicules de patrouille sécurisés</li>
+                            <li>Vérification des points sensibles</li>
+                            <li>Coordination avec les forces de l'ordre</li>
+                            <li>Rapports détaillés avec preuves photos</li>
+                        </ul>
+                    </div>
                 </div>
                 
+                <!-- Service 3: Événementiel -->
                 <div class="service-card">
-                    <div class="service-icon">🚐</div>
-                    <h3>Transport de fonds</h3>
-                    <p>Transport sécurisé de valeurs avec des véhicules blindés et du personnel hautement qualifié pour tous vos besoins.</p>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="service-content">
+                        <div class="service-icon">🎪</div>
+                        <h3>Sécurité Événementielle</h3>
+                        <p>Gestion complète de la sécurité pour tous vos événements</p>
+                        <ul class="sub-services">
+                            <li>Événements culturels et sportifs</li>
+                            <li>Congrès et séminaires d'entreprise</li>
+                            <li>Festivals et concerts</li>
+                            <li>Mariages et réceptions</li>
+                            <li>Gestion des flux et foules</li>
+                            <li>Protection des personnalités</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon">📹</div>
-                    <h3>Télésurveillance</h3>
-                    <p>Solutions de surveillance à distance 24h/24 et 7j/7 avec centre de monitoring et intervention rapide en cas d'incident.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">🏠</div>
-                    <h3>Sécurité résidentielle</h3>
-                    <p>Services de sécurité sur mesure pour particuliers et résidences avec des agents discrets et professionnels.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">🔍</div>
-                    <h3>Audit de sécurité</h3>
-                    <p>Évaluation complète de vos besoins en sécurité et recommandations personnalisées pour optimiser votre protection.</p>
-                </div>
             </div>
         </div>
     </section>
 
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">À propos de nous</h2>
+            <h2 class="section-title">À propos de 4S Sécurité Privée</h2>
             <div class="about-content">
-                <p>Fondée en 2010 à Montpellier, notre société de sécurité privée s'est rapidement imposée comme un acteur majeur de la sécurité en Occitanie. Nous mettons à votre service notre expertise et notre savoir-faire pour assurer la protection de vos biens et personnes.</p>
-                <p>Notre équipe est composée de professionnels expérimentés, rigoureusement sélectionnés et formés aux dernières techniques de sécurité. Tous nos agents sont habilités par le CNAPS et possèdent les autorisations nécessaires pour exercer leurs missions.</p>
-                <p>Nous intervenons sur Montpellier et toute la région Occitanie, avec une disponibilité 24h/24 et 7j/7 pour répondre à tous vos besoins de sécurité.</p>
+                <p>Fondée en 2024 à Montpellier, <strong>4S Sécurité Privée</strong> s'est rapidement imposée comme un acteur majeur de la sécurité en région Occitanie. Notre entreprise est née de la volonté de proposer des services de sécurité haut de gamme, adaptés aux besoins spécifiques des professionnels et particuliers.</p>
+                
+                <p>Notre équipe est composée d'agents expérimentés, rigoureusement sélectionnés et formés aux dernières techniques de sécurité. Tous nos agents sont habilités par le CNAPS (Conseil National des Activités Privées de Sécurité) et possèdent les autorisations nécessaires pour exercer leurs missions avec professionnalisme et efficacité.</p>
+                
+                <p>Nous intervenons sur Montpellier et toute la région Occitanie, avec une disponibilité 24h/24 et 7j/7 pour répondre à tous vos besoins de sécurité. Notre engagement : votre sérénité.</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text">Agents de sécurité</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-text">Disponibilité</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-text">Clients satisfaits</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2024</div>
+                    <div class="stat-text">Fondation à Montpellier</div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Contactez-nous</h2>
+            <h2 class="section-title">Contact & Devis Gratuit</h2>
+            
             <div class="contact-form">
-                <form>
+                <form id="devisForm">
                     <div class="form-group">
-                        <label for="name">Nom complet</label>
+                        <label for="name">Nom complet *</label>
                         <input type="text" id="name" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">Adresse email</label>
+                        <label for="entreprise">Entreprise</label>
+                        <input type="text" id="entreprise" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Adresse email *</label>
                         <input type="email" id="email" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone" class="form-control">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="service">Service demandé</label>
+                        <label for="service">Service demandé *</label>
                         <select id="service" class="form-control" required>
                             <option value="">Sélectionnez un service</option>
-                            <option value="surveillance">Surveillance d'établissements</option>
-                            <option value="evenements">Sécurité d'événements</option>
-                            <option value="transport">Transport de fonds</option>
-                            <option value="telesurveillance">Télésurveillance</option>
-                            <option value="residentiel">Sécurité résidentielle</option>
-                            <option value="audit">Audit de sécurité</option>
+                            <option value="gardiennage">Gardiennage & Surveillance</option>
+                            <option value="rondes">Rondes & Interventions</option>
+                            <option value="evenementiel">Sécurité Événementielle</option>
+                            <option value="autres">Autre demande</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" required></textarea>
+                        <label for="message">Votre message *</label>
+                        <textarea id="message" class="form-control" required placeholder="Décrivez vos besoins en sécurité, lieu d'intervention, durée, etc."></textarea>
                     </div>
                     
-                    <button type="submit" class="btn" style="width: 100%;">Envoyer la demande</button>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Envoyer ma demande de devis
+                    </button>
                 </form>
             </div>
             
-            <div style="text-align: center; margin-top: 40px;">
-                <h3>Coordonnées</h3>
-                <p>📞 04 67 12 34 56</p>
-                <p>📧 contact@securite-montpellier.fr</p>
-                <p>🏢 123 Avenue de la Sécurité, 34000 Montpellier</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <strong>06 60 35 01 97</strong>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <strong>forsecuriteprivee@gmail.com</strong>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <strong>Montpellier, Occitanie</strong>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="logo" style="justify-content: center;">
-                <span>🔒</span> Sécurité Montpellier
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <span>🔒</span> 4S Sécurité Privée
+                    </div>
+                    <p>Votre partenaire de confiance pour tous vos besoins de sécurité à Montpellier et en région Occitanie.</p>
+                </div>
+                
+                <div>
+                    <h3>Services</h3>
+                    <ul class="sub-services">
+                        <li>Gardiennage & Surveillance</li>
+                        <li>Rondes & Interventions</li>
+                        <li>Sécurité Événementielle</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-phone"></i> 06 60 35 01 97</p>
+                    <p><i class="fas fa-envelope"></i> forsecuriteprivee@gmail.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
             </div>
             
             <div class="footer-links">
@@ -381,28 +631,55 @@
                 <a href="#contact">Contact</a>
             </div>
             
-            <p>Agréments officiels | Entreprise certifiée CNAPS</p>
-            <p>&copy; 2023 Sécurité Montpellier - Tous droits réservés</p>
+            <div class="copyright">
+                <p>&copy; 2024 4S Sécurité Privée - Tous droits réservés | Agrément CNAPS en cours</p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Smooth scrolling for navigation
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 window.scrollTo({
-                    top: target.offsetTop - 70,
+                    top: target.offsetTop - 80,
                     behavior: 'smooth'
                 });
             });
         });
         
-        const form = document.querySelector('form');
+        // Form submission
+        const form = document.getElementById('devisForm');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Merci pour votre message. Nous vous contacterons rapidement.');
+            alert('Merci pour votre demande de devis. Nous vous contacterons dans les plus brefs délais.');
             form.reset();
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply animations to elements
+        document.querySelectorAll('.service-card, .stat-item').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
         });
     </script>
 </body>
