@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOR Sécurité Privée - Protection et surveillance</title>
+    <title>FOR Sécurité Privée (4SP) - Services de sécurité à Montpellier</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,14 +13,22 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #ff9f43;
+            --dark: #333;
+            --light: #f8f9fa;
+        }
+        
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
         
         header {
-            background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             padding: 1rem 2rem;
             display: flex;
@@ -40,20 +48,22 @@
         .logo {
             width: 80px;
             height: 80px;
-            background: linear-gradient(45deg, #ff9f43, #ff7f00);
+            background: white;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 15px;
-            border: 3px solid white;
+            border: 3px solid var(--accent);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
         
-        .logo-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
         }
         
         .company-name {
@@ -90,7 +100,7 @@
         }
         
         .hero {
-            background: url('https://images.unsplash.com/photo-1586449480533-53cf01f89a58?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
             height: 500px;
             display: flex;
             flex-direction: column;
@@ -132,7 +142,7 @@
         
         .btn {
             display: inline-block;
-            background: #ff9f43;
+            background: var(--accent);
             color: white;
             padding: 12px 30px;
             text-decoration: none;
@@ -140,6 +150,8 @@
             font-weight: bold;
             transition: all 0.3s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
         }
         
         .btn:hover {
@@ -148,15 +160,44 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
         
+        .commercial-presentation {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: white;
+        }
+        
+        .commercial-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .commercial-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .commercial-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
         .services {
             padding: 5rem 2rem;
             text-align: center;
+            background: var(--light);
         }
         
         .section-title {
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #2e86c1;
+            color: var(--secondary);
             position: relative;
             display: inline-block;
         }
@@ -169,7 +210,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: #ff9f43;
+            background: var(--accent);
         }
         
         .services-grid {
@@ -188,6 +229,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .service-card::before {
@@ -197,7 +239,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: #2e86c1;
+            background: var(--secondary);
             transition: width 0.3s ease;
         }
         
@@ -212,47 +254,127 @@
         }
         
         .service-image {
-            width: 100%;
             height: 200px;
-            object-fit: cover;
+            overflow: hidden;
             border-radius: 8px;
             margin-bottom: 1.5rem;
         }
         
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+        
         .service-icon {
             font-size: 3rem;
-            color: #2e86c1;
+            color: var(--secondary);
             margin-bottom: 1.5rem;
             transition: all 0.3s;
         }
         
         .service-card:hover .service-icon {
-            color: #ff9f43;
+            color: var(--accent);
             transform: scale(1.1);
         }
         
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #2e86c1;
+            color: var(--secondary);
             transition: all 0.3s;
         }
         
         .service-card:hover h3 {
-            color: #1a5276;
+            color: var(--primary);
+        }
+        
+        .service-detail {
+            display: none;
+            padding: 4rem 2rem;
+            background: white;
+        }
+        
+        .service-detail.active {
+            display: block;
+        }
+        
+        .service-detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .service-detail-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-detail-text h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .service-detail-text ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-detail-text li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .service-detail-text li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .service-detail-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
         
         .about {
             padding: 5rem 2rem;
-            background: #eef2f7;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
+            background: var(--light);
         }
         
         .about-content {
             max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
@@ -261,7 +383,7 @@
         
         .about-text h2 {
             font-size: 2.5rem;
-            color: #2e86c1;
+            color: var(--primary);
             margin-bottom: 1.5rem;
         }
         
@@ -270,21 +392,31 @@
             font-size: 1.1rem;
         }
         
-        .about-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
         
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s;
+        .value-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
         
-        .about-image:hover img {
-            transform: scale(1.05);
+        .value-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .value-item h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
         
         .news {
@@ -304,22 +436,27 @@
             margin-top: 2rem;
         }
         
-        .news-card {
-            background: #f8f9fa;
+        .news-item {
+            background: var(--light);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-5px);
         }
         
         .news-image {
-            width: 100%;
             height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .news-item:hover .news-image img {
+            transform: scale(1.05);
         }
         
         .news-content {
@@ -327,42 +464,55 @@
         }
         
         .news-date {
-            color: #2e86c1;
             font-size: 0.9rem;
+            color: #777;
             margin-bottom: 0.5rem;
         }
         
         .news-title {
             font-size: 1.3rem;
+            color: var(--primary);
             margin-bottom: 1rem;
-            color: #2e86c1;
         }
         
         .upload-section {
-            background: #eef2f7;
-            padding: 3rem 2rem;
+            background: var(--light);
+            padding: 2rem;
             border-radius: 10px;
             margin-top: 3rem;
             text-align: center;
         }
         
-        .upload-btn {
-            display: inline-block;
-            background: #2e86c1;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: background 0.3s;
+        .upload-form {
+            margin-top: 1.5rem;
         }
         
-        .upload-btn:hover {
-            background: #1a5276;
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
         }
         
         footer {
-            background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             padding: 3rem 2rem;
         }
@@ -389,7 +539,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background: #ff9f43;
+            background: var(--accent);
         }
         
         .footer-section p, .footer-section li {
@@ -407,7 +557,12 @@
         }
         
         .footer-section a:hover {
-            color: #ff9f43;
+            color: var(--accent);
+        }
+        
+        .footer-section i {
+            width: 30px;
+            color: var(--accent);
         }
         
         .footer-bottom {
@@ -441,7 +596,16 @@
                 font-size: 1.2rem;
             }
             
+            .service-detail-content,
             .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-detail-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -451,18 +615,18 @@
     <header>
         <div class="logo-container">
             <div class="logo">
-                <div class="logo-text">FOR</div>
+                <!-- Remplacez par votre logo -->
+                <img src="https://via.placeholder.com/150" alt="FOR Sécurité Privée (4SP)" id="logo-image">
             </div>
             <div>
-                <div class="company-name">FOR Sécurité Privée</div>
-                <div class="company-slogan">Votre sécurité est notre priorité</div>
+                <div class="company-name">FOR Sécurité Privée (4SP)</div>
+                <div class="company-slogan">Votre sécurité est notre priorité depuis 2024</div>
             </div>
         </div>
         <nav>
             <ul>
                 <li><a href="#"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
-                <li><a href="#news"><i class="fas fa-newspaper"></i> Actualités</a></li>
                 <li><a href="#about"><i class="fas fa-info-circle"></i> À propos</a></li>
                 <li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
             </ul>
@@ -472,104 +636,189 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Experts en Sécurité à Montpellier</h1>
-            <p>Protection et surveillance 24h/24 pour votre tranquillité d'esprit</p>
+            <p>Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</p>
             <a href="#contact" class="btn">Demander un devis gratuit</a>
         </div>
     </section>
     
-    <section id="services" class="services">
+    <section class="commercial-presentation">
+        <div class="commercial-content">
+            <h2>Votre partenaire de confiance en sécurité privée</h2>
+            <p>Chez <span class="highlight">FOR Sécurité Privée (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">50 agents expérimentés</span> vous garantit une protection optimale de vos biens et personnes.</p>
+            <p>Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
+        </div>
+    </section>
+    
+    <section class="services" id="services">
         <h2 class="section-title">Nos Services</h2>
         <div class="services-grid">
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1586449480533-53cf01f89a58?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de gardiennage" class="service-image">
+            <div class="service-card" onclick="showService('gardiennage')">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de gardiennage">
+                </div>
+                <div class="service-icon"><i class="fas fa-user-shield"></i></div>
                 <h3>Gardiennage & Surveillance Humaine</h3>
-                <p>Agents de sécurité diplômés CNAPS assurant une surveillance continue 24h/24 et 7j/7 avec contrôle d'accès strict et gestion des entrées/sorties.</p>
-                <ul style="text-align: left; padding-left: 20px; margin-top: 15px;">
+                <p>Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</p>
+            </div>
+            <div class="service-card" onclick="showService('rondes')">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de rondes">
+                </div>
+                <div class="service-icon"><i class="fas fa-walking"></i></div>
+                <h3>Rondes & Interventions</h3>
+                <p>Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</p>
+            </div>
+            <div class="service-card" onclick="showService('evenementiel')">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité événementielle">
+                </div>
+                <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
+                <h3>Sécurité Événementielle</h3>
+                <p>Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="service-detail" id="gardiennage">
+        <div class="service-detail-content">
+            <div class="service-detail-text">
+                <h2>Gardiennage & Surveillance Humaine</h2>
+                <p>Notre service de gardiennage et surveillance humaine offre une protection optimale pour vos biens et personnes. Nos agents, spécialement formés et habilités, assurent une présence dissuasive et réactive.</p>
+                
+                <h3>Prestations incluses :</h3>
+                <ul>
                     <li>Agents de sécurité diplômés CNAPS</li>
                     <li>Surveillance continue 24h/24 et 7j/7</li>
-                    <li>Contrôle d'accès strict</li>
+                    <li>Contrôle d'accès strict et gestion des entrées/sorties</li>
                     <li>Rondes de sécurité programmées</li>
-                    <li>Rapports d'activité détaillés</li>
+                    <li>Rapports d'activité détaillés quotidiens</li>
+                    <li>Intervention rapide en cas d'incident</li>
+                    <li>Vidéosurveillance complémentaire</li>
+                    <li>Gestion des alarmes et alertes</li>
                 </ul>
-            </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1608121632781-748e7fa25635?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de ronde et intervention" class="service-image">
-                <h3>Ronde & Intervention</h3>
-                <p>Services de patrouille et d'intervention rapide pour assurer la sécurité de vos biens avec des équipes disponibles 24h/24.</p>
-                <ul style="text-align: left; padding-left: 20px; margin-top: 15px;">
-                    <li>Patrouilles régulières</li>
-                    <li>Intervention rapide</li>
-                    <li>Vérification des équipements</li>
-                    <li>Rapports détaillés après chaque intervention</li>
-                    <li>Surveillance mobile</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service sécurité événementiel" class="service-image">
-                <h3>Sécurité Événementielle</h3>
-                <p>Services de sécurité sur mesure pour tous types d'événements : concerts, conférences, salons, manifestations sportives.</p>
-                <ul style="text-align: left; padding-left: 20px; margin-top: 15px;">
-                    <li>Gestion des foules</li>
-                    <li>Contrôle d'accès événementiel</li>
-                    <li>Sécurité rapprochée</li>
-                    <li>Plan de sécurité personnalisé</li>
-                    <li>Coordination avec les services publics</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    
-    <section id="news" class="news">
-        <div class="news-container">
-            <h2 class="section-title">Actualités</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Découvrez nos dernières interventions et rapports d'activité</p>
-            
-            <div class="news-grid">
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Actualité 1" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">12 Novembre 2023</div>
-                        <h3 class="news-title">Nouveau contrat de surveillance</h3>
-                        <p>FOR Sécurité Privée a été choisie pour assurer la surveillance du centre commercial Grand Midi.</p>
-                    </div>
-                </div>
                 
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1585730849176-978a8b77f1b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Actualité 2" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">5 Novembre 2023</div>
-                        <h3 class="news-title">Formation des agents</h3>
-                        <p>Nos agents ont suivi une formation spécialisée sur les nouvelles techniques de gestion de crise.</p>
-                    </div>
-                </div>
-                
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1519452635264-4b7d0c124def?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Actualité 3" class="news-image">
-                    <div class="news-content">
-                        <div class="news-date">28 Octobre 2023</div>
-                        <h3 class="news-title">Sécurité événementielle</h3>
-                        <p>Retour sur notre intervention lors du festival de Montpellier qui a accueilli plus de 20 000 personnes.</p>
-                    </div>
-                </div>
+                <a href="#contact" class="btn">Demander un devis</a>
             </div>
-            
-            <div class="upload-section">
-                <h3>Espace administrateur</h3>
-                <p>Ajoutez de nouvelles actualités, photos ou rapports</p>
-                <div class="upload-btn">
-                    <i class="fas fa-cloud-upload-alt"></i> Télécharger un fichier
+            <div class="service-detail-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agent de sécurité">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contrôle d'accès">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ronde de sécurité">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590688219069-ec2eac74718a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport d'activité">
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="about" class="about">
+    <section class="service-detail" id="rondes">
+        <div class="service-detail-content">
+            <div class="service-detail-text">
+                <h2>Rondes & Interventions</h2>
+                <p>Notre service de rondes et interventions offre une surveillance proactive de vos sites, permettant de prévenir les incidents et d'intervenir rapidement en cas de besoin.</p>
+                
+                <h3>Prestations incluses :</h3>
+                <ul>
+                    <li>Rondes régulières selon un planning défini</li>
+                    <li>Contrôles aléatoires pour une sécurité optimale</li>
+                    <li>Utilisation de technologies de pointes (badgeage, QR codes)</li>
+                    <li>Intervention rapide en cas d'alarme ou d'incident</li>
+                    <li>Vérification des accès et intégrité des locaux</li>
+                    <li>Rapports détaillés avec photos à l'appui</li>
+                    <li>Surveillance de sites isolés ou peu fréquentés</li>
+                    <li>Coordination avec les forces de l'ordre si nécessaire</li>
+                </ul>
+                
+                <a href="#contact" class="btn">Demander un devis</a>
+            </div>
+            <div class="service-detail-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ronde de nuit">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agent en intervention">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contrôle de site">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590688219069-ec2eac74718a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport d'intervention">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="service-detail" id="evenementiel">
+        <div class="service-detail-content">
+            <div class="service-detail-text">
+                <h2>Sécurité Événementielle</h2>
+                <p>Notre service de sécurité événementielle assure la protection des participants, du personnel et des biens lors de tous types d'événements, qu'ils soient publics ou privés.</p>
+                
+                <h3>Prestations incluses :</h3>
+                <ul>
+                    <li>Évaluation des risques et plan de sécurité sur mesure</li>
+                    <li>Gestion des flux et fouilles de sécurité</li>
+                    <li>Contrôle d'accès et gestion des entrées/sorties</li>
+                    <li>Surveillance statique et dynamique de l'événement</li>
+                    <li>Gestion des incidents et coordination avec les secours</li>
+                    <li>Protection rapprochée pour personnalités</li>
+                    <li>Supervision via poste de commandement mobile</li>
+                    <li>Bilans et rapports post-événement</li>
+                </ul>
+                
+                <a href="#contact" class="btn">Demander un devis</a>
+            </div>
+            <div class="service-detail-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité concert">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contrôle d'accès événement">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Surveillance foule">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe sécurité événement">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about" id="about">
         <div class="about-content">
             <div class="about-text">
-                <h2>À propos de FOR Sécurité Privée</h2>
-                <p>Forte de plus de 15 ans d'expérience, FOR Sécurité Privée est la référence en matière de sécurité dans la région Montpelliéraine. Notre équipe d'experts certifiés vous propose des solutions sur mesure pour protéger vos biens et vos proches.</p>
+                <h2>À propos de FOR Sécurité Privée (4SP)</h2>
+                <p>Forte de plus de 50 agents expérimentés, FOR Sécurité Privée (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
                 <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
-                <a href="#contact" class="btn">Nous contacter</a>
+                
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Expertise</h4>
+                        <p>Des agents formés et certifiés</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Disponibilité</h4>
+                        <p>24h/24 et 7j/7</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Proximité</h4>
+                        <p>À votre écoute</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-star"></i>
+                        <h4>Qualité</h4>
+                        <p>Services haut de gamme</p>
+                    </div>
+                </div>
             </div>
             <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe FOR Sécurité Privée">
@@ -577,32 +826,79 @@
         </div>
     </section>
     
+    <section class="news" id="news">
+        <div class="news-container">
+            <h2 class="section-title">Actualités</h2>
+            <p>Découvrez nos dernières interventions et rapports d'activité.</p>
+            
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Actualité 1">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">12 Novembre 2023</div>
+                        <h3 class="news-title">Nouveau contrat de surveillance</h3>
+                        <p>Nous sommes fiers d'annoncer notre nouveau partenariat avec le centre commercial Grand M.</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Actualité 2">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">5 Novembre 2023</div>
+                        <h3 class="news-title">Formation des agents</h3>
+                        <p>Cette semaine, nos agents ont suivi une formation aux nouvelles techniques de gestion de foule.</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Actualité 3">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">28 Octobre 2023</div>
+                        <h3 class="news-title">Sécurité événementielle</h3>
+                        <p>Retour sur notre intervention lors du festival de Montpellier qui a accueilli 15 000 personnes.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="upload-section">
+                <h3>Ajouter une actualité</h3>
+                <p>Espace réservé à l'administration pour ajouter de nouvelles actualités</p>
+                
+                <form class="upload-form" id="news-form">
+                    <div class="form-group">
+                        <label for="news-title">Titre de l'actualité</label>
+                        <input type="text" id="news-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-date">Date</label>
+                        <input type="date" id="news-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-content">Contenu</label>
+                        <textarea id="news-content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-image">Image (URL)</label>
+                        <input type="url" id="news-image" placeholder="https://...">
+                    </div>
+                    <button type="submit" class="btn">Ajouter l'actualité</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>FOR Sécurité Privée</h3>
+                <h3>FOR Sécurité Privée (4SP)</h3>
                 <p>Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</p>
+                <p>Plus de 50 agents dédiés à votre sécurité</p>
             </div>
             <div class="footer-section">
                 <h3>Nos coordonnées</h3>
                 <p><i class="fas fa-map-marker-alt"></i> 83 rue Yves Montand, 34080 Montpellier</p>
-                <p><i class="fas fa-phone"></i> 06 60 35 01 97</p>
-                <p><i class="fas fa-envelope"></i> forsecuriteprivee@gmail.com</p>
-            </div>
-            <div class="footer-section">
-                <h3>Liens rapides</h3>
-                <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#news">Actualités</a></li>
-                    <li><a href="#about">À propos</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 FOR Sécurité Privée - Tous droits réservés</p>
-        </div>
-    </footer>
-</body>
-</html>
+                <p><i class="fas fa-phone"></i>
