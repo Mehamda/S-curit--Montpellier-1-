@@ -6,51 +6,88 @@
     <title>For Securite Privee (4SP) - Services de sécurité à Montpellier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0d6efd;
+            --primary-color: #0d3c61;
             --secondary-color: #1a1a1a;
-            --accent-color: #ffc107;
+            --accent-color: #c29b40;
+            --light-color: #f5f5f5;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
             padding-top: 80px;
+            background-color: var(--light-color);
         }
         
         .navbar {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+        
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background: linear-gradient(rgba(13, 60, 97, 0.8), rgba(13, 60, 97, 0.8)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
             background-size: cover;
             color: white;
             padding: 120px 0;
             text-align: center;
         }
         
+        .hero-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
         .service-card {
             transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
             border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 8px;
             overflow: hidden;
+            background: white;
         }
         
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
         
         .service-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 20px;
+            background: rgba(13, 60, 97, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
         }
         
         .section-title {
@@ -59,6 +96,7 @@
             margin-bottom: 30px;
             text-align: center;
             font-weight: 700;
+            color: var(--primary-color);
         }
         
         .section-title:after {
@@ -69,75 +107,13 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             border-radius: 2px;
         }
         
         .about-section {
-            background-color: #f8f9fa;
+            background-color: white;
             padding: 80px 0;
-        }
-        
-        .contact-form {
-            background-color: #f8f9fa;
-            padding: 60px 0;
-        }
-        
-        .news-section {
-            padding: 80px 0;
-        }
-        
-        .news-card {
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .news-img {
-            height: 200px;
-            object-fit: cover;
-            width: 100%;
-        }
-        
-        footer {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 60px 0 30px;
-        }
-        
-        .admin-panel {
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 50px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .admin-login {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            padding: 10px 25px;
-            font-weight: 600;
-            border-radius: 5px;
-        }
-        
-        .btn-primary:hover {
-            background-color: #0b5ed7;
-            border-color: #0a58ca;
-            transform: translateY(-2px);
         }
         
         .stats-number {
@@ -151,45 +127,138 @@
             color: #6c757d;
         }
         
-        .modal-content {
-            border-radius: 15px;
+        .contact-form {
+            background-color: white;
+            padding: 80px 0;
+        }
+        
+        .news-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .news-card {
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 8px;
             overflow: hidden;
+            transition: transform 0.3s;
+            background: white;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0c3556;
+            border-color: #0c3556;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .admin-panel {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 50px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .admin-login {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
         }
         
         .admin-section {
             margin-bottom: 30px;
             padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
-        .report-card {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .gallery-img {
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-img:hover {
-            transform: scale(1.05);
-        }
-
         .service-detail-section {
             padding: 80px 0;
             display: none;
+            background: white;
         }
 
         .service-hero {
-            padding: 80px 0;
+            padding: 100px 0;
             color: white;
             background-size: cover;
             background-position: center;
@@ -204,7 +273,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5));
+            background: linear-gradient(to right, rgba(13, 60, 97, 0.9), rgba(13, 60, 97, 0.7));
             z-index: 1;
         }
 
@@ -215,6 +284,15 @@
 
         .back-button {
             margin-bottom: 30px;
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            font-weight: 600;
+        }
+        
+        .back-button:hover {
+            background-color: var(--accent-color);
+            color: white;
         }
 
         .feature-list {
@@ -223,18 +301,95 @@
         }
 
         .feature-list li {
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #eee;
             position: relative;
-            padding-left: 30px;
+            padding-left: 35px;
         }
 
         .feature-list li:before {
             content: '✓';
-            color: var(--primary-color);
+            color: var(--accent-color);
             position: absolute;
             left: 0;
             font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            height: 100%;
+        }
+        
+        .contact-info i {
+            color: var(--accent-color);
+            width: 25px;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 60, 97, 0.25);
+        }
+        
+        .guarantee-badge {
+            background: var(--accent-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .guarantee-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Admin specific styles */
+        .admin-tabs {
+            margin-bottom: 20px;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0;
+            }
+            
+            .display-4 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
@@ -243,18 +398,18 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="#" id="logo-img" alt="4SP Logo" height="40"> FOR SECURITE PRIVEE (4SP)
+                <img src="#" id="logo-img" alt="4SP Logo" height="40" class="me-2"> FOR SECURITE PRIVEE (4SP)
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#rapports">Rapports</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#accueil">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#rapports">Rapports</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -263,29 +418,32 @@
     <!-- Section d'accueil avec présentation commerciale -->
     <section id="accueil" class="hero-section">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE PRIORITÉ</h1>
-            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Expert en solutions de sécurité sur Montpellier et sa région</p>
-            <p class="fs-5 mb-5">Plus de 50 agents dévoués à votre protection 24h/24 et 7j/7</p>
-            <a href="#services" class="btn btn-primary btn-lg mt-3">Découvrir nos services</a>
+            <div class="hero-badge">Depuis 2024</div>
+            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE ENGAGEMENT</h1>
+            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Expert en solutions de sécurité sur Montpellier</p>
+            <p class="fs-5 mb-5">Plus de 50 agents professionnels dévoués à votre protection 24h/24 et 7j/7</p>
+            <a href="#services" class="btn btn-primary btn-lg mt-3 me-3">Découvrir nos services</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg mt-3">Nous contacter</a>
         </div>
     </section>
 
     <!-- Section Services -->
     <section id="services" class="py-5">
         <div class="container">
-            <h2 class="section-title">Nos Services</h2>
+            <h2 class="section-title">Nos Services Professionnels</h2>
+            <p class="text-center mb-5">Des solutions de sécurité sur mesure adaptées à vos besoins spécifiques</p>
             <div class="row g-4">
                 <!-- Service 1: Gardiennage et surveillance -->
                 <div class="col-md-4">
                     <div class="card service-card">
-                        <img src="#" class="card-img-top service-main-img" alt="Service de gardiennage" height="200" id="service1-img">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top service-main-img" alt="Service de gardiennage" height="200" id="service1-img">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-user-shield"></i>
                             </div>
-                            <h3 class="card-title">Gardiennage & Surveillance Humaine</h3>
-                            <p class="card-text">Services de surveillance professionnelle pour tous types de sites.</p>
-                            <button class="btn btn-primary" onclick="showServiceDetail('service1')">En savoir plus</button>
+                            <h3 class="card-title">Gardiennage & Surveillance</h3>
+                            <p class="card-text">Services de surveillance professionnelle pour tous types de sites et propriétés.</p>
+                            <button class="btn btn-outline-primary" onclick="showServiceDetail('service1')">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -293,14 +451,14 @@
                 <!-- Service 2: Rondes et interventions -->
                 <div class="col-md-4">
                     <div class="card service-card">
-                        <img src="#" class="card-img-top service-main-img" alt="Service de rondes" height="200" id="service2-img">
+                        <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top service-main-img" alt="Service de rondes" height="200" id="service2-img">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-car"></i>
                             </div>
                             <h3 class="card-title">Rondes & Interventions</h3>
-                            <p class="card-text">Patrouilles régulières et interventions rapides sur demande.</p>
-                            <button class="btn btn-primary" onclick="showServiceDetail('service2')">En savoir plus</button>
+                            <p class="card-text">Patrouilles régulières et interventions rapides sur demande 24h/24.</p>
+                            <button class="btn btn-outline-primary" onclick="showServiceDetail('service2')">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -308,14 +466,14 @@
                 <!-- Service 3: Événementiels -->
                 <div class="col-md-4">
                     <div class="card service-card">
-                        <img src="#" class="card-img-top service-main-img" alt="Service événementiel" height="200" id="service3-img">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top service-main-img" alt="Service événementiel" height="200" id="service3-img">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
                             <h3 class="card-title">Sécurité Événementielle</h3>
                             <p class="card-text">Gestion de la sécurité pour tous types d'événements publics ou privés.</p>
-                            <button class="btn btn-primary" onclick="showServiceDetail('service3')">En savoir plus</button>
+                            <button class="btn btn-outline-primary" onclick="showServiceDetail('service3')">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -336,8 +494,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Notre service de gardiennage</h3>
-                    <p>Notre service de gardiennage propose une surveillance humaine professionnelle 24h/24 et 7j/7 pour tous types de sites : industriels, commerciaux, résidentiels et administratifs.</p>
+                    <h3>Service de gardiennage professionnel</h3>
+                    <p>Notre service de gardiennage propose une surveillance humaine professionnelle 24h/24 et 7j/7 pour tous types de sites : industriels, commerciaux, résidentiels et administratifs. Avec plus de 50 agents formés et expérimentés, nous garantissons la sécurité de vos biens et personnes.</p>
                     
                     <h4>Nos prestations incluent :</h4>
                     <ul class="feature-list">
@@ -351,37 +509,48 @@
                         <li>Surveillance des systèmes de sécurité</li>
                     </ul>
 
-                    <h4>Nos avantages</h4>
-                    <div class="row">
+                    <div class="row mt-5">
                         <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-shield-alt text-primary me-2"></i> Sécurité renforcée</h5>
-                                    <p>Présence physique dissuasive et réactive</p>
+                            <div class="guarantee-item">
+                                <div class="guarantee-badge">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h5>Sécurité renforcée</h5>
+                                    <p class="mb-0">Présence physique dissuasive et réactive</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-clock text-primary me-2"></i> Disponibilité 24/7</h5>
-                                    <p>Service continu jour et nuit, week-end inclus</p>
+                            <div class="guarantee-item">
+                                <div class="guarantee-badge">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h5>Disponibilité 24/7</h5>
+                                    <p class="mb-0">Service continu jour et nuit, week-end inclus</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-user-tie text-primary me-2"></i> Personnel qualifié</h5>
-                                    <p>Agents formés et expérimentés</p>
+                            <div class="guarantee-item">
+                                <div class="guarantee-badge">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <h5>Personnel qualifié</h5>
+                                    <p class="mb-0">Agents formés et expérimentés</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-report text-primary me-2"></i> Rapports détaillés</h5>
-                                    <p>Comptes-rendus précis de toutes les interventions</p>
+                            <div class="guarantee-item">
+                                <div class="guarantee-badge">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div>
+                                    <h5>Rapports détaillés</h5>
+                                    <p class="mb-0">Comptes-rendus précis de toutes les interventions</p>
                                 </div>
                             </div>
                         </div>
@@ -397,6 +566,7 @@
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
                                 <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
+                                <li><i class="fas fa-map-marker-alt me-2"></i> 83 rue Yves Montand, Montpellier</li>
                             </ul>
                             <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
                         </div>
@@ -404,211 +574,21 @@
 
                     <div class="card mt-4">
                         <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Galerie</h5>
+                            <h5 class="mb-0">Galerie Professionnelle</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Gardiennage">
+                                <div class="col-6 mb-3">
+                                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Agent de sécurité en formation">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Poste de contrôle">
                                 </div>
                                 <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Surveillance">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service 2: Rondes et interventions -->
-    <section id="service2-detail" class="service-detail-section">
-        <div class="service-hero" style="background-image: url('https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-            <div class="container service-hero-content">
-                <button class="btn btn-light back-button" onclick="hideServiceDetails()"><i class="fas fa-arrow-left me-2"></i>Retour aux services</button>
-                <h2 class="text-white">Rondes & Interventions</h2>
-                <p class="lead text-white">Service de rondes et interventions rapides</p>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Service de rondes et interventions</h3>
-                    <p>Notre service de rondes et interventions offre une présence sécurité mobile sur l'ensemble de la région Montpelliéraine, avec des équipes formées et équipées pour répondre à toutes situations.</p>
-                    
-                    <h4>Nos prestations incluent :</h4>
-                    <ul class="feature-list">
-                        <li>Rondes de surveillance aléatoires ou programmées</li>
-                        <li>Vérification de l'intégrité des sites</li>
-                        <li>Intervention sur alarme</li>
-                        <li>Levée de doute et sécurisation des accès</li>
-                        <li>Patrouilles avec points de contrôle géolocalisés</li>
-                        <li>Rapports d'intervention détaillés</li>
-                        <li>Intervention rapide en moins de 30 minutes</li>
-                        <li>Coordination avec les forces de l'ordre</li>
-                    </ul>
-
-                    <h4>Nos avantages</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-bolt text-primary me-2"></i> Rapidité d'intervention</h5>
-                                    <p>Intervention en moins de 30 minutes sur Montpellier</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-map-marked-alt text-primary me-2"></i> Couverture complète</h5>
-                                    <p>Service disponible sur toute la région Occitanie</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-video text-primary me-2"></i> Équipements high-tech</h5>
-                                    <p>Véhicules équipés de GPS et moyens de communication modernes</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5><i class="fas fa-report text-primary me-2"></i> Rapports en temps réel</h5>
-                                    <p>Comptes-rendus détaillés disponibles immédiatement</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Demander un devis</h5>
-                        </div>
-                        <div class="card-body">
-                            <p>Contactez-nous pour une étude gratuite de vos besoins en sécurité</p>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
-                                <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
-                            </ul>
-                            <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
-                        </div>
-                    </div>
-
-                    <div class="card mt-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Galerie</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Ronde">
+                                    <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Surveillance">
                                 </div>
                                 <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Intervention">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service 3: Événementiels -->
-    <section id="service3-detail" class="service-detail-section">
-        <div class="service-hero" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80');">
-            <div class="container service-hero-content">
-                <button class="btn btn-light back-button" onclick="hideServiceDetails()"><i class="fas fa-arrow-left me-2"></i>Retour aux services</button>
-                <h2 class="text-white">Sécurité Événementielle</h2>
-                <p class="lead text-white">Service de sécurité pour événements</p>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Service de sécurité événementielle</h3>
-                    <p>Nous proposons des solutions de sécurité sur mesure pour tous types d'événements : concerts, salons professionnels, mariages, manifestations sportives et culturelles.</p>
-                    
-                    <h4>Nos prestations incluent :</h4>
-                    <ul class="feature-list">
-                        <li>Étude de sécurité préalable et plan de sécurité</li>
-                        <li>Gestion des flux et fouilles de sécurité</li>
-                        <li>Contrôle d'accès et billetterie</li>
-                        <li>Surveillance de foule et gestion des conflits</li>
-                        <li>Dispositif de premiers secours</li>
-                        <li>Coordination avec les forces de l'ordre</li>
-                        <li>Gestion des accès VIP</li>
-                        <li>Supervision générale de la sécurité</li>
-                    </ul>
-
-                    <h4>Types d'événements</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-music fa-2x text-primary mb-2"></i>
-                                    <h5>Concerts & Festivals</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-briefcase fa-2x text-primary mb-2"></i>
-                                    <h5>Événements professionnels</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-ring fa-2x text-primary mb-2"></i>
-                                    <h5>Mariages & Cérémonies</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-3">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-running fa-2x text-primary mb-2"></i>
-                                    <h5>Manifestations sportives</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Demander un devis</h5>
-                        </div>
-                        <div class="card-body">
-                            <p>Contactez-nous pour une étude gratuite de vos besoins en sécurité</p>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
-                                <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
-                            </ul>
-                            <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
-                        </div>
-                    </div>
-
-                    <div class="card mt-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Galerie</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Événement">
-                                </div>
-                                <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Sécurité événement">
+                                    <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Équipe de sécurité">
                                 </div>
                             </div>
                         </div>
@@ -625,28 +605,36 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h3>Notre histoire</h3>
-                    <p>For Sécurité Privée (4SP) a été créée à Montpellier en 2024 avec une ambition claire : offrir des services de sécurité professionnels et sur mesure pour répondre aux besoins spécifiques de chaque client.</p>
+                    <p>For Sécurité Privée (4SP) a été créée à Montpellier en 2024 avec une ambition claire : offrir des services de sécurité professionnels et sur mesure pour répondre aux besoins spécifiques de chaque client. Notre fondateur, fort de 15 ans d'expérience dans le domaine de la sécurité, a voulu créer une entreprise alliant expertise technique et relation client d'exception.</p>
                     
                     <h3>Nos valeurs</h3>
                     <ul>
-                        <li><strong>Professionnalisme</strong> : Des agents formés et certifiés</li>
-                        <li><strong>Réactivité</strong> : Intervention rapide 24h/24</li>
-                        <li><strong>Discretion</strong> : Services efficaces sans perturbation</li>
-                        <li><strong>Innovation</strong> : Solutions techniques adaptées</li>
+                        <li><strong>Professionnalisme</strong> : Des agents formés et certifiés, suivant des protocoles stricts</li>
+                        <li><strong>Réactivité</strong> : Intervention rapide 24h/24, 7j/7 sur toute la région</li>
+                        <li><strong>Discretion</strong> : Services efficaces sans perturbation de vos activités</li>
+                        <li><strong>Innovation</strong> : Solutions techniques adaptées aux nouvelles menaces</li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
                     <h3>Nos ambitions</h3>
-                    <p>Devenir le leader de la sécurité privée dans la région Occitanie en développant des partenariats durables avec nos clients et en investissant continuellement dans la formation de nos agents et les technologies de sécurité.</p>
+                    <p>Devenir le leader de la sécurité privée dans la région Occitanie en développant des partenariats durables avec nos clients et en investissant continuellement dans la formation de nos agents et les technologies de sécurité. Nous visons l'excellence opérationnelle dans tous nos services.</p>
                     
-                    <div class="row mt-5">
-                        <div class="col-6 text-center">
+                    <div class="row mt-5 text-center">
+                        <div class="col-6 col-md-3 mb-4">
                             <div class="stats-number">50+</div>
                             <div class="stats-text">Agents de sécurité</div>
                         </div>
-                        <div class="col-6 text-center">
+                        <div class="col-6 col-md-3 mb-4">
                             <div class="stats-number">100%</div>
                             <div class="stats-text">Agents certifiés</div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-4">
+                            <div class="stats-number">24/7</div>
+                            <div class="stats-text">Disponibilité</div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-4">
+                            <div class="stats-number">50+</div>
+                            <div class="stats-text">Clients satisfaits</div>
                         </div>
                     </div>
                 </div>
@@ -655,13 +643,13 @@
     </section>
 
     <!-- Section Rapports et activités -->
-    <section id="rapports" class="news-section bg-light">
+    <section id="rapports" class="news-section">
         <div class="container">
             <h2 class="section-title">Nos Rapports d'Activité</h2>
             <p class="text-center mb-5">Découvrez nos interventions et réalisations sur le terrain</p>
             
             <div id="reports-container" class="row">
-                <!-- Les rapports seront chargés dynamiquement ici -->
+                <!-- Rapports chargés dynamiquement -->
             </div>
         </div>
     </section>
@@ -671,22 +659,30 @@
         <div class="container">
             <h2 class="section-title">Contactez-nous</h2>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <form id="contactForm">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nom complet</label>
-                            <input type="text" class="form-control" id="name" required>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Nom complet *</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="company" class="form-label">Entreprise</label>
+                                <input type="text" class="form-control" id="company">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Téléphone *</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Téléphone</label>
-                            <input type="tel" class="form-control" id="phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="service" class="form-label">Service concerné</label>
+                            <label for="service" class="form-label">Service concerné *</label>
                             <select class="form-select" id="service" required>
                                 <option value="">Sélectionnez un service</option>
                                 <option value="gardiennage">Gardiennage & Surveillance</option>
@@ -696,23 +692,26 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" id="message" rows="5" required placeholder="Décrivez votre besoin en sécurité..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                        <button type="submit" class="btn btn-primary">Envoyer la demande</button>
                     </form>
                 </div>
-                <div class="col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title">Nos coordonnées</h3>
-                            <p><i class="fas fa-map-marker-alt me-2"></i> 83 rue Yves Montand, 34080 Montpellier</p>
-                            <p><i class="fas fa-phone me-2"></i> 06 60 35 01 97</p>
-                            <p><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</p>
-                            <hr>
-                            <h4>Horaires</h4>
-                            <p>Notre équipe administrative est disponible du lundi au vendredi de 9h à 18h.</p>
-                            <p>Nos services de sécurité opèrent 24h/24 et 7j/7.</p>
+                <div class="col-md-5">
+                    <div class="contact-info">
+                        <h3 class="text-white">Nos coordonnées</h3>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 83 rue Yves Montand, 34080 Montpellier</p>
+                        <p><i class="fas fa-phone me-2"></i> 06 60 35 01 97</p>
+                        <p><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</p>
+                        <hr class="bg-light">
+                        <h4 class="text-white">Horaires</h4>
+                        <p>Notre équipe administrative est disponible du lundi au vendredi de 9h à 18h.</p>
+                        <p>Nos services de sécurité opèrent 24h/24 et 7j/7.</p>
+                        
+                        <div class="mt-4">
+                            <h5 class="text-white">Zone d'intervention</h5>
+                            <p>Montpellier et toute la région Occitanie</p>
                         </div>
                     </div>
                 </div>
@@ -724,85 +723,114 @@
     <section class="admin-panel container" id="adminPanel">
         <h2 class="section-title">Espace Administrateur</h2>
         
-        <div class="admin-section">
-            <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
-            <div class="mb-3">
-                <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
-                <input class="form-control" type="file" id="logoUpload" accept="image/*">
-            </div>
-            <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
-        </div>
+        <ul class="nav nav-tabs admin-tabs" id="adminTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="logo-tab" data-bs-toggle="tab" data-bs-target="#logo" type="button" role="tab">Logo</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab">Images</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="texts-tab" data-bs-toggle="tab" data-bs-target="#texts" type="button" role="tab">Textes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab">Rapports</button>
+            </li>
+        </ul>
         
-        <div class="admin-section">
-            <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
-            <div class="mb-3">
-                <label class="form-label">Sélectionner un service</label>
-                <select class="form-select" id="serviceSelect">
-                    <option value="service1-img">Gardiennage - Image principale</option>
-                    <option value="service1-detail-img">Gardiennage - Image détail</option>
-                    <option value="service1-gallery1">Gardiennage - Galerie 1</option>
-                    <option value="service1-gallery2">Gardiennage - Galerie 2</option>
-                    <option value="service2-img">Rondes - Image principale</option>
-                    <option value="service2-detail-img">Rondes - Image détail</option>
-                    <option value="service2-gallery1">Rondes - Galerie 1</option>
-                    <option value="service2-gallery2">Rondes - Galerie 2</option>
-                    <option value="service3-img">Événementiel - Image principale</option>
-                    <option value="service3-detail-img">Événementiel - Image détail</option>
-                    <option value="service3-gallery1">Événementiel - Galerie 1</option>
-                    <option value="service3-gallery2">Événementiel - Galerie 2</option>
-                </select>
+        <div class="tab-content" id="adminTabContent">
+            <!-- Onglet Logo -->
+            <div class="tab-pane fade show active" id="logo" role="tabpanel">
+                <div class="admin-section">
+                    <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
+                    <div class="mb-3">
+                        <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
+                        <input class="form-control" type="file" id="logoUpload" accept="image/*">
+                    </div>
+                    <div class="image-preview">
+                        <img id="logoPreview" src="#" alt="Aperçu du logo">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Télécharger l'image</label>
-                <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
+            
+            <!-- Onglet Images -->
+            <div class="tab-pane fade" id="images" role="tabpanel">
+                <div class="admin-section">
+                    <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Sélectionner un service</label>
+                        <select class="form-select" id="serviceSelect">
+                            <option value="service1-img">Gardiennage - Image principale</option>
+                            <option value="service1-detail-img">Gardiennage - Image détail</option>
+                            <option value="service2-img">Rondes - Image principale</option>
+                            <option value="service2-detail-img">Rondes - Image détail</option>
+                            <option value="service3-img">Événementiel - Image principale</option>
+                            <option value="service3-detail-img">Événementiel - Image détail</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Télécharger l'image</label>
+                        <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
+                    </div>
+                    <div class="image-preview">
+                        <img id="serviceImagePreview" src="#" alt="Aperçu de l'image">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
+                </div>
             </div>
-            <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
-        </div>
-        
-        <div class="admin-section">
-            <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
-            <div class="mb-3">
-                <label class="form-label">Sélectionner un service</label>
-                <select class="form-select" id="textServiceSelect">
-                    <option value="service1">Gardiennage & Surveillance</option>
-                    <option value="service2">Rondes & Interventions</option>
-                    <option value="service3">Sécurité Événementielle</option>
-                </select>
+            
+            <!-- Onglet Textes -->
+            <div class="tab-pane fade" id="texts" role="tabpanel">
+                <div class="admin-section">
+                    <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Sélectionner un service</label>
+                        <select class="form-select" id="textServiceSelect">
+                            <option value="service1">Gardiennage & Surveillance</option>
+                            <option value="service2">Rondes & Interventions</option>
+                            <option value="service3">Sécurité Événementielle</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Titre du service</label>
+                        <input type="text" class="form-control" id="serviceTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description courte</label>
+                        <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description détaillée</label>
+                        <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Titre du service</label>
-                <input type="text" class="form-control" id="serviceTitle">
+            
+            <!-- Onglet Rapports -->
+            <div class="tab-pane fade" id="reports" role="tabpanel">
+                <div class="admin-section">
+                    <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
+                    <div class="mb-3">
+                        <label class="form-label">Titre du rapport</label>
+                        <input type="text" class="form-control" id="reportTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="reportDescription" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" id="reportDate">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Images (multiple autorisé)</label>
+                        <input class="form-control" type="file" id="reportImageUpload" accept="image/*" multiple>
+                    </div>
+                    <button class="btn btn-primary" onclick="addReport()">Ajouter le rapport</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Description courte</label>
-                <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Description détaillée</label>
-                <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
-            </div>
-            <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
-        </div>
-        
-        <div class="admin-section">
-            <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
-            <div class="mb-3">
-                <label class="form-label">Titre du rapport</label>
-                <input type="text" class="form-control" id="reportTitle">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" id="reportDescription" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Date</label>
-                <input type="date" class="form-control" id="reportDate">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Images (multiple autorisé)</label>
-                <input class="form-control" type="file" id="reportImageUpload" accept="image/*" multiple>
-            </div>
-            <button class="btn btn-primary" onclick="addReport()">Ajouter le rapport</button>
         </div>
     </section>
 
@@ -810,28 +838,37 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h4>For Sécurité Privée (4SP)</h4>
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">For Sécurité Privée (4SP)</h4>
                     <p>Votre partenaire de confiance pour tous vos besoins en sécurité à Montpellier et dans toute la région Occitanie.</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h4>Nos services</h4>
-                    <ul class="list-unstyled">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Nos services</h4>
+                    <ul class="footer-links">
                         <li><a href="#services">Gardiennage & Surveillance</a></li>
                         <li><a href="#services">Rondes & Interventions</a></li>
                         <li><a href="#services">Sécurité Événementielle</a></li>
+                        <li><a href="#contact">Devis personnalisé</a></li>
+                        <li><a href="#contact">Audit de sécurité</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h4>Coordonnées</h4>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> 83 rue Yves Montand, 34080 Montpellier</p>
-                    <p><i class="fas fa-phone me-2"></i> 06 60 35 01 97</p>
-                    <p><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</p>
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Coordonnées</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 83 rue Yves Montand, 34080 Montpellier</li>
+                        <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
+                        <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
+                    </ul>
                 </div>
             </div>
-            <hr>
+            <hr class="bg-light">
             <div class="text-center">
-                <p>&copy; 2024 For Sécurité Privée (4SP). Tous droits réservés.</p>
+                <p>&copy; 2024 For Sécurité Privée (4SP). Tous droits réservés. | <a href="#" class="text-light">Mentions légales</a> | <a href="#" class="text-light">Politique de confidentialité</a></p>
             </div>
         </div>
     </footer>
@@ -896,27 +933,14 @@
             document.getElementById('services').scrollIntoView();
         }
         
-        // Charger les images depuis le stockage local
-        function loadImagesFromStorage() {
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('image_')) {
-                    const elementId = key.replace('image_', '');
-                    const imgData = localStorage.getItem(key);
-                    const imgElement = document.getElementById(elementId);
-                    if (imgElement) {
-                        imgElement.src = imgData;
-                    }
-                }
-            }
-        }
-        
+        // Fonctions pour l'administration
         function updateLogo() {
             const fileInput = document.getElementById('logoUpload');
             if (fileInput.files.length > 0) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('logo-img').src = e.target.result;
+                    document.getElementById('logoPreview').src = e.target.result;
                     // Sauvegarder dans le stockage local
                     localStorage.setItem('image_logo-img', e.target.result);
                     alert('Logo mis à jour!');
@@ -935,6 +959,7 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById(service).src = e.target.result;
+                    document.getElementById('serviceImagePreview').src = e.target.result;
                     // Sauvegarder dans le stockage local
                     localStorage.setItem('image_' + service, e.target.result);
                     alert('Image de service mise à jour!');
@@ -972,7 +997,7 @@
                 const reportsContainer = document.getElementById('reports-container');
                 
                 const col = document.createElement('div');
-                col.className = 'col-md-6 col-lg-4 mb-4';
+                col.className = 'col-md-4 mb-4';
                 
                 const reportId = 'report_' + Date.now();
                 const reportElement = document.createElement('div');
@@ -981,83 +1006,45 @@
                 
                 // Gérer les images
                 if (fileInput.files.length > 0) {
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'position-relative';
-                    
-                    const carouselId = 'carousel_' + reportId;
-                    let carouselInnerHTML = '<div class="carousel-inner">';
-                    
-                    for (let i = 0; i < fileInput.files.length; i++) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const isActive = i === 0 ? 'active' : '';
-                            carouselInnerHTML += `
-                                <div class="carousel-item ${isActive}">
-                                    <img src="${e.target.result}" class="d-block w-100 news-img" alt="${title}">
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        reportElement.innerHTML = `
+                            <img src="${e.target.result}" class="card-img-top news-img" alt="${title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text">${description}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Nouveau rapport</small>
+                                    <small class="text-muted">${new Date(date).toLocaleDateString('fr-FR')}</small>
                                 </div>
-                            `;
-                            
-                            // Si c'est la dernière image, finaliser le carousel
-                            if (i === fileInput.files.length - 1) {
-                                carouselInnerHTML += '</div>';
-                                if (fileInput.files.length > 1) {
-                                    carouselInnerHTML += `
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                    `;
-                                }
-                                
-                                imageContainer.innerHTML = `
-                                    <div id="${carouselId}" class="carousel slide">
-                                        ${carouselInnerHTML}
-                                    </div>
-                                `;
-                                
-                                reportElement.appendChild(imageContainer);
-                                
-                                const cardBody = document.createElement('div');
-                                cardBody.className = 'card-body';
-                                cardBody.innerHTML = `
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text">${description}</p>
-                                    <p class="text-muted"><small>${new Date(date).toLocaleDateString('fr-FR')}</small></p>
-                                `;
-                                
-                                reportElement.appendChild(cardBody);
-                                col.appendChild(reportElement);
-                                reportsContainer.appendChild(col);
-                                
-                                // Sauvegarder le rapport
-                                localStorage.setItem(reportId, JSON.stringify({
-                                    title,
-                                    description,
-                                    date,
-                                    images: Array.from(fileInput.files).map(file => {
-                                        const reader = new FileReader();
-                                        reader.readAsDataURL(file);
-                                        return reader.result;
-                                    })
-                                }));
-                                
-                                resetReportForm();
-                                alert('Rapport ajouté avec succès!');
-                            }
-                        };
-                        reader.readAsDataURL(fileInput.files[i]);
-                    }
+                            </div>
+                        `;
+                        
+                        col.appendChild(reportElement);
+                        reportsContainer.appendChild(col);
+                        
+                        // Sauvegarder le rapport
+                        localStorage.setItem(reportId, JSON.stringify({
+                            title,
+                            description,
+                            date,
+                            image: e.target.result
+                        }));
+                        
+                        resetReportForm();
+                        alert('Rapport ajouté avec succès!');
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
                 } else {
                     // Aucune image, juste le texte
                     reportElement.innerHTML = `
                         <div class="card-body">
                             <h5 class="card-title">${title}</h5>
                             <p class="card-text">${description}</p>
-                            <p class="text-muted"><small>${new Date(date).toLocaleDateString('fr-FR')}</small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Nouveau rapport</small>
+                                <small class="text-muted">${new Date(date).toLocaleDateString('fr-FR')}</small>
+                            </div>
                         </div>
                     `;
                     
@@ -1086,58 +1073,51 @@
             document.getElementById('reportImageUpload').value = '';
         }
         
-        // Charger les rapports depuis le stockage local
-        function loadReportsFromStorage() {
-            const reportsContainer = document.getElementById('reports-container');
+        // Charger les données depuis le stockage local
+        function loadFromStorage() {
+            // Charger le logo
+            const logoData = localStorage.getItem('image_logo-img');
+            if (logoData) {
+                document.getElementById('logo-img').src = logoData;
+                document.getElementById('logoPreview').src = logoData;
+            }
             
+            // Charger les images des services
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('image_') && key !== 'image_logo-img') {
+                    const elementId = key.replace('image_', '');
+                    const imgData = localStorage.getItem(key);
+                    const imgElement = document.getElementById(elementId);
+                    if (imgElement) {
+                        imgElement.src = imgData;
+                    }
+                }
+            }
+            
+            // Charger les rapports
+            const reportsContainer = document.getElementById('reports-container');
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
                 if (key.startsWith('report_')) {
                     const reportData = JSON.parse(localStorage.getItem(key));
                     
                     const col = document.createElement('div');
-                    col.className = 'col-md-6 col-lg-4 mb-4';
+                    col.className = 'col-md-4 mb-4';
                     
                     const reportElement = document.createElement('div');
                     reportElement.className = 'card news-card';
-                    reportElement.id = key;
                     
-                    if (reportData.images && reportData.images.length > 0) {
-                        const carouselId = 'carousel_' + key;
-                        let carouselInnerHTML = '<div class="carousel-inner">';
-                        
-                        reportData.images.forEach((img, index) => {
-                            const isActive = index === 0 ? 'active' : '';
-                            carouselInnerHTML += `
-                                <div class="carousel-item ${isActive}">
-                                    <img src="${img}" class="d-block w-100 news-img" alt="${reportData.title}">
-                                </div>
-                            `;
-                        });
-                        
-                        carouselInnerHTML += '</div>';
-                        
-                        if (reportData.images.length > 1) {
-                            carouselInnerHTML += `
-                                <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            `;
-                        }
-                        
+                    if (reportData.image) {
                         reportElement.innerHTML = `
-                            <div id="${carouselId}" class="carousel slide">
-                                ${carouselInnerHTML}
-                            </div>
+                            <img src="${reportData.image}" class="card-img-top news-img" alt="${reportData.title}">
                             <div class="card-body">
                                 <h5 class="card-title">${reportData.title}</h5>
                                 <p class="card-text">${reportData.description}</p>
-                                <p class="text-muted"><small>${new Date(reportData.date).toLocaleDateString('fr-FR')}</small></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Rapport</small>
+                                    <small class="text-muted">${new Date(reportData.date).toLocaleDateString('fr-FR')}</small>
+                                </div>
                             </div>
                         `;
                     } else {
@@ -1145,7 +1125,10 @@
                             <div class="card-body">
                                 <h5 class="card-title">${reportData.title}</h5>
                                 <p class="card-text">${reportData.description}</p>
-                                <p class="text-muted"><small>${new Date(reportData.date).toLocaleDateString('fr-FR')}</small></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Rapport</small>
+                                    <small class="text-muted">${new Date(reportData.date).toLocaleDateString('fr-FR')}</small>
+                                </div>
                             </div>
                         `;
                     }
@@ -1165,8 +1148,7 @@
         
         // Chargement initial
         window.addEventListener('DOMContentLoaded', function() {
-            loadImagesFromStorage();
-            loadReportsFromStorage();
+            loadFromStorage();
             
             // Masquer le panel admin par défaut
             document.getElementById('adminPanel').style.display = 'none';
@@ -1176,19 +1158,22 @@
                 section.style.display = 'none';
             });
             
-            // Charger quelques images par défaut si aucune image n'est sauvegardée
-            if (localStorage.length === 0) {
-                // Images par défaut pour les services
-                const defaultImages = {
-                    'service1-img': 'https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-                    'service2-img': 'https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-                    'service3-img': 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80'
+            // Prévisualisation des images
+            document.getElementById('logoUpload').addEventListener('change', function() {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logoPreview').src = e.target.result;
                 };
-                
-                for (const [id, url] of Object.entries(defaultImages)) {
-                    document.getElementById(id).src = url;
-                }
-            }
+                reader.readAsDataURL(this.files[0]);
+            });
+            
+            document.getElementById('serviceImageUpload').addEventListener('change', function() {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('serviceImagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
         });
     </script>
 </body>
