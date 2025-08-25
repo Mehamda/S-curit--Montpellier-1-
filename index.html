@@ -182,6 +182,60 @@
         .gallery-img:hover {
             transform: scale(1.05);
         }
+
+        .service-detail-section {
+            padding: 80px 0;
+            display: none;
+        }
+
+        .service-hero {
+            padding: 80px 0;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .service-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5));
+            z-index: 1;
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -231,7 +285,7 @@
                             </div>
                             <h3 class="card-title">Gardiennage & Surveillance Humaine</h3>
                             <p class="card-text">Services de surveillance professionnelle pour tous types de sites.</p>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#service1Modal">En savoir plus</button>
+                            <button class="btn btn-primary" onclick="showServiceDetail('service1')">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -246,7 +300,7 @@
                             </div>
                             <h3 class="card-title">Rondes & Interventions</h3>
                             <p class="card-text">Patrouilles régulières et interventions rapides sur demande.</p>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#service2Modal">En savoir plus</button>
+                            <button class="btn btn-primary" onclick="showServiceDetail('service2')">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -261,7 +315,302 @@
                             </div>
                             <h3 class="card-title">Sécurité Événementielle</h3>
                             <p class="card-text">Gestion de la sécurité pour tous types d'événements publics ou privés.</p>
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#service3Modal">En savoir plus</button>
+                            <button class="btn btn-primary" onclick="showServiceDetail('service3')">En savoir plus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Détails des Services -->
+    <!-- Service 1: Gardiennage et surveillance -->
+    <section id="service1-detail" class="service-detail-section">
+        <div class="service-hero" style="background-image: url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="container service-hero-content">
+                <button class="btn btn-light back-button" onclick="hideServiceDetails()"><i class="fas fa-arrow-left me-2"></i>Retour aux services</button>
+                <h2 class="text-white">Gardiennage & Surveillance Humaine</h2>
+                <p class="lead text-white">Service complet de surveillance et gardiennage professionnel</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Notre service de gardiennage</h3>
+                    <p>Notre service de gardiennage propose une surveillance humaine professionnelle 24h/24 et 7j/7 pour tous types de sites : industriels, commerciaux, résidentiels et administratifs.</p>
+                    
+                    <h4>Nos prestations incluent :</h4>
+                    <ul class="feature-list">
+                        <li>Contrôle des accès et gestion des entrées/sorties</li>
+                        <li>Surveillance par vidéoprotection</li>
+                        <li>Rondes de contrôle régulières</li>
+                        <li>Tenue de registres de sécurité</li>
+                        <li>Gestion des alarmes et interventions</li>
+                        <li>Accueil et orientation des visiteurs</li>
+                        <li>Contrôle des biens et marchandises</li>
+                        <li>Surveillance des systèmes de sécurité</li>
+                    </ul>
+
+                    <h4>Nos avantages</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-shield-alt text-primary me-2"></i> Sécurité renforcée</h5>
+                                    <p>Présence physique dissuasive et réactive</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-clock text-primary me-2"></i> Disponibilité 24/7</h5>
+                                    <p>Service continu jour et nuit, week-end inclus</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-user-tie text-primary me-2"></i> Personnel qualifié</h5>
+                                    <p>Agents formés et expérimentés</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-report text-primary me-2"></i> Rapports détaillés</h5>
+                                    <p>Comptes-rendus précis de toutes les interventions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Demander un devis</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Contactez-nous pour une étude gratuite de vos besoins en sécurité</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
+                                <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Galerie</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Gardiennage">
+                                </div>
+                                <div class="col-6">
+                                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Surveillance">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service 2: Rondes et interventions -->
+    <section id="service2-detail" class="service-detail-section">
+        <div class="service-hero" style="background-image: url('https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="container service-hero-content">
+                <button class="btn btn-light back-button" onclick="hideServiceDetails()"><i class="fas fa-arrow-left me-2"></i>Retour aux services</button>
+                <h2 class="text-white">Rondes & Interventions</h2>
+                <p class="lead text-white">Service de rondes et interventions rapides</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Service de rondes et interventions</h3>
+                    <p>Notre service de rondes et interventions offre une présence sécurité mobile sur l'ensemble de la région Montpelliéraine, avec des équipes formées et équipées pour répondre à toutes situations.</p>
+                    
+                    <h4>Nos prestations incluent :</h4>
+                    <ul class="feature-list">
+                        <li>Rondes de surveillance aléatoires ou programmées</li>
+                        <li>Vérification de l'intégrité des sites</li>
+                        <li>Intervention sur alarme</li>
+                        <li>Levée de doute et sécurisation des accès</li>
+                        <li>Patrouilles avec points de contrôle géolocalisés</li>
+                        <li>Rapports d'intervention détaillés</li>
+                        <li>Intervention rapide en moins de 30 minutes</li>
+                        <li>Coordination avec les forces de l'ordre</li>
+                    </ul>
+
+                    <h4>Nos avantages</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-bolt text-primary me-2"></i> Rapidité d'intervention</h5>
+                                    <p>Intervention en moins de 30 minutes sur Montpellier</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-map-marked-alt text-primary me-2"></i> Couverture complète</h5>
+                                    <p>Service disponible sur toute la région Occitanie</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-video text-primary me-2"></i> Équipements high-tech</h5>
+                                    <p>Véhicules équipés de GPS et moyens de communication modernes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-report text-primary me-2"></i> Rapports en temps réel</h5>
+                                    <p>Comptes-rendus détaillés disponibles immédiatement</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Demander un devis</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Contactez-nous pour une étude gratuite de vos besoins en sécurité</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
+                                <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Galerie</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Ronde">
+                                </div>
+                                <div class="col-6">
+                                    <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Intervention">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service 3: Événementiels -->
+    <section id="service3-detail" class="service-detail-section">
+        <div class="service-hero" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80');">
+            <div class="container service-hero-content">
+                <button class="btn btn-light back-button" onclick="hideServiceDetails()"><i class="fas fa-arrow-left me-2"></i>Retour aux services</button>
+                <h2 class="text-white">Sécurité Événementielle</h2>
+                <p class="lead text-white">Service de sécurité pour événements</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Service de sécurité événementielle</h3>
+                    <p>Nous proposons des solutions de sécurité sur mesure pour tous types d'événements : concerts, salons professionnels, mariages, manifestations sportives et culturelles.</p>
+                    
+                    <h4>Nos prestations incluent :</h4>
+                    <ul class="feature-list">
+                        <li>Étude de sécurité préalable et plan de sécurité</li>
+                        <li>Gestion des flux et fouilles de sécurité</li>
+                        <li>Contrôle d'accès et billetterie</li>
+                        <li>Surveillance de foule et gestion des conflits</li>
+                        <li>Dispositif de premiers secours</li>
+                        <li>Coordination avec les forces de l'ordre</li>
+                        <li>Gestion des accès VIP</li>
+                        <li>Supervision générale de la sécurité</li>
+                    </ul>
+
+                    <h4>Types d'événements</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-music fa-2x text-primary mb-2"></i>
+                                    <h5>Concerts & Festivals</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-briefcase fa-2x text-primary mb-2"></i>
+                                    <h5>Événements professionnels</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-ring fa-2x text-primary mb-2"></i>
+                                    <h5>Mariages & Cérémonies</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-running fa-2x text-primary mb-2"></i>
+                                    <h5>Manifestations sportives</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Demander un devis</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Contactez-nous pour une étude gratuite de vos besoins en sécurité</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
+                                <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Galerie</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Événement">
+                                </div>
+                                <div class="col-6">
+                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail gallery-img" alt="Sécurité événement">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -411,6 +760,31 @@
         </div>
         
         <div class="admin-section">
+            <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
+            <div class="mb-3">
+                <label class="form-label">Sélectionner un service</label>
+                <select class="form-select" id="textServiceSelect">
+                    <option value="service1">Gardiennage & Surveillance</option>
+                    <option value="service2">Rondes & Interventions</option>
+                    <option value="service3">Sécurité Événementielle</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Titre du service</label>
+                <input type="text" class="form-control" id="serviceTitle">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description courte</label>
+                <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description détaillée</label>
+                <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
+        </div>
+        
+        <div class="admin-section">
             <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
             <div class="mb-3">
                 <label class="form-label">Titre du rapport</label>
@@ -492,6 +866,36 @@
             }
         }
         
+        // Fonctions pour afficher/masquer les détails des services
+        function showServiceDetail(serviceId) {
+            // Masquer toutes les sections de services
+            document.querySelectorAll('.service-detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Masquer la section des services
+            document.getElementById('services').style.display = 'none';
+            
+            // Afficher la section de détail correspondante
+            document.getElementById(serviceId + '-detail').style.display = 'block';
+            
+            // Faire défiler jusqu'au début de la page
+            window.scrollTo(0, 0);
+        }
+        
+        function hideServiceDetails() {
+            // Masquer toutes les sections de détail
+            document.querySelectorAll('.service-detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Afficher la section des services
+            document.getElementById('services').style.display = 'block';
+            
+            // Faire défiler jusqu'à la section des services
+            document.getElementById('services').scrollIntoView();
+        }
+        
         // Charger les images depuis le stockage local
         function loadImagesFromStorage() {
             for (let i = 0; i < localStorage.length; i++) {
@@ -539,6 +943,23 @@
             } else {
                 alert('Veuillez sélectionner un fichier');
             }
+        }
+        
+        function updateServiceText() {
+            const service = document.getElementById('textServiceSelect').value;
+            const title = document.getElementById('serviceTitle').value;
+            const shortDescription = document.getElementById('serviceShortDescription').value;
+            const fullDescription = document.getElementById('serviceFullDescription').value;
+            
+            // Ici, vous devriez enregistrer ces textes dans localStorage ou une base de données
+            // Pour cet exemple, nous allons simplement afficher une alerte
+            
+            alert(`Textes du service ${service} mis à jour!\nTitre: ${title}\nDescription courte: ${shortDescription}`);
+            
+            // Réinitialiser le formulaire
+            document.getElementById('serviceTitle').value = '';
+            document.getElementById('serviceShortDescription').value = '';
+            document.getElementById('serviceFullDescription').value = '';
         }
         
         function addReport() {
@@ -749,6 +1170,11 @@
             
             // Masquer le panel admin par défaut
             document.getElementById('adminPanel').style.display = 'none';
+            
+            // Masquer les détails des services par défaut
+            document.querySelectorAll('.service-detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
             
             // Charger quelques images par défaut si aucune image n'est sauvegardée
             if (localStorage.length === 0) {
