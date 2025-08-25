@@ -6,81 +6,102 @@
     <title>For Securite Privee (4SP) - Services de sécurité à Montpellier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0d3c61;
-            --secondary-color: #1a1a1a;
-            --accent-color: #c29b40;
-            --light-color: #f5f5f5;
+            --primary-red: #cc0000;
+            --primary-black: #1a1a1a;
+            --primary-white: #ffffff;
+            --secondary-gray: #f5f5f5;
+            --accent-gold: #d4af37;
         }
         
         body {
             font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
             padding-top: 80px;
-            background-color: var(--light-color);
+            background-color: var(--primary-white);
         }
         
         .navbar {
-            background-color: var(--primary-color);
+            background-color: var(--primary-white);
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid var(--primary-red);
         }
         
         .navbar-brand {
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-weight: 800;
+            color: var(--primary-red) !important;
         }
         
         .nav-link {
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--primary-black) !important;
             transition: all 0.3s;
+            position: relative;
         }
         
         .nav-link:hover {
-            color: var(--accent-color) !important;
+            color: var(--primary-red) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-red);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
         }
         
         .hero-section {
-            background: linear-gradient(rgba(13, 60, 97, 0.8), rgba(13, 60, 97, 0.8)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
             background-size: cover;
             color: white;
-            padding: 120px 0;
+            padding: 150px 0;
             text-align: center;
+            position: relative;
         }
         
         .hero-badge {
-            background-color: var(--accent-color);
+            background-color: var(--primary-red);
             color: white;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 30px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
         }
         
         .service-card {
             transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
             border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
             overflow: hidden;
             background: white;
+            border-top: 4px solid var(--primary-red);
         }
         
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
         
         .service-icon {
             font-size: 2.5rem;
-            color: var(--primary-color);
+            color: var(--primary-red);
             margin-bottom: 20px;
-            background: rgba(13, 60, 97, 0.1);
+            background: rgba(204, 0, 0, 0.1);
             width: 80px;
             height: 80px;
             display: flex;
@@ -93,10 +114,10 @@
         .section-title {
             position: relative;
             padding-bottom: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-weight: 800;
+            color: var(--primary-black);
         }
         
         .section-title:after {
@@ -107,40 +128,41 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: var(--accent-color);
+            background-color: var(--primary-red);
             border-radius: 2px;
         }
         
         .about-section {
-            background-color: white;
-            padding: 80px 0;
+            background-color: var(--secondary-gray);
+            padding: 100px 0;
         }
         
         .stats-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-red);
         }
         
         .stats-text {
             font-size: 1.1rem;
             color: #6c757d;
+            font-weight: 600;
         }
         
         .contact-form {
-            background-color: white;
-            padding: 80px 0;
+            background-color: var(--primary-white);
+            padding: 100px 0;
         }
         
         .news-section {
-            padding: 80px 0;
-            background-color: var(--light-color);
+            padding: 100px 0;
+            background-color: var(--secondary-gray);
         }
         
         .news-card {
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s;
             background: white;
@@ -151,22 +173,23 @@
         }
         
         .news-img {
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             width: 100%;
         }
         
         footer {
-            background-color: var(--primary-color);
+            background-color: var(--primary-black);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
         }
         
         .footer-title {
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            color: var(--primary-white);
         }
         
         .footer-title:after {
@@ -176,7 +199,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background-color: var(--accent-color);
+            background-color: var(--primary-red);
         }
         
         .footer-links {
@@ -185,84 +208,91 @@
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .footer-links a {
             color: #ddd;
             text-decoration: none;
             transition: all 0.3s;
+            font-weight: 500;
         }
         
         .footer-links a:hover {
-            color: var(--accent-color);
-            padding-left: 5px;
+            color: var(--primary-red);
+            padding-left: 8px;
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            padding: 12px 30px;
-            font-weight: 600;
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+            padding: 14px 35px;
+            font-weight: 700;
             border-radius: 5px;
             transition: all 0.3s;
+            letter-spacing: 0.5px;
         }
         
         .btn-primary:hover {
-            background-color: #0c3556;
-            border-color: #0c3556;
-            transform: translateY(-2px);
+            background-color: #b30000;
+            border-color: #b30000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.2);
         }
         
         .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-            font-weight: 600;
+            color: var(--primary-red);
+            border-color: var(--primary-red);
+            font-weight: 700;
             border-radius: 5px;
             transition: all 0.3s;
+            padding: 12px 30px;
         }
         
         .btn-outline-primary:hover {
-            background-color: var(--primary-color);
+            background-color: var(--primary-red);
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.2);
         }
         
         .admin-panel {
             background-color: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             margin: 50px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary-red);
         }
         
         .admin-login {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 1000;
         }
         
         .admin-section {
-            margin-bottom: 30px;
-            padding: 20px;
+            margin-bottom: 35px;
+            padding: 25px;
             background: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-red);
         }
         
         .service-detail-section {
-            padding: 80px 0;
+            padding: 100px 0;
             display: none;
             background: white;
         }
 
         .service-hero {
-            padding: 100px 0;
+            padding: 120px 0;
             color: white;
             background-size: cover;
             background-position: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             position: relative;
         }
 
@@ -273,7 +303,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to right, rgba(13, 60, 97, 0.9), rgba(13, 60, 97, 0.7));
+            background: linear-gradient(to right, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.8));
             z-index: 1;
         }
 
@@ -283,16 +313,20 @@
         }
 
         .back-button {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             background-color: white;
-            color: var(--primary-color);
+            color: var(--primary-red);
             border: none;
-            font-weight: 600;
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 5px;
+            transition: all 0.3s;
         }
         
         .back-button:hover {
-            background-color: var(--accent-color);
+            background-color: var(--primary-red);
             color: white;
+            transform: translateY(-3px);
         }
 
         .feature-list {
@@ -301,87 +335,87 @@
         }
 
         .feature-list li {
-            padding: 12px 0;
+            padding: 15px 0;
             border-bottom: 1px solid #eee;
             position: relative;
-            padding-left: 35px;
+            padding-left: 40px;
+            font-weight: 500;
         }
 
         .feature-list li:before {
             content: '✓';
-            color: var(--accent-color);
+            color: var(--primary-red);
             position: absolute;
             left: 0;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
         
         .contact-info {
-            background: var(--primary-color);
+            background: var(--primary-black);
             color: white;
-            padding: 30px;
-            border-radius: 8px;
+            padding: 40px;
+            border-radius: 10px;
             height: 100%;
         }
         
         .contact-info i {
-            color: var(--accent-color);
+            color: var(--primary-red);
             width: 25px;
+            font-size: 1.2rem;
         }
         
         .form-control {
-            padding: 12px 15px;
+            padding: 14px 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-weight: 500;
         }
         
         .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(13, 60, 97, 0.25);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 0.25rem rgba(204, 0, 0, 0.25);
         }
         
         .guarantee-badge {
-            background: var(--accent-color);
+            background: var(--primary-red);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            margin-right: 15px;
+            margin-right: 20px;
             flex-shrink: 0;
+            font-size: 1.3rem;
         }
         
         .guarantee-item {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
-        /* Admin specific styles */
-        .admin-tabs {
-            margin-bottom: 20px;
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-section {
+                padding: 100px 0;
+            }
+            
+            .display-4 {
+                font-size: 2.5rem;
+            }
+            
+            .service-card, .news-card {
+                margin-bottom: 25px;
+            }
+            
+            .admin-panel {
+                padding: 25px;
+            }
         }
         
-        .image-preview {
-            width: 100%;
-            height: 200px;
-            border: 2px dashed #ddd;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-        
-        .image-preview img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .hero-section {
                 padding: 80px 0;
@@ -390,26 +424,109 @@
             .display-4 {
                 font-size: 2.2rem;
             }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-number {
+                font-size: 2.2rem;
+            }
+            
+            .admin-panel {
+                padding: 20px;
+            }
+            
+            .admin-section {
+                padding: 20px;
+            }
+            
+            .service-hero {
+                padding: 80px 0;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Admin specific styles */
+        .admin-tabs {
+            border-bottom: 2px solid var(--primary-red);
+            margin-bottom: 30px;
+        }
+        
+        .admin-tab {
+            padding: 12px 25px;
+            background: #f5f5f5;
+            border: none;
+            font-weight: 600;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s;
+        }
+        
+        .admin-tab.active {
+            background: var(--primary-red);
+            color: white;
+        }
+        
+        .admin-tab-content {
+            display: none;
+        }
+        
+        .admin-tab-content.active {
+            display: block;
+        }
+        
+        /* Loading animation */
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="#" id="logo-img" alt="4SP Logo" height="40" class="me-2"> FOR SECURITE PRIVEE (4SP)
+            <a class="navbar-brand" href="#accueil">
+                <img src="#" id="logo-img" alt="4SP Logo" height="45" class="me-2"> FOR SECURITE PRIVEE (4SP)
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link text-white" href="#accueil">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#about">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#rapports">Rapports</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rapports">Rapports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -418,12 +535,12 @@
     <!-- Section d'accueil avec présentation commerciale -->
     <section id="accueil" class="hero-section">
         <div class="container">
-            <div class="hero-badge">Depuis 2024</div>
-            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE ENGAGEMENT</h1>
-            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Expert en solutions de sécurité sur Montpellier</p>
-            <p class="fs-5 mb-5">Plus de 50 agents professionnels dévoués à votre protection 24h/24 et 7j/7</p>
+            <div class="hero-badge">SÉCURITÉ HAUT DE GAMME DEPUIS 2024</div>
+            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE EXPERTISE</h1>
+            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Solutions de sécurité professionnelles sur Montpellier</p>
+            <p class="fs-5 mb-5">Plus de 50 agents spécialisés dédiés à votre protection 24h/24 et 7j/7</p>
             <a href="#services" class="btn btn-primary btn-lg mt-3 me-3">Découvrir nos services</a>
-            <a href="#contact" class="btn btn-outline-light btn-lg mt-3">Nous contacter</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg mt-3">Contact urgent</a>
         </div>
     </section>
 
@@ -431,7 +548,7 @@
     <section id="services" class="py-5">
         <div class="container">
             <h2 class="section-title">Nos Services Professionnels</h2>
-            <p class="text-center mb-5">Des solutions de sécurité sur mesure adaptées à vos besoins spécifiques</p>
+            <p class="text-center mb-5">Des solutions de sécurité sur mesure adaptées à tous vos besoins</p>
             <div class="row g-4">
                 <!-- Service 1: Gardiennage et surveillance -->
                 <div class="col-md-4">
@@ -481,123 +598,6 @@
         </div>
     </section>
 
-    <!-- Détails des Services -->
-    <!-- Service 1: Gardiennage et surveillance -->
-    <section id="service1-detail" class="service-detail-section">
-        <div class="service-hero" style="background-image: url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-            <div class="container service-hero-content">
-                <button class="btn btn-light back-button" onclick="hideServiceDetails()"><i class="fas fa-arrow-left me-2"></i>Retour aux services</button>
-                <h2 class="text-white">Gardiennage & Surveillance Humaine</h2>
-                <p class="lead text-white">Service complet de surveillance et gardiennage professionnel</p>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Service de gardiennage professionnel</h3>
-                    <p>Notre service de gardiennage propose une surveillance humaine professionnelle 24h/24 et 7j/7 pour tous types de sites : industriels, commerciaux, résidentiels et administratifs. Avec plus de 50 agents formés et expérimentés, nous garantissons la sécurité de vos biens et personnes.</p>
-                    
-                    <h4>Nos prestations incluent :</h4>
-                    <ul class="feature-list">
-                        <li>Contrôle des accès et gestion des entrées/sorties</li>
-                        <li>Surveillance par vidéoprotection</li>
-                        <li>Rondes de contrôle régulières</li>
-                        <li>Tenue de registres de sécurité</li>
-                        <li>Gestion des alarmes et interventions</li>
-                        <li>Accueil et orientation des visiteurs</li>
-                        <li>Contrôle des biens et marchandises</li>
-                        <li>Surveillance des systèmes de sécurité</li>
-                    </ul>
-
-                    <div class="row mt-5">
-                        <div class="col-md-6">
-                            <div class="guarantee-item">
-                                <div class="guarantee-badge">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <div>
-                                    <h5>Sécurité renforcée</h5>
-                                    <p class="mb-0">Présence physique dissuasive et réactive</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="guarantee-item">
-                                <div class="guarantee-badge">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <h5>Disponibilité 24/7</h5>
-                                    <p class="mb-0">Service continu jour et nuit, week-end inclus</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="guarantee-item">
-                                <div class="guarantee-badge">
-                                    <i class="fas fa-user-tie"></i>
-                                </div>
-                                <div>
-                                    <h5>Personnel qualifié</h5>
-                                    <p class="mb-0">Agents formés et expérimentés</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="guarantee-item">
-                                <div class="guarantee-badge">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <div>
-                                    <h5>Rapports détaillés</h5>
-                                    <p class="mb-0">Comptes-rendus précis de toutes les interventions</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Demander un devis</h5>
-                        </div>
-                        <div class="card-body">
-                            <p>Contactez-nous pour une étude gratuite de vos besoins en sécurité</p>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-phone me-2"></i> 06 60 35 01 97</li>
-                                <li><i class="fas fa-envelope me-2"></i> forsecuriteprivee@gmail.com</li>
-                                <li><i class="fas fa-map-marker-alt me-2"></i> 83 rue Yves Montand, Montpellier</li>
-                            </ul>
-                            <a href="#contact" class="btn btn-primary w-100">Nous contacter</a>
-                        </div>
-                    </div>
-
-                    <div class="card mt-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Galerie Professionnelle</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Agent de sécurité en formation">
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Poste de contrôle">
-                                </div>
-                                <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Surveillance">
-                                </div>
-                                <div class="col-6">
-                                    <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="img-thumbnail w-100" alt="Équipe de sécurité">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Section À propos -->
     <section id="about" class="about-section">
         <div class="container">
@@ -605,7 +605,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h3>Notre histoire</h3>
-                    <p>For Sécurité Privée (4SP) a été créée à Montpellier en 2024 avec une ambition claire : offrir des services de sécurité professionnels et sur mesure pour répondre aux besoins spécifiques de chaque clien.</p>
+                    <p>For Sécurité Privée (4SP) a été créée à Montpellier en 2024 avec une ambition claire : offrir des services de sécurité professionnels et sur mesure pour répondre aux besoins spécifiques de chaque client. Notre fondateur, fort de 15 ans d'expérience dans le domaine de la sécurité, a voulu créer une entreprise alliant expertise technique et relation client d'exception.</p>
                     
                     <h3>Nos valeurs</h3>
                     <ul>
@@ -649,7 +649,47 @@
             <p class="text-center mb-5">Découvrez nos interventions et réalisations sur le terrain</p>
             
             <div id="reports-container" class="row">
-                <!-- Rapports chargés dynamiquement -->
+                <div class="col-md-4 mb-4">
+                    <div class="card news-card">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top news-img" alt="Rapport mensuel">
+                        <div class="card-body">
+                            <h5 class="card-title">Rapport Mensuel - Juin 2024</h5>
+                            <p class="card-text">Bilan de nos interventions et activités pour le mois de juin 2024 sur Montpellier et sa région.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">15 interventions</small>
+                                <small class="text-muted">2 juillet 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card news-card">
+                        <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top news-img" alt="Formation agents">
+                        <div class="card-body">
+                            <h5 class="card-title">Formation des Agents</h5>
+                            <p class="card-text">Session de formation avancée pour nos agents sur les nouvelles procédures de sécurité.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">25 agents formés</small>
+                                <small class="text-muted">28 juin 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card news-card">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top news-img" alt="Sécurité événement">
+                        <div class="card-body">
+                            <h5 class="card-title">Festival de Montpellier</h5>
+                            <p class="card-text">Gestion de la sécurité pour le festival annuel de Montpellier avec une équipe de 15 agents.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">3 jours d'événement</small>
+                                <small class="text-muted">20 juin 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -723,113 +763,107 @@
     <section class="admin-panel container" id="adminPanel">
         <h2 class="section-title">Espace Administrateur</h2>
         
-        <ul class="nav nav-tabs admin-tabs" id="adminTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="logo-tab" data-bs-toggle="tab" data-bs-target="#logo" type="button" role="tab">Logo</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab">Images</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="texts-tab" data-bs-toggle="tab" data-bs-target="#texts" type="button" role="tab">Textes</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab">Rapports</button>
-            </li>
-        </ul>
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="openAdminTab('tab-logo')">Logo</button>
+            <button class="admin-tab" onclick="openAdminTab('tab-services')">Services</button>
+            <button class="admin-tab" onclick="openAdminTab('tab-content')">Contenu</button>
+            <button class="admin-tab" onclick="openAdminTab('tab-reports')">Rapports</button>
+        </div>
         
-        <div class="tab-content" id="adminTabContent">
-            <!-- Onglet Logo -->
-            <div class="tab-pane fade show active" id="logo" role="tabpanel">
-                <div class="admin-section">
-                    <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
-                    <div class="mb-3">
-                        <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
-                        <input class="form-control" type="file" id="logoUpload" accept="image/*">
-                    </div>
-                    <div class="image-preview">
-                        <img id="logoPreview" src="#" alt="Aperçu du logo">
-                    </div>
-                    <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
+        <div id="tab-logo" class="admin-tab-content active">
+            <div class="admin-section">
+                <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
+                <div class="mb-3">
+                    <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
+                    <input class="form-control" type="file" id="logoUpload" accept="image/*">
                 </div>
+                <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
+                <div class="loading-spinner" id="logo-spinner"></div>
+                <div class="success-message" id="logo-success">Logo mis à jour avec succès!</div>
             </div>
-            
-            <!-- Onglet Images -->
-            <div class="tab-pane fade" id="images" role="tabpanel">
-                <div class="admin-section">
-                    <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Sélectionner un service</label>
-                        <select class="form-select" id="serviceSelect">
-                            <option value="service1-img">Gardiennage - Image principale</option>
-                            <option value="service1-detail-img">Gardiennage - Image détail</option>
-                            <option value="service2-img">Rondes - Image principale</option>
-                            <option value="service2-detail-img">Rondes - Image détail</option>
-                            <option value="service3-img">Événementiel - Image principale</option>
-                            <option value="service3-detail-img">Événementiel - Image détail</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Télécharger l'image</label>
-                        <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
-                    </div>
-                    <div class="image-preview">
-                        <img id="serviceImagePreview" src="#" alt="Aperçu de l'image">
-                    </div>
-                    <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
+        </div>
+        
+        <div id="tab-services" class="admin-tab-content">
+            <div class="admin-section">
+                <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
+                <div class="mb-3">
+                    <label class="form-label">Sélectionner un service</label>
+                    <select class="form-select" id="serviceSelect">
+                        <option value="service1-img">Gardiennage - Image principale</option>
+                        <option value="service1-detail-img">Gardiennage - Image détail</option>
+                        <option value="service1-gallery1">Gardiennage - Galerie 1</option>
+                        <option value="service1-gallery2">Gardiennage - Galerie 2</option>
+                        <option value="service2-img">Rondes - Image principale</option>
+                        <option value="service2-detail-img">Rondes - Image détail</option>
+                        <option value="service2-gallery1">Rondes - Galerie 1</option>
+                        <option value="service2-gallery2">Rondes - Galerie 2</option>
+                        <option value="service3-img">Événementiel - Image principale</option>
+                        <option value="service3-detail-img">Événementiel - Image détail</option>
+                        <option value="service3-gallery1">Événementiel - Galerie 1</option>
+                        <option value="service3-gallery2">Événementiel - Galerie 2</option>
+                    </select>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">Télécharger l'image</label>
+                    <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
+                </div>
+                <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
+                <div class="loading-spinner" id="service-image-spinner"></div>
+                <div class="success-message" id="service-image-success">Image de service mise à jour avec succès!</div>
             </div>
-            
-            <!-- Onglet Textes -->
-            <div class="tab-pane fade" id="texts" role="tabpanel">
-                <div class="admin-section">
-                    <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Sélectionner un service</label>
-                        <select class="form-select" id="textServiceSelect">
-                            <option value="service1">Gardiennage & Surveillance</option>
-                            <option value="service2">Rondes & Interventions</option>
-                            <option value="service3">Sécurité Événementielle</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Titre du service</label>
-                        <input type="text" class="form-control" id="serviceTitle">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description courte</label>
-                        <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description détaillée</label>
-                        <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
-                    </div>
-                    <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
+        </div>
+        
+        <div id="tab-content" class="admin-tab-content">
+            <div class="admin-section">
+                <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
+                <div class="mb-3">
+                    <label class="form-label">Sélectionner un service</label>
+                    <select class="form-select" id="textServiceSelect">
+                        <option value="service1">Gardiennage & Surveillance</option>
+                        <option value="service2">Rondes & Interventions</option>
+                        <option value="service3">Sécurité Événementielle</option>
+                    </select>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">Titre du service</label>
+                    <input type="text" class="form-control" id="serviceTitle">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description courte</label>
+                    <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description détaillée</label>
+                    <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
+                <div class="loading-spinner" id="service-text-spinner"></div>
+                <div class="success-message" id="service-text-success">Texte de service mis à jour avec succès!</div>
             </div>
-            
-            <!-- Onglet Rapports -->
-            <div class="tab-pane fade" id="reports" role="tabpanel">
-                <div class="admin-section">
-                    <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Titre du rapport</label>
-                        <input type="text" class="form-control" id="reportTitle">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" id="reportDescription" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Date</label>
-                        <input type="date" class="form-control" id="reportDate">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Images (multiple autorisé)</label>
-                        <input class="form-control" type="file" id="reportImageUpload" accept="image/*" multiple>
-                    </div>
-                    <button class="btn btn-primary" onclick="addReport()">Ajouter le rapport</button>
+        </div>
+        
+        <div id="tab-reports" class="admin-tab-content">
+            <div class="admin-section">
+                <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
+                <div class="mb-3">
+                    <label class="form-label">Titre du rapport</label>
+                    <input type="text" class="form-control" id="reportTitle">
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="reportDescription" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-control" id="reportDate">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Images (multiple autorisé)</label>
+                    <input class="form-control" type="file" id="reportImageUpload" accept="image/*" multiple>
+                </div>
+                <button class="btn btn-primary" onclick="addReport()">Ajouter le rapport</button>
+                <div class="loading-spinner" id="report-spinner"></div>
+                <div class="success-message" id="report-success">Rapport ajouté avec succès!</div>
             </div>
         </div>
     </section>
@@ -875,7 +909,7 @@
 
     <!-- Bouton d'administration -->
     <div class="admin-login">
-        <button class="btn btn-secondary" onclick="loginToAdmin()">Admin</button>
+        <button class="btn btn-danger" onclick="loginToAdmin()">Admin</button>
     </div>
 
     <!-- Scripts -->
@@ -883,7 +917,7 @@
     <script>
         // Fonctions pour le panneau d'administration
         let adminAuthenticated = false;
-        const ADMIN_PASSWORD = "4SP@forsecuriteprivee2024"; // À changer en production
+        const ADMIN_PASSWORD = "4SP@2024"; // À changer en production
 
         function loginToAdmin() {
             if (adminAuthenticated) {
@@ -903,47 +937,48 @@
             }
         }
         
-        // Fonctions pour afficher/masquer les détails des services
-        function showServiceDetail(serviceId) {
-            // Masquer toutes les sections de services
-            document.querySelectorAll('.service-detail-section').forEach(section => {
-                section.style.display = 'none';
+        function openAdminTab(tabId) {
+            // Masquer tous les onglets
+            document.querySelectorAll('.admin-tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
             
-            // Masquer la section des services
-            document.getElementById('services').style.display = 'none';
-            
-            // Afficher la section de détail correspondante
-            document.getElementById(serviceId + '-detail').style.display = 'block';
-            
-            // Faire défiler jusqu'au début de la page
-            window.scrollTo(0, 0);
-        }
-        
-        function hideServiceDetails() {
-            // Masquer toutes les sections de détail
-            document.querySelectorAll('.service-detail-section').forEach(section => {
-                section.style.display = 'none';
+            // Désactiver tous les boutons d'onglets
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
             });
             
-            // Afficher la section des services
-            document.getElementById('services').style.display = 'block';
+            // Activer l'onglet sélectionné
+            document.getElementById(tabId).classList.add('active');
             
-            // Faire défiler jusqu'à la section des services
-            document.getElementById('services').scrollIntoView();
+            // Activer le bouton de l'onglet sélectionné
+            document.querySelector(`button[onclick="openAdminTab('${tabId}')"]`).classList.add('active');
         }
         
-        // Fonctions pour l'administration
         function updateLogo() {
             const fileInput = document.getElementById('logoUpload');
             if (fileInput.files.length > 0) {
+                // Afficher l'animation de chargement
+                document.getElementById('logo-spinner').style.display = 'block';
+                document.getElementById('logo-success').style.display = 'none';
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('logo-img').src = e.target.result;
-                    document.getElementById('logoPreview').src = e.target.result;
-                    // Sauvegarder dans le stockage local
-                    localStorage.setItem('image_logo-img', e.target.result);
-                    alert('Logo mis à jour!');
+                    // Simuler un délai de traitement
+                    setTimeout(function() {
+                        document.getElementById('logo-img').src = e.target.result;
+                        // Sauvegarder dans le stockage local
+                        localStorage.setItem('image_logo-img', e.target.result);
+                        
+                        // Cacher l'animation et afficher le message de succès
+                        document.getElementById('logo-spinner').style.display = 'none';
+                        document.getElementById('logo-success').style.display = 'block';
+                        
+                        // Cacher le message après 3 secondes
+                        setTimeout(function() {
+                            document.getElementById('logo-success').style.display = 'none';
+                        }, 3000);
+                    }, 1000);
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
@@ -956,13 +991,27 @@
             const fileInput = document.getElementById('serviceImageUpload');
             
             if (fileInput.files.length > 0) {
+                // Afficher l'animation de chargement
+                document.getElementById('service-image-spinner').style.display = 'block';
+                document.getElementById('service-image-success').style.display = 'none';
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById(service).src = e.target.result;
-                    document.getElementById('serviceImagePreview').src = e.target.result;
-                    // Sauvegarder dans le stockage local
-                    localStorage.setItem('image_' + service, e.target.result);
-                    alert('Image de service mise à jour!');
+                    // Simuler un délai de traitement
+                    setTimeout(function() {
+                        document.getElementById(service).src = e.target.result;
+                        // Sauvegarder dans le stockage local
+                        localStorage.setItem('image_' + service, e.target.result);
+                        
+                        // Cacher l'animation et afficher le message de succès
+                        document.getElementById('service-image-spinner').style.display = 'none';
+                        document.getElementById('service-image-success').style.display = 'block';
+                        
+                        // Cacher le message après 3 secondes
+                        setTimeout(function() {
+                            document.getElementById('service-image-success').style.display = 'none';
+                        }, 3000);
+                    }, 1000);
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
@@ -976,15 +1025,33 @@
             const shortDescription = document.getElementById('serviceShortDescription').value;
             const fullDescription = document.getElementById('serviceFullDescription').value;
             
-            // Ici, vous devriez enregistrer ces textes dans localStorage ou une base de données
-            // Pour cet exemple, nous allons simplement afficher une alerte
-            
-            alert(`Textes du service ${service} mis à jour!\nTitre: ${title}\nDescription courte: ${shortDescription}`);
-            
-            // Réinitialiser le formulaire
-            document.getElementById('serviceTitle').value = '';
-            document.getElementById('serviceShortDescription').value = '';
-            document.getElementById('serviceFullDescription').value = '';
+            if (title && shortDescription && fullDescription) {
+                // Afficher l'animation de chargement
+                document.getElementById('service-text-spinner').style.display = 'block';
+                document.getElementById('service-text-success').style.display = 'none';
+                
+                // Simuler un délai de traitement
+                setTimeout(function() {
+                    // Ici, vous devriez enregistrer ces textes dans localStorage ou une base de données
+                    // Pour cet exemple, nous allons simplement afficher un message de succès
+                    
+                    // Cacher l'animation et afficher le message de succès
+                    document.getElementById('service-text-spinner').style.display = 'none';
+                    document.getElementById('service-text-success').style.display = 'block';
+                    
+                    // Réinitialiser le formulaire
+                    document.getElementById('serviceTitle').value = '';
+                    document.getElementById('serviceShortDescription').value = '';
+                    document.getElementById('serviceFullDescription').value = '';
+                    
+                    // Cacher le message après 3 secondes
+                    setTimeout(function() {
+                        document.getElementById('service-text-success').style.display = 'none';
+                    }, 3000);
+                }, 1000);
+            } else {
+                alert('Veuillez remplir tous les champs');
+            }
         }
         
         function addReport() {
@@ -994,22 +1061,21 @@
             const fileInput = document.getElementById('reportImageUpload');
             
             if (title && description && date) {
-                const reportsContainer = document.getElementById('reports-container');
+                // Afficher l'animation de chargement
+                document.getElementById('report-spinner').style.display = 'block';
+                document.getElementById('report-success').style.display = 'none';
                 
-                const col = document.createElement('div');
-                col.className = 'col-md-4 mb-4';
-                
-                const reportId = 'report_' + Date.now();
-                const reportElement = document.createElement('div');
-                reportElement.className = 'card news-card';
-                reportElement.id = reportId;
-                
-                // Gérer les images
-                if (fileInput.files.length > 0) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        reportElement.innerHTML = `
-                            <img src="${e.target.result}" class="card-img-top news-img" alt="${title}">
+                // Simuler un délai de traitement
+                setTimeout(function() {
+                    const reportsContainer = document.getElementById('reports-container');
+                    
+                    // Créer un nouvel élément de rapport
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4 mb-4';
+                    
+                    col.innerHTML = `
+                        <div class="card news-card">
+                            <img src="${fileInput.files.length > 0 ? URL.createObjectURL(fileInput.files[0]) : 'https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'}" class="card-img-top news-img" alt="${title}">
                             <div class="card-body">
                                 <h5 class="card-title">${title}</h5>
                                 <p class="card-text">${description}</p>
@@ -1018,124 +1084,28 @@
                                     <small class="text-muted">${new Date(date).toLocaleDateString('fr-FR')}</small>
                                 </div>
                             </div>
-                        `;
-                        
-                        col.appendChild(reportElement);
-                        reportsContainer.appendChild(col);
-                        
-                        // Sauvegarder le rapport
-                        localStorage.setItem(reportId, JSON.stringify({
-                            title,
-                            description,
-                            date,
-                            image: e.target.result
-                        }));
-                        
-                        resetReportForm();
-                        alert('Rapport ajouté avec succès!');
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
-                } else {
-                    // Aucune image, juste le texte
-                    reportElement.innerHTML = `
-                        <div class="card-body">
-                            <h5 class="card-title">${title}</h5>
-                            <p class="card-text">${description}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Nouveau rapport</small>
-                                <small class="text-muted">${new Date(date).toLocaleDateString('fr-FR')}</small>
-                            </div>
                         </div>
                     `;
                     
-                    col.appendChild(reportElement);
                     reportsContainer.appendChild(col);
                     
-                    // Sauvegarder le rapport
-                    localStorage.setItem(reportId, JSON.stringify({
-                        title,
-                        description,
-                        date
-                    }));
+                    // Cacher l'animation et afficher le message de succès
+                    document.getElementById('report-spinner').style.display = 'none';
+                    document.getElementById('report-success').style.display = 'block';
                     
-                    resetReportForm();
-                    alert('Rapport ajouté avec succès!');
-                }
+                    // Réinitialiser le formulaire
+                    document.getElementById('reportTitle').value = '';
+                    document.getElementById('reportDescription').value = '';
+                    document.getElementById('reportDate').value = '';
+                    document.getElementById('reportImageUpload').value = '';
+                    
+                    // Cacher le message après 3 secondes
+                    setTimeout(function() {
+                        document.getElementById('report-success').style.display = 'none';
+                    }, 3000);
+                }, 1000);
             } else {
                 alert('Veuillez remplir tous les champs');
-            }
-        }
-        
-        function resetReportForm() {
-            document.getElementById('reportTitle').value = '';
-            document.getElementById('reportDescription').value = '';
-            document.getElementById('reportDate').value = '';
-            document.getElementById('reportImageUpload').value = '';
-        }
-        
-        // Charger les données depuis le stockage local
-        function loadFromStorage() {
-            // Charger le logo
-            const logoData = localStorage.getItem('image_logo-img');
-            if (logoData) {
-                document.getElementById('logo-img').src = logoData;
-                document.getElementById('logoPreview').src = logoData;
-            }
-            
-            // Charger les images des services
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('image_') && key !== 'image_logo-img') {
-                    const elementId = key.replace('image_', '');
-                    const imgData = localStorage.getItem(key);
-                    const imgElement = document.getElementById(elementId);
-                    if (imgElement) {
-                        imgElement.src = imgData;
-                    }
-                }
-            }
-            
-            // Charger les rapports
-            const reportsContainer = document.getElementById('reports-container');
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('report_')) {
-                    const reportData = JSON.parse(localStorage.getItem(key));
-                    
-                    const col = document.createElement('div');
-                    col.className = 'col-md-4 mb-4';
-                    
-                    const reportElement = document.createElement('div');
-                    reportElement.className = 'card news-card';
-                    
-                    if (reportData.image) {
-                        reportElement.innerHTML = `
-                            <img src="${reportData.image}" class="card-img-top news-img" alt="${reportData.title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${reportData.title}</h5>
-                                <p class="card-text">${reportData.description}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Rapport</small>
-                                    <small class="text-muted">${new Date(reportData.date).toLocaleDateString('fr-FR')}</small>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        reportElement.innerHTML = `
-                            <div class="card-body">
-                                <h5 class="card-title">${reportData.title}</h5>
-                                <p class="card-text">${reportData.description}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Rapport</small>
-                                    <small class="text-muted">${new Date(reportData.date).toLocaleDateString('fr-FR')}</small>
-                                </div>
-                            </div>
-                        `;
-                    }
-                    
-                    col.appendChild(reportElement);
-                    reportsContainer.appendChild(col);
-                }
             }
         }
         
@@ -1148,32 +1118,21 @@
         
         // Chargement initial
         window.addEventListener('DOMContentLoaded', function() {
-            loadFromStorage();
-            
             // Masquer le panel admin par défaut
             document.getElementById('adminPanel').style.display = 'none';
             
-            // Masquer les détails des services par défaut
-            document.querySelectorAll('.service-detail-section').forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Prévisualisation des images
-            document.getElementById('logoUpload').addEventListener('change', function() {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('logoPreview').src = e.target.result;
-                };
-                reader.readAsDataURL(this.files[0]);
-            });
-            
-            document.getElementById('serviceImageUpload').addEventListener('change', function() {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('serviceImagePreview').src = e.target.result;
-                };
-                reader.readAsDataURL(this.files[0]);
-            });
+            // Charger les images depuis le stockage local
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('image_')) {
+                    const elementId = key.replace('image_', '');
+                    const imgData = localStorage.getItem(key);
+                    const imgElement = document.getElementById(elementId);
+                    if (imgElement) {
+                        imgElement.src = imgData;
+                    }
+                }
+            }
         });
     </script>
 </body>
