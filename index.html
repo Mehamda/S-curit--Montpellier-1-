@@ -101,7 +101,14 @@
             padding: 30px;
             border-radius: 10px;
             margin-top: 50px;
-            display: none; /* Masqué par défaut, visible seulement pour l'admin */
+            display: none;
+        }
+        
+        .admin-login {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -145,7 +152,7 @@
                 <!-- Service 1: Gardiennage et surveillance -->
                 <div class="col-md-4">
                     <div class="card service-card">
-                        <img src="#" class="card-img-top service-main-img" alt="Service de gardiennage" height="200">
+                        <img src="#" class="card-img-top service-main-img" alt="Service de gardiennage" height="200" id="service1-img">
                         <div class="card-body">
                             <div class="service-icon">
                                 <i class="fas fa-user-shield"></i>
@@ -160,7 +167,7 @@
                 <!-- Service 2: Rondes et interventions -->
                 <div class="col-md-4">
                     <div class="card service-card">
-                        <img src="#" class="card-img-top service-main-img" alt="Service de rondes" height="200">
+                        <img src="#" class="card-img-top service-main-img" alt="Service de rondes" height="200" id="service2-img">
                         <div class="card-body">
                             <div class="service-icon">
                                 <i class="fas fa-car"></i>
@@ -175,7 +182,7 @@
                 <!-- Service 3: Événementiels -->
                 <div class="col-md-4">
                     <div class="card service-card">
-                        <img src="#" class="card-img-top service-main-img" alt="Service événementiel" height="200">
+                        <img src="#" class="card-img-top service-main-img" alt="Service événementiel" height="200" id="service3-img">
                         <div class="card-body">
                             <div class="service-icon">
                                 <i class="fas fa-calendar-alt"></i>
@@ -199,7 +206,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="#" class="img-fluid mb-3 service-detail-img" alt="Détail gardiennage">
+                    <img src="#" class="img-fluid mb-3 service-detail-img" id="service1-detail-img" alt="Détail gardiennage">
                     <h4>Service complet de surveillance et gardiennage</h4>
                     <p>Notre service de gardiennage propose une surveillance humaine professionnelle 24h/24 et 7j/7 pour tous types de sites : industriels, commerciaux, résidentiels et administratifs.</p>
                     
@@ -215,10 +222,10 @@
                     
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" alt="Gallery image 1">
+                            <img src="#" class="img-thumbnail service-gallery-img" id="service1-gallery1" alt="Gallery image 1">
                         </div>
                         <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" alt="Gallery image 2">
+                            <img src="#" class="img-thumbnail service-gallery-img" id="service1-gallery2" alt="Gallery image 2">
                         </div>
                     </div>
                 </div>
@@ -238,7 +245,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="#" class="img-fluid mb-3 service-detail-img" alt="Détail rondes">
+                    <img src="#" class="img-fluid mb-3 service-detail-img" id="service2-detail-img" alt="Détail rondes">
                     <h4>Service de rondes et interventions rapides</h4>
                     <p>Notre service de rondes et interventions offre une présence sécurité mobile sur l'ensemble de la région Montpelliéraine, avec des équipes formées et équipées pour répondre à toutes situations.</p>
                     
@@ -254,10 +261,10 @@
                     
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" alt="Gallery image 1">
+                            <img src="#" class="img-thumbnail service-gallery-img" id="service2-gallery1" alt="Gallery image 1">
                         </div>
                         <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" alt="Gallery image 2">
+                            <img src="#" class="img-thumbnail service-gallery-img" id="service2-gallery2" alt="Gallery image 2">
                         </div>
                     </div>
                 </div>
@@ -277,7 +284,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="#" class="img-fluid mb-3 service-detail-img" alt="Détail événementiel">
+                    <img src="#" class="img-fluid mb-3 service-detail-img" id="service3-detail-img" alt="Détail événementiel">
                     <h4>Service de sécurité pour événements</h4>
                     <p>Nous proposons des solutions de sécurité sur mesure pour tous types d'événements : concerts, salons professionnels, mariages, manifestations sportives et culturelles.</p>
                     
@@ -293,10 +300,10 @@
                     
                     <div class="row mt-4">
                         <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" alt="Gallery image 1">
+                            <img src="#" class="img-thumbnail service-gallery-img" id="service3-gallery1" alt="Gallery image 1">
                         </div>
                         <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" alt="Gallery image 2">
+                            <img src="#" class="img-thumbnail service-gallery-img" id="service3-gallery2" alt="Gallery image 2">
                         </div>
                     </div>
                 </div>
@@ -446,15 +453,18 @@
                         <div class="mb-3">
                             <label class="form-label">Sélectionner un service</label>
                             <select class="form-select" id="serviceSelect">
-                                <option value="service1">Gardiennage - Image principale</option>
-                                <option value="service1-g1">Gardiennage - Image galerie 1</option>
-                                <option value="service1-g2">Gardiennage - Image galerie 2</option>
-                                <option value="service2">Rondes - Image principale</option>
-                                <option value="service2-g1">Rondes - Image galerie 1</option>
-                                <option value="service2-g2">Rondes - Image galerie 2</option>
-                                <option value="service3">Événementiel - Image principale</option>
-                                <option value="service3-g1">Événementiel - Image galerie 1</option>
-                                <option value="service3-g2">Événementiel - Image galerie 2</option>
+                                <option value="service1-img">Gardiennage - Image principale</option>
+                                <option value="service1-detail-img">Gardiennage - Image détail</option>
+                                <option value="service1-gallery1">Gardiennage - Galerie 1</option>
+                                <option value="service1-gallery2">Gardiennage - Galerie 2</option>
+                                <option value="service2-img">Rondes - Image principale</option>
+                                <option value="service2-detail-img">Rondes - Image détail</option>
+                                <option value="service2-gallery1">Rondes - Galerie 1</option>
+                                <option value="service2-gallery2">Rondes - Galerie 2</option>
+                                <option value="service3-img">Événementiel - Image principale</option>
+                                <option value="service3-detail-img">Événementiel - Image détail</option>
+                                <option value="service3-gallery1">Événementiel - Galerie 1</option>
+                                <option value="service3-gallery2">Événementiel - Galerie 2</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -526,16 +536,48 @@
         </div>
     </footer>
 
+    <!-- Bouton d'administration -->
+    <div class="admin-login">
+        <button class="btn btn-secondary" onclick="loginToAdmin()">Admin</button>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Fonctions pour le panneau d'administration
-        function showAdminPanel() {
-            document.getElementById('adminPanel').style.display = 'block';
+        let adminAuthenticated = false;
+        const ADMIN_PASSWORD = "4SP@2024"; // À changer en production
+
+        function loginToAdmin() {
+            if (adminAuthenticated) {
+                document.getElementById('adminPanel').style.display = 'block';
+                return;
+            }
+            
+            const password = prompt("Veuillez entrer le mot de passe administrateur:");
+            if (password === ADMIN_PASSWORD) {
+                adminAuthenticated = true;
+                document.getElementById('adminPanel').style.display = 'block';
+                alert("Connexion réussie!");
+            } else {
+                alert("Mot de passe incorrect");
+            }
         }
         
-        // Masqué par défaut - à activer via une connexion admin sécurisée
-        // showAdminPanel(); 
+        // Charger les images depuis le stockage local
+        function loadImagesFromStorage() {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('image_')) {
+                    const elementId = key.replace('image_', '');
+                    const imgData = localStorage.getItem(key);
+                    const imgElement = document.getElementById(elementId);
+                    if (imgElement) {
+                        imgElement.src = imgData;
+                    }
+                }
+            }
+        }
         
         function updateLogo() {
             const fileInput = document.getElementById('logoUpload');
@@ -543,8 +585,9 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('logo-img').src = e.target.result;
-                    // Ici, normalement, vous enverriez l'image au serveur
-                    alert('Logo mis à jour (simulation)');
+                    // Sauvegarder dans le stockage local
+                    localStorage.setItem('image_logo-img', e.target.result);
+                    alert('Logo mis à jour!');
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             }
@@ -557,15 +600,10 @@
             if (fileInput.files.length > 0) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Mettre à jour l'image correspondante selon le service sélectionné
-                    if (service === 'service1') {
-                        document.querySelectorAll('.service-main-img')[0].src = e.target.result;
-                    } else if (service === 'service1-g1') {
-                        document.querySelectorAll('#service1Modal .service-gallery-img')[0].src = e.target.result;
-                    } 
-                    // Ajouter les autres cas pour chaque image...
-                    
-                    alert('Image de service mise à jour (simulation)');
+                    document.getElementById(service).src = e.target.result;
+                    // Sauvegarder dans le stockage local
+                    localStorage.setItem('image_' + service, e.target.result);
+                    alert('Image de service mise à jour!');
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             }
@@ -578,7 +616,6 @@
             const fileInput = document.getElementById('newsImageUpload');
             
             if (title && content && date) {
-                // Créer un élément d'actualité
                 const newsContainer = document.getElementById('news-container');
                 
                 const col = document.createElement('div');
@@ -587,21 +624,37 @@
                 const card = document.createElement('div');
                 card.className = 'card news-card';
                 
-                let imageHtml = '';
                 if (fileInput.files.length > 0) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        imageHtml = `<img src="${e.target.result}" class="card-img-top news-img" alt="${title}">`;
-                        completeNewsCard();
+                        const imageUrl = e.target.result;
+                        card.innerHTML = `
+                            <img src="${imageUrl}" class="card-img-top news-img" alt="${title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text">${content}</p>
+                                <p class="text-muted"><small>${new Date(date).toLocaleDateString('fr-FR')}</small></p>
+                            </div>
+                        `;
+                        
+                        col.appendChild(card);
+                        newsContainer.appendChild(col);
+                        
+                        // Sauvegarder l'actualité
+                        const newsId = 'news_' + Date.now();
+                        localStorage.setItem(newsId, JSON.stringify({
+                            title,
+                            content,
+                            date,
+                            imageUrl
+                        }));
+                        
+                        resetNewsForm();
+                        alert('Actualité ajoutée!');
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 } else {
-                    completeNewsCard();
-                }
-                
-                function completeNewsCard() {
                     card.innerHTML = `
-                        ${imageHtml}
                         <div class="card-body">
                             <h5 class="card-title">${title}</h5>
                             <p class="card-text">${content}</p>
@@ -612,16 +665,66 @@
                     col.appendChild(card);
                     newsContainer.appendChild(col);
                     
-                    // Réinitialiser le formulaire
-                    document.getElementById('newsTitle').value = '';
-                    document.getElementById('newsContent').value = '';
-                    document.getElementById('newsDate').value = '';
-                    document.getElementById('newsImageUpload').value = '';
+                    // Sauvegarder l'actualité
+                    const newsId = 'news_' + Date.now();
+                    localStorage.setItem(newsId, JSON.stringify({
+                        title,
+                        content,
+                        date
+                    }));
                     
-                    alert('Actualité ajoutée (simulation)');
+                    resetNewsForm();
+                    alert('Actualité ajoutée!');
                 }
             } else {
                 alert('Veuillez remplir tous les champs');
+            }
+        }
+        
+        function resetNewsForm() {
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsContent').value = '';
+            document.getElementById('newsDate').value = '';
+            document.getElementById('newsImageUpload').value = '';
+        }
+        
+        // Charger les actualités depuis le stockage local
+        function loadNewsFromStorage() {
+            const newsContainer = document.getElementById('news-container');
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('news_')) {
+                    const newsData = JSON.parse(localStorage.getItem(key));
+                    
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'card news-card';
+                    
+                    if (newsData.imageUrl) {
+                        card.innerHTML = `
+                            <img src="${newsData.imageUrl}" class="card-img-top news-img" alt="${newsData.title}">
+                            <div class="card-body">
+                                <h5 class="card-title">${newsData.title}</h5>
+                                <p class="card-text">${newsData.content}</p>
+                                <p class="text-muted"><small>${new Date(newsData.date).toLocaleDateString('fr-FR')}</small></p>
+                            </div>
+                        `;
+                    } else {
+                        card.innerHTML = `
+                            <div class="card-body">
+                                <h5 class="card-title">${newsData.title}</h5>
+                                <p class="card-text">${newsData.content}</p>
+                                <p class="text-muted"><small>${new Date(newsData.date).toLocaleDateString('fr-FR')}</small></p>
+                            </div>
+                        `;
+                    }
+                    
+                    col.appendChild(card);
+                    newsContainer.appendChild(col);
+                }
             }
         }
         
@@ -632,44 +735,13 @@
             this.reset();
         });
         
-        // Charger les actualités existantes (simulation)
+        // Chargement initial
         window.addEventListener('DOMContentLoaded', function() {
-            // Simuler le chargement de quelques actualités
-            const sampleNews = [
-                {
-                    title: 'Nouveau contrat de sécurité',
-                    content: '4SP a été choisie pour assurer la sécurité du nouveau centre commercial de Montpellier.',
-                    date: '2024-05-15',
-                    image: 'https://images.unsplash.com/photo-1563013546-66238ba2230e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
-                },
-                {
-                    title: 'Formation des agents',
-                    content: 'Tous nos agents ont suivi une formation spéciale sur la gestion des situations d\'urgence.',
-                    date: '2024-04-28',
-                    image: 'https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
-                }
-            ];
+            loadImagesFromStorage();
+            loadNewsFromStorage();
             
-            const newsContainer = document.getElementById('news-container');
-            
-            sampleNews.forEach(news => {
-                const col = document.createElement('div');
-                col.className = 'col-md-4';
-                
-                col.innerHTML = `
-                    <div class="card news-card">
-                        <img src="${news.image}" class="card-img-top news-img" alt="${news.title}">
-                        <div class="card-body">
-                            <h5 class="card-title">${news.title}</h5>
-                            <p class="card-text">${news.content}</p>
-                            <p class="text-muted"><small>${new Date(news.date).toLocaleDateString('fr-FR')}</small></p>
-                        </div>
-                    </div>
-                `;
-                
-                newsContainer.appendChild(col);
-            });
-        });
-    </script>
-</body>
-</html>
+            // Charger quelques images par défaut si aucune image n'est sauvegardée
+            if (localStorage.length === 0) {
+                // Images par défaut pour les services (remplacer par vos URLs)
+                const defaultImages = {
+                    'service1-img': 'https://images.unsplash.com/photo-1589
