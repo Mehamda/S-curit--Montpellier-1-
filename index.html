@@ -16,30 +16,35 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
+            padding-top: 80px;
         }
         
         .navbar {
             background-color: var(--secondary-color);
             padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?ixlib=rb-4.0.3') no-repeat center center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
             background-size: cover;
             color: white;
-            padding: 100px 0;
+            padding: 120px 0;
             text-align: center;
         }
         
         .service-card {
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
             border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
         
         .service-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
         .service-icon {
@@ -53,6 +58,7 @@
             padding-bottom: 15px;
             margin-bottom: 30px;
             text-align: center;
+            font-weight: 700;
         }
         
         .section-title:after {
@@ -62,8 +68,9 @@
             left: 50%;
             transform: translateX(-50%);
             width: 80px;
-            height: 3px;
+            height: 4px;
             background-color: var(--primary-color);
+            border-radius: 2px;
         }
         
         .about-section {
@@ -82,12 +89,20 @@
         
         .news-card {
             margin-bottom: 30px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
         }
         
         .news-img {
             height: 200px;
             object-fit: cover;
+            width: 100%;
         }
         
         footer {
@@ -100,8 +115,8 @@
             background-color: #f8f9fa;
             padding: 30px;
             border-radius: 10px;
-            margin-top: 50px;
-            display: none;
+            margin: 50px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         .admin-login {
@@ -110,11 +125,68 @@
             right: 20px;
             z-index: 1000;
         }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+            transform: translateY(-2px);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stats-text {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .admin-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .report-card {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-img {
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="#" id="logo-img" alt="4SP Logo" height="40"> FOR SECURITE PRIVEE (4SP)
@@ -127,7 +199,7 @@
                     <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#actualites">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rapports">Rapports</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -137,9 +209,9 @@
     <!-- Section d'accueil avec présentation commerciale -->
     <section id="accueil" class="hero-section">
         <div class="container">
-            <h1 class="display-4 fw-bold">VOTRE SÉCURITÉ, NOTRE PRIORITÉ</h1>
-            <p class="lead">For Sécurité Privée (4SP) - Expert en solutions de sécurité sur Montpellier et sa région</p>
-            <p>Plus de 50 agents dévoués à votre protection 24h/24 et 7j/7</p>
+            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE PRIORITÉ</h1>
+            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Expert en solutions de sécurité sur Montpellier et sa région</p>
+            <p class="fs-5 mb-5">Plus de 50 agents dévoués à votre protection 24h/24 et 7j/7</p>
             <a href="#services" class="btn btn-primary btn-lg mt-3">Découvrir nos services</a>
         </div>
     </section>
@@ -153,7 +225,7 @@
                 <div class="col-md-4">
                     <div class="card service-card">
                         <img src="#" class="card-img-top service-main-img" alt="Service de gardiennage" height="200" id="service1-img">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-user-shield"></i>
                             </div>
@@ -168,7 +240,7 @@
                 <div class="col-md-4">
                     <div class="card service-card">
                         <img src="#" class="card-img-top service-main-img" alt="Service de rondes" height="200" id="service2-img">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-car"></i>
                             </div>
@@ -183,7 +255,7 @@
                 <div class="col-md-4">
                     <div class="card service-card">
                         <img src="#" class="card-img-top service-main-img" alt="Service événementiel" height="200" id="service3-img">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
@@ -196,124 +268,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modals pour les services détaillés -->
-    <div class="modal fade" id="service1Modal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Gardiennage & Surveillance Humaine</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="#" class="img-fluid mb-3 service-detail-img" id="service1-detail-img" alt="Détail gardiennage">
-                    <h4>Service complet de surveillance et gardiennage</h4>
-                    <p>Notre service de gardiennage propose une surveillance humaine professionnelle 24h/24 et 7j/7 pour tous types de sites : industriels, commerciaux, résidentiels et administratifs.</p>
-                    
-                    <h5>Nos prestations incluent :</h5>
-                    <ul>
-                        <li>Contrôle des accès et gestion des entrées/sorties</li>
-                        <li>Surveillance par vidéoprotection</li>
-                        <li>Rondes de contrôle régulières</li>
-                        <li>Tenue de registres de sécurité</li>
-                        <li>Gestion des alarmes et interventions</li>
-                        <li>Accueil et orientation des visiteurs</li>
-                    </ul>
-                    
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" id="service1-gallery1" alt="Gallery image 1">
-                        </div>
-                        <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" id="service1-gallery2" alt="Gallery image 2">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <a href="#contact" class="btn btn-primary">Nous contacter</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="service2Modal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Rondes & Interventions</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="#" class="img-fluid mb-3 service-detail-img" id="service2-detail-img" alt="Détail rondes">
-                    <h4>Service de rondes et interventions rapides</h4>
-                    <p>Notre service de rondes et interventions offre une présence sécurité mobile sur l'ensemble de la région Montpelliéraine, avec des équipes formées et équipées pour répondre à toutes situations.</p>
-                    
-                    <h5>Nos prestations incluent :</h5>
-                    <ul>
-                        <li>Rondes de surveillance aléatoires ou programmées</li>
-                        <li>Vérification de l'intégrité des sites</li>
-                        <li>Intervention sur alarme</li>
-                        <li>Levée de doute et sécurisation des accès</li>
-                        <li>Patrouilles avec points de contrôle géolocalisés</li>
-                        <li>Rapports d'intervention détaillés</li>
-                    </ul>
-                    
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" id="service2-gallery1" alt="Gallery image 1">
-                        </div>
-                        <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" id="service2-gallery2" alt="Gallery image 2">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <a href="#contact" class="btn btn-primary">Nous contacter</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="service3Modal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Sécurité Événementielle</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="#" class="img-fluid mb-3 service-detail-img" id="service3-detail-img" alt="Détail événementiel">
-                    <h4>Service de sécurité pour événements</h4>
-                    <p>Nous proposons des solutions de sécurité sur mesure pour tous types d'événements : concerts, salons professionnels, mariages, manifestations sportives et culturelles.</p>
-                    
-                    <h5>Nos prestations incluent :</h5>
-                    <ul>
-                        <li>Étude de sécurité préalable et plan de sécurité</li>
-                        <li>Gestion des flux et fouilles de sécurité</li>
-                        <li>Contrôle d'accès et billetterie</li>
-                        <li>Surveillance de foule et gestion des conflits</li>
-                        <li>Dispositif de premiers secours</li>
-                        <li>Coordination avec les forces de l'ordre</li>
-                    </ul>
-                    
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" id="service3-gallery1" alt="Gallery image 1">
-                        </div>
-                        <div class="col-md-6">
-                            <img src="#" class="img-thumbnail service-gallery-img" id="service3-gallery2" alt="Gallery image 2">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <a href="#contact" class="btn btn-primary">Nous contacter</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Section À propos -->
     <section id="about" class="about-section">
@@ -336,25 +290,14 @@
                     <h3>Nos ambitions</h3>
                     <p>Devenir le leader de la sécurité privée dans la région Occitanie en développant des partenariats durables avec nos clients et en investissant continuellement dans la formation de nos agents et les technologies de sécurité.</p>
                     
-                    <div class="mt-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary p-3 rounded-circle me-3">
-                                <i class="fas fa-users text-white fa-2x"></i>
-                            </div>
-                            <div>
-                                <h4 class="mb-0">50+</h4>
-                                <p class="mb-0">Agents de sécurité</p>
-                            </div>
+                    <div class="row mt-5">
+                        <div class="col-6 text-center">
+                            <div class="stats-number">50+</div>
+                            <div class="stats-text">Agents de sécurité</div>
                         </div>
-                        
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary p-3 rounded-circle me-3">
-                                <i class="fas fa-shield-alt text-white fa-2x"></i>
-                            </div>
-                            <div>
-                                <h4 class="mb-0">100%</h4>
-                                <p class="mb-0">Agents certifiés</p>
-                            </div>
+                        <div class="col-6 text-center">
+                            <div class="stats-number">100%</div>
+                            <div class="stats-text">Agents certifiés</div>
                         </div>
                     </div>
                 </div>
@@ -362,12 +305,14 @@
         </div>
     </section>
 
-    <!-- Section Actualités -->
-    <section id="actualites" class="news-section">
+    <!-- Section Rapports et activités -->
+    <section id="rapports" class="news-section bg-light">
         <div class="container">
-            <h2 class="section-title">Actualités</h2>
-            <div id="news-container" class="row">
-                <!-- Les actualités seront chargées dynamiquement ici -->
+            <h2 class="section-title">Nos Rapports d'Activité</h2>
+            <p class="text-center mb-5">Découvrez nos interventions et réalisations sur le terrain</p>
+            
+            <div id="reports-container" class="row">
+                <!-- Les rapports seront chargés dynamiquement ici -->
             </div>
         </div>
     </section>
@@ -426,83 +371,64 @@
         </div>
     </section>
 
-    <!-- Panel d'administration (masqué par défaut) -->
-    <section class="admin-panel container my-5" id="adminPanel">
+    <!-- Panel d'administration -->
+    <section class="admin-panel container" id="adminPanel">
         <h2 class="section-title">Espace Administrateur</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Gérer le logo</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
-                            <input class="form-control" type="file" id="logoUpload" accept="image/*">
-                        </div>
-                        <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
-                    </div>
-                </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
+            <div class="mb-3">
+                <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
+                <input class="form-control" type="file" id="logoUpload" accept="image/*">
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Gérer les images des services</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label">Sélectionner un service</label>
-                            <select class="form-select" id="serviceSelect">
-                                <option value="service1-img">Gardiennage - Image principale</option>
-                                <option value="service1-detail-img">Gardiennage - Image détail</option>
-                                <option value="service1-gallery1">Gardiennage - Galerie 1</option>
-                                <option value="service1-gallery2">Gardiennage - Galerie 2</option>
-                                <option value="service2-img">Rondes - Image principale</option>
-                                <option value="service2-detail-img">Rondes - Image détail</option>
-                                <option value="service2-gallery1">Rondes - Galerie 1</option>
-                                <option value="service2-gallery2">Rondes - Galerie 2</option>
-                                <option value="service3-img">Événementiel - Image principale</option>
-                                <option value="service3-detail-img">Événementiel - Image détail</option>
-                                <option value="service3-gallery1">Événementiel - Galerie 1</option>
-                                <option value="service3-gallery2">Événementiel - Galerie 2</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Télécharger l'image</label>
-                            <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
-                        </div>
-                        <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
-                    </div>
-                </div>
-            </div>
+            <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
         </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Gérer les actualités</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label">Titre de l'actualité</label>
-                            <input type="text" class="form-control" id="newsTitle">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Contenu</label>
-                            <textarea class="form-control" id="newsContent" rows="4"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Image</label>
-                            <input class="form-control" type="file" id="newsImageUpload" accept="image/*">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Date</label>
-                            <input type="date" class="form-control" id="newsDate">
-                        </div>
-                        <button class="btn btn-primary" onclick="addNews()">Ajouter l'actualité</button>
-                    </div>
-                </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
+            <div class="mb-3">
+                <label class="form-label">Sélectionner un service</label>
+                <select class="form-select" id="serviceSelect">
+                    <option value="service1-img">Gardiennage - Image principale</option>
+                    <option value="service1-detail-img">Gardiennage - Image détail</option>
+                    <option value="service1-gallery1">Gardiennage - Galerie 1</option>
+                    <option value="service1-gallery2">Gardiennage - Galerie 2</option>
+                    <option value="service2-img">Rondes - Image principale</option>
+                    <option value="service2-detail-img">Rondes - Image détail</option>
+                    <option value="service2-gallery1">Rondes - Galerie 1</option>
+                    <option value="service2-gallery2">Rondes - Galerie 2</option>
+                    <option value="service3-img">Événementiel - Image principale</option>
+                    <option value="service3-detail-img">Événementiel - Image détail</option>
+                    <option value="service3-gallery1">Événementiel - Galerie 1</option>
+                    <option value="service3-gallery2">Événementiel - Galerie 2</option>
+                </select>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Télécharger l'image</label>
+                <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
+            </div>
+            <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
+            <div class="mb-3">
+                <label class="form-label">Titre du rapport</label>
+                <input type="text" class="form-control" id="reportTitle">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" id="reportDescription" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control" id="reportDate">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Images (multiple autorisé)</label>
+                <input class="form-control" type="file" id="reportImageUpload" accept="image/*" multiple>
+            </div>
+            <button class="btn btn-primary" onclick="addReport()">Ajouter le rapport</button>
         </div>
     </section>
 
@@ -546,11 +472,12 @@
     <script>
         // Fonctions pour le panneau d'administration
         let adminAuthenticated = false;
-        const ADMIN_PASSWORD = "4SP@2024"; // À changer en production
+        const ADMIN_PASSWORD = "4SP@forsecuriteprivee2024"; // À changer en production
 
         function loginToAdmin() {
             if (adminAuthenticated) {
                 document.getElementById('adminPanel').style.display = 'block';
+                window.location.href = '#adminPanel';
                 return;
             }
             
@@ -559,6 +486,7 @@
                 adminAuthenticated = true;
                 document.getElementById('adminPanel').style.display = 'block';
                 alert("Connexion réussie!");
+                window.location.href = '#adminPanel';
             } else {
                 alert("Mot de passe incorrect");
             }
@@ -590,6 +518,8 @@
                     alert('Logo mis à jour!');
                 };
                 reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert('Veuillez sélectionner un fichier');
             }
         }
         
@@ -606,124 +536,201 @@
                     alert('Image de service mise à jour!');
                 };
                 reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert('Veuillez sélectionner un fichier');
             }
         }
         
-        function addNews() {
-            const title = document.getElementById('newsTitle').value;
-            const content = document.getElementById('newsContent').value;
-            const date = document.getElementById('newsDate').value;
-            const fileInput = document.getElementById('newsImageUpload');
+        function addReport() {
+            const title = document.getElementById('reportTitle').value;
+            const description = document.getElementById('reportDescription').value;
+            const date = document.getElementById('reportDate').value;
+            const fileInput = document.getElementById('reportImageUpload');
             
-            if (title && content && date) {
-                const newsContainer = document.getElementById('news-container');
+            if (title && description && date) {
+                const reportsContainer = document.getElementById('reports-container');
                 
                 const col = document.createElement('div');
-                col.className = 'col-md-4';
+                col.className = 'col-md-6 col-lg-4 mb-4';
                 
-                const card = document.createElement('div');
-                card.className = 'card news-card';
+                const reportId = 'report_' + Date.now();
+                const reportElement = document.createElement('div');
+                reportElement.className = 'card news-card';
+                reportElement.id = reportId;
                 
+                // Gérer les images
                 if (fileInput.files.length > 0) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const imageUrl = e.target.result;
-                        card.innerHTML = `
-                            <img src="${imageUrl}" class="card-img-top news-img" alt="${title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${title}</h5>
-                                <p class="card-text">${content}</p>
-                                <p class="text-muted"><small>${new Date(date).toLocaleDateString('fr-FR')}</small></p>
-                            </div>
-                        `;
-                        
-                        col.appendChild(card);
-                        newsContainer.appendChild(col);
-                        
-                        // Sauvegarder l'actualité
-                        const newsId = 'news_' + Date.now();
-                        localStorage.setItem(newsId, JSON.stringify({
-                            title,
-                            content,
-                            date,
-                            imageUrl
-                        }));
-                        
-                        resetNewsForm();
-                        alert('Actualité ajoutée!');
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'position-relative';
+                    
+                    const carouselId = 'carousel_' + reportId;
+                    let carouselInnerHTML = '<div class="carousel-inner">';
+                    
+                    for (let i = 0; i < fileInput.files.length; i++) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const isActive = i === 0 ? 'active' : '';
+                            carouselInnerHTML += `
+                                <div class="carousel-item ${isActive}">
+                                    <img src="${e.target.result}" class="d-block w-100 news-img" alt="${title}">
+                                </div>
+                            `;
+                            
+                            // Si c'est la dernière image, finaliser le carousel
+                            if (i === fileInput.files.length - 1) {
+                                carouselInnerHTML += '</div>';
+                                if (fileInput.files.length > 1) {
+                                    carouselInnerHTML += `
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    `;
+                                }
+                                
+                                imageContainer.innerHTML = `
+                                    <div id="${carouselId}" class="carousel slide">
+                                        ${carouselInnerHTML}
+                                    </div>
+                                `;
+                                
+                                reportElement.appendChild(imageContainer);
+                                
+                                const cardBody = document.createElement('div');
+                                cardBody.className = 'card-body';
+                                cardBody.innerHTML = `
+                                    <h5 class="card-title">${title}</h5>
+                                    <p class="card-text">${description}</p>
+                                    <p class="text-muted"><small>${new Date(date).toLocaleDateString('fr-FR')}</small></p>
+                                `;
+                                
+                                reportElement.appendChild(cardBody);
+                                col.appendChild(reportElement);
+                                reportsContainer.appendChild(col);
+                                
+                                // Sauvegarder le rapport
+                                localStorage.setItem(reportId, JSON.stringify({
+                                    title,
+                                    description,
+                                    date,
+                                    images: Array.from(fileInput.files).map(file => {
+                                        const reader = new FileReader();
+                                        reader.readAsDataURL(file);
+                                        return reader.result;
+                                    })
+                                }));
+                                
+                                resetReportForm();
+                                alert('Rapport ajouté avec succès!');
+                            }
+                        };
+                        reader.readAsDataURL(fileInput.files[i]);
+                    }
                 } else {
-                    card.innerHTML = `
+                    // Aucune image, juste le texte
+                    reportElement.innerHTML = `
                         <div class="card-body">
                             <h5 class="card-title">${title}</h5>
-                            <p class="card-text">${content}</p>
+                            <p class="card-text">${description}</p>
                             <p class="text-muted"><small>${new Date(date).toLocaleDateString('fr-FR')}</small></p>
                         </div>
                     `;
                     
-                    col.appendChild(card);
-                    newsContainer.appendChild(col);
+                    col.appendChild(reportElement);
+                    reportsContainer.appendChild(col);
                     
-                    // Sauvegarder l'actualité
-                    const newsId = 'news_' + Date.now();
-                    localStorage.setItem(newsId, JSON.stringify({
+                    // Sauvegarder le rapport
+                    localStorage.setItem(reportId, JSON.stringify({
                         title,
-                        content,
+                        description,
                         date
                     }));
                     
-                    resetNewsForm();
-                    alert('Actualité ajoutée!');
+                    resetReportForm();
+                    alert('Rapport ajouté avec succès!');
                 }
             } else {
                 alert('Veuillez remplir tous les champs');
             }
         }
         
-        function resetNewsForm() {
-            document.getElementById('newsTitle').value = '';
-            document.getElementById('newsContent').value = '';
-            document.getElementById('newsDate').value = '';
-            document.getElementById('newsImageUpload').value = '';
+        function resetReportForm() {
+            document.getElementById('reportTitle').value = '';
+            document.getElementById('reportDescription').value = '';
+            document.getElementById('reportDate').value = '';
+            document.getElementById('reportImageUpload').value = '';
         }
         
-        // Charger les actualités depuis le stockage local
-        function loadNewsFromStorage() {
-            const newsContainer = document.getElementById('news-container');
+        // Charger les rapports depuis le stockage local
+        function loadReportsFromStorage() {
+            const reportsContainer = document.getElementById('reports-container');
             
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
-                if (key.startsWith('news_')) {
-                    const newsData = JSON.parse(localStorage.getItem(key));
+                if (key.startsWith('report_')) {
+                    const reportData = JSON.parse(localStorage.getItem(key));
                     
                     const col = document.createElement('div');
-                    col.className = 'col-md-4';
+                    col.className = 'col-md-6 col-lg-4 mb-4';
                     
-                    const card = document.createElement('div');
-                    card.className = 'card news-card';
+                    const reportElement = document.createElement('div');
+                    reportElement.className = 'card news-card';
+                    reportElement.id = key;
                     
-                    if (newsData.imageUrl) {
-                        card.innerHTML = `
-                            <img src="${newsData.imageUrl}" class="card-img-top news-img" alt="${newsData.title}">
+                    if (reportData.images && reportData.images.length > 0) {
+                        const carouselId = 'carousel_' + key;
+                        let carouselInnerHTML = '<div class="carousel-inner">';
+                        
+                        reportData.images.forEach((img, index) => {
+                            const isActive = index === 0 ? 'active' : '';
+                            carouselInnerHTML += `
+                                <div class="carousel-item ${isActive}">
+                                    <img src="${img}" class="d-block w-100 news-img" alt="${reportData.title}">
+                                </div>
+                            `;
+                        });
+                        
+                        carouselInnerHTML += '</div>';
+                        
+                        if (reportData.images.length > 1) {
+                            carouselInnerHTML += `
+                                <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            `;
+                        }
+                        
+                        reportElement.innerHTML = `
+                            <div id="${carouselId}" class="carousel slide">
+                                ${carouselInnerHTML}
+                            </div>
                             <div class="card-body">
-                                <h5 class="card-title">${newsData.title}</h5>
-                                <p class="card-text">${newsData.content}</p>
-                                <p class="text-muted"><small>${new Date(newsData.date).toLocaleDateString('fr-FR')}</small></p>
+                                <h5 class="card-title">${reportData.title}</h5>
+                                <p class="card-text">${reportData.description}</p>
+                                <p class="text-muted"><small>${new Date(reportData.date).toLocaleDateString('fr-FR')}</small></p>
                             </div>
                         `;
                     } else {
-                        card.innerHTML = `
+                        reportElement.innerHTML = `
                             <div class="card-body">
-                                <h5 class="card-title">${newsData.title}</h5>
-                                <p class="card-text">${newsData.content}</p>
-                                <p class="text-muted"><small>${new Date(newsData.date).toLocaleDateString('fr-FR')}</small></p>
+                                <h5 class="card-title">${reportData.title}</h5>
+                                <p class="card-text">${reportData.description}</p>
+                                <p class="text-muted"><small>${new Date(reportData.date).toLocaleDateString('fr-FR')}</small></p>
                             </div>
                         `;
                     }
                     
-                    col.appendChild(card);
-                    newsContainer.appendChild(col);
+                    col.appendChild(reportElement);
+                    reportsContainer.appendChild(col);
                 }
             }
         }
@@ -738,10 +745,25 @@
         // Chargement initial
         window.addEventListener('DOMContentLoaded', function() {
             loadImagesFromStorage();
-            loadNewsFromStorage();
+            loadReportsFromStorage();
+            
+            // Masquer le panel admin par défaut
+            document.getElementById('adminPanel').style.display = 'none';
             
             // Charger quelques images par défaut si aucune image n'est sauvegardée
             if (localStorage.length === 0) {
-                // Images par défaut pour les services (remplacer par vos URLs)
+                // Images par défaut pour les services
                 const defaultImages = {
-                    'service1-img': 'https://images.unsplash.com/photo-1589
+                    'service1-img': 'https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                    'service2-img': 'https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+                    'service3-img': 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80'
+                };
+                
+                for (const [id, url] of Object.entries(defaultImages)) {
+                    document.getElementById(id).src = url;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
