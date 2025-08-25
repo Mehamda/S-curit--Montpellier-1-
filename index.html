@@ -901,4 +901,82 @@
             <div class="footer-section">
                 <h3>Nos coordonnées</h3>
                 <p><i class="fas fa-map-marker-alt"></i> 83 rue Yves Montand, 34080 Montpellier</p>
-                <p><i class="fas fa-phone"></i>
+                <p><i class="fas fa-phone"></i> 06 60 35 01 97</p>
+                <p><i class="fas fa-envelope"></i> forsecuriteprivee@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens rapides</h3>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#news">Actualités</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 FOR Sécurité Privée (4SP) - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fonction pour afficher/masquer les détails des services
+        function showService(serviceId) {
+            // Masquer tous les détails de service
+            document.querySelectorAll('.service-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Afficher le service sélectionné
+            document.getElementById(serviceId).classList.add('active');
+            
+            // Faire défiler jusqu'au service
+            document.getElementById(serviceId).scrollIntoView({behavior: 'smooth'});
+        }
+        
+        // Gestion de l'upload d'actualités (simulation)
+        document.getElementById('news-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Fonctionnalité d\'ajout d\'actualité réservée à l\'administration. En production, cette fonction permettrait de téléverser de nouvelles actualités.');
+            this.reset();
+        });
+        
+        // Fonction pour charger le logo depuis l'ordinateur
+        function loadLogo(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const logoImg = document.getElementById('logo-image');
+                logoImg.src = reader.result;
+                // Stocker dans localStorage pour persistence
+                localStorage.setItem('companyLogo', reader.result);
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        
+        // Au chargement de la page, vérifier s'il y a un logo enregistré
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLogo = localStorage.getItem('companyLogo');
+            if (savedLogo) {
+                document.getElementById('logo-image').src = savedLogo;
+            }
+            
+            // Créer un input file caché pour le logo
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            fileInput.addEventListener('change', loadLogo);
+            document.body.appendChild(fileInput);
+            
+            // Ajouter un event listener sur le logo pour permettre le changement
+            document.getElementById('logo-image').addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            // Ajouter un titre pour indiquer que le logo est cliquable
+            document.getElementById('logo-image').title = "Cliquez pour changer le logo";
+        });
+    </script>
+</body>
+</html>
