@@ -6,118 +6,109 @@
     <title>For Securite Privee (4SP) - Services de sécurité à Montpellier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-red: #cc0000;
-            --primary-black: #1a1a1a;
-            --primary-white: #ffffff;
-            --secondary-gray: #f5f5f5;
-            --accent-gold: #d4af37;
+            --primary-color: #D32F2F;
+            --secondary-color: #1a1a1a;
+            --accent-color: #FFFFFF;
+            --light-bg: #f8f9fa;
+            --dark-text: #212121;
+            --light-text: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--accent-color);
+            line-height: 1.6;
             padding-top: 80px;
-            background-color: var(--primary-white);
+            overflow-x: hidden;
         }
         
+        /* Navigation */
         .navbar {
-            background-color: var(--primary-white);
+            background-color: var(--secondary-color);
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-bottom: 2px solid var(--primary-red);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
         
         .navbar-brand {
-            font-weight: 800;
-            color: var(--primary-red) !important;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent-color) !important;
+        }
+        
+        .navbar-brand img {
+            margin-right: 10px;
         }
         
         .nav-link {
-            font-weight: 600;
-            color: var(--primary-black) !important;
+            font-weight: 500;
+            color: var(--accent-color) !important;
             transition: all 0.3s;
             position: relative;
         }
         
-        .nav-link:hover {
-            color: var(--primary-red) !important;
-        }
-        
-        .nav-link::after {
+        .nav-link:after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
-            height: 3px;
-            background-color: var(--primary-red);
+            height: 2px;
+            background-color: var(--primary-color);
             transition: width 0.3s;
         }
         
-        .nav-link:hover::after {
+        .nav-link:hover:after, .nav-link.active:after {
             width: 100%;
         }
         
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
             background-size: cover;
-            color: white;
+            color: var(--accent-color);
             padding: 150px 0;
             text-align: center;
             position: relative;
         }
         
         .hero-badge {
-            background-color: var(--primary-red);
-            color: white;
-            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            padding: 8px 20px;
             border-radius: 30px;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
             display: inline-block;
             margin-bottom: 25px;
-            letter-spacing: 1px;
         }
         
-        .service-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-            border: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            border-radius: 10px;
-            overflow: hidden;
-            background: white;
-            border-top: 4px solid var(--primary-red);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary-red);
-            margin-bottom: 20px;
-            background: rgba(204, 0, 0, 0.1);
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin: 0 auto 20px;
+        /* Services */
+        .services-section {
+            padding: 100px 0;
+            background-color: var(--light-bg);
         }
         
         .section-title {
             position: relative;
             padding-bottom: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
-            font-weight: 800;
-            color: var(--primary-black);
+            font-weight: 700;
+            color: var(--secondary-color);
         }
         
         .section-title:after {
@@ -128,68 +119,142 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: var(--primary-red);
+            background-color: var(--primary-color);
             border-radius: 2px;
         }
         
+        .service-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--accent-color);
+            margin-bottom: 30px;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            background: rgba(211, 47, 47, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+        
+        /* About Section */
         .about-section {
-            background-color: var(--secondary-gray);
             padding: 100px 0;
+            background-color: var(--accent-color);
         }
         
         .stats-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--primary-red);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
         }
         
         .stats-text {
             font-size: 1.1rem;
-            color: #6c757d;
-            font-weight: 600;
+            color: var(--light-text);
         }
         
-        .contact-form {
-            background-color: var(--primary-white);
+        /* Reports Section */
+        .reports-section {
             padding: 100px 0;
+            background-color: var(--light-bg);
         }
         
-        .news-section {
-            padding: 100px 0;
-            background-color: var(--secondary-gray);
-        }
-        
-        .news-card {
+        .report-card {
             margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-radius: 8px;
             overflow: hidden;
             transition: transform 0.3s;
-            background: white;
+            background: var(--accent-color);
         }
         
-        .news-card:hover {
+        .report-card:hover {
             transform: translateY(-5px);
         }
         
-        .news-img {
-            height: 220px;
+        .report-img {
+            height: 200px;
             object-fit: cover;
             width: 100%;
         }
         
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background-color: var(--accent-color);
+        }
+        
+        .contact-info {
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 30px;
+            border-radius: 8px;
+            height: 100%;
+        }
+        
+        .contact-info i {
+            color: var(--primary-color);
+            width: 25px;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b71c1c;
+            border-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
         footer {
-            background-color: var(--primary-black);
-            color: white;
-            padding: 80px 0 40px;
+            background-color: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 60px 0 30px;
         }
         
         .footer-title {
-            font-weight: 700;
-            margin-bottom: 25px;
+            font-weight: 600;
+            margin-bottom: 20px;
             position: relative;
-            padding-bottom: 15px;
-            color: var(--primary-white);
+            padding-bottom: 10px;
         }
         
         .footer-title:after {
@@ -199,7 +264,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background-color: var(--primary-red);
+            background-color: var(--primary-color);
         }
         
         .footer-links {
@@ -208,91 +273,58 @@
         }
         
         .footer-links li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .footer-links a {
             color: #ddd;
             text-decoration: none;
             transition: all 0.3s;
-            font-weight: 500;
         }
         
         .footer-links a:hover {
-            color: var(--primary-red);
-            padding-left: 8px;
+            color: var(--primary-color);
+            padding-left: 5px;
         }
         
-        .btn-primary {
-            background-color: var(--primary-red);
-            border-color: var(--primary-red);
-            padding: 14px 35px;
-            font-weight: 700;
-            border-radius: 5px;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-primary:hover {
-            background-color: #b30000;
-            border-color: #b30000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.2);
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary-red);
-            border-color: var(--primary-red);
-            font-weight: 700;
-            border-radius: 5px;
-            transition: all 0.3s;
-            padding: 12px 30px;
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary-red);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.2);
-        }
-        
+        /* Admin Panel */
         .admin-panel {
-            background-color: white;
-            padding: 40px;
+            background-color: var(--accent-color);
+            padding: 30px;
             border-radius: 10px;
             margin: 50px 0;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--primary-red);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: none;
         }
         
         .admin-login {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             z-index: 1000;
         }
         
         .admin-section {
-            margin-bottom: 35px;
-            padding: 25px;
-            background: #f9f9f9;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--light-bg);
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--primary-red);
         }
         
+        /* Service Details */
         .service-detail-section {
             padding: 100px 0;
             display: none;
-            background: white;
+            background: var(--accent-color);
         }
 
         .service-hero {
             padding: 120px 0;
-            color: white;
+            color: var(--accent-color);
             background-size: cover;
             background-position: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             position: relative;
         }
 
@@ -303,7 +335,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to right, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.8));
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
             z-index: 1;
         }
 
@@ -313,20 +345,16 @@
         }
 
         .back-button {
-            margin-bottom: 40px;
-            background-color: white;
-            color: var(--primary-red);
+            margin-bottom: 30px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
             border: none;
-            font-weight: 700;
-            padding: 12px 25px;
-            border-radius: 5px;
-            transition: all 0.3s;
+            font-weight: 600;
         }
         
         .back-button:hover {
-            background-color: var(--primary-red);
-            color: white;
-            transform: translateY(-3px);
+            background-color: var(--primary-color);
+            color: var(--accent-color);
         }
 
         .feature-list {
@@ -335,90 +363,47 @@
         }
 
         .feature-list li {
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #eee;
             position: relative;
-            padding-left: 40px;
-            font-weight: 500;
+            padding-left: 35px;
         }
 
         .feature-list li:before {
             content: '✓';
-            color: var(--primary-red);
+            color: var(--primary-color);
             position: absolute;
             left: 0;
             font-weight: bold;
-            font-size: 1.5rem;
-        }
-        
-        .contact-info {
-            background: var(--primary-black);
-            color: white;
-            padding: 40px;
-            border-radius: 10px;
-            height: 100%;
-        }
-        
-        .contact-info i {
-            color: var(--primary-red);
-            width: 25px;
             font-size: 1.2rem;
         }
         
+        /* Form Elements */
         .form-control {
-            padding: 14px 16px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-weight: 500;
         }
         
         .form-control:focus {
-            border-color: var(--primary-red);
-            box-shadow: 0 0 0 0.25rem rgba(204, 0, 0, 0.25);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(211, 47, 47, 0.25);
         }
         
-        .guarantee-badge {
-            background: var(--primary-red);
-            color: white;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 20px;
-            flex-shrink: 0;
-            font-size: 1.3rem;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .guarantee-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
         }
         
-        /* Mobile Responsive Adjustments */
-        @media (max-width: 992px) {
-            .hero-section {
-                padding: 100px 0;
-            }
-            
-            .display-4 {
-                font-size: 2.5rem;
-            }
-            
-            .service-card, .news-card {
-                margin-bottom: 25px;
-            }
-            
-            .admin-panel {
-                padding: 25px;
-            }
-        }
-        
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero-section {
-                padding: 80px 0;
+                padding: 100px 0;
             }
             
             .display-4 {
@@ -426,103 +411,80 @@
             }
             
             .section-title {
-                font-size: 1.8rem;
+                margin-bottom: 30px;
             }
             
-            .stats-number {
-                font-size: 2.2rem;
-            }
-            
-            .admin-panel {
-                padding: 20px;
-            }
-            
-            .admin-section {
-                padding: 20px;
-            }
-            
-            .service-hero {
-                padding: 80px 0;
+            .services-section, .about-section, .reports-section, .contact-section {
+                padding: 60px 0;
             }
         }
         
-        /* Smooth scrolling */
+        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
         
-        /* Admin specific styles */
-        .admin-tabs {
-            border-bottom: 2px solid var(--primary-red);
-            margin-bottom: 30px;
+        /* Admin Gallery */
+        .gallery-img {
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
         
-        .admin-tab {
-            padding: 12px 25px;
-            background: #f5f5f5;
-            border: none;
-            font-weight: 600;
-            margin-right: 5px;
-            border-radius: 5px 5px 0 0;
-            transition: all 0.3s;
+        .gallery-img:hover {
+            transform: scale(1.05);
         }
         
-        .admin-tab.active {
-            background: var(--primary-red);
-            color: white;
-        }
-        
-        .admin-tab-content {
+        /* Loading Animation */
+        .loader {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
         }
         
-        .admin-tab-content.active {
-            display: block;
-        }
-        
-        /* Loading animation */
-        .loading-spinner {
-            display: none;
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-red);
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-bg);
+            border-top: 5px solid var(--primary-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
         }
         
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        /* Success message */
-        .success-message {
-            display: none;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#accueil">
-                <img src="#" id="logo-img" alt="4SP Logo" height="45" class="me-2"> FOR SECURITE PRIVEE (4SP)
+            <a class="navbar-brand" href="#">
+                <img src="#" id="logo-img" alt="4SP Logo" height="40"> FOR SECURITE PRIVEE (4SP)
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#accueil">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#rapports">Rapports</a></li>
@@ -532,28 +494,28 @@
         </div>
     </nav>
 
-    <!-- Section d'accueil avec présentation commerciale -->
+    <!-- Hero Section -->
     <section id="accueil" class="hero-section">
         <div class="container">
-            <div class="hero-badge">SÉCURITÉ HAUT DE GAMME DEPUIS 2024</div>
-            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE EXPERTISE</h1>
-            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Solutions de sécurité professionnelles sur Montpellier</p>
-            <p class="fs-5 mb-5">Plus de 50 agents spécialisés dédiés à votre protection 24h/24 et 7j/7</p>
+            <div class="hero-badge">Depuis 2024</div>
+            <h1 class="display-4 fw-bold mb-4">VOTRE SÉCURITÉ, NOTRE ENGAGEMENT</h1>
+            <p class="lead fs-3 mb-4">For Sécurité Privée (4SP) - Expert en solutions de sécurité sur Montpellier</p>
+            <p class="fs-5 mb-5">Plus de 50 agents professionnels dévoués à votre protection 24h/24 et 7j/7</p>
             <a href="#services" class="btn btn-primary btn-lg mt-3 me-3">Découvrir nos services</a>
-            <a href="#contact" class="btn btn-outline-light btn-lg mt-3">Contact urgent</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg mt-3">Nous contacter</a>
         </div>
     </section>
 
-    <!-- Section Services -->
-    <section id="services" class="py-5">
+    <!-- Services Section -->
+    <section id="services" class="services-section">
         <div class="container">
             <h2 class="section-title">Nos Services Professionnels</h2>
-            <p class="text-center mb-5">Des solutions de sécurité sur mesure adaptées à tous vos besoins</p>
-            <div class="row g-4">
+            <p class="text-center mb-5">Des solutions de sécurité sur mesure adaptées à vos besoins spécifiques</p>
+            <div class="row">
                 <!-- Service 1: Gardiennage et surveillance -->
-                <div class="col-md-4">
+                <div class="col-md-4 fade-in">
                     <div class="card service-card">
-                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top service-main-img" alt="Service de gardiennage" height="200" id="service1-img">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Service de gardiennage" height="200">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-user-shield"></i>
@@ -566,9 +528,9 @@
                 </div>
 
                 <!-- Service 2: Rondes et interventions -->
-                <div class="col-md-4">
+                <div class="col-md-4 fade-in">
                     <div class="card service-card">
-                        <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top service-main-img" alt="Service de rondes" height="200" id="service2-img">
+                        <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Service de rondes" height="200">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-car"></i>
@@ -581,9 +543,9 @@
                 </div>
 
                 <!-- Service 3: Événementiels -->
-                <div class="col-md-4">
+                <div class="col-md-4 fade-in">
                     <div class="card service-card">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top service-main-img" alt="Service événementiel" height="200" id="service3-img">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Service événementiel" height="200">
                         <div class="card-body text-center">
                             <div class="service-icon">
                                 <i class="fas fa-calendar-alt"></i>
@@ -598,7 +560,7 @@
         </div>
     </section>
 
-    <!-- Section À propos -->
+    <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
             <h2 class="section-title">À propos de 4SP</h2>
@@ -642,60 +604,48 @@
         </div>
     </section>
 
-    <!-- Section Rapports et activités -->
-    <section id="rapports" class="news-section">
+    <!-- Reports Section -->
+    <section id="rapports" class="reports-section">
         <div class="container">
             <h2 class="section-title">Nos Rapports d'Activité</h2>
             <p class="text-center mb-5">Découvrez nos interventions et réalisations sur le terrain</p>
             
             <div id="reports-container" class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card news-card">
-                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top news-img" alt="Rapport mensuel">
-                        <div class="card-body">
-                            <h5 class="card-title">Rapport Mensuel - Juin 2024</h5>
-                            <p class="card-text">Bilan de nos interventions et activités pour le mois de juin 2024 sur Montpellier et sa région.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">15 interventions</small>
-                                <small class="text-muted">2 juillet 2024</small>
-                            </div>
+                <!-- Reports will be loaded here -->
+            </div>
+            
+            <!-- Admin Report Form -->
+            <div class="admin-section mt-5">
+                <h4><i class="fas fa-plus-circle me-2"></i>Ajouter un nouveau rapport</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Titre du rapport</label>
+                            <input type="text" class="form-control" id="reportTitle">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" id="reportDate">
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-4 mb-4">
-                    <div class="card news-card">
-                        <img src="https://images.unsplash.com/photo-1611329850060-9d1a6e0c6af1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top news-img" alt="Formation agents">
-                        <div class="card-body">
-                            <h5 class="card-title">Formation des Agents</h5>
-                            <p class="card-text">Session de formation avancée pour nos agents sur les nouvelles procédures de sécurité.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">25 agents formés</small>
-                                <small class="text-muted">28 juin 2024</small>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="reportDescription" rows="3"></textarea>
                 </div>
-                
-                <div class="col-md-4 mb-4">
-                    <div class="card news-card">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top news-img" alt="Sécurité événement">
-                        <div class="card-body">
-                            <h5 class="card-title">Festival de Montpellier</h5>
-                            <p class="card-text">Gestion de la sécurité pour le festival annuel de Montpellier avec une équipe de 15 agents.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">3 jours d'événement</small>
-                                <small class="text-muted">20 juin 2024</small>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label">Image</label>
+                    <input class="form-control" type="file" id="reportImageUpload" accept="image/*">
                 </div>
+                <button class="btn btn-primary" onclick="addReport()">Publier le rapport</button>
             </div>
         </div>
     </section>
 
-    <!-- Section Contact -->
-    <section id="contact" class="contact-form">
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
         <div class="container">
             <h2 class="section-title">Contactez-nous</h2>
             <div class="row">
@@ -759,115 +709,6 @@
         </div>
     </section>
 
-    <!-- Panel d'administration -->
-    <section class="admin-panel container" id="adminPanel">
-        <h2 class="section-title">Espace Administrateur</h2>
-        
-        <div class="admin-tabs">
-            <button class="admin-tab active" onclick="openAdminTab('tab-logo')">Logo</button>
-            <button class="admin-tab" onclick="openAdminTab('tab-services')">Services</button>
-            <button class="admin-tab" onclick="openAdminTab('tab-content')">Contenu</button>
-            <button class="admin-tab" onclick="openAdminTab('tab-reports')">Rapports</button>
-        </div>
-        
-        <div id="tab-logo" class="admin-tab-content active">
-            <div class="admin-section">
-                <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
-                <div class="mb-3">
-                    <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
-                    <input class="form-control" type="file" id="logoUpload" accept="image/*">
-                </div>
-                <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
-                <div class="loading-spinner" id="logo-spinner"></div>
-                <div class="success-message" id="logo-success">Logo mis à jour avec succès!</div>
-            </div>
-        </div>
-        
-        <div id="tab-services" class="admin-tab-content">
-            <div class="admin-section">
-                <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
-                <div class="mb-3">
-                    <label class="form-label">Sélectionner un service</label>
-                    <select class="form-select" id="serviceSelect">
-                        <option value="service1-img">Gardiennage - Image principale</option>
-                        <option value="service1-detail-img">Gardiennage - Image détail</option>
-                        <option value="service1-gallery1">Gardiennage - Galerie 1</option>
-                        <option value="service1-gallery2">Gardiennage - Galerie 2</option>
-                        <option value="service2-img">Rondes - Image principale</option>
-                        <option value="service2-detail-img">Rondes - Image détail</option>
-                        <option value="service2-gallery1">Rondes - Galerie 1</option>
-                        <option value="service2-gallery2">Rondes - Galerie 2</option>
-                        <option value="service3-img">Événementiel - Image principale</option>
-                        <option value="service3-detail-img">Événementiel - Image détail</option>
-                        <option value="service3-gallery1">Événementiel - Galerie 1</option>
-                        <option value="service3-gallery2">Événementiel - Galerie 2</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Télécharger l'image</label>
-                    <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
-                </div>
-                <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
-                <div class="loading-spinner" id="service-image-spinner"></div>
-                <div class="success-message" id="service-image-success">Image de service mise à jour avec succès!</div>
-            </div>
-        </div>
-        
-        <div id="tab-content" class="admin-tab-content">
-            <div class="admin-section">
-                <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
-                <div class="mb-3">
-                    <label class="form-label">Sélectionner un service</label>
-                    <select class="form-select" id="textServiceSelect">
-                        <option value="service1">Gardiennage & Surveillance</option>
-                        <option value="service2">Rondes & Interventions</option>
-                        <option value="service3">Sécurité Événementielle</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Titre du service</label>
-                    <input type="text" class="form-control" id="serviceTitle">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Description courte</label>
-                    <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Description détaillée</label>
-                    <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
-                </div>
-                <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
-                <div class="loading-spinner" id="service-text-spinner"></div>
-                <div class="success-message" id="service-text-success">Texte de service mis à jour avec succès!</div>
-            </div>
-        </div>
-        
-        <div id="tab-reports" class="admin-tab-content">
-            <div class="admin-section">
-                <h4><i class="fas fa-file-alt me-2"></i> Gestion des Rapports d'Activité</h4>
-                <div class="mb-3">
-                    <label class="form-label">Titre du rapport</label>
-                    <input type="text" class="form-control" id="reportTitle">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" id="reportDescription" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Date</label>
-                    <input type="date" class="form-control" id="reportDate">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Images (multiple autorisé)</label>
-                    <input class="form-control" type="file" id="reportImageUpload" accept="image/*" multiple>
-                </div>
-                <button class="btn btn-primary" onclick="addReport()">Ajouter le rapport</button>
-                <div class="loading-spinner" id="report-spinner"></div>
-                <div class="success-message" id="report-success">Rapport ajouté avec succès!</div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -907,17 +748,73 @@
         </div>
     </footer>
 
-    <!-- Bouton d'administration -->
+    <!-- Admin Panel -->
+    <section class="admin-panel container" id="adminPanel">
+        <h2 class="section-title">Espace Administrateur</h2>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-image me-2"></i> Gestion du Logo</h4>
+            <div class="mb-3">
+                <label for="logoUpload" class="form-label">Télécharger un nouveau logo</label>
+                <input class="form-control" type="file" id="logoUpload" accept="image/*">
+            </div>
+            <button class="btn btn-primary" onclick="updateLogo()">Mettre à jour le logo</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-cogs me-2"></i> Gestion des Images des Services</h4>
+            <div class="mb-3">
+                <label class="form-label">Sélectionner un service</label>
+                <select class="form-select" id="serviceSelect">
+                    <option value="service1-img">Gardiennage - Image principale</option>
+                    <option value="service2-img">Rondes - Image principale</option>
+                    <option value="service3-img">Événementiel - Image principale</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Télécharger l'image</label>
+                <input class="form-control" type="file" id="serviceImageUpload" accept="image/*">
+            </div>
+            <button class="btn btn-primary" onclick="updateServiceImage()">Mettre à jour l'image</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4><i class="fas fa-edit me-2"></i> Gestion des Textes des Services</h4>
+            <div class="mb-3">
+                <label class="form-label">Sélectionner un service</label>
+                <select class="form-select" id="textServiceSelect">
+                    <option value="service1">Gardiennage & Surveillance</option>
+                    <option value="service2">Rondes & Interventions</option>
+                    <option value="service3">Sécurité Événementielle</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Titre du service</label>
+                <input type="text" class="form-control" id="serviceTitle">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description courte</label>
+                <textarea class="form-control" id="serviceShortDescription" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description détaillée</label>
+                <textarea class="form-control" id="serviceFullDescription" rows="5"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="updateServiceText()">Mettre à jour le texte</button>
+        </div>
+    </section>
+
+    <!-- Admin Login Button -->
     <div class="admin-login">
-        <button class="btn btn-danger" onclick="loginToAdmin()">Admin</button>
+        <button class="btn btn-secondary" onclick="loginToAdmin()">Admin</button>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Fonctions pour le panneau d'administration
+        // Admin functions
         let adminAuthenticated = false;
-        const ADMIN_PASSWORD = "4SP@forsecuriteprivee2024"; // À changer en production
+        const ADMIN_PASSWORD = "4SP@forsecuriteprivee2024"; // Change this in production
 
         function loginToAdmin() {
             if (adminAuthenticated) {
@@ -937,48 +834,14 @@
             }
         }
         
-        function openAdminTab(tabId) {
-            // Masquer tous les onglets
-            document.querySelectorAll('.admin-tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Désactiver tous les boutons d'onglets
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Activer l'onglet sélectionné
-            document.getElementById(tabId).classList.add('active');
-            
-            // Activer le bouton de l'onglet sélectionné
-            document.querySelector(`button[onclick="openAdminTab('${tabId}')"]`).classList.add('active');
-        }
-        
         function updateLogo() {
             const fileInput = document.getElementById('logoUpload');
             if (fileInput.files.length > 0) {
-                // Afficher l'animation de chargement
-                document.getElementById('logo-spinner').style.display = 'block';
-                document.getElementById('logo-success').style.display = 'none';
-                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Simuler un délai de traitement
-                    setTimeout(function() {
-                        document.getElementById('logo-img').src = e.target.result;
-                        // Sauvegarder dans le stockage local
-                        localStorage.setItem('image_logo-img', e.target.result);
-                        
-                        // Cacher l'animation et afficher le message de succès
-                        document.getElementById('logo-spinner').style.display = 'none';
-                        document.getElementById('logo-success').style.display = 'block';
-                        
-                        // Cacher le message après 3 secondes
-                        setTimeout(function() {
-                            document.getElementById('logo-success').style.display = 'none';
-                        }, 3000);
-                    }, 1000);
+                    document.getElementById('logo-img').src = e.target.result;
+                    localStorage.setItem('image_logo-img', e.target.result);
+                    alert('Logo mis à jour!');
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
@@ -991,66 +854,15 @@
             const fileInput = document.getElementById('serviceImageUpload');
             
             if (fileInput.files.length > 0) {
-                // Afficher l'animation de chargement
-                document.getElementById('service-image-spinner').style.display = 'block';
-                document.getElementById('service-image-success').style.display = 'none';
-                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Simuler un délai de traitement
-                    setTimeout(function() {
-                        document.getElementById(service).src = e.target.result;
-                        // Sauvegarder dans le stockage local
-                        localStorage.setItem('image_' + service, e.target.result);
-                        
-                        // Cacher l'animation et afficher le message de succès
-                        document.getElementById('service-image-spinner').style.display = 'none';
-                        document.getElementById('service-image-success').style.display = 'block';
-                        
-                        // Cacher le message après 3 secondes
-                        setTimeout(function() {
-                            document.getElementById('service-image-success').style.display = 'none';
-                        }, 3000);
-                    }, 1000);
+                    document.getElementById(service).src = e.target.result;
+                    localStorage.setItem('image_' + service, e.target.result);
+                    alert('Image de service mise à jour!');
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 alert('Veuillez sélectionner un fichier');
-            }
-        }
-        
-        function updateServiceText() {
-            const service = document.getElementById('textServiceSelect').value;
-            const title = document.getElementById('serviceTitle').value;
-            const shortDescription = document.getElementById('serviceShortDescription').value;
-            const fullDescription = document.getElementById('serviceFullDescription').value;
-            
-            if (title && shortDescription && fullDescription) {
-                // Afficher l'animation de chargement
-                document.getElementById('service-text-spinner').style.display = 'block';
-                document.getElementById('service-text-success').style.display = 'none';
-                
-                // Simuler un délai de traitement
-                setTimeout(function() {
-                    // Ici, vous devriez enregistrer ces textes dans localStorage ou une base de données
-                    // Pour cet exemple, nous allons simplement afficher un message de succès
-                    
-                    // Cacher l'animation et afficher le message de succès
-                    document.getElementById('service-text-spinner').style.display = 'none';
-                    document.getElementById('service-text-success').style.display = 'block';
-                    
-                    // Réinitialiser le formulaire
-                    document.getElementById('serviceTitle').value = '';
-                    document.getElementById('serviceShortDescription').value = '';
-                    document.getElementById('serviceFullDescription').value = '';
-                    
-                    // Cacher le message après 3 secondes
-                    setTimeout(function() {
-                        document.getElementById('service-text-success').style.display = 'none';
-                    }, 3000);
-                }, 1000);
-            } else {
-                alert('Veuillez remplir tous les champs');
             }
         }
         
@@ -1061,67 +873,107 @@
             const fileInput = document.getElementById('reportImageUpload');
             
             if (title && description && date) {
-                // Afficher l'animation de chargement
-                document.getElementById('report-spinner').style.display = 'block';
-                document.getElementById('report-success').style.display = 'none';
+                const reportsContainer = document.getElementById('reports-container');
                 
-                // Simuler un délai de traitement
-                setTimeout(function() {
-                    const reportsContainer = document.getElementById('reports-container');
-                    
-                    // Créer un nouvel élément de rapport
-                    const col = document.createElement('div');
-                    col.className = 'col-md-4 mb-4';
-                    
-                    col.innerHTML = `
-                        <div class="card news-card">
-                            <img src="${fileInput.files.length > 0 ? URL.createObjectURL(fileInput.files[0]) : 'https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'}" class="card-img-top news-img" alt="${title}">
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-4 fade-in';
+                
+                const reportElement = document.createElement('div');
+                reportElement.className = 'card report-card';
+                
+                if (fileInput.files.length > 0) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        reportElement.innerHTML = `
+                            <img src="${e.target.result}" class="report-img" alt="${title}">
                             <div class="card-body">
                                 <h5 class="card-title">${title}</h5>
                                 <p class="card-text">${description}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Nouveau rapport</small>
                                     <small class="text-muted">${new Date(date).toLocaleDateString('fr-FR')}</small>
                                 </div>
+                            </div>
+                        `;
+                        
+                        col.appendChild(reportElement);
+                        reportsContainer.appendChild(col);
+                        
+                        resetReportForm();
+                        alert('Rapport ajouté avec succès!');
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    reportElement.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${title}</h5>
+                            <p class="card-text">${description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">${new Date(date).toLocaleDateString('fr-FR')}</small>
                             </div>
                         </div>
                     `;
                     
+                    col.appendChild(reportElement);
                     reportsContainer.appendChild(col);
                     
-                    // Cacher l'animation et afficher le message de succès
-                    document.getElementById('report-spinner').style.display = 'none';
-                    document.getElementById('report-success').style.display = 'block';
-                    
-                    // Réinitialiser le formulaire
-                    document.getElementById('reportTitle').value = '';
-                    document.getElementById('reportDescription').value = '';
-                    document.getElementById('reportDate').value = '';
-                    document.getElementById('reportImageUpload').value = '';
-                    
-                    // Cacher le message après 3 secondes
-                    setTimeout(function() {
-                        document.getElementById('report-success').style.display = 'none';
-                    }, 3000);
-                }, 1000);
+                    resetReportForm();
+                    alert('Rapport ajouté avec succès!');
+                }
             } else {
                 alert('Veuillez remplir tous les champs');
             }
         }
         
-        // Gestion de la soumission du formulaire de contact
+        function resetReportForm() {
+            document.getElementById('reportTitle').value = '';
+            document.getElementById('reportDescription').value = '';
+            document.getElementById('reportDate').value = '';
+            document.getElementById('reportImageUpload').value = '';
+        }
+        
+        // Service detail functions
+        function showServiceDetail(serviceId) {
+            document.querySelectorAll('.service-detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            document.getElementById('services').style.display = 'none';
+            document.getElementById(serviceId + '-detail').style.display = 'block';
+            
+            window.scrollTo(0, 0);
+        }
+        
+        function hideServiceDetails() {
+            document.querySelectorAll('.service-detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            document.getElementById('services').style.display = 'block';
+            document.getElementById('services').scrollIntoView();
+        }
+        
+        // Form handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Votre message a été envoyé. Nous vous contacterons rapidement.');
             this.reset();
         });
         
-        // Chargement initial
+        // Initialize the page
         window.addEventListener('DOMContentLoaded', function() {
-            // Masquer le panel admin par défaut
+            // Hide service details by default
+            document.querySelectorAll('.service-detail-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Hide admin panel by default
             document.getElementById('adminPanel').style.display = 'none';
             
-            // Charger les images depuis le stockage local
+            // Load images from storage if available
+            loadImagesFromStorage();
+        });
+        
+        function loadImagesFromStorage() {
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
                 if (key.startsWith('image_')) {
@@ -1133,6 +985,25 @@
                     }
                 }
             }
+        }
+        
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transition = 'opacity 0.5s ease-in-out';
+                observer.observe(element);
+            });
         });
     </script>
 </body>
