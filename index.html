@@ -5,32 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOR Sécurité Privée (4SP) - Services de sécurité à Montpellier</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #e30613; /* Rouge */
+            --secondary: #000000; /* Noir */
+            --accent: #ffffff; /* Blanc */
+            --dark: #2c2c2c; /* Noir plus clair */
+            --light: #f5f5f5; /* Gris très clair */
+            --text: #333333; /* Texte foncé */
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary: #1a5276;
-            --secondary: #2e86c1;
-            --accent: #e74c3c;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --text: #34495e;
+            font-family: 'Montserrat', sans-serif;
         }
         
         body {
             background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
+        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+            color: var(--accent);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -49,13 +52,13 @@
         .logo {
             width: 80px;
             height: 80px;
-            background: white;
+            background: var(--accent);
             border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 15px;
-            border: 3px solid var(--accent);
+            border: 3px solid var(--primary);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             transition: transform 0.3s;
@@ -76,12 +79,14 @@
             font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: 0.5px;
+            color: var(--accent);
         }
         
         .company-slogan {
             font-size: 1rem;
             opacity: 0.9;
             font-weight: 300;
+            color: var(--accent);
         }
         
         nav ul {
@@ -94,7 +99,7 @@
         }
         
         nav ul li a {
-            color: white;
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
@@ -104,10 +109,11 @@
         }
         
         nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: var(--primary);
             transform: translateY(-2px);
         }
         
+        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
             height: 90vh;
@@ -116,7 +122,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
+            color: var(--accent);
             position: relative;
             padding: 0 2rem;
         }
@@ -147,14 +153,14 @@
         
         .btn {
             display: inline-block;
-            background: var(--accent);
-            color: white;
+            background: var(--primary);
+            color: var(--accent);
             padding: 15px 40px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
             border: none;
             cursor: pointer;
             font-size: 1.1rem;
@@ -163,19 +169,20 @@
         }
         
         .btn:hover {
-            background: #c0392b;
+            background: #b80510;
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+            box-shadow: 0 8px 20px rgba(227, 6, 19, 0.4);
         }
         
         .btn i {
             margin-left: 8px;
         }
         
+        /* Commercial Presentation */
         .commercial-presentation {
             padding: 6rem 2rem;
             text-align: center;
-            background: white;
+            background: var(--accent);
         }
         
         .commercial-content {
@@ -185,7 +192,7 @@
         
         .commercial-content h2 {
             font-size: 2.8rem;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 2rem;
             font-weight: 700;
         }
@@ -193,15 +200,16 @@
         .commercial-content p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: #555;
+            color: var(--text);
             line-height: 1.8;
         }
         
         .highlight {
-            color: var(--accent);
+            color: var(--primary);
             font-weight: 700;
         }
         
+        /* Services Section */
         .services {
             padding: 6rem 2rem;
             text-align: center;
@@ -225,7 +233,7 @@
             transform: translateX(-50%);
             width: 100px;
             height: 5px;
-            background: var(--accent);
+            background: var(--primary);
             border-radius: 3px;
         }
         
@@ -238,7 +246,7 @@
         }
         
         .service-card {
-            background: white;
+            background: var(--accent);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
@@ -254,7 +262,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: var(--accent);
+            background: var(--primary);
             transition: width 0.4s ease;
         }
         
@@ -296,7 +304,7 @@
         }
         
         .service-card:hover .service-icon {
-            color: var(--accent);
+            color: var(--primary);
             transform: scale(1.2);
         }
         
@@ -335,13 +343,14 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--primary);
             font-weight: bold;
         }
         
+        /* About Section */
         .about {
             padding: 6rem 2rem;
-            background: white;
+            background: var(--accent);
         }
         
         .about-content {
@@ -355,7 +364,7 @@
         
         .about-text h2 {
             font-size: 2.8rem;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 2rem;
             font-weight: 700;
         }
@@ -364,7 +373,7 @@
             margin-bottom: 1.8rem;
             font-size: 1.2rem;
             line-height: 1.8;
-            color: #555;
+            color: var(--text);
         }
         
         .values-grid {
@@ -389,13 +398,13 @@
         
         .value-item i {
             font-size: 2.5rem;
-            color: var(--accent);
+            color: var(--primary);
             margin-bottom: 1.2rem;
         }
         
         .value-item h4 {
             font-size: 1.4rem;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 0.8rem;
             font-weight: 600;
         }
@@ -417,10 +426,11 @@
             display: block;
         }
         
+        /* Contact Section */
         .contact {
             padding: 6rem 2rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
+            background: linear-gradient(to right, var(--secondary), var(--dark));
+            color: var(--accent);
         }
         
         .contact-container {
@@ -457,20 +467,20 @@
         
         .contact-details i {
             font-size: 1.5rem;
-            color: var(--accent);
+            color: var(--primary);
             margin-right: 1rem;
             width: 30px;
         }
         
         .contact-form {
-            background: white;
+            background: var(--accent);
             padding: 3rem;
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         
         .contact-form h3 {
-            color: var(--primary);
+            color: var(--secondary);
             font-size: 1.8rem;
             margin-bottom: 2rem;
             text-align: center;
@@ -502,7 +512,7 @@
         .form-group input:focus, 
         .form-group textarea:focus,
         .form-group select:focus {
-            border-color: var(--accent);
+            border-color: var(--primary);
             outline: none;
         }
         
@@ -524,9 +534,10 @@
             border: none;
         }
         
+        /* Footer */
         footer {
-            background: var(--dark);
-            color: white;
+            background: var(--secondary);
+            color: var(--accent);
             padding: 4rem 2rem 2rem;
             text-align: center;
         }
@@ -555,7 +566,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background: var(--accent);
+            background: var(--primary);
         }
         
         .footer-section p, .footer-section li {
@@ -574,12 +585,12 @@
         }
         
         .footer-section a:hover {
-            color: var(--accent);
+            color: var(--primary);
         }
         
         .footer-section i {
             width: 30px;
-            color: var(--accent);
+            color: var(--primary);
         }
         
         .social-icons {
@@ -600,7 +611,7 @@
         }
         
         .social-icons a:hover {
-            background: var(--accent);
+            background: var(--primary);
             transform: translateY(-5px);
         }
         
@@ -610,6 +621,150 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             opacity: 0.7;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 50%;
+            right: -300px;
+            transform: translateY(-50%);
+            width: 300px;
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 20px;
+            border-radius: 10px 0 0 10px;
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: right 0.4s ease;
+        }
+        
+        .admin-panel.open {
+            right: 0;
+        }
+        
+        .admin-toggle {
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            background: var(--primary);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 0 0 10px;
+            cursor: pointer;
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .admin-panel h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .admin-section {
+            margin-bottom: 20px;
+        }
+        
+        .admin-section h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .admin-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: var(--primary);
+            color: var(--accent);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .admin-btn:hover {
+            background: #b80510;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--accent);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .modal-header h3 {
+            color: var(--secondary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+        
+        /* Upload section for images */
+        .upload-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--accent);
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            border: none;
+        }
+        
+        .upload-btn:hover {
+            background: #b80510;
+        }
+        
+        .image-upload {
+            display: none;
         }
         
         /* Responsive Design */
@@ -630,6 +785,10 @@
             
             .contact-form {
                 order: -1;
+            }
+            
+            .admin-panel {
+                width: 250px;
             }
         }
         
@@ -683,6 +842,11 @@
             .contact-info h2 {
                 font-size: 2.2rem;
             }
+            
+            .admin-panel {
+                width: 80%;
+                right: -80%;
+            }
         }
         
         /* Animation utilities */
@@ -707,41 +871,40 @@
             from { opacity: 0; transform: translateX(50px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        
-        /* Upload section for images */
-        .upload-section {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .upload-btn {
-            display: inline-block;
-            background: var(--secondary);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
-        }
-        
-        .upload-btn:hover {
-            background: var(--primary);
-        }
-        
-        #image-upload {
-            display: none;
-        }
     </style>
 </head>
 <body>
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-toggle" onclick="toggleAdminPanel()">
+            <i class="fas fa-cog"></i>
+        </div>
+        <h3>Panneau d'Administration</h3>
+        
+        <div class="admin-section">
+            <h4>Gestion du Logo</h4>
+            <button class="admin-btn" onclick="openModal('logoModal')">Modifier le Logo</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4>Gestion des Services</h4>
+            <button class="admin-btn" onclick="openModal('service1Modal')">Modifier Gardiennage</button>
+            <button class="admin-btn" onclick="openModal('service2Modal')">Modifier Rondes</button>
+            <button class="admin-btn" onclick="openModal('service3Modal')">Modifier Événementiel</button>
+        </div>
+        
+        <div class="admin-section">
+            <h4>Général</h4>
+            <button class="admin-btn" onclick="openModal('contentModal')">Modifier Contenu</button>
+            <button class="admin-btn" onclick="openModal('imagesModal')">Gérer les Images</button>
+        </div>
+    </div>
+
+    <!-- Header -->
     <header>
         <div class="logo-container">
             <div class="logo">
-                <img src="https://via.placeholder.com/150?text=4SP" alt="FOR Sécurité Privée (4SP)" id="logo-image">
+                <img src="https://via.placeholder.com/150x150/e30613/ffffff?text=4SP" alt="FOR Sécurité Privée (4SP)" id="logo-image">
             </div>
             <div>
                 <div class="company-name">FOR Sécurité Privée (4SP)</div>
@@ -758,6 +921,7 @@
         </nav>
     </header>
     
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Experts en Sécurité à Montpellier</h1>
@@ -766,6 +930,7 @@
         </div>
     </section>
     
+    <!-- Commercial Presentation -->
     <section class="commercial-presentation">
         <div class="commercial-content">
             <h2>Votre partenaire de confiance en sécurité privée</h2>
@@ -774,14 +939,15 @@
         </div>
     </section>
     
+    <!-- Services Section -->
     <section class="services" id="services">
         <h2 class="section-title">Nos Services</h2>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de gardiennage" id="service-img-1">
-                    <label for="image-upload-1" class="upload-btn">Changer l'image</label>
-                    <input type="file" id="image-upload-1" class="image-upload">
+                    <button class="upload-btn" onclick="document.getElementById('image-upload-1').click()">Changer l'image</button>
+                    <input type="file" id="image-upload-1" class="image-upload" accept="image/*">
                 </div>
                 <div class="service-content">
                     <div class="service-icon"><i class="fas fa-user-shield"></i></div>
@@ -800,8 +966,8 @@
             <div class="service-card">
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de rondes" id="service-img-2">
-                    <label for="image-upload-2" class="upload-btn">Changer l'image</label>
-                    <input type="file" id="image-upload-2" class="image-upload">
+                    <button class="upload-btn" onclick="document.getElementById('image-upload-2').click()">Changer l'image</button>
+                    <input type="file" id="image-upload-2" class="image-upload" accept="image/*">
                 </div>
                 <div class="service-content">
                     <div class="service-icon"><i class="fas fa-walking"></i></div>
@@ -820,8 +986,8 @@
             <div class="service-card">
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité événementielle" id="service-img-3">
-                    <label for="image-upload-3" class="upload-btn">Changer l'image</label>
-                    <input type="file" id="image-upload-3" class="image-upload">
+                    <button class="upload-btn" onclick="document.getElementById('image-upload-3').click()">Changer l'image</button>
+                    <input type="file" id="image-upload-3" class="image-upload" accept="image/*">
                 </div>
                 <div class="service-content">
                     <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
@@ -839,6 +1005,7 @@
         </div>
     </section>
     
+    <!-- About Section -->
     <section class="about" id="about">
         <div class="about-content">
             <div class="about-text">
@@ -875,6 +1042,7 @@
         </div>
     </section>
     
+    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="contact-container">
             <div class="contact-info">
@@ -939,6 +1107,7 @@
         </div>
     </section>
     
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -976,7 +1145,107 @@
         </div>
     </footer>
 
+    <!-- Admin Modals -->
+    <div id="logoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier le Logo</h3>
+                <button class="close-modal" onclick="closeModal('logoModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="logoUpload">Télécharger un nouveau logo</label>
+                <input type="file" id="logoUpload" accept="image/*">
+            </div>
+            <button class="btn" onclick="updateLogo()">Mettre à jour</button>
+        </div>
+    </div>
+
+    <div id="service1Modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier le Service Gardiennage</h3>
+                <button class="close-modal" onclick="closeModal('service1Modal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="service1Title">Titre du service</label>
+                <input type="text" id="service1Title" value="Gardiennage & Surveillance Humaine">
+            </div>
+            <div class="form-group">
+                <label for="service1Desc">Description</label>
+                <textarea id="service1Desc">Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</textarea>
+            </div>
+            <div class="form-group">
+                <label for="service1Img">Image du service</label>
+                <input type="file" id="service1Img" accept="image/*">
+            </div>
+            <button class="btn" onclick="updateService(1)">Mettre à jour</button>
+        </div>
+    </div>
+
     <script>
+        // Admin Panel Functions
+        function toggleAdminPanel() {
+            document.getElementById('adminPanel').classList.toggle('open');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Update Logo
+        function updateLogo() {
+            const fileInput = document.getElementById('logoUpload');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logo-image').src = e.target.result;
+                    localStorage.setItem('companyLogo', e.target.result);
+                    alert('Logo mis à jour avec succès!');
+                    closeModal('logoModal');
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert('Veuillez sélectionner une image');
+            }
+        }
+
+        // Update Service
+        function updateService(serviceNum) {
+            const title = document.getElementById(`service${serviceNum}Title`).value;
+            const desc = document.getElementById(`service${serviceNum}Desc`).value;
+            const imgInput = document.getElementById(`service${serviceNum}Img`);
+            
+            // Update text content
+            document.querySelectorAll('.service-card h3')[serviceNum-1].textContent = title;
+            document.querySelectorAll('.service-card p')[serviceNum-1].textContent = desc;
+            
+            // Update image if provided
+            if (imgInput.files && imgInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(`service-img-${serviceNum}`).src = e.target.result;
+                    localStorage.setItem(`service-img-${serviceNum}`, e.target.result);
+                }
+                reader.readAsDataURL(imgInput.files[0]);
+            }
+            
+            alert('Service mis à jour avec succès!');
+            closeModal(`service${serviceNum}Modal`);
+        }
+
         // Gestion du formulaire de contact
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1014,29 +1283,10 @@
                 }
             }
             
-            // Créer un input file pour le logo
-            const logoInput = document.createElement('input');
-            logoInput.type = 'file';
-            logoInput.accept = 'image/*';
-            logoInput.style.display = 'none';
-            logoInput.addEventListener('change', function(event) {
-                const reader = new FileReader();
-                reader.onload = function() {
-                    const logoImg = document.getElementById('logo-image');
-                    logoImg.src = reader.result;
-                    localStorage.setItem('companyLogo', reader.result);
-                }
-                reader.readAsDataURL(event.target.files[0]);
-            });
-            document.body.appendChild(logoInput);
-            
             // Ajouter un event listener sur le logo pour permettre le changement
             document.getElementById('logo-image').addEventListener('click', function() {
-                logoInput.click();
+                openModal('logoModal');
             });
-            
-            // Ajouter un titre pour indiquer que le logo est cliquable
-            document.getElementById('logo-image').title = "Cliquez pour changer le logo";
         });
         
         // Animation au défilement
