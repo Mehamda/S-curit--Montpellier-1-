@@ -28,8 +28,6 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-            padding-bottom: 70px; /* Espace pour le bouton admin */
         }
         
         /* Header */
@@ -429,7 +427,7 @@
         }
         
         /* Activity Reports Section */
-        .reports {
+        .activity-reports {
             padding: 6rem 2rem;
             background: var(--light);
         }
@@ -446,7 +444,7 @@
             margin-top: 3rem;
         }
         
-        .report-item {
+        .report-card {
             background: var(--accent);
             border-radius: 12px;
             overflow: hidden;
@@ -454,7 +452,7 @@
             transition: transform 0.3s;
         }
         
-        .report-item:hover {
+        .report-card:hover {
             transform: translateY(-10px);
         }
         
@@ -470,8 +468,8 @@
             transition: transform 0.5s;
         }
         
-        .report-item:hover .report-image img {
-            transform: scale(1.05);
+        .report-card:hover .report-image img {
+            transform: scale(1.1);
         }
         
         .report-content {
@@ -479,14 +477,14 @@
         }
         
         .report-date {
-            font-size: 0.9rem;
             color: var(--primary);
             font-weight: 600;
             margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
         
         .report-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--secondary);
             margin-bottom: 1rem;
             font-weight: 600;
@@ -496,6 +494,23 @@
             color: #666;
             line-height: 1.6;
             margin-bottom: 1.5rem;
+        }
+        
+        .report-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .report-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .report-link:hover i {
+            transform: translateX(5px);
         }
         
         /* Contact Section */
@@ -681,7 +696,6 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             transition: all 0.3s;
-            text-decoration: none;
         }
         
         .social-icons a:hover {
@@ -697,94 +711,37 @@
             opacity: 0.7;
         }
         
-        /* Admin Button */
-        .admin-button {
-            position: fixed;
+        .admin-access {
+            position: absolute;
             bottom: 20px;
             right: 20px;
-            background: var(--primary);
-            color: var(--accent);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s;
-        }
-        
-        .admin-button:hover {
-            transform: scale(1.1);
-            background: #b80510;
-        }
-        
-        .admin-button i {
-            font-size: 1.5rem;
-        }
-        
-        /* Admin Panel */
-        .admin-panel {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 300px;
-            background: var(--secondary);
-            color: var(--accent);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            z-index: 998;
-            display: none;
-        }
-        
-        .admin-panel.open {
-            display: block;
-            animation: slideInUp 0.3s ease-out;
-        }
-        
-        @keyframes slideInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .admin-panel h3 {
-            margin-bottom: 20px;
-            color: var(--accent);
-            text-align: center;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 10px;
-        }
-        
-        .admin-section {
-            margin-bottom: 20px;
-        }
-        
-        .admin-section h4 {
-            margin-bottom: 10px;
-            color: var(--primary);
         }
         
         .admin-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
             background: var(--primary);
             color: var(--accent);
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
+            display: flex;
+            align-items: center;
         }
         
         .admin-btn:hover {
             background: #b80510;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(227, 6, 19, 0.4);
         }
         
-        /* Password Modal */
+        .admin-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Admin Login Modal */
         .modal {
             display: none;
             position: fixed;
@@ -793,7 +750,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
+            z-index: 2000;
             align-items: center;
             justify-content: center;
         }
@@ -803,7 +760,8 @@
             padding: 30px;
             border-radius: 15px;
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         .modal-header {
@@ -817,6 +775,7 @@
         
         .modal-header h3 {
             color: var(--secondary);
+            font-size: 1.8rem;
         }
         
         .close-modal {
@@ -825,6 +784,37 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--secondary);
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .login-form input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
         }
         
         /* Responsive Design */
@@ -899,10 +889,13 @@
                 font-size: 2.2rem;
             }
             
-            .admin-panel {
-                width: 80%;
-                right: 10%;
-                left: 10%;
+            .admin-access {
+                position: relative;
+                bottom: unset;
+                right: unset;
+                margin-top: 2rem;
+                display: flex;
+                justify-content: center;
             }
         }
         
@@ -910,54 +903,41 @@
         .fade-in {
             animation: fadeIn 1s ease-in-out;
         }
+        
+        .slide-in-left {
+            animation: slideInLeft 1s ease-in-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 1s ease-in-out;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
-    <!-- Admin Button -->
-    <div class="admin-button" onclick="toggleAdminPanel()">
-        <i class="fas fa-cog"></i>
-    </div>
-    
-    <!-- Admin Panel -->
-    <div class="admin-panel" id="adminPanel">
-        <h3>Panneau d'Administration</h3>
-        
-        <div class="admin-section">
-            <h4>Gestion du Logo</h4>
-            <button class="admin-btn" onclick="openModal('logoModal')">Modifier le Logo</button>
-        </div>
-        
-        <div class="admin-section">
-            <h4>Gestion des Services</h4>
-            <button class="admin-btn" onclick="openModal('service1Modal')">Modifier Gardiennage</button>
-            <button class="admin-btn" onclick="openModal('service2Modal')">Modifier Rondes</button>
-            <button class="admin-btn" onclick="openModal('service3Modal')">Modifier Événementiel</button>
-        </div>
-        
-        <div class="admin-section">
-            <h4>Rapports d'Activité</h4>
-            <button class="admin-btn" onclick="openModal('reportModal')">Ajouter un Rapport</button>
-        </div>
-        
-        <div class="admin-section">
-            <h4>Général</h4>
-            <button class="admin-btn" onclick="openModal('contentModal')">Modifier Contenu</button>
-            <button class="admin-btn" onclick="openModal('imagesModal')">Gérer les Images</button>
-        </div>
-    </div>
-
-    <!-- Password Modal -->
-    <div id="passwordModal" class="modal">
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Accès Administrateur</h3>
-                <button class="close-modal" onclick="closeModal('passwordModal')">&times;</button>
+                <button class="close-modal" onclick="closeModal('adminLoginModal')">&times;</button>
             </div>
-            <div class="form-group">
-                <label for="adminPassword">Mot de passe</label>
-                <input type="password" id="adminPassword" placeholder="Entrez le mot de passe">
-            </div>
-            <button class="btn" onclick="checkPassword()">Se connecter</button>
+            <form class="login-form" id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminPassword">Mot de passe</label>
+                    <input type="password" id="adminPassword" required placeholder="Entrez le mot de passe administrateur">
+                </div>
+                <button type="submit" class="btn login-btn">Se connecter</button>
+            </form>
         </div>
     </div>
 
@@ -976,7 +956,7 @@
             <ul>
                 <li><a href="#"><i class="fas fa-home"></i> Accueil</a></li>
                 <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
-                <li><a href="#reports"><i class="fas fa-file-alt"></i> Rapports</a></li>
+                <li><a href="#reports"><i class="fas fa-chart-line"></i> Rapports</a></li>
                 <li><a href="#about"><i class="fas fa-info-circle"></i> À propos</a></li>
                 <li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
             </ul>
@@ -1061,33 +1041,46 @@
         </div>
     </section>
     
-    <!-- Reports Section -->
-    <section class="reports" id="reports">
+    <!-- Activity Reports Section -->
+    <section class="activity-reports" id="reports">
         <h2 class="section-title">Rapports d'Activité</h2>
         <div class="reports-container">
-            <p>Découvrez nos interventions récentes et rapports d'activité.</p>
+            <p>Découvrez nos interventions récentes et rapports d'activité. Notre transparence est gage de confiance.</p>
             
-            <div class="reports-grid" id="reportsContainer">
-                <!-- Rapports will be added dynamically -->
-                <div class="report-item">
+            <div class="reports-grid">
+                <div class="report-card">
                     <div class="report-image">
-                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport d'activité">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport mensuel">
                     </div>
                     <div class="report-content">
-                        <div class="report-date">12 Novembre 2023</div>
-                        <h3 class="report-title">Surveillance Centre Commercial</h3>
-                        <p class="report-desc">Opération de surveillance au centre Grand M. avec équipe de 5 agents.</p>
+                        <div class="report-date">15 Novembre 2023</div>
+                        <h3 class="report-title">Rapport Mensuel - Octobre 2023</h3>
+                        <p class="report-desc">Bilan complet de nos activités de sécurité pour le mois d'octobre 2023. Interventions, statistiques et retours clients.</p>
+                        <a href="#" class="report-link">Voir le rapport <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
-                <div class="report-item">
+                <div class="report-card">
                     <div class="report-image">
-                        <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport d'activité">
+                        <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Festival de Montpellier">
                     </div>
                     <div class="report-content">
-                        <div class="report-date">8 Novembre 2023</div>
-                        <h3 class="report-title">Ronde Nocturne Quartier Affaires</h3>
-                        <p class="report-desc">Contrôle de sécurité renforcé dans le quartier d'affaires de Montpellier.</p>
+                        <div class="report-date">5 Novembre 2023</div>
+                        <h3 class="report-title">Sécurité Événementielle - Festival</h3>
+                        <p class="report-desc">Retour sur notre intervention lors du festival de Montpellier. Gestion de foules et sécurisation du site.</p>
+                        <a href="#" class="report-link">Voir le rapport <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-image">
+                        <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Formation agents">
+                    </div>
+                    <div class="report-content">
+                        <div class="report-date">28 Octobre 2023</div>
+                        <h3 class="report-title">Formation des Agents - Nouvelles Techniques</h3>
+                        <p class="report-desc">Compte-rendu de la session de formation de nos agents aux nouvelles techniques de sécurisation.</p>
+                        <a href="#" class="report-link">Voir le rapport <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -1180,6 +1173,7 @@
                             <option value="gardiennage">Gardiennage & Surveillance</option>
                             <option value="rondes">Rondes & Interventions</option>
                             <option value="evenementiel">Sécurité Événementielle</option>
+                            <option value="autre">Autre demande</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1233,47 +1227,22 @@
         <div class="footer-bottom">
             <p>&copy; 2024 FOR Sécurité Privée (4SP) - Tous droits réservés</p>
         </div>
+        
+        <div class="admin-access">
+            <button class="admin-btn" onclick="openModal('adminLoginModal')"><i class="fas fa-lock"></i> Accès Admin</button>
+        </div>
     </footer>
 
-    <!-- Admin Modals would be here -->
-
     <script>
-        // Admin Panel Functions
-        let adminAuthenticated = false;
-        const ADMIN_PASSWORD = "4SP@forsecuriteprivee2024"; // Mot de passe administrateur
-        
-        function toggleAdminPanel() {
-            if (!adminAuthenticated) {
-                openModal('passwordModal');
-                return;
-            }
-            
-            document.getElementById('adminPanel').classList.toggle('open');
-        }
-        
-        function checkPassword() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === ADMIN_PASSWORD) {
-                adminAuthenticated = true;
-                closeModal('passwordModal');
-                document.getElementById('adminPanel').classList.add('open');
-            } else {
-                alert('Mot de passe incorrect');
-            }
-        }
-        
+        // Admin Login Functionality
         function openModal(modalId) {
-            if (!adminAuthenticated && modalId !== 'passwordModal') {
-                openModal('passwordModal');
-                return;
-            }
             document.getElementById(modalId).style.display = 'flex';
         }
-        
+
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
-        
+
         // Close modal when clicking outside
         window.onclick = function(event) {
             document.querySelectorAll('.modal').forEach(modal => {
@@ -1282,7 +1251,21 @@
                 }
             });
         }
-        
+
+        // Admin Login Form Submission
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            // Mot de passe administrateur (à changer en production)
+            if (password === "4SP@forsecuriteprivee2024") {
+                alert("Connexion réussie! Redirection vers le panneau d'administration.");
+                window.location.href = "admin.html"; // Page d'administration séparée
+            } else {
+                alert("Mot de passe incorrect. Veuillez réessayer.");
+            }
+        });
+
         // Gestion du formulaire de contact
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1292,7 +1275,7 @@
         
         // Animation au défilement
         window.addEventListener('scroll', function() {
-            const elements = document.querySelectorAll('.service-card, .value-item, .about-image, .report-item');
+            const elements = document.querySelectorAll('.service-card, .value-item, .about-image, .report-card');
             elements.forEach(element => {
                 const position = element.getBoundingClientRect().top;
                 const screenPosition = window.innerHeight / 1.3;
@@ -1301,24 +1284,6 @@
                 }
             });
         });
-        
-        // Exemple de fonction pour ajouter un rapport
-        function addReport(title, date, description, imageUrl) {
-            const reportsContainer = document.getElementById('reportsContainer');
-            const reportItem = document.createElement('div');
-            reportItem.className = 'report-item';
-            reportItem.innerHTML = `
-                <div class="report-image">
-                    <img src="${imageUrl}" alt="${title}">
-                </div>
-                <div class="report-content">
-                    <div class="report-date">${date}</div>
-                    <h3 class="report-title">${title}</h3>
-                    <p class="report-desc">${description}</p>
-                </div>
-            `;
-            reportsContainer.prepend(reportItem);
-        }
     </script>
 </body>
 </html>
