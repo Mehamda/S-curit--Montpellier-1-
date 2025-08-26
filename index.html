@@ -3,31 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOR Sécurité Privée (4SP) - Services de sécurité à Montpellier</title>
+    <title>FOR SÉCURITÉ PRIVÉE (4SP) - Services de sécurité à Montpellier</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* VOS STYLES EXISTANTS (conservés intacts) */
+        :root {
+            --primary: #e30613; /* Rouge */
+            --secondary: #000000; /* Noir */
+            --accent: #ffffff; /* Blanc */
+            --dark: #2c2c2c; /* Noir plus clair */
+            --light: #f5f5f5; /* Gris très clair */
+            --text: #333333; /* Texte foncé */
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
         
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: var(--light);
+            color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
+        /* Header */
         header {
-            background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+            color: var(--accent);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
         .logo-container {
@@ -36,30 +50,43 @@
         }
         
         .logo {
-            width: 70px;
-            height: 70px;
-            background-color: #fff;
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 15px;
-            border: 2px solid #ff9f43;
-            color: #1a5276;
-            font-weight: bold;
-            text-align: center;
-            font-size: 12px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             padding: 5px;
         }
         
         .company-name {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--accent);
         }
         
         .company-slogan {
             font-size: 1rem;
             opacity: 0.9;
+            font-weight: 300;
+            color: var(--accent);
         }
         
         nav ul {
@@ -72,159 +99,640 @@
         }
         
         nav ul li a {
-            color: white;
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 10px;
+            transition: all 0.3s;
+            padding: 8px 15px;
             border-radius: 4px;
+            font-size: 1.1rem;
         }
         
         nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--primary);
+            transform: translateY(-2px);
         }
         
+        /* Hero Section */
         .hero {
-            background: url('https://images.unsplash.com/photo-1563013541-5a7b555b20f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
+            color: var(--accent);
             position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            padding: 0 2rem;
         }
         
         .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            padding: 0 20px;
+            max-width: 900px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 800;
         }
         
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
         }
         
         .btn {
             display: inline-block;
-            background: #ff9f43;
-            color: white;
-            padding: 12px 30px;
+            background: var(--primary);
+            color: var(--accent);
+            padding: 15px 40px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .btn:hover {
-            background: #e67e22;
+            background: #b80510;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(227, 6, 19, 0.4);
         }
         
-        .services {
-            padding: 5rem 2rem;
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        /* Commercial Presentation */
+        .commercial-presentation {
+            padding: 6rem 2rem;
             text-align: center;
+            background: var(--accent);
+        }
+        
+        .commercial-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .commercial-content h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .commercial-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: var(--light);
         }
         
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 3rem;
-            color: #2e86c1;
+            color: var(--secondary);
             position: relative;
             display: inline-block;
+            font-weight: 700;
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: #ff9f43;
+            width: 100px;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 3px;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
         }
         
         .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            background: var(--accent);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.4s ease;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-card:hover::before {
+            width: 100%;
+            opacity: 0.05;
+        }
+        
+        .service-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 2.5rem;
         }
         
         .service-icon {
-            font-size: 3rem;
-            color: #2e86c1;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover .service-icon {
+            color: var(--primary);
+            transform: scale(1.2);
         }
         
         .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2e86c1;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 600;
         }
         
-        footer {
-            background: #1a5276;
-            color: white;
+        .service-card:hover h3 {
+            color: var(--primary);
+        }
+        
+        .service-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            list-style: none;
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+        
+        .service-features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+            color: #555;
+        }
+        
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Service Detail Pages */
+        .service-detail {
+            display: none;
+            padding: 6rem 2rem;
+            background: var(--accent);
+        }
+        
+        .service-detail.active {
+            display: block;
+        }
+        
+        .service-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            padding: 4rem 2rem;
             text-align: center;
-            padding: 2rem;
+            color: var(--accent);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+        
+        .service-detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .service-benefits {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 15px;
+        }
+        
+        .benefits-list {
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .benefits-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .service-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
             margin-top: 2rem;
         }
         
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 1rem;
-                justify-content: center;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
         }
-
-        /* SYSTÈME D'ADMINISTRATION INTÉGRÉ */
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.8rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-item {
+            background: var(--accent);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+        
+        .value-item h4 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: linear-gradient(to right, var(--secondary), var(--dark));
+            color: var(--accent);
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 1rem;
+            width: 30px;
+        }
+        
+        .contact-form {
+            background: var(--accent);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-form h3 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .map-container {
+            margin-top: 5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: var(--accent);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-section i {
+            width: 30px;
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .admin-access {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .admin-toggle {
+            background: var(--primary);
+            color: var(--accent);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+        
+        .admin-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Admin Panel */
         .admin-panel {
             display: none;
             position: fixed;
@@ -259,6 +767,7 @@
             display: flex;
             margin-bottom: 20px;
             border-bottom: 2px solid #ddd;
+            flex-wrap: wrap;
         }
         
         .admin-tab {
@@ -266,10 +775,11 @@
             cursor: pointer;
             margin-right: 5px;
             border-radius: 5px 5px 0 0;
+            background: #f5f5f5;
         }
         
         .admin-tab.active {
-            background: #2e86c1;
+            background: var(--primary);
             color: white;
         }
         
@@ -289,6 +799,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
+            color: var(--dark);
         }
         
         .form-group input, 
@@ -298,6 +809,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: 1rem;
         }
         
         .form-group textarea {
@@ -306,18 +818,20 @@
         }
         
         .admin-btn {
-            background: #2e86c1;
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             margin-top: 10px;
+            transition: all 0.3s;
         }
         
         .admin-btn:hover {
-            background: #1a5276;
+            background: #b80510;
+            transform: translateY(-2px);
         }
         
         .login-panel {
@@ -328,31 +842,11 @@
         .password-input {
             margin: 20px 0;
             padding: 12px;
-            width: 300px;
-            border: 2px solid #2e86c1;
+            width: 100%;
+            max-width: 300px;
+            border: 2px solid var(--primary);
             border-radius: 5px;
             font-size: 16px;
-        }
-        
-        .admin-access {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .admin-toggle {
-            background: #ff9f43;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            font-size: 24px;
         }
         
         .report-item {
@@ -360,7 +854,7 @@
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 5px;
-            border-left: 4px solid #2e86c1;
+            border-left: 4px solid var(--primary);
         }
         
         .image-preview {
@@ -369,101 +863,538 @@
             margin-top: 10px;
             border: 1px dashed #ddd;
             padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.5rem;
+            }
+            
+            .about-content,
+            .contact-container,
+            .service-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .contact-form {
+                order: -1;
+            }
+            
+            .service-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 6rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .commercial-content h2,
+            .about-text h2,
+            .contact-info h2 {
+                font-size: 2.2rem;
+            }
+            
+            .admin-tabs {
+                flex-direction: column;
+            }
+            
+            .admin-tab {
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
+        }
+        
+        /* Animation utilities */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="logo-container">
             <div class="logo">
-                <div class="logo-text">4SP</div>
+                <img src="https://via.placeholder.com/150x150/e30613/ffffff?text=4SP" alt="FOR SÉCURITÉ PRIVÉE (4SP)" id="logo-image">
             </div>
             <div>
-                <div class="company-name">FOR Sécurité Privée (4SP)</div>
-                <div class="company-slogan">Votre sécurité est notre priorité</div>
+                <div class="company-name">FOR SÉCURITÉ PRIVÉE (4SP)</div>
+                <div class="company-slogan">Votre sécurité est notre priorité depuis 2024</div>
             </div>
         </div>
         <nav>
             <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="showSection('home')">Accueil</a></li>
+                <li><a href="#services" onclick="showSection('services')">Services</a></li>
+                <li><a href="#about" onclick="showSection('about')">À propos</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
             </ul>
         </nav>
     </header>
     
-    <section class="hero">
+    <!-- Home Section -->
+    <section id="home" class="hero">
         <div class="hero-content">
             <h1>Experts en Sécurité à Montpellier</h1>
-            <p>Protection et surveillance 24h/24 pour votre tranquillité d'esprit</p>
-            <a href="#contact" class="btn">Demander un devis</a>
+            <p>Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</p>
+            <a href="#contact" class="btn" onclick="showSection('contact')">Demander un devis gratuit <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
     
-    <section class="services" id="services">
+    <!-- Commercial Presentation -->
+    <section class="commercial-presentation">
+        <div class="commercial-content">
+            <h2>Votre partenaire de confiance en sécurité privée</h2>
+            <p>Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">50 agents expérimentés</span> vous garantit une protection optimale de vos biens et personnes.</p>
+            <p>Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="services">
         <h2 class="section-title">Nos Services</h2>
         <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🔒</div>
-                <h3>Systèmes d'Alarme</h3>
-                <p>Installation et maintenance de systèmes d'alarme haute performance pour votre domicile ou entreprise.</p>
+            <div class="service-card" onclick="showService('gardiennage')">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de gardiennage">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3>Gardiennage & Surveillance Humaine</h3>
+                    <p>Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</p>
+                    <ul class="service-features">
+                        <li>Agents de sécurité diplômés CNAPS</li>
+                        <li>Surveillance continue 24h/24 et 7j/7</li>
+                        <li>Contrôle d'accès strict</li>
+                        <li>Rapports d'activité détaillés</li>
+                    </ul>
+                    <a href="#" class="btn" onclick="showService('gardiennage')">En savoir plus</a>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">📹</div>
-                <h3>Vidéosurveillance</h3>
-                <p>Solutions de surveillance complètes avec enregistrement cloud et accès à distance.</p>
+            
+            <div class="service-card" onclick="showService('rondes')">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de rondes">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon"><i class="fas fa-walking"></i></div>
+                    <h3>Rondes & Interventions</h3>
+                    <p>Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</p>
+                    <ul class="service-features">
+                        <li>Rondes régulières programmées</li>
+                        <li>Intervention rapide 24/7</li>
+                        <li>Contrôles aléatoires</li>
+                        <li>Technologies de pointe</li>
+                    </ul>
+                    <a href="#" class="btn" onclick="showService('rondes')">En savoir plus</a>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">🏢</div>
-                <h3>Sécurité d'Entreprise</h3>
-                <p>Protection sur mesure pour les entreprises avec contrôle d'accès et monitoring 24/7.</p>
+            
+            <div class="service-card" onclick="showService('evenementiel')">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité événementielle">
+                </div>
+                <div class="service-content">
+                    <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Sécurité Événementielle</h3>
+                    <p>Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</p>
+                    <ul class="service-features">
+                        <li>Gestion des flux et fouilles</li>
+                        <li>Contrôle d'accès événementiel</li>
+                        <li>Protection rapprochée VIP</li>
+                        <li>Poste de commandement mobile</li>
+                    </ul>
+                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir plus</a>
+                </div>
             </div>
         </div>
     </section>
     
-    <section id="about" class="services">
-        <h2 class="section-title">À propos de nous</h2>
-        <p>FOR Sécurité Privée (4SP) est une entreprise de sécurité créée à Montpellier en 2024, spécialisée dans la protection des biens et des personnes.</p>
-    </section>
-    
-    <section id="reports" class="services">
-        <h2 class="section-title">Rapports d'Activité</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Rapport Hebdomadaire</h3>
-                <p>Bilan complet des interventions de la semaine.</p>
+    <!-- Service Detail: Gardiennage -->
+    <section id="gardiennage" class="service-detail">
+        <div class="service-detail-content">
+            <div class="service-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;">
+                <h2>Gardiennage & Surveillance Humaine</h2>
+                <p>Service professionnel de surveillance et protection de vos biens</p>
             </div>
-            <div class="service-card">
-                <h3>Rapport Mensuel</h3>
-                <p>Statistiques et analyses mensuelles de notre activité.</p>
+            
+            <div class="service-detail-grid">
+                <div>
+                    <h3>Notre expertise à votre service</h3>
+                    <p>Notre service de gardiennage et surveillance humaine offre une protection optimale pour vos biens et personnes. Nos agents, spécialement formés et habilités, assurent une présence dissuasive et réactive.</p>
+                    
+                    <h4>Prestations incluses :</h4>
+                    <ul class="benefits-list">
+                        <li>Agents de sécurité diplômés CNAPS</li>
+                        <li>Surveillance continue 24h/24 et 7j/7</li>
+                        <li>Contrôle d'accès strict et gestion des entrées/sorties</li>
+                        <li>Rondes de sécurité programmées</li>
+                        <li>Rapports d'activité détaillés quotidiens</li>
+                        <li>Intervention rapide en cas d'incident</li>
+                        <li>Vidéosurveillance complémentaire</li>
+                        <li>Gestion des alarmes et alertes</li>
+                    </ul>
+                </div>
+                
+                <div class="service-benefits">
+                    <h4>Avantages</h4>
+                    <ul class="benefits-list">
+                        <li>Réduction des risques d'intrusion et de vol</li>
+                        <li>Intervention rapide en cas d'incident</li>
+                        <li>Rapports détaillés pour une traçabilité complète</li>
+                        <li>Personnel formé et expérimenté</li>
+                        <li>Adaptation à vos besoins spécifiques</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn" onclick="showSection('contact')">Demander un devis</a>
+                </div>
+            </div>
+            
+            <div class="service-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agent de sécurité">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Surveillance">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contrôle d'accès">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590688219069-ec2eac74718a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport d'activité">
+                </div>
             </div>
         </div>
     </section>
     
-    <section id="contact" class="services">
-        <h2 class="section-title">Contact</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Coordonnées</h3>
-                <p>83 rue Yves Montand, 34080 Montpellier</p>
-                <p>06 60 35 01 97</p>
-                <p>forsecuriteprivee@gmail.com</p>
+    <!-- Service Detail: Rondes -->
+    <section id="rondes" class="service-detail">
+        <div class="service-detail-content">
+            <div class="service-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;">
+                <h2>Rondes & Interventions</h2>
+                <p>Surveillance proactive et interventions rapides sur site</p>
+            </div>
+            
+            <div class="service-detail-grid">
+                <div>
+                    <h3>Surveillance proactive</h3>
+                    <p>Notre service de rondes et interventions offre une surveillance proactive de vos sites, permettant de prévenir les incidents et d'intervenir rapidement en cas de besoin.</p>
+                    
+                    <h4>Prestations incluses :</h4>
+                    <ul class="benefits-list">
+                        <li>Rondes régulières selon un planning défini</li>
+                        <li>Contrôles aléatoires pour une sécurité optimale</li>
+                        <li>Utilisation de technologies de pointe (badgeage, QR codes)</li>
+                        <li>Intervention rapide en cas d'alarme ou d'incident</li>
+                        <li>Vérification des accès et intégrité des locaux</li>
+                        <li>Rapports détaillés avec photos à l'appui</li>
+                        <li>Surveillance de sites isolés ou peu fréquentés</li>
+                        <li>Coordination avec les forces de l'ordre si nécessaire</li>
+                    </ul>
+                </div>
+                
+                <div class="service-benefits">
+                    <h4>Avantages</h4>
+                    <ul class="benefits-list">
+                        <li>Prévention des intrusions et actes de malveillance</li>
+                        <li>Intervention rapide 24h/24 et 7j/7</li>
+                        <li>Rapports détaillés avec preuves photographiques</li>
+                        <li>Technologies modernes pour une efficacité maximale</li>
+                        <li>Adaptation aux spécificités de chaque site</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn" onclick="showSection('contact')">Demander un devis</a>
+                </div>
+            </div>
+            
+            <div class="service-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ronde de sécurité">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agent en intervention">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contrôle de site">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590688219069-ec2eac74718a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rapport d'intervention">
+                </div>
             </div>
         </div>
     </section>
     
+    <!-- Service Detail: Événementiel -->
+    <section id="evenementiel" class="service-detail">
+        <div class="service-detail-content">
+            <div class="service-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;">
+                <h2>Sécurité Événementielle</h2>
+                <p>Gestion complète de la sécurité pour tous types d'événements</p>
+            </div>
+            
+            <div class="service-detail-grid">
+                <div>
+                    <h3>Sécurité sur mesure pour vos événements</h3>
+                    <p>Notre service de sécurité événementielle assure la protection des participants, du personnel et des biens lors de tous types d'événements, qu'ils soient publics ou privés.</p>
+                    
+                    <h4>Prestations incluses :</h4>
+                    <ul class="benefits-list">
+                        <li>Évaluation des risques et plan de sécurité sur mesure</li>
+                        <li>Gestion des flux et fouilles de sécurité</li>
+                        <li>Contrôle d'accès et gestion des entrées/sorties</li>
+                        <li>Surveillance statique et dynamique de l'événement</li>
+                        <li>Gestion des incidents et coordination avec les secours</li>
+                        <li>Protection rapprochée pour personnalités</li>
+                        <li>Supervision via poste de commandement mobile</li>
+                        <li>Bilans et rapports post-événement</li>
+                    </ul>
+                </div>
+                
+                <div class="service-benefits">
+                    <h4>Avantages</h4>
+                    <ul class="benefits-list">
+                        <li>Adaptation à tout type d'événement</li>
+                        <li>Gestion professionnelle des foules</li>
+                        <li>Protection des personnalités et invités VIP</li>
+                        <li>Coordination avec les services de secours</li>
+                        <li>Post-analyse et retours d'expérience</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn" onclick="showSection('contact')">Demander un devis</a>
+                </div>
+            </div>
+            
+            <div class="service-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité concert">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contrôle d'accès événement">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Surveillance foule">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe sécurité événement">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>À propos de FOR SÉCURITÉ PRIVÉE (4SP)</h2>
+                <p>Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
+                <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
+                
+                <h3>Nos valeurs</h3>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Expertise</h4>
+                        <p>Des agents formés et certifiés</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Disponibilité</h4>
+                        <p>24h/24 et 7j/7</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Proximité</h4>
+                        <p>À votre écoute</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-star"></i>
+                        <h4>Qualité</h4>
+                        <p>Services haut de gamme</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe FOR SÉCURITÉ PRIVÉE">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contactez-nous</h2>
+                <p>Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</p>
+                
+                <ul class="contact-details">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>83 rue Yves Montand, 34080 Montpellier</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>06 60 35 01 97</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>forsecuriteprivee@gmail.com</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Disponible 24h/24 et 7j/7</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-users"></i>
+                        <span>Plus de 50 agents dédiés</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Demande de devis</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service demandé</label>
+                        <select id="service" required>
+                            <option value="">Sélectionnez un service</option>
+                            <option value="gardiennage">Gardiennage & Surveillance</option>
+                            <option value="rondes">Rondes & Interventions</option>
+                            <option value="evenementiel">Sécurité Événementielle</option>
+                            <option value="autre">Autre demande</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer la demande</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.55942739232!2d3.848876176955411!3d43.61087915538826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6af5f48ab0c1f%3A0x9e1e43a9c2c94b3a!2s83%20Rue%20Yves%20Montand%2C%2034080%20Montpellier!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+    
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2023 FOR Sécurité Privée (4SP) - Tous droits réservés</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FOR SÉCURITÉ PRIVÉE (4SP)</h3>
+                <p>Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</p>
+                <p>Plus de 50 agents dédiés à votre sécurité</p>
+            </div>
+            <div class="footer-section">
+                <h3>Nos coordonnées</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 83 rue Yves Montand, 34080 Montpellier</p>
+                <p><i class="fas fa-phone"></i> 06 60 35 01 97</p>
+                <p><i class="fas fa-envelope"></i> forsecuriteprivee@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens rapides</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('home')">Accueil</a></li>
+                    <li><a href="#services" onclick="showSection('services')">Services</a></li>
+                    <li><a href="#about" onclick="showSection('about')">À propos</a></li>
+                    <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FOR SÉCURITÉ PRIVÉE (4SP) - Tous droits réservés</p>
+        </div>
+        
+        <div class="admin-access">
+            <div class="admin-toggle" onclick="openAdmin()">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
     </footer>
 
-    <!-- PANEL D'ADMINISTRATION -->
-    <div class="admin-access">
-        <div class="admin-toggle" onclick="openAdmin()">
-            <i class="fas fa-cog"></i>
-        </div>
-    </div>
-
+    <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-content">
             <span class="close-admin" onclick="closeAdmin()">&times;</span>
@@ -478,7 +1409,7 @@
             </div>
             
             <div id="adminMainSection" class="admin-section">
-                <h2>Panel d'Administration FOR Sécurité Privée</h2>
+                <h2>Panel d'Administration FOR SÉCURITÉ PRIVÉE</h2>
                 
                 <div class="admin-tabs">
                     <div class="admin-tab active" onclick="switchTab('services-tab')">Services</div>
@@ -490,20 +1421,28 @@
                 <div id="services-tab" class="admin-section active">
                     <h3>Gestion des Services</h3>
                     <div class="form-group">
-                        <label for="service1-title">Titre du Service 1</label>
-                        <input type="text" id="service1-title" value="Systèmes d'Alarme">
+                        <label for="service1-title">Titre du Service Gardiennage</label>
+                        <input type="text" id="service1-title" value="Gardiennage & Surveillance Humaine">
                     </div>
                     <div class="form-group">
-                        <label for="service1-desc">Description du Service 1</label>
-                        <textarea id="service1-desc">Installation et maintenance de systèmes d'alarme haute performance pour votre domicile ou entreprise.</textarea>
+                        <label for="service1-desc">Description du Service Gardiennage</label>
+                        <textarea id="service1-desc">Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="service2-title">Titre du Service 2</label>
-                        <input type="text" id="service2-title" value="Vidéosurveillance">
+                        <label for="service2-title">Titre du Service Rondes</label>
+                        <input type="text" id="service2-title" value="Rondes & Interventions">
                     </div>
                     <div class="form-group">
-                        <label for="service2-desc">Description du Service 2</label>
-                        <textarea id="service2-desc">Solutions de surveillance complètes avec enregistrement cloud et accès à distance.</textarea>
+                        <label for="service2-desc">Description du Service Rondes</label>
+                        <textarea id="service2-desc">Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="service3-title">Titre du Service Événementiel</label>
+                        <input type="text" id="service3-title" value="Sécurité Événementielle">
+                    </div>
+                    <div class="form-group">
+                        <label for="service3-desc">Description du Service Événementiel</label>
+                        <textarea id="service3-desc">Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</textarea>
                     </div>
                     <button class="admin-btn" onclick="saveServices()">Enregistrer les Services</button>
                 </div>
@@ -550,11 +1489,15 @@
                     </div>
                     <div class="form-group">
                         <label for="hero-text">Texte Principal</label>
-                        <textarea id="hero-text">Protection et surveillance 24h/24 pour votre tranquillité d'esprit</textarea>
+                        <textarea id="hero-text">Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</textarea>
                     </div>
                     <div class="form-group">
                         <label for="about-text">Texte À Propos</label>
-                        <textarea id="about-text">FOR Sécurité Privée (4SP) est une entreprise de sécurité créée à Montpellier en 2024, spécialisée dans la protection des biens et des personnes.</textarea>
+                        <textarea id="about-text">FOR SÉCURITÉ PRIVÉE (4SP) est une entreprise de sécurité créée à Montpellier en 2024, spécialisée dans la protection des biens et des personnes.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="commercial-text">Texte Commercial</label>
+                        <textarea id="commercial-text">Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de 50 agents expérimentés vous garantit une protection optimale de vos biens et personnes.</textarea>
                     </div>
                     <button class="admin-btn" onclick="saveContent()">Enregistrer le Contenu</button>
                 </div>
@@ -571,6 +1514,21 @@
                         <input type="file" id="hero-image" accept="image/*">
                         <div class="image-preview" id="heroImagePreview"></div>
                     </div>
+                    <div class="form-group">
+                        <label for="service1-image">Image Service Gardiennage</label>
+                        <input type="file" id="service1-image" accept="image/*">
+                        <div class="image-preview" id="service1ImagePreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service2-image">Image Service Rondes</label>
+                        <input type="file" id="service2-image" accept="image/*">
+                        <div class="image-preview" id="service2ImagePreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service3-image">Image Service Événementiel</label>
+                        <input type="file" id="service3-image" accept="image/*">
+                        <div class="image-preview" id="service3ImagePreview"></div>
+                    </div>
                     <button class="admin-btn" onclick="saveImages()">Enregistrer les Images</button>
                 </div>
             </div>
@@ -581,6 +1539,36 @@
         // Stockage des données (simulé - en production, utiliser une base de données)
         let adminPassword = "4SP@forsecuriteprivee2024"; // Mot de passe administrateur
         let isAdminAuthenticated = false;
+        
+        // Fonctions de navigation
+        function showSection(sectionId) {
+            // Masquer toutes les sections de détail de service
+            document.querySelectorAll('.service-detail').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Afficher la section demandée
+            if (sectionId === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (sectionId === 'services') {
+                document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+            } else if (sectionId === 'about') {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            } else if (sectionId === 'contact') {
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function showService(serviceId) {
+            // Masquer toutes les sections de détail de service
+            document.querySelectorAll('.service-detail').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Afficher le service demandé
+            document.getElementById(serviceId).classList.add('active');
+            document.getElementById(serviceId).scrollIntoView({ behavior: 'smooth' });
+        }
         
         // Fonctions d'administration
         function openAdmin() {
@@ -601,6 +1589,9 @@
                 isAdminAuthenticated = true;
                 document.getElementById('loginSection').classList.remove('active');
                 document.getElementById('adminMainSection').classList.add('active');
+                
+                // Charger les données existantes
+                loadAdminData();
             } else {
                 alert("Mot de passe incorrect. Veuillez réessayer.");
             }
@@ -622,18 +1613,30 @@
             event.target.classList.add('active');
         }
         
+        function loadAdminData() {
+            // Charger les données existantes dans le formulaire d'administration
+            // (Cette fonction serait reliée à une base de données en production)
+            console.log("Chargement des données administrateur");
+        }
+        
         function saveServices() {
             // Récupérer les valeurs des champs
             const service1Title = document.getElementById('service1-title').value;
             const service1Desc = document.getElementById('service1-desc').value;
             const service2Title = document.getElementById('service2-title').value;
             const service2Desc = document.getElementById('service2-desc').value;
+            const service3Title = document.getElementById('service3-title').value;
+            const service3Desc = document.getElementById('service3-desc').value;
             
-            // Ici, vous enregistreriez ces valeurs en base de données
-            // Pour cette démo, on affiche juste une confirmation
-            alert("Services enregistrés avec succès!\n\n" + 
-                  service1Title + ": " + service1Desc + "\n" +
-                  service2Title + ": " + service2Desc);
+            // Mettre à jour le contenu de la page en direct
+            document.querySelectorAll('.service-card h3')[0].textContent = service1Title;
+            document.querySelectorAll('.service-card p')[0].textContent = service1Desc;
+            document.querySelectorAll('.service-card h3')[1].textContent = service2Title;
+            document.querySelectorAll('.service-card p')[1].textContent = service2Desc;
+            document.querySelectorAll('.service-card h3')[2].textContent = service3Title;
+            document.querySelectorAll('.service-card p')[2].textContent = service3Desc;
+            
+            alert("Services enregistrés et mis à jour avec succès!");
         }
         
         function addReport() {
@@ -668,11 +1671,13 @@
             const heroTitle = document.getElementById('hero-title').value;
             const heroText = document.getElementById('hero-text').value;
             const aboutText = document.getElementById('about-text').value;
+            const commercialText = document.getElementById('commercial-text').value;
             
             // Mettre à jour le contenu de la page en direct
             document.querySelector('.hero h1').textContent = heroTitle;
             document.querySelector('.hero p').textContent = heroText;
-            document.querySelector('#about p').textContent = aboutText;
+            document.querySelector('#about .about-text p').textContent = aboutText;
+            document.querySelector('.commercial-content p').textContent = commercialText;
             
             alert("Contenu enregistré et mis à jour avec succès!");
         }
@@ -695,11 +1700,30 @@
             }
         });
         
+        // Gestion du formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Votre demande a été envoyée avec succès! Nous vous contacterons rapidement.');
+            this.reset();
+        });
+        
         // Fermer le panel admin en cliquant à l'extérieur
         window.addEventListener('click', function(e) {
             if (e.target === document.getElementById('adminPanel')) {
                 closeAdmin();
             }
+        });
+        
+        // Animation au défilement
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.service-card, .value-item, .about-image');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (position < screenPosition) {
+                    element.classList.add('fade-in');
+                }
+            });
         });
     </script>
 </body>
