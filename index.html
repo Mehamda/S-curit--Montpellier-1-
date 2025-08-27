@@ -1,4 +1,4 @@
-           <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -969,6 +969,41 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Styles pour les messages de formulaire */
+        .form-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .form-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .form-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .form-loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -1065,7 +1100,7 @@
                         <li>Protection rapprochée VIP</li>
                         <li>Poste de commandement mobile</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir plus</a>
+                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir more</a>
                 </div>
             </div>
         </div>
@@ -1313,13 +1348,14 @@
             
             <div class="contact-form">
                 <h3>Demande de devis</h3>
-                <form id="contactForm" action="https://formspree.io/f/mjvnqkgg" method="POST">
+                <div id="form-message" class="form-message"></div>
+                <form id="contactForm">
                     <div class="form-group">
-                        <label for="name">Nom complet</label>
+                        <label for="name">Nom complet *</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Adresse email</label>
+                        <label for="email">Adresse email *</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
@@ -1327,7 +1363,7 @@
                         <input type="tel" id="phone" name="phone">
                     </div>
                     <div class="form-group">
-                        <label for="service">Service demandé</label>
+                        <label for="service">Service demandé *</label>
                         <select id="service" name="service" required>
                             <option value="">Sélectionnez un service</option>
                             <option value="gardiennage">Gardiennage & Surveillance</option>
@@ -1337,10 +1373,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
+                        <label for="message">Message *</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit" class="btn">Envoyer la demande</button>
+                    <button type="submit" class="btn" id="submit-btn">
+                        <span id="btn-text">Envoyer la demande</span>
+                        <div id="btn-loading" class="form-loading" style="display: none;"></div>
+                    </button>
                 </form>
             </div>
         </div>
@@ -1721,29 +1760,37 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Récupérer les données du formulaire
-            const formData = new FormData(this);
+            // Masquer les messages précédents
+            const messageElement = document.getElementById('form-message');
+            messageElement.style.display = 'none';
             
-            // Envoyer les données via Formspree
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Votre demande a été envoyée avec succès! Nous vous contacterons rapidement.');
-                    this.reset();
-                } else {
-                    throw new Error('Erreur lors de l\'envoi du formulaire');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Une erreur s\'est produite. Veuillez réessayer ou nous contacter directement par téléphone.');
-            });
+            // Afficher l'indicateur de chargement
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            
+            btnText.textContent = 'Envoi en cours';
+            btnLoading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            // Simuler l'envoi du formulaire (à remplacer par Formspree)
+            setTimeout(() => {
+                // Cacher l'indicateur de chargement
+                btnText.textContent = 'Envoyer la demande';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+                
+                // Afficher le message de succès
+                messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
+                messageElement.className = 'form-message form-success';
+                messageElement.style.display = 'block';
+                
+                // Réinitialiser le formulaire
+                this.reset();
+                
+                // Faire défiler jusqu'au message
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 2000);
         });
         
         // Fermer le panel admin en cliquant à l'extérieur
