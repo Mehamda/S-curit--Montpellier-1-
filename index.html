@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+           <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -1006,7 +1006,7 @@
     <section class="commercial-presentation">
         <div class="commercial-content">
             <h2>Votre partenaire de confiance en sécurité privée</h2>
-            <p>Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">50 agents expérimentés</span> vous garantit une protection optimale de vos biens et personnes.</p>
+            <p>Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">50 agents expérimentés</span> vous garantît une protection optimale de vos biens et personnes.</p>
             <p>Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
         </div>
     </section>
@@ -1313,22 +1313,22 @@
             
             <div class="contact-form">
                 <h3>Demande de devis</h3>
-                <form id="contactForm">
+                <form id="contactForm" action="https://formspree.io/f/mjvnqkgg" method="POST">
                     <div class="form-group">
                         <label for="name">Nom complet</label>
-                        <input type="text" id="name" required>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Adresse email</label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone">
+                        <input type="tel" id="phone" name="phone">
                     </div>
                     <div class="form-group">
                         <label for="service">Service demandé</label>
-                        <select id="service" required>
+                        <select id="service" name="service" required>
                             <option value="">Sélectionnez un service</option>
                             <option value="gardiennage">Gardiennage & Surveillance</option>
                             <option value="rondes">Rondes & Interventions</option>
@@ -1338,7 +1338,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" required></textarea>
+                        <textarea id="message" name="message" required></textarea>
                     </div>
                     <button type="submit" class="btn">Envoyer la demande</button>
                 </form>
@@ -1463,7 +1463,7 @@
                     </div>
                     <div class="form-group">
                         <label for="report-image">Image (optionnelle)</label>
-                        <input type="file" id="report-image" accept="image/*">
+                        <input type="file" id="report-image" accept="image/*" onchange="previewImage(this, 'reportImagePreview')">
                         <div class="image-preview" id="reportImagePreview"></div>
                     </div>
                     <button class="admin-btn" onclick="addReport()">Ajouter le Rapport</button>
@@ -1506,27 +1506,27 @@
                     <h3>Gestion des Images</h3>
                     <div class="form-group">
                         <label for="logo-upload">Logo de l'entreprise</label>
-                        <input type="file" id="logo-upload" accept="image/*">
+                        <input type="file" id="logo-upload" accept="image/*" onchange="previewImage(this, 'logoPreview')">
                         <div class="image-preview" id="logoPreview"></div>
                     </div>
                     <div class="form-group">
                         <label for="hero-image">Image de fond (Hero)</label>
-                        <input type="file" id="hero-image" accept="image/*">
+                        <input type="file" id="hero-image" accept="image/*" onchange="previewImage(this, 'heroImagePreview')">
                         <div class="image-preview" id="heroImagePreview"></div>
                     </div>
                     <div class="form-group">
                         <label for="service1-image">Image Service Gardiennage</label>
-                        <input type="file" id="service1-image" accept="image/*">
+                        <input type="file" id="service1-image" accept="image/*" onchange="previewImage(this, 'service1ImagePreview')">
                         <div class="image-preview" id="service1ImagePreview"></div>
                     </div>
                     <div class="form-group">
                         <label for="service2-image">Image Service Rondes</label>
-                        <input type="file" id="service2-image" accept="image/*">
+                        <input type="file" id="service2-image" accept="image/*" onchange="previewImage(this, 'service2ImagePreview')">
                         <div class="image-preview" id="service2ImagePreview"></div>
                     </div>
                     <div class="form-group">
                         <label for="service3-image">Image Service Événementiel</label>
-                        <input type="file" id="service3-image" accept="image/*">
+                        <input type="file" id="service3-image" accept="image/*" onchange="previewImage(this, 'service3ImagePreview')">
                         <div class="image-preview" id="service3ImagePreview"></div>
                     </div>
                     <button class="admin-btn" onclick="saveImages()">Enregistrer les Images</button>
@@ -1600,7 +1600,9 @@
         function switchTab(tabId) {
             // Masquer tous les onglets
             document.querySelectorAll('.admin-section').forEach(tab => {
-                tab.classList.remove('active');
+                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
+                    tab.classList.remove('active');
+                }
             });
             
             // Afficher l'onglet sélectionné
@@ -1682,29 +1684,66 @@
             alert("Contenu enregistré et mis à jour avec succès!");
         }
         
-        function saveImages() {
-            // Cette fonction gérerait le téléchargement des images
-            alert("Fonction de sauvegarde d'images prête pour l'implémentation.");
-        }
-        
-        // Prévisualisation des images
-        document.getElementById('report-image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            const file = input.files[0];
+            
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById('reportImagePreview').innerHTML = 
-                        `<img src="${event.target.result}" style="max-width: 100%;">`;
-                };
+                
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
+                }
+                
                 reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
             }
-        });
+        }
+        
+        function saveImages() {
+            // Cette fonction gérerait le téléchargement des images
+            // Pour l'instant, nous allons simplement afficher un message
+            alert("Fonction de sauvegarde d'images prête pour l'implémentation. En production, cela enverrait les images à un serveur.");
+            
+            // Simulation de la mise à jour du logo
+            const logoFile = document.getElementById('logo-upload').files[0];
+            if (logoFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logo-image').src = e.target.result;
+                }
+                reader.readAsDataURL(logoFile);
+            }
+        }
         
         // Gestion du formulaire de contact
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Votre demande a été envoyée avec succès! Nous vous contacterons rapidement.');
-            this.reset();
+            
+            // Récupérer les données du formulaire
+            const formData = new FormData(this);
+            
+            // Envoyer les données via Formspree
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Votre demande a été envoyée avec succès! Nous vous contacterons rapidement.');
+                    this.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi du formulaire');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur s\'est produite. Veuillez réessayer ou nous contacter directement par téléphone.');
+            });
         });
         
         // Fermer le panel admin en cliquant à l'extérieur
