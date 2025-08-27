@@ -1758,41 +1758,73 @@
         }
         
         // Gestion du formulaire de contact
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Masquer les messages précédents
-            const messageElement = document.getElementById('form-message');
-            messageElement.style.display = 'none';
-            
-            // Afficher l'indicateur de chargement
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const btnLoading = document.getElementById('btn-loading');
-            
-            btnText.textContent = 'Envoi en cours';
-            btnLoading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            
-            // Simuler l'envoi du formulaire (à remplacer par Formspree)
-            setTimeout(() => {
-                // Cacher l'indicateur de chargement
-                btnText.textContent = 'Envoyer la demande';
-                btnLoading.style.display = 'none';
-                submitBtn.disabled = false;
-                
-                // Afficher le message de succès
-                messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
-                messageElement.className = 'form-message form-success';
-                messageElement.style.display = 'block';
-                
-                // Réinitialiser le formulaire
-                this.reset();
-                
-                // Faire défiler jusqu'au message
-                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 2000);
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Masquer les messages précédents
+    const messageElement = document.getElementById('form-message');
+    messageElement.style.display = 'none';
+    
+    // Afficher l'indicateur de chargement
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnLoading = document.getElementById('btn-loading');
+    
+    btnText.textContent = 'Envoi en cours';
+    btnLoading.style.display = 'inline-block';
+    submitBtn.disabled = true;
+    
+    try {
+        // Envoyer les données via Formspree
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
         });
+        
+        if (response.ok) {
+            // Afficher message de succès
+            messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
+            messageElement.className = 'form-message form-success';
+            messageElement.style.display = 'block';
+            
+            // Réinitialiser le formulaire
+            this.reset();
+        } else {
+            throw new Error('Erreur lors de l\'envoi');
+        }
+    } catch (error) {
+        // Afficher message d'erreur
+        messageElement.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
+        messageElement.className = 'form-message form-error';
+        messageElement.style.display = 'block';
+    } finally {
+        // Cacher l'indicateur de chargement
+        btnText.textContent = 'Envoyer la demande';
+        btnLoading.style.display = 'none';
+        submitBtn.disabled = false;
+        
+        // Faire défiler jusqu'au message
+        messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+});
+
+// Gestion de la confirmation après redirection
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
+    const messageElement = document.getElementById('form-message');
+    messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
+    messageElement.className = 'form-message form-success';
+    messageElement.style.display = 'block';
+    
+    // Faire défiler jusqu'au message
+    setTimeout(() => {
+        messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 500);
+}
         
         // Fermer le panel admin en cliquant à l'extérieur
         window.addEventListener('click', function(e) {
