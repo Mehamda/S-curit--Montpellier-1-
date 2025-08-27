@@ -1349,7 +1349,7 @@
             <div class="contact-form">
                 <h3>Demande de devis</h3>
                 <div id="form-message" class="form-message"></div>
-                <form id="contactForm">
+                <form id="contactForm" action="https://formspree.io/f/xeolqboy" method="POST">
                     <div class="form-group">
                         <label for="name">Nom complet *</label>
                         <input type="text" id="name" name="name" required>
@@ -1375,7 +1375,8 @@
                     <div class="form-group">
                         <label for="message">Message *</label>
                         <textarea id="message" name="message" required></textarea>
-                    </div>
+                    </div> 
+                    <input type="hidden" name="_next" value="https://votresite.com/merci.html">
                     <button type="submit" class="btn" id="submit-btn">
                         <span id="btn-text">Envoyer la demande</span>
                         <div id="btn-loading" class="form-loading" style="display: none;"></div>
