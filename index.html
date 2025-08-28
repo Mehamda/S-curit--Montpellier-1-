@@ -537,6 +537,7 @@
         
         .contact-details {
             list-style: none;
+            margin-top: 2rem;
         }
         
         .contact-details li {
@@ -791,20 +792,20 @@
             display: block;
         }
         
-        .form-group {
+        .admin-form-group {
             margin-bottom: 20px;
         }
         
-        .form-group label {
+        .admin-form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
             color: var(--dark);
         }
         
-        .form-group input, 
-        .form-group textarea, 
-        .form-group select {
+        .admin-form-group input, 
+        .admin-form-group textarea, 
+        .admin-form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -812,7 +813,7 @@
             font-size: 1rem;
         }
         
-        .form-group textarea {
+        .admin-form-group textarea {
             min-height: 100px;
             resize: vertical;
         }
@@ -1077,7 +1078,7 @@
                     <h3>Rondes & Interventions</h3>
                     <p>Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</p>
                     <ul class="service-features">
-                        <li>Rondes régulières programmées</li>
+                        <li>Rondes régulières selon un planning défini</li>
                         <li>Intervention rapide 24/7</li>
                         <li>Contrôles aléatoires</li>
                         <li>Technologies de pointe</li>
@@ -1100,7 +1101,7 @@
                         <li>Protection rapprochée VIP</li>
                         <li>Poste de commandement mobile</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir more</a>
+                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir plus</a>
                 </div>
             </div>
         </div>
@@ -1452,35 +1453,35 @@
                 <h2>Panel d'Administration FOR SÉCURITÉ PRIVÉE</h2>
                 
                 <div class="admin-tabs">
-                    <div class="admin-tab active" onclick="switchTab('services-tab')">Services</div>
-                    <div class="admin-tab" onclick="switchTab('reports-tab')">Rapports</div>
-                    <div class="admin-tab" onclick="switchTab('content-tab')">Contenu</div>
-                    <div class="admin-tab" onclick="switchTab('images-tab')">Images</div>
+                    <div class="admin-tab active" onclick="switchTab('services-tab', event)">Services</div>
+                    <div class="admin-tab" onclick="switchTab('reports-tab', event)">Rapports</div>
+                    <div class="admin-tab" onclick="switchTab('content-tab', event)">Contenu</div>
+                    <div class="admin-tab" onclick="switchTab('images-tab', event)">Images</div>
                 </div>
                 
                 <div id="services-tab" class="admin-section active">
                     <h3>Gestion des Services</h3>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service1-title">Titre du Service Gardiennage</label>
                         <input type="text" id="service1-title" value="Gardiennage & Surveillance Humaine">
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service1-desc">Description du Service Gardiennage</label>
                         <textarea id="service1-desc">Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service2-title">Titre du Service Rondes</label>
                         <input type="text" id="service2-title" value="Rondes & Interventions">
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service2-desc">Description du Service Rondes</label>
                         <textarea id="service2-desc">Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service3-title">Titre du Service Événementiel</label>
                         <input type="text" id="service3-title" value="Sécurité Événementielle">
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service3-desc">Description du Service Événementiel</label>
                         <textarea id="service3-desc">Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</textarea>
                     </div>
@@ -1489,19 +1490,19 @@
                 
                 <div id="reports-tab" class="admin-section">
                     <h3>Gestion des Rapports</h3>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="report-title">Titre du Rapport</label>
                         <input type="text" id="report-title" placeholder="Titre du rapport">
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="report-date">Date du Rapport</label>
                         <input type="date" id="report-date">
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="report-content">Contenu du Rapport</label>
                         <textarea id="report-content" placeholder="Contenu détaillé du rapport"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="report-image">Image (optionnelle)</label>
                         <input type="file" id="report-image" accept="image/*" onchange="previewImage(this, 'reportImagePreview')">
                         <div class="image-preview" id="reportImagePreview"></div>
@@ -1512,30 +1513,30 @@
                     <div id="existing-reports">
                         <div class="report-item">
                             <strong>Rapport Hebdomadaire</strong> (12 Nov. 2023)
-                            <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;">Modifier</button>
+                            <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
                         </div>
                         <div class="report-item">
                             <strong>Rapport Mensuel</strong> (5 Nov. 2023)
-                            <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;">Modifier</button>
+                            <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
                         </div>
                     </div>
                 </div>
                 
                 <div id="content-tab" class="admin-section">
                     <h3>Gestion du Contenu</h3>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="hero-title">Titre Principal</label>
                         <input type="text" id="hero-title" value="Experts en Sécurité à Montpellier">
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="hero-text">Texte Principal</label>
                         <textarea id="hero-text">Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="about-text">Texte À Propos</label>
                         <textarea id="about-text">FOR SÉCURITÉ PRIVÉE (4SP) est une entreprise de sécurité créée à Montpellier en 2024, spécialisée dans la protection des biens et des personnes.</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="commercial-text">Texte Commercial</label>
                         <textarea id="commercial-text">Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de 50 agents expérimentés vous garantit une protection optimale de vos biens et personnes.</textarea>
                     </div>
@@ -1544,27 +1545,27 @@
                 
                 <div id="images-tab" class="admin-section">
                     <h3>Gestion des Images</h3>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="logo-upload">Logo de l'entreprise</label>
                         <input type="file" id="logo-upload" accept="image/*" onchange="previewImage(this, 'logoPreview')">
                         <div class="image-preview" id="logoPreview"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="hero-image">Image de fond (Hero)</label>
                         <input type="file" id="hero-image" accept="image/*" onchange="previewImage(this, 'heroImagePreview')">
                         <div class="image-preview" id="heroImagePreview"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service1-image">Image Service Gardiennage</label>
                         <input type="file" id="service1-image" accept="image/*" onchange="previewImage(this, 'service1ImagePreview')">
                         <div class="image-preview" id="service1ImagePreview"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service2-image">Image Service Rondes</label>
                         <input type="file" id="service2-image" accept="image/*" onchange="previewImage(this, 'service2ImagePreview')">
                         <div class="image-preview" id="service2ImagePreview"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="admin-form-group">
                         <label for="service3-image">Image Service Événementiel</label>
                         <input type="file" id="service3-image" accept="image/*" onchange="previewImage(this, 'service3ImagePreview')">
                         <div class="image-preview" id="service3ImagePreview"></div>
@@ -1616,6 +1617,7 @@
             // Réinitialiser à l'onglet de connexion
             document.getElementById('loginSection').classList.add('active');
             document.getElementById('adminMainSection').classList.remove('active');
+            document.getElementById('adminPassword').value = '';
         }
         
         function closeAdmin() {
@@ -1637,7 +1639,7 @@
             }
         }
         
-        function switchTab(tabId) {
+        function switchTab(tabId, event) {
             // Masquer tous les onglets
             document.querySelectorAll('.admin-section').forEach(tab => {
                 if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
@@ -1652,13 +1654,31 @@
             document.querySelectorAll('.admin-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
+            
+            // Ajouter la classe active à l'onglet cliqué
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
         
         function loadAdminData() {
             // Charger les données existantes dans le formulaire d'administration
-            // (Cette fonction serait reliée à une base de données en production)
-            console.log("Chargement des données administrateur");
+            // Depuis le localStorage
+            if (localStorage.getItem('service1Title')) {
+                document.getElementById('service1-title').value = localStorage.getItem('service1Title');
+                document.getElementById('service1-desc').value = localStorage.getItem('service1Desc');
+                document.getElementById('service2-title').value = localStorage.getItem('service2Title');
+                document.getElementById('service2-desc').value = localStorage.getItem('service2Desc');
+                document.getElementById('service3-title').value = localStorage.getItem('service3Title');
+                document.getElementById('service3-desc').value = localStorage.getItem('service3Desc');
+                
+                document.getElementById('hero-title').value = localStorage.getItem('heroTitle');
+                document.getElementById('hero-text').value = localStorage.getItem('heroText');
+                document.getElementById('about-text').value = localStorage.getItem('aboutText');
+                document.getElementById('commercial-text').value = localStorage.getItem('commercialText');
+            }
+            
+            console.log("Données administrateur chargées");
         }
         
         function saveServices() {
@@ -1669,6 +1689,14 @@
             const service2Desc = document.getElementById('service2-desc').value;
             const service3Title = document.getElementById('service3-title').value;
             const service3Desc = document.getElementById('service3-desc').value;
+            
+            // Sauvegarder dans le localStorage
+            localStorage.setItem('service1Title', service1Title);
+            localStorage.setItem('service1Desc', service1Desc);
+            localStorage.setItem('service2Title', service2Title);
+            localStorage.setItem('service2Desc', service2Desc);
+            localStorage.setItem('service3Title', service3Title);
+            localStorage.setItem('service3Desc', service3Desc);
             
             // Mettre à jour le contenu de la page en direct
             document.querySelectorAll('.service-card h3')[0].textContent = service1Title;
@@ -1696,10 +1724,15 @@
             reportItem.className = 'report-item';
             reportItem.innerHTML = `
                 <strong>${title}</strong> (${new Date(date).toLocaleDateString('fr-FR')})
-                <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;">Modifier</button>
+                <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
             `;
             
             document.getElementById('existing-reports').appendChild(reportItem);
+            
+            // Sauvegarder dans le localStorage
+            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            reports.push({ title, date, content });
+            localStorage.setItem('reports', JSON.stringify(reports));
             
             // Réinitialiser le formulaire
             document.getElementById('report-title').value = '';
@@ -1709,11 +1742,40 @@
             alert("Rapport ajouté avec succès!");
         }
         
+        function editReport(button) {
+            const reportItem = button.parentElement;
+            const title = reportItem.querySelector('strong').textContent;
+            
+            // Trouver le rapport dans le localStorage
+            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            const report = reports.find(r => r.title === title);
+            
+            if (report) {
+                // Remplir le formulaire avec les données du rapport
+                document.getElementById('report-title').value = report.title;
+                document.getElementById('report-date').value = report.date;
+                document.getElementById('report-content').value = report.content;
+                
+                // Supprimer l'ancien rapport
+                reportItem.remove();
+                
+                // Retirer du localStorage
+                const updatedReports = reports.filter(r => r.title !== title);
+                localStorage.setItem('reports', JSON.stringify(updatedReports));
+            }
+        }
+        
         function saveContent() {
             const heroTitle = document.getElementById('hero-title').value;
             const heroText = document.getElementById('hero-text').value;
             const aboutText = document.getElementById('about-text').value;
             const commercialText = document.getElementById('commercial-text').value;
+            
+            // Sauvegarder dans le localStorage
+            localStorage.setItem('heroTitle', heroTitle);
+            localStorage.setItem('heroText', heroText);
+            localStorage.setItem('aboutText', aboutText);
+            localStorage.setItem('commercialText', commercialText);
             
             // Mettre à jour le contenu de la page en direct
             document.querySelector('.hero h1').textContent = heroTitle;
@@ -1752,79 +1814,82 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('logo-image').src = e.target.result;
+                    localStorage.setItem('logoImage', e.target.result);
                 }
                 reader.readAsDataURL(logoFile);
             }
+            
+            // Répéter pour les autres images si nécessaire
         }
         
         // Gestion du formulaire de contact
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    // Masquer les messages précédents
-    const messageElement = document.getElementById('form-message');
-    messageElement.style.display = 'none';
-    
-    // Afficher l'indicateur de chargement
-    const submitBtn = document.getElementById('submit-btn');
-    const btnText = document.getElementById('btn-text');
-    const btnLoading = document.getElementById('btn-loading');
-    
-    btnText.textContent = 'Envoi en cours';
-    btnLoading.style.display = 'inline-block';
-    submitBtn.disabled = true;
-    
-    try {
-        // Envoyer les données via Formspree
-        const formData = new FormData(this);
-        const response = await fetch(this.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Masquer les messages précédents
+            const messageElement = document.getElementById('form-message');
+            messageElement.style.display = 'none';
+            
+            // Afficher l'indicateur de chargement
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            
+            btnText.textContent = 'Envoi en cours';
+            btnLoading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            try {
+                // Envoyer les données via Formspree
+                const formData = new FormData(this);
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Afficher message de succès
+                    messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
+                    messageElement.className = 'form-message form-success';
+                    messageElement.style.display = 'block';
+                    
+                    // Réinitialiser le formulaire
+                    this.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+            } catch (error) {
+                // Afficher message d'erreur
+                messageElement.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
+                messageElement.className = 'form-message form-error';
+                messageElement.style.display = 'block';
+            } finally {
+                // Cacher l'indicateur de chargement
+                btnText.textContent = 'Envoyer la demande';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+                
+                // Faire défiler jusqu'au message
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
-        
-        if (response.ok) {
-            // Afficher message de succès
+
+        // Gestion de la confirmation après redirection
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
+            const messageElement = document.getElementById('form-message');
             messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
             messageElement.className = 'form-message form-success';
             messageElement.style.display = 'block';
             
-            // Réinitialiser le formulaire
-            this.reset();
-        } else {
-            throw new Error('Erreur lors de l\'envoi');
+            // Faire défiler jusqu'au message
+            setTimeout(() => {
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
         }
-    } catch (error) {
-        // Afficher message d'erreur
-        messageElement.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
-        messageElement.className = 'form-message form-error';
-        messageElement.style.display = 'block';
-    } finally {
-        // Cacher l'indicateur de chargement
-        btnText.textContent = 'Envoyer la demande';
-        btnLoading.style.display = 'none';
-        submitBtn.disabled = false;
-        
-        // Faire défiler jusqu'au message
-        messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-});
-
-// Gestion de la confirmation après redirection
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
-    const messageElement = document.getElementById('form-message');
-    messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
-    messageElement.className = 'form-message form-success';
-    messageElement.style.display = 'block';
-    
-    // Faire défiler jusqu'au message
-    setTimeout(() => {
-        messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 500);
-}
         
         // Fermer le panel admin en cliquant à l'extérieur
         window.addEventListener('click', function(e) {
@@ -1842,6 +1907,44 @@ if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
                 if (position < screenPosition) {
                     element.classList.add('fade-in');
                 }
+            });
+        });
+        
+        // Charger les données sauvegardées au chargement de la page
+        window.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('service1Title')) {
+                document.querySelectorAll('.service-card h3')[0].textContent = localStorage.getItem('service1Title');
+                document.querySelectorAll('.service-card p')[0].textContent = localStorage.getItem('service1Desc');
+                document.querySelectorAll('.service-card h3')[1].textContent = localStorage.getItem('service2Title');
+                document.querySelectorAll('.service-card p')[1].textContent = localStorage.getItem('service2Desc');
+                document.querySelectorAll('.service-card h3')[2].textContent = localStorage.getItem('service3Title');
+                document.querySelectorAll('.service-card p')[2].textContent = localStorage.getItem('service3Desc');
+            }
+            
+            if (localStorage.getItem('heroTitle')) {
+                document.querySelector('.hero h1').textContent = localStorage.getItem('heroTitle');
+                document.querySelector('.hero p').textContent = localStorage.getItem('heroText');
+                document.querySelector('#about .about-text p').textContent = localStorage.getItem('aboutText');
+                document.querySelector('.commercial-content p').textContent = localStorage.getItem('commercialText');
+            }
+            
+            if (localStorage.getItem('logoImage')) {
+                document.getElementById('logo-image').src = localStorage.getItem('logoImage');
+            }
+            
+            // Charger les rapports
+            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            const reportsContainer = document.getElementById('existing-reports');
+            reportsContainer.innerHTML = '';
+            
+            reports.forEach(report => {
+                const reportItem = document.createElement('div');
+                reportItem.className = 'report-item';
+                reportItem.innerHTML = `
+                    <strong>${report.title}</strong> (${new Date(report.date).toLocaleDateString('fr-FR')})
+                    <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
+                `;
+                reportsContainer.appendChild(reportItem);
             });
         });
     </script>
