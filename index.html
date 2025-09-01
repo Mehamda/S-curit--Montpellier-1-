@@ -569,7 +569,7 @@
             margin-bottom: 2.5rem;
             line-height: 1.8;
             opacity: 0.9;
-        }
+            }
         
         .contact-details {
             list-style: none;
@@ -871,6 +871,40 @@
             transform: translateY(-2px);
         }
         
+        .admin-btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .admin-btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .admin-btn-danger {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .admin-btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+        
         .login-panel {
             text-align: center;
             padding: 30px;
@@ -958,6 +992,58 @@
             color: var(--primary);
         }
         
+        /* Gestion des images des services */
+        .service-images-management {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .service-images-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .service-image-item {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background: white;
+        }
+        
+        .service-image-preview {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .service-image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .service-image-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-style: italic;
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero h1 {
@@ -980,6 +1066,10 @@
             }
             
             .service-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-images-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -1137,13 +1227,13 @@
         <div class="services-grid">
             <div class="service-card" onclick="showService('gardiennage')">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de gardiennage et surveillance par FOR SÉCURITÉ PRIVÉE">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de gardiennage et surveillance par FOR SÉCURITÉ PRIVÉE" id="service1-main-image">
                 </div>
                 <div class="service-content">
                     <div class="service-icon"><i class="fas fa-user-shield"></i></div>
-                    <h3>Gardiennage & Surveillance Humaine</h3>
-                    <p>Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</p>
-                    <ul class="service-features">
+                    <h3 id="service1-title">Gardiennage & Surveillance Humaine</h3>
+                    <p id="service1-desc">Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</p>
+                    <ul class="service-features" id="service1-features">
                         <li>Agents de sécurité diplômés CNAPS</li>
                         <li>Surveillance continue 24h/24 et 7j/7</li>
                         <li>Contrôle d'accès strict</li>
@@ -1155,13 +1245,13 @@
             
             <div class="service-card" onclick="showService('rondes')">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de rondes et interventions de sécurité">
+                    <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Service de rondes et interventions de sécurité" id="service2-main-image">
                 </div>
                 <div class="service-content">
                     <div class="service-icon"><i class="fas fa-walking"></i></div>
-                    <h3>Rondes & Interventions</h3>
-                    <p>Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</p>
-                    <ul class="service-features">
+                    <h3 id="service2-title">Rondes & Interventions</h3>
+                    <p id="service2-desc">Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</p>
+                    <ul class="service-features" id="service2-features">
                         <li>Rondes régulières selon un planning défini</li>
                         <li>Intervention rapide 24/7</li>
                         <li>Contrôles aléatoires</li>
@@ -1173,19 +1263,19 @@
             
             <div class="service-card" onclick="showService('evenementiel')">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité événementielle à Montpellier">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité événementielle à Montpellier" id="service3-main-image">
                 </div>
                 <div class="service-content">
                     <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
-                    <h3>Sécurité Événementielle</h3>
-                    <p>Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</p>
-                    <ul class="service-features">
+                    <h3 id="service3-title">Sécurité Événementielle</h3>
+                    <p id="service3-desc">Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</p>
+                    <ul class="service-features" id="service3-features">
                         <li>Gestion des flux et fouilles</li>
                         <li>Contrôle d'accès événementiel</li>
                         <li>Protection rapprochée VIP</li>
                         <li>Poste de commandement mobile</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir plus</a>
+                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir more</a>
                 </div>
             </div>
         </div>
@@ -1205,13 +1295,13 @@
                     <p>Notre service de gardiennage et surveillance humaine offre une protection optimale pour vos biens et personnes. Nos agents, spécialement formés et habilités, assurent une présence dissuasive et réactive.</p>
                     
                     <h4>Prestations incluses :</h4>
-                    <ul class="benefits-list">
+                    <ul class="benefits-list" id="service1-detail-features">
                         <li>Agents de sécurité diplômés CNAPS</li>
                         <li>Surveillance continue 24h/24 et 7j/7</li>
                         <li>Contrôle d'accès strict et gestion des entrées/sorties</li>
                         <li>Rondes de sécurité programmées</li>
                         <li>Rapports d'activité détaillés quotidiens</li>
-                        <li>Intervention rapide en cas d'incident</li>
+                        <li>Intervention rapide en case d'incident</li>
                         <li>Vidéosurveillance complémentaire</li>
                         <li>Gestion des alarmes et alertes</li>
                     </ul>
@@ -1231,7 +1321,7 @@
                 </div>
             </div>
             
-            <div class="service-gallery">
+            <div class="service-gallery" id="service1-gallery">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agent de sécurité en poste">
                 </div>
@@ -1262,7 +1352,7 @@
                     <p>Notre service de rondes et interventions offre une surveillance proactive de vos sites, permettant de prévenir les incidents et d'intervenir rapidement en cas de besoin.</p>
                     
                     <h4>Prestations incluses :</h4>
-                    <ul class="benefits-list">
+                    <ul class="benefits-list" id="service2-detail-features">
                         <li>Rondes régulières selon un planning défini</li>
                         <li>Contrôles aléatoires pour une sécurité optimale</li>
                         <li>Utilisation de technologies de pointe (badgeage, QR codes)</li>
@@ -1288,7 +1378,7 @@
                 </div>
             </div>
             
-            <div class="service-gallery">
+            <div class="service-gallery" id="service2-gallery">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ronde de sécurité nocturne">
                 </div>
@@ -1319,7 +1409,7 @@
                     <p>Notre service de sécurité événementielle assure la protection des participants, du personnel et des biens lors de tous types d'événements, qu'ils soient publics ou privés.</p>
                     
                     <h4>Prestations incluses :</h4>
-                    <ul class="benefits-list">
+                    <ul class="benefits-list" id="service3-detail-features">
                         <li>Évaluation des risques et plan de sécurité sur mesure</li>
                         <li>Gestion des flux et fouilles de sécurité</li>
                         <li>Contrôle d'accès et gestion des entrées/sorties</li>
@@ -1345,7 +1435,7 @@
                 </div>
             </div>
             
-            <div class="service-gallery">
+            <div class="service-gallery" id="service3-gallery">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sécurité pour concert et événements">
                 </div>
@@ -1540,37 +1630,64 @@
                     <div class="admin-tab active" onclick="switchTab('services-tab', event)">Services</div>
                     <div class="admin-tab" onclick="switchTab('reports-tab', event)">Rapports</div>
                     <div class="admin-tab" onclick="switchTab('content-tab', event)">Contenu</div>
-                    <div class="admin-tab" onclick="switchTab('images-tab', event)">Images</div>
                     <div class="admin-tab" onclick="switchTab('seo-tab', event)">SEO</div>
                 </div>
                 
                 <div id="services-tab" class="admin-section active">
                     <h3>Gestion des Services</h3>
+                    
                     <div class="admin-form-group">
-                        <label for="service1-title">Titre du Service Gardiennage</label>
-                        <input type="text" id="service1-title" value="Gardiennage & Surveillance Humaine">
+                        <label>Sélectionnez un service à modifier:</label>
+                        <select id="service-selector" onchange="loadServiceData()">
+                            <option value="service1">Gardiennage & Surveillance Humaine</option>
+                            <option value="service2">Rondes & Interventions</option>
+                            <option value="service3">Sécurité Événementielle</option>
+                        </select>
                     </div>
-                    <div class="admin-form-group">
-                        <label for="service1-desc">Description du Service Gardiennage</label>
-                        <textarea id="service1-desc">Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.</textarea>
+                    
+                    <div id="service-editor">
+                        <div class="admin-form-group">
+                            <label for="service-title">Titre du Service</label>
+                            <input type="text" id="service-title" value="">
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="service-desc">Description du Service</label>
+                            <textarea id="service-desc"></textarea>
+                        </div>
+                        
+                        <div class="admin-form-group">
+                            <label>Caractéristiques du Service</label>
+                            <div id="service-features-container">
+                                <!-- Les caractéristiques seront générées ici -->
+                            </div>
+                            <button type="button" class="admin-btn-secondary" onclick="addFeature()">
+                                <i class="fas fa-plus"></i> Ajouter une caractéristique
+                            </button>
+                        </div>
+                        
+                        <div class="service-images-management">
+                            <h4>Gestion des Images du Service (Maximum 4)</h4>
+                            <div class="admin-form-group">
+                                <label for="service-main-image">Image Principale</label>
+                                <input type="file" id="service-main-image" accept="image/*" onchange="previewMainImage(this)">
+                                <div class="image-preview" id="service-main-image-preview"></div>
+                            </div>
+                            
+                            <div class="admin-form-group">
+                                <label>Images supplémentaires (Galerie)</label>
+                                <div class="service-images-grid" id="service-gallery-images">
+                                    <!-- Les images de galerie seront générées ici -->
+                                </div>
+                                <button type="button" class="admin-btn-secondary" onclick="addGalleryImage()" id="add-gallery-image-btn">
+                                    <i class="fas fa-plus"></i> Ajouter une image à la galerie
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button class="admin-btn" onclick="saveServiceData()">
+                            <i class="fas fa-save"></i> Enregistrer les modifications
+                        </button>
                     </div>
-                    <div class="admin-form-group">
-                        <label for="service2-title">Titre du Service Rondes</label>
-                        <input type="text" id="service2-title" value="Rondes & Interventions">
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="service2-desc">Description du Service Rondes</label>
-                        <textarea id="service2-desc">Surveillance proactive et interventions rapides sur site pour prévenir tout incident.</textarea>
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="service3-title">Titre du Service Événementiel</label>
-                        <input type="text" id="service3-title" value="Sécurité Événementielle">
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="service3-desc">Description du Service Événementiel</label>
-                        <textarea id="service3-desc">Gestion complète de la sécurité pour tous types d'événements, publics ou privés.</textarea>
-                    </div>
-                    <button class="admin-btn" onclick="saveServices()">Enregistrer les Services</button>
                 </div>
                 
                 <div id="reports-tab" class="admin-section">
@@ -1628,36 +1745,6 @@
                     <button class="admin-btn" onclick="saveContent()">Enregistrer le Contenu</button>
                 </div>
                 
-                <div id="images-tab" class="admin-section">
-                    <h3>Gestion des Images</h3>
-                    <div class="admin-form-group">
-                        <label for="logo-upload">Logo de l'entreprise</label>
-                        <input type="file" id="logo-upload" accept="image/*" onchange="previewImage(this, 'logoPreview')">
-                        <div class="image-preview" id="logoPreview"></div>
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="hero-image">Image de fond (Hero)</label>
-                        <input type="file" id="hero-image" accept="image/*" onchange="previewImage(this, 'heroImagePreview')">
-                        <div class="image-preview" id="heroImagePreview"></div>
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="service1-image">Image Service Gardiennage</label>
-                        <input type="file" id="service1-image" accept="image/*" onchange="previewImage(this, 'service1ImagePreview')">
-                        <div class="image-preview" id="service1ImagePreview"></div>
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="service2-image">Image Service Rondes</label>
-                        <input type="file" id="service2-image" accept="image/*" onchange="previewImage(this, 'service2ImagePreview')">
-                        <div class="image-preview" id="service2ImagePreview"></div>
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="service3-image">Image Service Événementiel</label>
-                        <input type="file" id="service3-image" accept="image/*" onchange="previewImage(this, 'service3ImagePreview')">
-                        <div class="image-preview" id="service3ImagePreview"></div>
-                    </div>
-                    <button class="admin-btn" onclick="saveImages()">Enregistrer les Images</button>
-                </div>
-                
                 <div id="seo-tab" class="admin-section">
                     <h3>Optimisation SEO</h3>
                     <div class="seo-status">
@@ -1704,6 +1791,21 @@
         // Stockage des données (simulé - en production, utiliser une base de données)
         let adminPassword = "4SP@forsecuriteprivee2024"; // Mot de passe administrateur
         let isAdminAuthenticated = false;
+        let currentService = 'service1';
+        let serviceImages = {
+            service1: {
+                main: '',
+                gallery: ['', '', '', '']
+            },
+            service2: {
+                main: '',
+                gallery: ['', '', '', '']
+            },
+            service3: {
+                main: '',
+                gallery: ['', '', '', '']
+            }
+        };
         
         // Module AI SEO
         const seoOptimizer = {
@@ -1838,6 +1940,7 @@
                 
                 // Charger les données existantes
                 loadAdminData();
+                loadServiceData();
             } else {
                 alert("Mot de passe incorrect. Veuillez réessayer.");
             }
@@ -1869,13 +1972,6 @@
             // Charger les données existantes dans le formulaire d'administration
             // Depuis le localStorage
             if (localStorage.getItem('service1Title')) {
-                document.getElementById('service1-title').value = localStorage.getItem('service1Title');
-                document.getElementById('service1-desc').value = localStorage.getItem('service1Desc');
-                document.getElementById('service2-title').value = localStorage.getItem('service2Title');
-                document.getElementById('service2-desc').value = localStorage.getItem('service2Desc');
-                document.getElementById('service3-title').value = localStorage.getItem('service3Title');
-                document.getElementById('service3-desc').value = localStorage.getItem('service3Desc');
-                
                 document.getElementById('hero-title').value = localStorage.getItem('heroTitle');
                 document.getElementById('hero-text').value = localStorage.getItem('heroText');
                 document.getElementById('about-text').value = localStorage.getItem('aboutText');
@@ -1885,35 +1981,195 @@
                 document.getElementById('meta-description').value = localStorage.getItem('metaDescription') || "Société de sécurité à Montpellier proposant gardiennage, surveillance, sécurité événementielle. Agents diplômés CNAPS. Devis gratuit.";
             }
             
+            // Charger les données des images
+            if (localStorage.getItem('serviceImages')) {
+                serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
+            }
+            
             console.log("Données administrateur chargées");
         }
         
-        function saveServices() {
-            // Récupérer les valeurs des champs
-            const service1Title = document.getElementById('service1-title').value;
-            const service1Desc = document.getElementById('service1-desc').value;
-            const service2Title = document.getElementById('service2-title').value;
-            const service2Desc = document.getElementById('service2-desc').value;
-            const service3Title = document.getElementById('service3-title').value;
-            const service3Desc = document.getElementById('service3-desc').value;
+        function loadServiceData() {
+            currentService = document.getElementById('service-selector').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('service1Title', service1Title);
-            localStorage.setItem('service1Desc', service1Desc);
-            localStorage.setItem('service2Title', service2Title);
-            localStorage.setItem('service2Desc', service2Desc);
-            localStorage.setItem('service3Title', service3Title);
-            localStorage.setItem('service3Desc', service3Desc);
+            // Charger les données du service sélectionné
+            if (localStorage.getItem(currentService + 'Title')) {
+                document.getElementById('service-title').value = localStorage.getItem(currentService + 'Title') || '';
+                document.getElementById('service-desc').value = localStorage.getItem(currentService + 'Desc') || '';
+                
+                // Charger les caractéristiques
+                const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+                const featuresContainer = document.getElementById('service-features-container');
+                featuresContainer.innerHTML = '';
+                
+                features.forEach((feature, index) => {
+                    const featureElement = document.createElement('div');
+                    featureElement.className = 'admin-form-group';
+                    featureElement.innerHTML = `
+                        <div style="display: flex; align-items: center;">
+                            <input type="text" value="${feature}" 
+                                oninput="updateFeature(${index}, this.value)" 
+                                style="flex: 1; margin-right: 10px;">
+                            <button type="button" class="admin-btn-danger" onclick="removeFeature(${index})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    featuresContainer.appendChild(featureElement);
+                });
+                
+                // Charger les images
+                if (serviceImages[currentService]) {
+                    // Image principale
+                    const mainImagePreview = document.getElementById('service-main-image-preview');
+                    if (serviceImages[currentService].main) {
+                        mainImagePreview.innerHTML = `<img src="${serviceImages[currentService].main}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
+                    } else {
+                        mainImagePreview.innerHTML = '<div class="image-placeholder">Aucune image</div>';
+                    }
+                    
+                    // Images de galerie
+                    const galleryContainer = document.getElementById('service-gallery-images');
+                    galleryContainer.innerHTML = '';
+                    
+                    serviceImages[currentService].gallery.forEach((image, index) => {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'service-image-item';
+                        galleryItem.innerHTML = `
+                            <div class="service-image-preview">
+                                ${image ? `<img src="${image}" alt="Preview">` : '<div class="image-placeholder">Aucune image</div>'}
+                            </div>
+                            <div class="service-image-actions">
+                                <label class="admin-btn-secondary" style="margin: 0; cursor: pointer;">
+                                    <i class="fas fa-upload"></i> Changer
+                                    <input type="file" accept="image/*" style="display: none;" 
+                                        onchange="updateGalleryImage(${index}, this)">
+                                </label>
+                                <button type="button" class="admin-btn-danger" onclick="removeGalleryImage(${index})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        galleryContainer.appendChild(galleryItem);
+                    });
+                    
+                    // Mettre à jour l'état du bouton d'ajout
+                    const addButton = document.getElementById('add-gallery-image-btn');
+                    const galleryCount = serviceImages[currentService].gallery.filter(img => img !== '').length;
+                    addButton.disabled = galleryCount >= 4;
+                }
+            }
+        }
+        
+        function addFeature() {
+            const featuresContainer = document.getElementById('service-features-container');
+            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
             
-            // Mettre à jour le contenu de la page en direct
-            document.querySelectorAll('.service-card h3')[0].textContent = service1Title;
-            document.querySelectorAll('.service-card p')[0].textContent = service1Desc;
-            document.querySelectorAll('.service-card h3')[1].textContent = service2Title;
-            document.querySelectorAll('.service-card p')[1].textContent = service2Desc;
-            document.querySelectorAll('.service-card h3')[2].textContent = service3Title;
-            document.querySelectorAll('.service-card p')[2].textContent = service3Desc;
+            features.push('Nouvelle caractéristique');
+            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
             
-            alert("Services enregistrés et mis à jour avec succès!");
+            loadServiceData(); // Recharger pour afficher la nouvelle caractéristique
+        }
+        
+        function updateFeature(index, value) {
+            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+            features[index] = value;
+            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
+        }
+        
+        function removeFeature(index) {
+            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+            features.splice(index, 1);
+            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
+            
+            loadServiceData(); // Recharger pour mettre à jour l'affichage
+        }
+        
+        function previewMainImage(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    serviceImages[currentService].main = e.target.result;
+                    localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+                    
+                    const preview = document.getElementById('service-main-image-preview');
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function addGalleryImage() {
+            const gallery = serviceImages[currentService].gallery;
+            const emptyIndex = gallery.findIndex(img => img === '');
+            
+            if (emptyIndex !== -1) {
+                // Simuler un clic sur l'input file du premier emplacement vide
+                const galleryItems = document.querySelectorAll('.service-image-item');
+                if (galleryItems[emptyIndex]) {
+                    const fileInput = galleryItems[emptyIndex].querySelector('input[type="file"]');
+                    fileInput.click();
+                }
+            }
+        }
+        
+        function updateGalleryImage(index, input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    serviceImages[currentService].gallery[index] = e.target.result;
+                    localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+                    
+                    // Mettre à jour l'affichage
+                    loadServiceData();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function removeGalleryImage(index) {
+            serviceImages[currentService].gallery[index] = '';
+            localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+            
+            // Mettre à jour l'affichage
+            loadServiceData();
+        }
+        
+        function saveServiceData() {
+            const title = document.getElementById('service-title').value;
+            const description = document.getElementById('service-desc').value;
+            
+            // Sauvegarder les données
+            localStorage.setItem(currentService + 'Title', title);
+            localStorage.setItem(currentService + 'Desc', description);
+            localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+            
+            // Mettre à jour l'affichage sur le site
+            document.getElementById(currentService + '-title').textContent = title;
+            document.getElementById(currentService + '-desc').textContent = description;
+            
+            // Mettre à jour l'image principale
+            if (serviceImages[currentService].main) {
+                document.getElementById(currentService + '-main-image').src = serviceImages[currentService].main;
+            }
+            
+            // Mettre à jour la galerie
+            const galleryContainer = document.getElementById(currentService + '-gallery');
+            if (galleryContainer) {
+                galleryContainer.innerHTML = '';
+                serviceImages[currentService].gallery.forEach(image => {
+                    if (image) {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item';
+                        galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
+                        galleryContainer.appendChild(galleryItem);
+                    }
+                });
+            }
+            
+            alert("Service enregistré et mis à jour avec succès!");
         }
         
         function addReport() {
@@ -2034,25 +2290,6 @@
             }
         }
         
-        function saveImages() {
-            // Cette fonction gérerait le téléchargement des images
-            // Pour l'instant, nous allons simplement afficher un message
-            alert("Fonction de sauvegarde d'images prête pour l'implémentation. En production, cela enverrait les images à un serveur.");
-            
-            // Simulation de la mise à jour du logo
-            const logoFile = document.getElementById('logo-upload').files[0];
-            if (logoFile) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('logo-image').src = e.target.result;
-                    localStorage.setItem('logoImage', e.target.result);
-                }
-                reader.readAsDataURL(logoFile);
-            }
-            
-            // Répéter pour les autres images si nécessaire
-        }
-        
         // Gestion du formulaire de contact
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -2143,14 +2380,26 @@
         
         // Charger les données sauvegardées au chargement de la page
         window.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('service1Title')) {
-                document.querySelectorAll('.service-card h3')[0].textContent = localStorage.getItem('service1Title');
-                document.querySelectorAll('.service-card p')[0].textContent = localStorage.getItem('service1Desc');
-                document.querySelectorAll('.service-card h3')[1].textContent = localStorage.getItem('service2Title');
-                document.querySelectorAll('.service-card p')[1].textContent = localStorage.getItem('service2Desc');
-                document.querySelectorAll('.service-card h3')[2].textContent = localStorage.getItem('service3Title');
-                document.querySelectorAll('.service-card p')[2].textContent = localStorage.getItem('service3Desc');
-            }
+            // Charger les données des services
+            const services = ['service1', 'service2', 'service3'];
+            services.forEach(service => {
+                if (localStorage.getItem(service + 'Title')) {
+                    document.getElementById(service + '-title').textContent = localStorage.getItem(service + 'Title');
+                    document.getElementById(service + '-desc').textContent = localStorage.getItem(service + 'Desc');
+                    
+                    // Charger les caractéristiques
+                    const features = JSON.parse(localStorage.getItem(service + 'Features') || '[]');
+                    const featuresContainer = document.getElementById(service + '-features');
+                    if (featuresContainer) {
+                        featuresContainer.innerHTML = '';
+                        features.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.textContent = feature;
+                            featuresContainer.appendChild(li);
+                        });
+                    }
+                }
+            });
             
             if (localStorage.getItem('heroTitle')) {
                 document.querySelector('.hero h1').textContent = localStorage.getItem('heroTitle');
@@ -2159,8 +2408,29 @@
                 document.querySelector('.commercial-content p').textContent = localStorage.getItem('commercialText');
             }
             
-            if (localStorage.getItem('logoImage')) {
-                document.getElementById('logo-image').src = localStorage.getItem('logoImage');
+            if (localStorage.getItem('serviceImages')) {
+                serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
+                
+                // Mettre à jour les images des services
+                services.forEach(service => {
+                    if (serviceImages[service] && serviceImages[service].main) {
+                        document.getElementById(service + '-main-image').src = serviceImages[service].main;
+                    }
+                    
+                    // Mettre à jour les galeries
+                    const galleryContainer = document.getElementById(service + '-gallery');
+                    if (galleryContainer && serviceImages[service]) {
+                        galleryContainer.innerHTML = '';
+                        serviceImages[service].gallery.forEach(image => {
+                            if (image) {
+                                const galleryItem = document.createElement('div');
+                                galleryItem.className = 'gallery-item';
+                                galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
+                                galleryContainer.appendChild(galleryItem);
+                            }
+                        });
+                    }
+                });
             }
             
             if (localStorage.getItem('metaTitle')) {
@@ -2171,17 +2441,19 @@
             // Charger les rapports
             const reports = JSON.parse(localStorage.getItem('reports') || '[]');
             const reportsContainer = document.getElementById('existing-reports');
-            reportsContainer.innerHTML = '';
-            
-            reports.forEach(report => {
-                const reportItem = document.createElement('div');
-                reportItem.className = 'report-item';
-                reportItem.innerHTML = `
-                    <strong>${report.title}</strong> (${new Date(report.date).toLocaleDateString('fr-FR')})
-                    <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
-                `;
-                reportsContainer.appendChild(reportItem);
-            });
+            if (reportsContainer) {
+                reportsContainer.innerHTML = '';
+                
+                reports.forEach(report => {
+                    const reportItem = document.createElement('div');
+                    reportItem.className = 'report-item';
+                    reportItem.innerHTML = `
+                        <strong>${report.title}</strong> (${new Date(report.date).toLocaleDateString('fr-FR')})
+                        <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
+                    `;
+                    reportsContainer.appendChild(reportItem);
+                });
+            }
             
             // Initialiser le module SEO
             seoOptimizer.init();
