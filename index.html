@@ -1044,6 +1044,148 @@
             font-style: italic;
         }
         
+        /* Nouvelle section Rapports d'Activité */
+        .activity-reports {
+            padding: 6rem 2rem;
+            background: var(--accent);
+        }
+        
+        .reports-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .report-card {
+            background: var(--light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .report-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .report-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .report-content {
+            padding: 1.5rem;
+        }
+        
+        .report-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .report-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Modal pour les rapports */
+        .report-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10001;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ff6b6b;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .modal-body {
+            line-height: 1.8;
+            color: #333;
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero h1 {
@@ -1199,6 +1341,7 @@
                 <li><a href="#services" onclick="showSection('services')">Services</a></li>
                 <li><a href="#about" onclick="showSection('about')">À propos</a></li>
                 <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                <li><a href="#reports" onclick="showSection('reports')">Rapports</a></li>
             </ul>
         </nav>
     </header>
@@ -1452,13 +1595,25 @@
         </div>
     </section>
     
+    <!-- Rapports d'Activité Section -->
+    <section id="reports" class="activity-reports">
+        <h2 class="section-title">Rapports d'Activité</h2>
+        <div class="reports-container">
+            <p>Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</p>
+            
+            <div class="reports-grid" id="reports-grid">
+                <!-- Les rapports seront chargés dynamiquement ici -->
+            </div>
+        </div>
+    </section>
+    
     <!-- About Section -->
     <section id="about" class="about">
         <div class="about-content">
             <div class="about-text">
                 <h2>À propos de FOR SÉCURITÉ PRIVÉE (4SP)</h2>
                 <p>Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
-                <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
+                <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Our centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
                 
                 <h3>Nos valeurs</h3>
                 <div class="values-grid">
@@ -1586,6 +1741,7 @@
                     <li><a href="#services" onclick="showSection('services')">Services</a></li>
                     <li><a href="#about" onclick="showSection('about')">À propos</a></li>
                     <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                    <li><a href="#reports" onclick="showSection('reports')">Rapports</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1609,6 +1765,14 @@
         </div>
     </footer>
 
+    <!-- Modal pour les rapports -->
+    <div class="report-modal" id="reportModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-content">
@@ -1631,6 +1795,7 @@
                     <div class="admin-tab" onclick="switchTab('reports-tab', event)">Rapports</div>
                     <div class="admin-tab" onclick="switchTab('content-tab', event)">Contenu</div>
                     <div class="admin-tab" onclick="switchTab('seo-tab', event)">SEO</div>
+                    <div class="admin-tab" onclick="switchTab('appearance-tab', event)">Apparence</div>
                 </div>
                 
                 <div id="services-tab" class="admin-section active">
@@ -1691,7 +1856,7 @@
                 </div>
                 
                 <div id="reports-tab" class="admin-section">
-                    <h3>Gestion des Rapports</h3>
+                    <h3>Gestion des Rapports d'Activité</h3>
                     <div class="admin-form-group">
                         <label for="report-title">Titre du Rapport</label>
                         <input type="text" id="report-title" placeholder="Titre du rapport">
@@ -1713,14 +1878,7 @@
                     
                     <h4>Rapports Existants</h4>
                     <div id="existing-reports">
-                        <div class="report-item">
-                            <strong>Rapport Hebdomadaire</strong> (12 Nov. 2023)
-                            <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
-                        </div>
-                        <div class="report-item">
-                            <strong>Rapport Mensuel</strong> (5 Nov. 2023)
-                            <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
-                        </div>
+                        <!-- Les rapports existants seront chargés ici -->
                     </div>
                 </div>
                 
@@ -1782,6 +1940,32 @@
                     <button class="admin-btn" onclick="generateSEOSuggestions()">Générer des suggestions SEO</button>
                     
                     <div id="seo-suggestions"></div>
+                </div>
+                
+                <div id="appearance-tab" class="admin-section">
+                    <h3>Gestion de l'Apparence</h3>
+                    <div class="admin-form-group">
+                        <label for="logo-upload">Logo du site</label>
+                        <input type="file" id="logo-upload" accept="image/*" onchange="previewLogo(this)">
+                        <div class="image-preview" id="logo-preview"></div>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="primary-color">Couleur principale</label>
+                        <input type="color" id="primary-color" value="#e30613">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="secondary-color">Couleur secondaire</label>
+                        <input type="color" id="secondary-color" value="#000000">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="accent-color">Couleur d'accent</label>
+                        <input type="color" id="accent-color" value="#ffffff">
+                    </div>
+                    
+                    <button class="admin-btn" onclick="saveAppearance()">Enregistrer l'apparence</button>
                 </div>
             </div>
         </div>
@@ -1894,6 +2078,9 @@
                 section.classList.remove('active');
             });
             
+            // Masquer le modal de rapport
+            document.getElementById('reportModal').style.display = 'none';
+            
             // Afficher la section demandée
             if (sectionId === 'home') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1903,6 +2090,8 @@
                 document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
             } else if (sectionId === 'contact') {
                 document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            } else if (sectionId === 'reports') {
+                document.getElementById('reports').scrollIntoView({ behavior: 'smooth' });
             }
         }
         
@@ -1915,6 +2104,30 @@
             // Afficher le service demandé
             document.getElementById(serviceId).classList.add('active');
             document.getElementById(serviceId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function openModal(reportId) {
+            const modal = document.getElementById('reportModal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Charger le contenu du rapport
+            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            const report = reports.find(r => r.id === reportId);
+            
+            if (report) {
+                modalContent.innerHTML = `
+                    ${report.image ? `<div class="modal-image"><img src="${report.image}" alt="${report.title}"></div>` : ''}
+                    <div class="modal-date">${new Date(report.date).toLocaleDateString('fr-FR')}</div>
+                    <h2 class="modal-title">${report.title}</h2>
+                    <div class="modal-body">${report.content}</div>
+                `;
+                
+                modal.style.display = 'block';
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('reportModal').style.display = 'none';
         }
         
         // Fonctions d'administration
@@ -1941,6 +2154,7 @@
                 // Charger les données existantes
                 loadAdminData();
                 loadServiceData();
+                loadReports();
             } else {
                 alert("Mot de passe incorrect. Veuillez réessayer.");
             }
@@ -1984,6 +2198,13 @@
             // Charger les données des images
             if (localStorage.getItem('serviceImages')) {
                 serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
+            }
+            
+            // Charger les couleurs
+            if (localStorage.getItem('primaryColor')) {
+                document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
+                document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
+                document.getElementById('accent-color').value = localStorage.getItem('accentColor');
             }
             
             console.log("Données administrateur chargées");
@@ -2182,36 +2403,91 @@
                 return;
             }
             
+            // Générer un ID unique pour le rapport
+            const reportId = 'report_' + Date.now();
+            
+            // Récupérer l'image si elle existe
+            const reportImagePreview = document.getElementById('reportImagePreview');
+            const image = reportImagePreview.querySelector('img') ? reportImagePreview.querySelector('img').src : '';
+            
             // Ajouter le rapport à la liste
-            const reportItem = document.createElement('div');
-            reportItem.className = 'report-item';
-            reportItem.innerHTML = `
-                <strong>${title}</strong> (${new Date(date).toLocaleDateString('fr-FR')})
-                <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
-            `;
-            
-            document.getElementById('existing-reports').appendChild(reportItem);
-            
-            // Sauvegarder dans le localStorage
             const reports = JSON.parse(localStorage.getItem('reports') || '[]');
-            reports.push({ title, date, content });
+            reports.push({
+                id: reportId,
+                title,
+                date,
+                content,
+                image
+            });
+            
             localStorage.setItem('reports', JSON.stringify(reports));
+            
+            // Recharger les rapports
+            loadReports();
             
             // Réinitialiser le formulaire
             document.getElementById('report-title').value = '';
             document.getElementById('report-date').value = '';
             document.getElementById('report-content').value = '';
+            document.getElementById('reportImagePreview').innerHTML = '';
             
             alert("Rapport ajouté avec succès!");
         }
         
-        function editReport(button) {
-            const reportItem = button.parentElement;
-            const title = reportItem.querySelector('strong').textContent;
-            
-            // Trouver le rapport dans le localStorage
+        function loadReports() {
             const reports = JSON.parse(localStorage.getItem('reports') || '[]');
-            const report = reports.find(r => r.title === title);
+            const reportsContainer = document.getElementById('existing-reports');
+            const reportsGrid = document.getElementById('reports-grid');
+            
+            // Trier les rapports par date (du plus récent au plus ancien)
+            reports.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Afficher les rapports dans l'admin
+            if (reportsContainer) {
+                reportsContainer.innerHTML = '';
+                
+                reports.forEach(report => {
+                    const reportItem = document.createElement('div');
+                    reportItem.className = 'report-item';
+                    reportItem.innerHTML = `
+                        <strong>${report.title}</strong> (${new Date(report.date).toLocaleDateString('fr-FR')})
+                        <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport('${report.id}')">Modifier</button>
+                        <button class="admin-btn-danger" style="padding: 5px 10px; margin-left: 10px;" onclick="deleteReport('${report.id}')">Supprimer</button>
+                    `;
+                    reportsContainer.appendChild(reportItem);
+                });
+            }
+            
+            // Afficher les rapports sur le site
+            if (reportsGrid) {
+                reportsGrid.innerHTML = '';
+                
+                reports.slice(0, 6).forEach(report => {
+                    const reportCard = document.createElement('div');
+                    reportCard.className = 'report-card';
+                    reportCard.innerHTML = `
+                        ${report.image ? `
+                        <div class="report-image">
+                            <img src="${report.image}" alt="${report.title}">
+                        </div>
+                        ` : ''}
+                        <div class="report-content">
+                            <div class="report-date">${new Date(report.date).toLocaleDateString('fr-FR')}</div>
+                            <h3 class="report-title">${report.title}</h3>
+                            <p class="report-excerpt">${report.content.substring(0, 100)}...</p>
+                            <a href="#" class="read-more" onclick="openModal('${report.id}'); return false;">
+                                Lire la suite <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    `;
+                    reportsGrid.appendChild(reportCard);
+                });
+            }
+        }
+        
+        function editReport(reportId) {
+            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            const report = reports.find(r => r.id === reportId);
             
             if (report) {
                 // Remplir le formulaire avec les données du rapport
@@ -2219,12 +2495,29 @@
                 document.getElementById('report-date').value = report.date;
                 document.getElementById('report-content').value = report.content;
                 
-                // Supprimer l'ancien rapport
-                reportItem.remove();
+                // Afficher l'image si elle existe
+                const reportImagePreview = document.getElementById('reportImagePreview');
+                if (report.image) {
+                    reportImagePreview.innerHTML = `<img src="${report.image}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
+                } else {
+                    reportImagePreview.innerHTML = '';
+                }
                 
-                // Retirer du localStorage
-                const updatedReports = reports.filter(r => r.title !== title);
-                localStorage.setItem('reports', JSON.stringify(updatedReports));
+                // Supprimer l'ancien rapport
+                deleteReport(reportId, false);
+            }
+        }
+        
+        function deleteReport(reportId, showAlert = true) {
+            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            const updatedReports = reports.filter(r => r.id !== reportId);
+            localStorage.setItem('reports', JSON.stringify(updatedReports));
+            
+            // Recharger les rapports
+            loadReports();
+            
+            if (showAlert) {
+                alert("Rapport supprimé avec succès!");
             }
         }
         
@@ -2267,6 +2560,41 @@
             }
             
             alert("Paramètres SEO enregistrés avec succès!");
+        }
+        
+        function saveAppearance() {
+            const primaryColor = document.getElementById('primary-color').value;
+            const secondaryColor = document.getElementById('secondary-color').value;
+            const accentColor = document.getElementById('accent-color').value;
+            
+            // Sauvegarder dans le localStorage
+            localStorage.setItem('primaryColor', primaryColor);
+            localStorage.setItem('secondaryColor', secondaryColor);
+            localStorage.setItem('accentColor', accentColor);
+            
+            // Mettre à jour les variables CSS
+            document.documentElement.style.setProperty('--primary', primaryColor);
+            document.documentElement.style.setProperty('--secondary', secondaryColor);
+            document.documentElement.style.setProperty('--accent', accentColor);
+            
+            alert("Apparence enregistrée et mise à jour avec succès!");
+        }
+        
+        function previewLogo(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Mettre à jour le logo
+                    document.getElementById('logo-image').src = e.target.result;
+                    localStorage.setItem('logo', e.target.result);
+                    
+                    // Mettre à jour l'aperçu
+                    const preview = document.getElementById('logo-preview');
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
+                };
+                reader.readAsDataURL(file);
+            }
         }
         
         function generateSEOSuggestions() {
@@ -2364,11 +2692,14 @@
             if (e.target === document.getElementById('adminPanel')) {
                 closeAdmin();
             }
+            if (e.target === document.getElementById('reportModal')) {
+                closeModal();
+            }
         });
         
         // Animation au défilement
         window.addEventListener('scroll', function() {
-            const elements = document.querySelectorAll('.service-card, .value-item, .about-image');
+            const elements = document.querySelectorAll('.service-card, .value-item, .about-image, .report-card');
             elements.forEach(element => {
                 const position = element.getBoundingClientRect().top;
                 const screenPosition = window.innerHeight / 1.3;
@@ -2438,22 +2769,22 @@
                 document.querySelector('meta[name="description"]').setAttribute('content', localStorage.getItem('metaDescription'));
             }
             
-            // Charger les rapports
-            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
-            const reportsContainer = document.getElementById('existing-reports');
-            if (reportsContainer) {
-                reportsContainer.innerHTML = '';
+            if (localStorage.getItem('primaryColor')) {
+                document.documentElement.style.setProperty('--primary', localStorage.getItem('primaryColor'));
+                document.documentElement.style.setProperty('--secondary', localStorage.getItem('secondaryColor'));
+                document.documentElement.style.setProperty('--accent', localStorage.getItem('accentColor'));
                 
-                reports.forEach(report => {
-                    const reportItem = document.createElement('div');
-                    reportItem.className = 'report-item';
-                    reportItem.innerHTML = `
-                        <strong>${report.title}</strong> (${new Date(report.date).toLocaleDateString('fr-FR')})
-                        <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport(this)">Modifier</button>
-                    `;
-                    reportsContainer.appendChild(reportItem);
-                });
+                document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
+                document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
+                document.getElementById('accent-color').value = localStorage.getItem('accentColor');
             }
+            
+            if (localStorage.getItem('logo')) {
+                document.getElementById('logo-image').src = localStorage.getItem('logo');
+            }
+            
+            // Charger les rapports
+            loadReports();
             
             // Initialiser le module SEO
             seoOptimizer.init();
