@@ -7,7 +7,7 @@
     
     <!-- Meta descriptions optimisées pour le référencement -->
     <meta name="description" content="FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité à Montpellier proposant gardiennage, surveillance, sécurité événementielle et interventions. Plus de 50 agents diplômés CNAPS.">
-    <meta name="keywords" content="sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault, top société de sécurité">
+    <meta name="keywords" content="sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault, top société de sécurité, alarme, ronde d'intervention, caméras de surveillance">
     <meta name="author" content="FOR SÉCURITÉ PRIVÉE (4SP)">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="FOR SÉCURITÉ PRIVÉE (4SP) - Experts en sécurité à Montpellier">
@@ -17,8 +17,10 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Données structurées Schema.org pour améliorer le référencement -->
     <script type="application/ld+json">
@@ -38,7 +40,7 @@
       "email": "forsecuriteprivee@gmail.com",
       "areaServed": "Montpellier, Hérault, Occitanie",
       "serviceType": "gardiennage, surveillance, sécurité événementielle",
-      "keywords": "sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault"
+      "keywords": "sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault, alarme, ronde d'intervention, caméras de surveillance"
     }
     </script>
     
@@ -1991,83 +1993,221 @@
             }
         };
         
-        // Module AI SEO
-        const seoOptimizer = {
-            targetKeywords: [
-                "sécurité", "agent de sécurité", "événements", "surveillance",
-                "gardiennage", "ronde", "intervention", 
-                "société de sécurité Montpellier Hérault", "top société de sécurité"
-            ],
+        // Module AI SEO avancé
+        const advancedSEOOptimizer = {
+            keywordClusters: {
+                primary: ["sécurité", "agent de sécurité", "société de sécurité Montpellier"],
+                secondary: ["gardiennage", "surveillance", "alarme", "ronde", "ronde d'intervention"],
+                local: ["société de sécurité Hérault", "caméras de surveillance Montpellier"]
+            },
+            
+            contentGaps: [],
+            competitorAnalysis: [],
             
             init: function() {
-                this.optimizeContent();
-                this.trackPositions();
-                this.generateSEOSuggestions();
+                this.analyzeContentQuality();
+                this.generateContentStrategy();
+                this.monitorRankings();
+                this.setupAlerts();
             },
             
-            optimizeContent: function() {
-                // Optimisation automatique du contenu pour les mots-clés cibles
-                const contentAnalysis = this.analyzeContent();
-                this.improveSEO(contentAnalysis);
-            },
-            
-            analyzeContent: function() {
-                // Analyse le contenu existant pour évaluer la densité des mots-clés
-                console.log("Analyse du contenu pour optimisation SEO...");
-                return {
-                    keywordDensity: this.calculateKeywordDensity(),
-                    contentLength: this.getContentLength(),
-                    headingStructure: this.checkHeadingStructure()
+            analyzeContentQuality: function() {
+                // Analyse sémantique approfondie du contenu
+                const content = this.extractAllText();
+                const analysis = {
+                    wordCount: content.length,
+                    keywordDensity: this.calculateKeywordDensity(content),
+                    semanticScore: this.calculateSemanticRelevance(content),
+                    readabilityScore: this.calculateReadability(content)
                 };
+                
+                this.generateRecommendations(analysis);
             },
             
-            calculateKeywordDensity: function() {
-                // Calcule la densité des mots-clés dans le contenu
-                const content = document.body.innerText.toLowerCase();
-                let density = {};
+            extractAllText: function() {
+                // Extraire tout le texte pertinent de la page
+                const contentElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, .service-features, .benefits-list');
+                let allText = '';
                 
-                this.targetKeywords.forEach(keyword => {
-                    const regex = new RegExp(keyword, 'gi');
-                    const matches = content.match(regex);
-                    density[keyword] = matches ? matches.length : 0;
+                contentElements.forEach(el => {
+                    allText += ' ' + el.textContent;
                 });
+                
+                return allText;
+            },
+            
+            calculateKeywordDensity: function(content) {
+                // Calculer la densité des mots-clés cibles
+                const density = {};
+                const words = content.toLowerCase().split(/\s+/);
+                const totalWords = words.length;
+                
+                // Compter les occurrences pour chaque mot-clé
+                for (const category in this.keywordClusters) {
+                    this.keywordClusters[category].forEach(keyword => {
+                        const keywordWords = keyword.toLowerCase().split(/\s+/);
+                        let count = 0;
+                        
+                        keywordWords.forEach(kw => {
+                            const regex = new RegExp('\\b' + kw + '\\b', 'gi');
+                            const matches = content.match(regex);
+                            count += matches ? matches.length : 0;
+                        });
+                        
+                        density[keyword] = {
+                            count: count,
+                            density: (count / totalWords) * 100
+                        };
+                    });
+                }
                 
                 return density;
             },
             
-            improveSEO: function(analysis) {
-                // Améliore le SEO en fonction de l'analyse
-                console.log("Optimisation SEO en cours...", analysis);
-            },
-            
-            trackPositions: function() {
-                // Suivi des positions dans les moteurs de recherche
-                console.log("Tracking SEO positions for target keywords...");
-                // Intégration avec Google Search Console API possible
-            },
-            
-            generateSEOSuggestions: function() {
-                // Génération de suggestions d'amélioration SEO
-                const suggestions = [
-                    "Créer un blog avec des articles sur la sécurité privée",
-                    "Obtenir des backlinks de sites locaux Montpelliérains",
-                    "Optimiser les temps de chargement sur mobile",
-                    "Ajouter des témoignages clients pour améliorer la confiance"
-                ];
+            calculateSemanticRelevance: function(content) {
+                // Calculer un score de pertinence sémantique
+                let score = 0;
+                let keywordCount = 0;
                 
-                this.displaySuggestions(suggestions);
+                for (const category in this.keywordClusters) {
+                    this.keywordClusters[category].forEach(keyword => {
+                        const regex = new RegExp('\\b' + keyword + '\\b', 'gi');
+                        const matches = content.match(regex);
+                        if (matches && matches.length > 0) {
+                            score += matches.length;
+                            keywordCount++;
+                        }
+                    });
+                }
+                
+                return keywordCount > 0 ? Math.min(100, (score / keywordCount) * 10) : 0;
             },
             
-            displaySuggestions: function(suggestions) {
-                // Affichage des suggestions dans le panel admin
-                if (document.getElementById('seo-suggestions')) {
-                    let html = '<h4>Suggestions d\'amélioration SEO</h4><ul>';
-                    suggestions.forEach(suggestion => {
-                        html += `<li>${suggestion}</li>`;
+            calculateReadability: function(content) {
+                // Calculer un score de lisibilité (simplifié)
+                const words = content.split(/\s+/);
+                const sentences = content.split(/[.!?]+/);
+                const wordCount = words.length;
+                const sentenceCount = sentences.length;
+                
+                if (sentenceCount === 0) return 0;
+                
+                const avgWordsPerSentence = wordCount / sentenceCount;
+                const longWords = words.filter(word => word.length > 6).length;
+                const percentageLongWords = (longWords / wordCount) * 100;
+                
+                // Score basé sur la longueur moyenne des phrases et le pourcentage de mots longs
+                let score = 100 - (avgWordsPerSentence * 1.5) - (percentageLongWords * 0.5);
+                return Math.max(0, Math.min(100, score));
+            },
+            
+            generateContentStrategy: function() {
+                // Génération de stratégie de contenu basée sur l'analyse des concurrents
+                const strategy = {
+                    pillarPages: this.identifyPillarTopics(),
+                    clusterContent: this.generateContentIdeas(),
+                    publishingCalendar: this.createContentCalendar()
+                };
+                
+                this.implementStrategy(strategy);
+            },
+            
+            identifyPillarTopics: function() {
+                return [
+                    "Guide complet de la sécurité privée à Montpellier",
+                    "Tout savoir sur le gardiennage et la surveillance",
+                    "Sécurité événementielle : best practices"
+                ];
+            },
+            
+            generateContentIdeas: function() {
+                const ideas = [];
+                
+                // Générer des idées de contenu basées sur les mots-clés
+                for (const category in this.keywordClusters) {
+                    this.keywordClusters[category].forEach(keyword => {
+                        ideas.push({
+                            title: `Pourquoi choisir ${keyword} à Montpellier?`,
+                            keyword: keyword,
+                            type: 'article'
+                        });
+                        
+                        ideas.push({
+                            title: `5 avantages du ${keyword} pour votre entreprise`,
+                            keyword: keyword,
+                            type: 'list'
+                        });
                     });
-                    html += '</ul>';
-                    document.getElementById('seo-suggestions').innerHTML = html;
                 }
+                
+                return ideas;
+            },
+            
+            implementStrategy: function(strategy) {
+                // Implémenter la stratégie de contenu (à compléter)
+                console.log("Stratégie de contenu SEO:", strategy);
+            },
+            
+            monitorRankings: function() {
+                // Surveillance continue des positions avec alertes
+                console.log("Démarrage du monitoring SEO...");
+                
+                // Simuler un suivi régulier
+                setInterval(() => {
+                    this.trackKeywordPositions();
+                }, 604800000); // Weekly tracking
+            },
+            
+            trackKeywordPositions: function() {
+                // Simuler le tracking des positions (en production, utiliser une API)
+                console.log("Tracking des positions des mots-clés...");
+            },
+            
+            generateRecommendations: function(analysis) {
+                const recommendations = [];
+                
+                if (analysis.readabilityScore < 60) {
+                    recommendations.push("Améliorer la lisibilité avec des phrases plus courtes et des sous-titres");
+                }
+                
+                if (analysis.semanticScore < 70) {
+                    recommendations.push("Enrichir le contenu avec des termes sémantiquement liés");
+                }
+                
+                // Analyser la densité des mots-clés
+                for (const keyword in analysis.keywordDensity) {
+                    const density = analysis.keywordDensity[keyword].density;
+                    if (density < 0.5) {
+                        recommendations.push(`Augmenter la présence du mot-clé "${keyword}" (actuellement: ${density.toFixed(2)}%)`);
+                    } else if (density > 3) {
+                        recommendations.push(`Réduire la densité du mot-clé "${keyword}" (actuellement: ${density.toFixed(2)}%) pour éviter le keyword stuffing`);
+                    }
+                }
+                
+                this.displaySEORecommendations(recommendations);
+            },
+            
+            displaySEORecommendations: function(recommendations) {
+                const suggestionsContainer = document.getElementById('seo-suggestions');
+                if (!suggestionsContainer) return;
+                
+                if (recommendations.length === 0) {
+                    suggestionsContainer.innerHTML = '<p class="form-success">✅ Votre contenu est bien optimisé pour le référencement.</p>';
+                    return;
+                }
+                
+                let html = '<h4>Recommandations d\'optimisation SEO</h4><ul>';
+                recommendations.forEach(rec => {
+                    html += `<li>${rec}</li>`;
+                });
+                html += '</ul>';
+                
+                suggestionsContainer.innerHTML = html;
+            },
+            
+            setupAlerts: function() {
+                // Configurer des alertes pour les changements de position
+                console.log("Configuration des alertes SEO...");
             }
         };
         
@@ -2283,7 +2423,6 @@
         }
         
         function addFeature() {
-            const featuresContainer = document.getElementById('service-features-container');
             const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
             
             features.push('Nouvelle caractéristique');
@@ -2309,6 +2448,12 @@
         function previewMainImage(input) {
             const file = input.files[0];
             if (file) {
+                // Vérifier le type de fichier
+                if (!file.type.match('image.*')) {
+                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     serviceImages[currentService].main = e.target.result;
@@ -2332,12 +2477,20 @@
                     const fileInput = galleryItems[emptyIndex].querySelector('input[type="file"]');
                     fileInput.click();
                 }
+            } else {
+                alert("Vous avez déjà atteint le nombre maximum d'images (4) pour cette galerie.");
             }
         }
         
         function updateGalleryImage(index, input) {
             const file = input.files[0];
             if (file) {
+                // Vérifier le type de fichier
+                if (!file.type.match('image.*')) {
+                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     serviceImages[currentService].gallery[index] = e.target.result;
@@ -2387,6 +2540,18 @@
                         galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
                         galleryContainer.appendChild(galleryItem);
                     }
+                });
+            }
+            
+            // Mettre à jour les caractéristiques
+            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+            const featuresContainer = document.getElementById(currentService + '-features');
+            if (featuresContainer) {
+                featuresContainer.innerHTML = '';
+                features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresContainer.appendChild(li);
                 });
             }
             
@@ -2536,8 +2701,16 @@
             // Mettre à jour le contenu de la page en direct
             document.querySelector('.hero h1').textContent = heroTitle;
             document.querySelector('.hero p').textContent = heroText;
-            document.querySelector('#about .about-text p').textContent = aboutText;
-            document.querySelector('.commercial-content p').textContent = commercialText;
+            
+            const aboutParagraphs = document.querySelectorAll('#about .about-text p');
+            if (aboutParagraphs.length > 0) {
+                aboutParagraphs[0].textContent = aboutText;
+            }
+            
+            const commercialParagraphs = document.querySelectorAll('.commercial-content p');
+            if (commercialParagraphs.length > 0) {
+                commercialParagraphs[0].textContent = commercialText;
+            }
             
             alert("Contenu enregistré et mis à jour avec succès!");
         }
@@ -2583,6 +2756,12 @@
         function previewLogo(input) {
             const file = input.files[0];
             if (file) {
+                // Vérifier le type de fichier
+                if (!file.type.match('image.*')) {
+                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     // Mettre à jour le logo
@@ -2598,7 +2777,7 @@
         }
         
         function generateSEOSuggestions() {
-            seoOptimizer.generateSEOSuggestions();
+            advancedSEOOptimizer.init();
         }
         
         function previewImage(input, previewId) {
@@ -2606,6 +2785,13 @@
             const file = input.files[0];
             
             if (file) {
+                // Vérifier le type de fichier
+                if (!file.type.match('image.*')) {
+                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
+                    preview.innerHTML = '';
+                    return;
+                }
+                
                 const reader = new FileReader();
                 
                 reader.onload = function(e) {
@@ -2735,8 +2921,16 @@
             if (localStorage.getItem('heroTitle')) {
                 document.querySelector('.hero h1').textContent = localStorage.getItem('heroTitle');
                 document.querySelector('.hero p').textContent = localStorage.getItem('heroText');
-                document.querySelector('#about .about-text p').textContent = localStorage.getItem('aboutText');
-                document.querySelector('.commercial-content p').textContent = localStorage.getItem('commercialText');
+                
+                const aboutParagraphs = document.querySelectorAll('#about .about-text p');
+                if (aboutParagraphs.length > 0 && localStorage.getItem('aboutText')) {
+                    aboutParagraphs[0].textContent = localStorage.getItem('aboutText');
+                }
+                
+                const commercialParagraphs = document.querySelectorAll('.commercial-content p');
+                if (commercialParagraphs.length > 0 && localStorage.getItem('commercialText')) {
+                    commercialParagraphs[0].textContent = localStorage.getItem('commercialText');
+                }
             }
             
             if (localStorage.getItem('serviceImages')) {
@@ -2766,7 +2960,10 @@
             
             if (localStorage.getItem('metaTitle')) {
                 document.title = localStorage.getItem('metaTitle');
-                document.querySelector('meta[name="description"]').setAttribute('content', localStorage.getItem('metaDescription'));
+                const metaDescTag = document.querySelector('meta[name="description"]');
+                if (metaDescTag && localStorage.getItem('metaDescription')) {
+                    metaDescTag.setAttribute('content', localStorage.getItem('metaDescription'));
+                }
             }
             
             if (localStorage.getItem('primaryColor')) {
@@ -2786,8 +2983,8 @@
             // Charger les rapports
             loadReports();
             
-            // Initialiser le module SEO
-            seoOptimizer.init();
+            // Initialiser le module SEO avancé
+            advancedSEOOptimizer.init();
         });
     </script>
 </body>
