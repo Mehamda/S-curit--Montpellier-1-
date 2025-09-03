@@ -302,6 +302,7 @@
             height: 100%;
             background: var(--primary);
             transition: width 0.4s ease;
+            z-index: 1;
         }
         
         .service-card:hover {
@@ -500,6 +501,8 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
+            z-index: 2;
+            position: relative;
         }
         
         .value-item {
@@ -947,6 +950,8 @@
         .login-panel {
             text-align: center;
             padding: 30px;
+            position: relative;
+            z-index: 2;
         }
         
         .password-input {
@@ -1439,7 +1444,7 @@
                         <li>Contrôles aléatoires</li>
                         <li>Technologies de pointe</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('rondes')">En savoir more</a>
+                    <a href="#" class="btn" onclick="showService('rondes')">En savoir plus</a>
                 </div>
             </div>
             
@@ -1550,7 +1555,7 @@
                     <h4>Avantages</h4>
                     <ul class="benefits-list">
                         <li>Prévention des intrusions et actes de malveillance</li>
-                        <li>Intervention rapid 24h/24 et 7j/7</li>
+                        <li>Intervention rapide 24h/24 et 7j/7</li>
                         <li>Rapports détaillés avec preuves photographiques</li>
                         <li>Technologies modernes pour une efficacité maximale</li>
                         <li>Adaptation aux spécificités de chaque site</li>
@@ -1652,7 +1657,7 @@
             <div class="about-text">
                 <h2>À propos de FOR SÉCURITÉ PRIVÉE (4SP)</h2>
                 <p>Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
-                <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Our centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
+                <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
                 
                 <h3>Nos valeurs</h3>
                 <div class="values-grid">
@@ -2250,7 +2255,7 @@
                 const suggestionsContainer = document.getElementById('seo-suggestions');
                 if (!suggestionsContainer) return;
                 
-                if (recommendations.length === 0) {
+                if (report.length === 0) {
                     suggestionsContainer.innerHTML = '<p class="form-success">✅ Votre contenu est bien optimisé pour le référencement.</p>';
                     return;
                 }
@@ -2527,6 +2532,15 @@
         
         function addGalleryImage() {
             const gallery = serviceImages[currentService].gallery;
+            
+            // Vérifier si nous avons moins de 4 images
+            const imageCount = gallery.filter(img => img !== '').length;
+            if (imageCount >= 4) {
+                alert("Vous avez atteint le nombre maximum d'images (4) pour cette galerie.");
+                return;
+            }
+            
+            // Trouver le premier emplacement vide
             const emptyIndex = gallery.findIndex(img => img === '');
             
             if (emptyIndex !== -1) {
@@ -2536,8 +2550,6 @@
                     const fileInput = galleryItems[emptyIndex].querySelector('input[type="file"]');
                     fileInput.click();
                 }
-            } else {
-                alert("Vous avez déjà atteint le nombre maximum d'images (4) pour cette galerie.");
             }
         }
         
@@ -2577,6 +2589,14 @@
             // Sauvegarder les données
             localStorage.setItem(currentService + 'Title', title);
             localStorage.setItem(currentService + 'Desc', description);
+            
+            // Sauvegarder les caractéristiques
+            const features = [];
+            document.querySelectorAll('#service-features-container input').forEach(input => {
+                features.push(input.value);
+            });
+            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
+            
             localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
             
             // Mettre à jour l'affichage sur le site
@@ -2603,7 +2623,6 @@
             }
             
             // Mettre à jour les caractéristiques
-            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
             const featuresContainer = document.getElementById(currentService + '-features');
             if (featuresContainer) {
                 featuresContainer.innerHTML = '';
