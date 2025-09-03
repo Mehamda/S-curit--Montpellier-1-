@@ -752,6 +752,28 @@
             text-align: left;
             font-size: 0.8rem;
             opacity: 0.7;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .legal-mentions.expanded {
+            max-height: 1000px;
+        }
+        
+        .legal-toggle {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+        
+        .legal-toggle:hover {
+            opacity: 1;
         }
         
         .legal-mentions h4 {
@@ -1417,7 +1439,7 @@
                         <li>Contrôles aléatoires</li>
                         <li>Technologies de pointe</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('rondes')">En savoir plus</a>
+                    <a href="#" class="btn" onclick="showService('rondes')">En savoir more</a>
                 </div>
             </div>
             
@@ -1773,7 +1795,8 @@
         </div>
         
         <!-- Ajout des mentions légales -->
-        <div class="legal-mentions">
+        <button class="legal-toggle" onclick="toggleLegalMentions()">Voir les mentions légales</button>
+        <div class="legal-mentions" id="legalMentions">
             <h4>Mentions légales</h4>
             <p>Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l’économie numérique, il est porté à la connaissance des utilisateurs du site for securite privee (4SP) les présentes mentions légales.</p>
             <p>Le présent site est édité par :<br>
@@ -2567,7 +2590,7 @@
             
             // Mettre à jour la galerie
             const galleryContainer = document.getElementById(currentService + '-gallery');
-            if (galleryContainer) {
+            if (galleryContainer && serviceImages[currentService]) {
                 galleryContainer.innerHTML = '';
                 serviceImages[currentService].gallery.forEach(image => {
                     if (image) {
@@ -2588,6 +2611,17 @@
                     const li = document.createElement('li');
                     li.textContent = feature;
                     featuresContainer.appendChild(li);
+                });
+            }
+            
+            // Mettre à jour les caractéristiques détaillées
+            const detailFeaturesContainer = document.getElementById(currentService + '-detail-features');
+            if (detailFeaturesContainer) {
+                detailFeaturesContainer.innerHTML = '';
+                features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    detailFeaturesContainer.appendChild(li);
                 });
             }
             
@@ -2840,6 +2874,19 @@
             }
         }
         
+        // Fonction pour basculer l'affichage des mentions légales
+        function toggleLegalMentions() {
+            const legalMentions = document.getElementById('legalMentions');
+            legalMentions.classList.toggle('expanded');
+            
+            const toggleButton = document.querySelector('.legal-toggle');
+            if (legalMentions.classList.contains('expanded')) {
+                toggleButton.textContent = 'Masquer les mentions légales';
+            } else {
+                toggleButton.textContent = 'Voir les mentions légales';
+            }
+        }
+
         // Gestion du formulaire de contact
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
