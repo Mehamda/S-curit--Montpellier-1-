@@ -88,8 +88,8 @@
         }
         
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 120px; /* Augmenté de 80px à 120px */
+            height: 120px; /* Augmenté de 80px à 120px */
             background: var(--accent);
             border-radius: 12px;
             display: flex;
@@ -1020,6 +1020,8 @@
         .keyword-list {
             list-style: none;
             margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
         }
         
         .keyword-list li {
@@ -1231,6 +1233,13 @@
         }
         
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        
         @media (max-width: 992px) {
             .hero h1 {
                 font-size: 2.8rem;
@@ -1269,11 +1278,21 @@
             
             .logo-container {
                 margin-bottom: 1rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                width: 100px;
+                height: 100px;
+                margin-right: 0;
+                margin-bottom: 10px;
             }
             
             nav ul {
                 justify-content: center;
                 flex-wrap: wrap;
+                margin-top: 15px;
             }
             
             nav ul li {
@@ -1319,8 +1338,51 @@
                 margin-bottom: 5px;
                 border-radius: 5px;
             }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
         
+        @media (max-width: 576px) {
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .company-name {
+                font-size: 1.5rem;
+            }
+            
+            .company-slogan {
+                font-size: 0.9rem;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem;
+                padding: 6px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
         /* Animation utilities */
         .fade-in {
             animation: fadeIn 1s ease-in-out;
@@ -1365,6 +1427,50 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* Styles pour l'administration améliorée */
+        .admin-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-section-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .admin-help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+        
+        .footer-editor textarea {
+            min-height: 100px;
+        }
+        
+        .contact-info-editor textarea {
+            min-height: 120px;
+        }
+        
+        .header-editor textarea {
+            min-height: 80px;
+        }
     </style>
 </head>
 <body>
@@ -1375,8 +1481,8 @@
                 <img src="https://via.placeholder.com/150x150/e30613/ffffff?text=4SP" alt="FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité à Montpellier" id="logo-image">
             </div>
             <div>
-                <div class="company-name">FOR SÉCURITÉ PRIVÉE (4SP)</div>
-                <div class="company-slogan">Votre sécurité est notre priorité depuis 2024</div>
+                <div class="company-name" id="header-company-name">FOR SÉCURITÉ PRIVÉE (4SP)</div>
+                <div class="company-slogan" id="header-company-slogan">Votre sécurité est notre priorité depuis 2024</div>
             </div>
         </div>
         <nav>
@@ -1393,8 +1499,8 @@
     <!-- Home Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Experts en Sécurité à Montpellier</h1>
-            <p>Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</p>
+            <h1 id="hero-main-title">Experts en Sécurité à Montpellier</h1>
+            <p id="hero-subtitle">Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</p>
             <a href="#contact" class="btn" onclick="showSection('contact')">Demander un devis gratuit <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
@@ -1402,9 +1508,9 @@
     <!-- Commercial Presentation -->
     <section class="commercial-presentation">
         <div class="commercial-content">
-            <h2>Votre partenaire de confiance en sécurité privée</h2>
-            <p>Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">50 agents expérimentés</span> vous garantît une protection optimale de vos biens et personnes.</p>
-            <p>Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
+            <h2 id="commercial-title">Votre partenaire de confiance en sécurité privée</h2>
+            <p id="commercial-text">Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">50 agents expérimentés</span> vous garantît une protection optimale de vos biens et personnes.</p>
+            <p id="commercial-text-2">Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
         </div>
     </section>
     
@@ -1643,7 +1749,7 @@
     <section id="reports" class="activity-reports">
         <h2 class="section-title">Rapports d'Activité</h2>
         <div class="reports-container">
-            <p>Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</p>
+            <p id="reports-description">Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</p>
             
             <div class="reports-grid" id="reports-grid">
                 <!-- Les rapports seront chargés dynamiquement ici -->
@@ -1655,36 +1761,36 @@
     <section id="about" class="about">
         <div class="about-content">
             <div class="about-text">
-                <h2>À propos de FOR SÉCURITÉ PRIVÉE (4SP)</h2>
-                <p>Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
-                <p>Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
+                <h2 id="about-title">À propos de FOR SÉCURITÉ PRIVÉE (4SP)</h2>
+                <p id="about-text-1">Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
+                <p id="about-text-2">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
                 
-                <h3>Nos valeurs</h3>
+                <h3 id="about-values-title">Nos valeurs</h3>
                 <div class="values-grid">
                     <div class="value-item">
                         <i class="fas fa-shield-alt"></i>
-                        <h4>Expertise</h4>
-                        <p>Des agents formés et certifiés</p>
+                        <h4 id="value-title-1">Expertise</h4>
+                        <p id="value-desc-1">Des agents formés et certifiés</p>
                     </div>
                     <div class="value-item">
                         <i class="fas fa-clock"></i>
-                        <h4>Disponibilité</h4>
-                        <p>24h/24 et 7j/7</p>
+                        <h4 id="value-title-2">Disponibilité</h4>
+                        <p id="value-desc-2">24h/24 et 7j/7</p>
                     </div>
                     <div class="value-item">
                         <i class="fas fa-users"></i>
-                        <h4>Proximité</h4>
-                        <p>À votre écoute</p>
+                        <h4 id="value-title-3">Proximité</h4>
+                        <p id="value-desc-3">À votre écoute</p>
                     </div>
                     <div class="value-item">
                         <i class="fas fa-star"></i>
-                        <h4>Qualité</h4>
-                        <p>Services haut de gamme</p>
+                        <h4 id="value-title-4">Qualité</h4>
+                        <p id="value-desc-4">Services haut de gamme</p>
                     </div>
                 </div>
             </div>
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe FOR SÉCURITÉ PRIVÉE - Agents de sécurité">
+                <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe FOR SÉCURITÉ PRIVÉE - Agents de sécurité" id="about-main-image">
             </div>
         </div>
     </section>
@@ -1693,35 +1799,35 @@
     <section id="contact" class="contact">
         <div class="contact-container">
             <div class="contact-info">
-                <h2>Contactez-nous</h2>
-                <p>Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</p>
+                <h2 id="contact-title">Contactez-nous</h2>
+                <p id="contact-description">Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</p>
                 
                 <ul class="contact-details">
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>83 rue Yves Montand, 34080 Montpellier</span>
+                        <span id="contact-address">83 rue Yves Montand, 34080 Montpellier</span>
                     </li>
                     <li>
                         <i class="fas fa-phone"></i>
-                        <span>06 60 35 01 97</span>
+                        <span id="contact-phone">06 60 35 01 97</span>
                     </li>
                     <li>
                         <i class="fas fa-envelope"></i>
-                        <span>forsecuriteprivee@gmail.com</span>
+                        <span id="contact-email">forsecuriteprivee@gmail.com</span>
                     </li>
                     <li>
                         <i class="fas fa-clock"></i>
-                        <span>Disponible 24h/24 et 7j/7</span>
+                        <span id="contact-availability">Disponible 24h/24 et 7j/7</span>
                     </li>
                     <li>
                         <i class="fas fa-users"></i>
-                        <span>Plus de 50 agents dédiés</span>
+                        <span id="contact-agents">Plus de 50 agents dédiés</span>
                     </li>
                 </ul>
             </div>
             
             <div class="contact-form">
-                <h3>Demande de devis</h3>
+                <h3 id="contact-form-title">Demande de devis</h3>
                 <div id="form-message" class="form-message"></div>
                 <form id="contactForm" action="https://formspree.io/f/xeolqboy" method="POST">
                     <div class="form-group">
@@ -1768,18 +1874,18 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>FOR SÉCURITÉ PRIVÉE (4SP)</h3>
-                <p>Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</p>
-                <p>Plus de 50 agents dédiés à votre sécurité</p>
+                <h3 id="footer-title-1">FOR SÉCURITÉ PRIVÉE (4SP)</h3>
+                <p id="footer-description-1">Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</p>
+                <p id="footer-agents-count">Plus de 50 agents dédiés à votre sécurité</p>
             </div>
             <div class="footer-section">
-                <h3>Nos coordonnées</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 83 rue Yves Montand, 34080 Montpellier</p>
-                <p><i class="fas fa-phone"></i> 06 60 35 01 97</p>
-                <p><i class="fas fa-envelope"></i> forsecuriteprivee@gmail.com</p>
+                <h3 id="footer-title-2">Nos coordonnées</h3>
+                <p><i class="fas fa-map-marker-alt"></i> <span id="footer-address">83 rue Yves Montand, 34080 Montpellier</span></p>
+                <p><i class="fas fa-phone"></i> <span id="footer-phone">06 60 35 01 97</span></p>
+                <p><i class="fas fa-envelope"></i> <span id="footer-email">forsecuriteprivee@gmail.com</span></p>
             </div>
             <div class="footer-section">
-                <h3>Liens rapides</h3>
+                <h3 id="footer-title-3">Liens rapides</h3>
                 <ul>
                     <li><a href="#" onclick="showSection('home')">Accueil</a></li>
                     <li><a href="#services" onclick="showSection('services')">Services</a></li>
@@ -1789,7 +1895,7 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Suivez-nous</h3>
+                <h3 id="footer-title-4">Suivez-nous</h3>
                 <div class="social-icons">
                     <a href="#" aria-label="Facebook FOR SÉCURITÉ PRIVÉE"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" aria-label="Twitter FOR SÉCURITÉ PRIVÉE"><i class="fab fa-twitter"></i></a>
@@ -1821,7 +1927,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 FOR SÉCURITÉ PRIVÉE (4SP) - Tous droits réservés</p>
+            <p>&copy; <span id="footer-year">2024</span> FOR SÉCURITÉ PRIVÉE (4SP) - Tous droits réservés</p>
         </div>
         
         <div class="admin-access">
@@ -1860,6 +1966,9 @@
                     <div class="admin-tab active" onclick="switchTab('services-tab', event)">Services</div>
                     <div class="admin-tab" onclick="switchTab('reports-tab', event)">Rapports</div>
                     <div class="admin-tab" onclick="switchTab('content-tab', event)">Contenu</div>
+                    <div class="admin-tab" onclick="switchTab('header-tab', event)">En-tête</div>
+                    <div class="admin-tab" onclick="switchTab('footer-tab', event)">Pied de page</div>
+                    <div class="admin-tab" onclick="switchTab('contact-tab', event)">Contact</div>
                     <div class="admin-tab" onclick="switchTab('seo-tab', event)">SEO</div>
                     <div class="admin-tab" onclick="switchTab('appearance-tab', event)">Apparence</div>
                 </div>
@@ -1949,7 +2058,11 @@
                 </div>
                 
                 <div id="content-tab" class="admin-section">
-                    <h3>Gestion du Contenu</h3>
+                    <h3>Gestion du Contenu Principal</h3>
+                    
+                    <div class="admin-section-header">
+                        <h4 class="admin-section-title">Section Hero</h4>
+                    </div>
                     <div class="admin-form-group">
                         <label for="hero-title">Titre Principal</label>
                         <input type="text" id="hero-title" value="Experts en Sécurité à Montpellier">
@@ -1958,15 +2071,226 @@
                         <label for="hero-text">Texte Principal</label>
                         <textarea id="hero-text">Plus de 50 agents dédiés à votre protection 24h/24 et 7j/7</textarea>
                     </div>
+                    
+                    <div class="admin-section-header">
+                        <h4 class="admin-section-title">Section Présentation Commerciale</h4>
+                    </div>
                     <div class="admin-form-group">
-                        <label for="about-text">Texte À Propos</label>
-                        <textarea id="about-text">FOR SÉCURITÉ PRIVÉE (4SP) est une entreprise de sécurité créée à Montpellier en 2024, spécialisée dans la protection des biens et des personnes.</textarea>
+                        <label for="commercial-title">Titre Commercial</label>
+                        <input type="text" id="commercial-title" value="Votre partenaire de confiance en sécurité privée">
                     </div>
                     <div class="admin-form-group">
                         <label for="commercial-text">Texte Commercial</label>
-                        <textarea id="commercial-text">Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de 50 agents expérimentés vous garantit une protection optimale de vos biens et personnes.</textarea>
+                        <textarea id="commercial-text" class="commercial-text-editor">Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de 50 agents expérimentés vous garantit une protection optimale de vos biens et personnes.</textarea>
                     </div>
+                    <div class="admin-form-group">
+                        <label for="commercial-text-2">Deuxième Paragraphe Commercial</label>
+                        <textarea id="commercial-text-2" class="commercial-text-editor">Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</textarea>
+                    </div>
+                    
+                    <div class="admin-section-header">
+                        <h4 class="admin-section-title">Section À Propos</h4>
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="about-title">Titre À Propos</label>
+                        <input type="text" id="about-title" value="À propos de FOR SÉCURITÉ PRIVÉE (4SP)">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="about-text-1">Premier Paragraphe À Propos</label>
+                        <textarea id="about-text-1" class="about-text-editor">Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</textarea>
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="about-text-2">Deuxième Paragraphe À Propos</label>
+                        <textarea id="about-text-2" class="about-text-editor">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</textarea>
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="about-values-title">Titre des Valeurs</label>
+                        <input type="text" id="about-values-title" value="Nos valeurs">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="about-main-image">Image À Propos</label>
+                        <input type="file" id="about-main-image" accept="image/*" onchange="previewImage(this, 'aboutImagePreview')">
+                        <div class="image-preview" id="aboutImagePreview"></div>
+                    </div>
+                    
+                    <div class="admin-section-header">
+                        <h4 class="admin-section-title">Valeurs</h4>
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="value-title-1">Titre Valeur 1</label>
+                        <input type="text" id="value-title-1" value="Expertise">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="value-desc-1">Description Valeur 1</label>
+                        <input type="text" id="value-desc-1" value="Des agents formés et certifiés">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="value-title-2">Titre Valeur 2</label>
+                        <input type="text" id="value-title-2" value="Disponibilité">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="value-desc-2">Description Valeur 2</label>
+                        <input type="text" id="value-desc-2" value="24h/24 et 7j/7">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="value-title-3">Titre Valeur 3</label>
+                        <input type="text" id="value-title-3" value="Proximité">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="value-desc-3">Description Valeur 3</label>
+                        <input type="text" id="value-desc-3" value="À votre écoute">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="value-title-4">Titre Valeur 4</label>
+                        <input type="text" id="value-title-4" value="Qualité">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="value-desc-4">Description Valeur 4</label>
+                        <input type="text" id="value-desc-4" value="Services haut de gamme">
+                    </div>
+                    
+                    <div class="admin-section-header">
+                        <h4 class="admin-section-title">Section Rapports</h4>
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="reports-description">Description des Rapports</label>
+                        <textarea id="reports-description">Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</textarea>
+                    </div>
+                    
                     <button class="admin-btn" onclick="saveContent()">Enregistrer le Contenu</button>
+                </div>
+                
+                <div id="header-tab" class="admin-section">
+                    <h3>Gestion de l'En-tête</h3>
+                    
+                    <div class="admin-form-group">
+                        <label for="header-company-name">Nom de l'entreprise</label>
+                        <input type="text" id="header-company-name" value="FOR SÉCURITÉ PRIVÉE (4SP)">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="header-company-slogan">Slogan de l'entreprise</label>
+                        <input type="text" id="header-company-slogan" value="Votre sécurité est notre priorité depuis 2024">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="logo-upload">Logo du site</label>
+                        <input type="file" id="logo-upload" accept="image/*" onchange="previewLogo(this)">
+                        <div class="image-preview" id="logo-preview"></div>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label>Navigation</label>
+                        <div class="admin-help-text">La navigation est gérée automatiquement en fonction de la structure du site.</div>
+                    </div>
+                    
+                    <button class="admin-btn" onclick="saveHeader()">Enregistrer l'en-tête</button>
+                </div>
+                
+                <div id="footer-tab" class="admin-section">
+                    <h3>Gestion du Pied de Page</h3>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-title-1">Titre Colonne 1</label>
+                        <input type="text" id="footer-title-1" value="FOR SÉCURITÉ PRIVÉE (4SP)">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-description-1">Description Colonne 1</label>
+                        <textarea id="footer-description-1" class="footer-editor">Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</textarea>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-agents-count">Nombre d'agents</label>
+                        <input type="text" id="footer-agents-count" value="Plus de 50 agents dédiés à votre sécurité">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-title-2">Titre Colonne 2</label>
+                        <input type="text" id="footer-title-2" value="Nos coordonnées">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-address">Adresse</label>
+                        <input type="text" id="footer-address" value="83 rue Yves Montand, 34080 Montpellier">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-phone">Téléphone</label>
+                        <input type="text" id="footer-phone" value="06 60 35 01 97">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-email">Email</label>
+                        <input type="text" id="footer-email" value="forsecuriteprivee@gmail.com">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-title-3">Titre Colonne 3</label>
+                        <input type="text" id="footer-title-3" value="Liens rapides">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-title-4">Titre Colonne 4</label>
+                        <input type="text" id="footer-title-4" value="Suivez-nous">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="footer-year">Année du copyright</label>
+                        <input type="text" id="footer-year" value="2024">
+                    </div>
+                    
+                    <button class="admin-btn" onclick="saveFooter()">Enregistrer le pied de page</button>
+                </div>
+                
+                <div id="contact-tab" class="admin-section">
+                    <h3>Gestion de la Section Contact</h3>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-title">Titre Contact</label>
+                        <input type="text" id="contact-title" value="Contactez-nous">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-description">Description Contact</label>
+                        <textarea id="contact-description" class="contact-info-editor">Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</textarea>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-address">Adresse</label>
+                        <input type="text" id="contact-address" value="83 rue Yves Montand, 34080 Montpellier">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-phone">Téléphone</label>
+                        <input type="text" id="contact-phone" value="06 60 35 01 97">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="text" id="contact-email" value="forsecuriteprivee@gmail.com">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-availability">Disponibilité</label>
+                        <input type="text" id="contact-availability" value="Disponible 24h/24 et 7j/7">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-agents">Agents</label>
+                        <input type="text" id="contact-agents" value="Plus de 50 agents dédiés">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="contact-form-title">Titre Formulaire</label>
+                        <input type="text" id="contact-form-title" value="Demande de devis">
+                    </div>
+                    
+                    <button class="admin-btn" onclick="saveContact()">Enregistrer les informations de contact</button>
                 </div>
                 
                 <div id="seo-tab" class="admin-section">
@@ -2010,28 +2334,27 @@
                 
                 <div id="appearance-tab" class="admin-section">
                     <h3>Gestion de l'Apparence</h3>
+                    
                     <div class="admin-form-group">
-                        <label for="logo-upload">Logo du site</label>
-                        <input type="file" id="logo-upload" accept="image/*" onchange="previewLogo(this)">
-                        <div class="image-preview" id="logo-preview"></div>
+                        <label for="primary-color">Couleur principale <span class="color-preview" id="primary-color-preview" style="background-color: #e30613;"></span></label>
+                        <input type="color" id="primary-color" value="#e30613" onchange="updateColorPreview('primary-color', 'primary-color-preview')">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="primary-color">Couleur principale</label>
-                        <input type="color" id="primary-color" value="#e30613">
+                        <label for="secondary-color">Couleur secondaire <span class="color-preview" id="secondary-color-preview" style="background-color: #000000;"></span></label>
+                        <input type="color" id="secondary-color" value="#000000" onchange="updateColorPreview('secondary-color', 'secondary-color-preview')">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="secondary-color">Couleur secondaire</label>
-                        <input type="color" id="secondary-color" value="#000000">
-                    </div>
-                    
-                    <div class="admin-form-group">
-                        <label for="accent-color">Couleur d'accent</label>
-                        <input type="color" id="accent-color" value="#ffffff">
+                        <label for="accent-color">Couleur d'accent <span class="color-preview" id="accent-color-preview" style="background-color: #ffffff; border: 1px solid #ccc;"></span></label>
+                        <input type="color" id="accent-color" value="#ffffff" onchange="updateColorPreview('accent-color', 'accent-color-preview')">
                     </div>
                     
                     <button class="admin-btn" onclick="saveAppearance()">Enregistrer l'apparence</button>
+                    
+                    <div class="admin-help-text">
+                        <p><strong>Conseil :</strong> Les couleurs seront appliquées immédiatement après l'enregistrement. Assurez-vous que le contraste entre les couleurs est suffisant pour une bonne accessibilité.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2255,7 +2578,7 @@
                 const suggestionsContainer = document.getElementById('seo-suggestions');
                 if (!suggestionsContainer) return;
                 
-                if (report.length === 0) {
+                if (recommendations.length === 0) {
                     suggestionsContainer.innerHTML = '<p class="form-success">✅ Votre contenu est bien optimisé pour le référencement.</p>';
                     return;
                 }
@@ -2389,14 +2712,53 @@
         function loadAdminData() {
             // Charger les données existantes dans le formulaire d'administration
             // Depuis le localStorage
-            if (localStorage.getItem('service1Title')) {
+            if (localStorage.getItem('heroTitle')) {
                 document.getElementById('hero-title').value = localStorage.getItem('heroTitle');
                 document.getElementById('hero-text').value = localStorage.getItem('heroText');
-                document.getElementById('about-text').value = localStorage.getItem('aboutText');
+                document.getElementById('commercial-title').value = localStorage.getItem('commercialTitle');
                 document.getElementById('commercial-text').value = localStorage.getItem('commercialText');
+                document.getElementById('commercial-text-2').value = localStorage.getItem('commercialText2');
+                document.getElementById('about-title').value = localStorage.getItem('aboutTitle');
+                document.getElementById('about-text-1').value = localStorage.getItem('aboutText1');
+                document.getElementById('about-text-2').value = localStorage.getItem('aboutText2');
+                document.getElementById('about-values-title').value = localStorage.getItem('aboutValuesTitle');
+                document.getElementById('reports-description').value = localStorage.getItem('reportsDescription');
                 
-                document.getElementById('meta-title').value = localStorage.getItem('metaTitle') || "FOR SÉCURITÉ PRIVÉE (4SP) - Experts en sécurité à Montpellier";
-                document.getElementById('meta-description').value = localStorage.getItem('metaDescription') || "Société de sécurité à Montpellier proposant gardiennage, surveillance, sécurité événementielle. Agents diplômés CNAPS. Devis gratuit.";
+                // Header
+                document.getElementById('header-company-name').value = localStorage.getItem('headerCompanyName');
+                document.getElementById('header-company-slogan').value = localStorage.getItem('headerCompanySlogan');
+                
+                // Footer
+                document.getElementById('footer-title-1').value = localStorage.getItem('footerTitle1');
+                document.getElementById('footer-description-1').value = localStorage.getItem('footerDescription1');
+                document.getElementById('footer-agents-count').value = localStorage.getItem('footerAgentsCount');
+                document.getElementById('footer-title-2').value = localStorage.getItem('footerTitle2');
+                document.getElementById('footer-address').value = localStorage.getItem('footerAddress');
+                document.getElementById('footer-phone').value = localStorage.getItem('footerPhone');
+                document.getElementById('footer-email').value = localStorage.getItem('footerEmail');
+                document.getElementById('footer-title-3').value = localStorage.getItem('footerTitle3');
+                document.getElementById('footer-title-4').value = localStorage.getItem('footerTitle4');
+                document.getElementById('footer-year').value = localStorage.getItem('footerYear');
+                
+                // Contact
+                document.getElementById('contact-title').value = localStorage.getItem('contactTitle');
+                document.getElementById('contact-description').value = localStorage.getItem('contactDescription');
+                document.getElementById('contact-address').value = localStorage.getItem('contactAddress');
+                document.getElementById('contact-phone').value = localStorage.getItem('contactPhone');
+                document.getElementById('contact-email').value = localStorage.getItem('contactEmail');
+                document.getElementById('contact-availability').value = localStorage.getItem('contactAvailability');
+                document.getElementById('contact-agents').value = localStorage.getItem('contactAgents');
+                document.getElementById('contact-form-title').value = localStorage.getItem('contactFormTitle');
+                
+                // Valeurs
+                document.getElementById('value-title-1').value = localStorage.getItem('valueTitle1');
+                document.getElementById('value-desc-1').value = localStorage.getItem('valueDesc1');
+                document.getElementById('value-title-2').value = localStorage.getItem('valueTitle2');
+                document.getElementById('value-desc-2').value = localStorage.getItem('valueDesc2');
+                document.getElementById('value-title-3').value = localStorage.getItem('valueTitle3');
+                document.getElementById('value-desc-3').value = localStorage.getItem('valueDesc3');
+                document.getElementById('value-title-4').value = localStorage.getItem('valueTitle4');
+                document.getElementById('value-desc-4').value = localStorage.getItem('valueDesc4');
             }
             
             // Charger les données des images
@@ -2409,9 +2771,29 @@
                 document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
                 document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
                 document.getElementById('accent-color').value = localStorage.getItem('accentColor');
+                
+                // Mettre à jour les aperçus de couleur
+                updateColorPreview('primary-color', 'primary-color-preview');
+                updateColorPreview('secondary-color', 'secondary-color-preview');
+                updateColorPreview('accent-color', 'accent-color-preview');
             }
             
             console.log("Données administrateur chargées");
+        }
+        
+        function updateColorPreview(colorInputId, previewId) {
+            const colorValue = document.getElementById(colorInputId).value;
+            const previewElement = document.getElementById(previewId);
+            if (previewElement) {
+                previewElement.style.backgroundColor = colorValue;
+                
+                // Ajouter une bordure pour les couleurs claires
+                if (colorValue === '#ffffff' || colorValue === '#fff' || colorValue === 'white') {
+                    previewElement.style.border = '1px solid #ccc';
+                } else {
+                    previewElement.style.border = 'none';
+                }
+            }
         }
         
         function loadServiceData() {
@@ -2778,30 +3160,179 @@
         function saveContent() {
             const heroTitle = document.getElementById('hero-title').value;
             const heroText = document.getElementById('hero-text').value;
-            const aboutText = document.getElementById('about-text').value;
+            const commercialTitle = document.getElementById('commercial-title').value;
             const commercialText = document.getElementById('commercial-text').value;
+            const commercialText2 = document.getElementById('commercial-text-2').value;
+            const aboutTitle = document.getElementById('about-title').value;
+            const aboutText1 = document.getElementById('about-text-1').value;
+            const aboutText2 = document.getElementById('about-text-2').value;
+            const aboutValuesTitle = document.getElementById('about-values-title').value;
+            const reportsDescription = document.getElementById('reports-description').value;
+            
+            // Valeurs
+            const valueTitle1 = document.getElementById('value-title-1').value;
+            const valueDesc1 = document.getElementById('value-desc-1').value;
+            const valueTitle2 = document.getElementById('value-title-2').value;
+            const valueDesc2 = document.getElementById('value-desc-2').value;
+            const valueTitle3 = document.getElementById('value-title-3').value;
+            const valueDesc3 = document.getElementById('value-desc-3').value;
+            const valueTitle4 = document.getElementById('value-title-4').value;
+            const valueDesc4 = document.getElementById('value-desc-4').value;
             
             // Sauvegarder dans le localStorage
             localStorage.setItem('heroTitle', heroTitle);
             localStorage.setItem('heroText', heroText);
-            localStorage.setItem('aboutText', aboutText);
+            localStorage.setItem('commercialTitle', commercialTitle);
             localStorage.setItem('commercialText', commercialText);
+            localStorage.setItem('commercialText2', commercialText2);
+            localStorage.setItem('aboutTitle', aboutTitle);
+            localStorage.setItem('aboutText1', aboutText1);
+            localStorage.setItem('aboutText2', aboutText2);
+            localStorage.setItem('aboutValuesTitle', aboutValuesTitle);
+            localStorage.setItem('reportsDescription', reportsDescription);
+            
+            // Valeurs
+            localStorage.setItem('valueTitle1', valueTitle1);
+            localStorage.setItem('valueDesc1', valueDesc1);
+            localStorage.setItem('valueTitle2', valueTitle2);
+            localStorage.setItem('valueDesc2', valueDesc2);
+            localStorage.setItem('valueTitle3', valueTitle3);
+            localStorage.setItem('valueDesc3', valueDesc3);
+            localStorage.setItem('valueTitle4', valueTitle4);
+            localStorage.setItem('valueDesc4', valueDesc4);
             
             // Mettre à jour le contenu de la page en direct
-            document.querySelector('.hero h1').textContent = heroTitle;
-            document.querySelector('.hero p').textContent = heroText;
+            document.getElementById('hero-main-title').textContent = heroTitle;
+            document.getElementById('hero-subtitle').textContent = heroText;
+            document.getElementById('commercial-title').textContent = commercialTitle;
+            document.getElementById('commercial-text').innerHTML = commercialText;
+            document.getElementById('commercial-text-2').innerHTML = commercialText2;
+            document.getElementById('about-title').textContent = aboutTitle;
+            document.getElementById('about-text-1').textContent = aboutText1;
+            document.getElementById('about-text-2').textContent = aboutText2;
+            document.getElementById('about-values-title').textContent = aboutValuesTitle;
+            document.getElementById('reports-description').textContent = reportsDescription;
             
-            const aboutParagraphs = document.querySelectorAll('#about .about-text p');
-            if (aboutParagraphs.length > 0) {
-                aboutParagraphs[0].textContent = aboutText;
-            }
+            // Valeurs
+            document.getElementById('value-title-1').textContent = valueTitle1;
+            document.getElementById('value-desc-1').textContent = valueDesc1;
+            document.getElementById('value-title-2').textContent = valueTitle2;
+            document.getElementById('value-desc-2').textContent = valueDesc2;
+            document.getElementById('value-title-3').textContent = valueTitle3;
+            document.getElementById('value-desc-3').textContent = valueDesc3;
+            document.getElementById('value-title-4').textContent = valueTitle4;
+            document.getElementById('value-desc-4').textContent = valueDesc4;
             
-            const commercialParagraphs = document.querySelectorAll('.commercial-content p');
-            if (commercialParagraphs.length > 0) {
-                commercialParagraphs[0].textContent = commercialText;
+            // Image à propos
+            const aboutImageInput = document.getElementById('about-main-image');
+            if (aboutImageInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('about-main-image').src = e.target.result;
+                    localStorage.setItem('aboutMainImage', e.target.result);
+                };
+                reader.readAsDataURL(aboutImageInput.files[0]);
             }
             
             alert("Contenu enregistré et mis à jour avec succès!");
+        }
+        
+        function saveHeader() {
+            const companyName = document.getElementById('header-company-name').value;
+            const companySlogan = document.getElementById('header-company-slogan').value;
+            
+            // Sauvegarder dans le localStorage
+            localStorage.setItem('headerCompanyName', companyName);
+            localStorage.setItem('headerCompanySlogan', companySlogan);
+            
+            // Mettre à jour l'affichage
+            document.getElementById('header-company-name').textContent = companyName;
+            document.getElementById('header-company-slogan').textContent = companySlogan;
+            
+            // Logo
+            const logoInput = document.getElementById('logo-upload');
+            if (logoInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logo-image').src = e.target.result;
+                    localStorage.setItem('logo', e.target.result);
+                };
+                reader.readAsDataURL(logoInput.files[0]);
+            }
+            
+            alert("En-tête enregistré et mis à jour avec succès!");
+        }
+        
+        function saveFooter() {
+            const footerTitle1 = document.getElementById('footer-title-1').value;
+            const footerDescription1 = document.getElementById('footer-description-1').value;
+            const footerAgentsCount = document.getElementById('footer-agents-count').value;
+            const footerTitle2 = document.getElementById('footer-title-2').value;
+            const footerAddress = document.getElementById('footer-address').value;
+            const footerPhone = document.getElementById('footer-phone').value;
+            const footerEmail = document.getElementById('footer-email').value;
+            const footerTitle3 = document.getElementById('footer-title-3').value;
+            const footerTitle4 = document.getElementById('footer-title-4').value;
+            const footerYear = document.getElementById('footer-year').value;
+            
+            // Sauvegarder dans le localStorage
+            localStorage.setItem('footerTitle1', footerTitle1);
+            localStorage.setItem('footerDescription1', footerDescription1);
+            localStorage.setItem('footerAgentsCount', footerAgentsCount);
+            localStorage.setItem('footerTitle2', footerTitle2);
+            localStorage.setItem('footerAddress', footerAddress);
+            localStorage.setItem('footerPhone', footerPhone);
+            localStorage.setItem('footerEmail', footerEmail);
+            localStorage.setItem('footerTitle3', footerTitle3);
+            localStorage.setItem('footerTitle4', footerTitle4);
+            localStorage.setItem('footerYear', footerYear);
+            
+            // Mettre à jour l'affichage
+            document.getElementById('footer-title-1').textContent = footerTitle1;
+            document.getElementById('footer-description-1').textContent = footerDescription1;
+            document.getElementById('footer-agents-count').textContent = footerAgentsCount;
+            document.getElementById('footer-title-2').textContent = footerTitle2;
+            document.getElementById('footer-address').textContent = footerAddress;
+            document.getElementById('footer-phone').textContent = footerPhone;
+            document.getElementById('footer-email').textContent = footerEmail;
+            document.getElementById('footer-title-3').textContent = footerTitle3;
+            document.getElementById('footer-title-4').textContent = footerTitle4;
+            document.getElementById('footer-year').textContent = footerYear;
+            
+            alert("Pied de page enregistré et mis à jour avec succès!");
+        }
+        
+        function saveContact() {
+            const contactTitle = document.getElementById('contact-title').value;
+            const contactDescription = document.getElementById('contact-description').value;
+            const contactAddress = document.getElementById('contact-address').value;
+            const contactPhone = document.getElementById('contact-phone').value;
+            const contactEmail = document.getElementById('contact-email').value;
+            const contactAvailability = document.getElementById('contact-availability').value;
+            const contactAgents = document.getElementById('contact-agents').value;
+            const contactFormTitle = document.getElementById('contact-form-title').value;
+            
+            // Sauvegarder dans le localStorage
+            localStorage.setItem('contactTitle', contactTitle);
+            localStorage.setItem('contactDescription', contactDescription);
+            localStorage.setItem('contactAddress', contactAddress);
+            localStorage.setItem('contactPhone', contactPhone);
+            localStorage.setItem('contactEmail', contactEmail);
+            localStorage.setItem('contactAvailability', contactAvailability);
+            localStorage.setItem('contactAgents', contactAgents);
+            localStorage.setItem('contactFormTitle', contactFormTitle);
+            
+            // Mettre à jour l'affichage
+            document.getElementById('contact-title').textContent = contactTitle;
+            document.getElementById('contact-description').textContent = contactDescription;
+            document.getElementById('contact-address').textContent = contactAddress;
+            document.getElementById('contact-phone').textContent = contactPhone;
+            document.getElementById('contact-email').textContent = contactEmail;
+            document.getElementById('contact-availability').textContent = contactAvailability;
+            document.getElementById('contact-agents').textContent = contactAgents;
+            document.getElementById('contact-form-title').textContent = contactFormTitle;
+            
+            alert("Informations de contact enregistrées et mises à jour avec succès!");
         }
         
         function saveSEO() {
@@ -3020,19 +3551,54 @@
                 }
             });
             
+            // Charger le contenu principal
             if (localStorage.getItem('heroTitle')) {
-                document.querySelector('.hero h1').textContent = localStorage.getItem('heroTitle');
-                document.querySelector('.hero p').textContent = localStorage.getItem('heroText');
+                document.getElementById('hero-main-title').textContent = localStorage.getItem('heroTitle');
+                document.getElementById('hero-subtitle').textContent = localStorage.getItem('heroText');
+                document.getElementById('commercial-title').textContent = localStorage.getItem('commercialTitle');
+                document.getElementById('commercial-text').innerHTML = localStorage.getItem('commercialText');
+                document.getElementById('commercial-text-2').innerHTML = localStorage.getItem('commercialText2');
+                document.getElementById('about-title').textContent = localStorage.getItem('aboutTitle');
+                document.getElementById('about-text-1').textContent = localStorage.getItem('aboutText1');
+                document.getElementById('about-text-2').textContent = localStorage.getItem('aboutText2');
+                document.getElementById('about-values-title').textContent = localStorage.getItem('aboutValuesTitle');
+                document.getElementById('reports-description').textContent = localStorage.getItem('reportsDescription');
                 
-                const aboutParagraphs = document.querySelectorAll('#about .about-text p');
-                if (aboutParagraphs.length > 0 && localStorage.getItem('aboutText')) {
-                    aboutParagraphs[0].textContent = localStorage.getItem('aboutText');
-                }
+                // Header
+                document.getElementById('header-company-name').textContent = localStorage.getItem('headerCompanyName');
+                document.getElementById('header-company-slogan').textContent = localStorage.getItem('headerCompanySlogan');
                 
-                const commercialParagraphs = document.querySelectorAll('.commercial-content p');
-                if (commercialParagraphs.length > 0 && localStorage.getItem('commercialText')) {
-                    commercialParagraphs[0].textContent = localStorage.getItem('commercialText');
-                }
+                // Footer
+                document.getElementById('footer-title-1').textContent = localStorage.getItem('footerTitle1');
+                document.getElementById('footer-description-1').textContent = localStorage.getItem('footerDescription1');
+                document.getElementById('footer-agents-count').textContent = localStorage.getItem('footerAgentsCount');
+                document.getElementById('footer-title-2').textContent = localStorage.getItem('footerTitle2');
+                document.getElementById('footer-address').textContent = localStorage.getItem('footerAddress');
+                document.getElementById('footer-phone').textContent = localStorage.getItem('footerPhone');
+                document.getElementById('footer-email').textContent = localStorage.getItem('footerEmail');
+                document.getElementById('footer-title-3').textContent = localStorage.getItem('footerTitle3');
+                document.getElementById('footer-title-4').textContent = localStorage.getItem('footerTitle4');
+                document.getElementById('footer-year').textContent = localStorage.getItem('footerYear');
+                
+                // Contact
+                document.getElementById('contact-title').textContent = localStorage.getItem('contactTitle');
+                document.getElementById('contact-description').textContent = localStorage.getItem('contactDescription');
+                document.getElementById('contact-address').textContent = localStorage.getItem('contactAddress');
+                document.getElementById('contact-phone').textContent = localStorage.getItem('contactPhone');
+                document.getElementById('contact-email').textContent = localStorage.getItem('contactEmail');
+                document.getElementById('contact-availability').textContent = localStorage.getItem('contactAvailability');
+                document.getElementById('contact-agents').textContent = localStorage.getItem('contactAgents');
+                document.getElementById('contact-form-title').textContent = localStorage.getItem('contactFormTitle');
+                
+                // Valeurs
+                document.getElementById('value-title-1').textContent = localStorage.getItem('valueTitle1');
+                document.getElementById('value-desc-1').textContent = localStorage.getItem('valueDesc1');
+                document.getElementById('value-title-2').textContent = localStorage.getItem('valueTitle2');
+                document.getElementById('value-desc-2').textContent = localStorage.getItem('valueDesc2');
+                document.getElementById('value-title-3').textContent = localStorage.getItem('valueTitle3');
+                document.getElementById('value-desc-3').textContent = localStorage.getItem('valueDesc3');
+                document.getElementById('value-title-4').textContent = localStorage.getItem('valueTitle4');
+                document.getElementById('value-desc-4').textContent = localStorage.getItem('valueDesc4');
             }
             
             if (localStorage.getItem('serviceImages')) {
@@ -3076,10 +3642,19 @@
                 document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
                 document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
                 document.getElementById('accent-color').value = localStorage.getItem('accentColor');
+                
+                // Mettre à jour les aperçus de couleur
+                updateColorPreview('primary-color', 'primary-color-preview');
+                updateColorPreview('secondary-color', 'secondary-color-preview');
+                updateColorPreview('accent-color', 'accent-color-preview');
             }
             
             if (localStorage.getItem('logo')) {
                 document.getElementById('logo-image').src = localStorage.getItem('logo');
+            }
+            
+            if (localStorage.getItem('aboutMainImage')) {
+                document.getElementById('about-main-image').src = localStorage.getItem('aboutMainImage');
             }
             
             // Charger les rapports
