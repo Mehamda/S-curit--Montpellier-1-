@@ -28,7 +28,7 @@
       "@context": "https://schema.org",
       "@type": "SecurityService",
       "name": "FOR SÉCURITÉ PRIVÉE (4SP)",
-      "description": "Société de sécurité à Montpellier proposing des services de gardiennage, surveillance, sécurité événementielle avec des agents diplômés CNAPS.",
+      "description": "Société de sécurité à Montpellier proposant des services de gardiennage, surveillance, sécurité événementielle avec des agents diplômés CNAPS.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "83 rue Yves Montand",
@@ -95,11 +95,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 20px; /* Augmenté de 15px à 20px */
+            margin-right: 15px;
             border: 3px solid var(--primary);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             transition: transform 0.3s;
+            flex-shrink: 0; /* Empêche le rétrécissement du logo */
         }
         
         .logo:hover {
@@ -110,19 +111,18 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 10px; /* Augmenté de 5px à 10px */
+            padding: 5px;
         }
         
         .company-name {
-            font-size: 2rem; /* Augmenté de 1.8rem à 2rem */
+            font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             color: var(--accent);
-            margin-bottom: 5px;
         }
         
         .company-slogan {
-            font-size: 1.1rem; /* Augmenté de 1rem à 1.1rem */
+            font-size: 1rem;
             opacity: 0.9;
             font-weight: 300;
             color: var(--accent);
@@ -142,7 +142,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            padding: 10px 15px; /* Augmenté de 8px 15px à 10px 15px */
+            padding: 8px 15px;
             border-radius: 4px;
             font-size: 1.1rem;
         }
@@ -1233,11 +1233,15 @@
             color: #333;
         }
         
-        /* Responsive Design - Mises à jour pour améliorer la synchronisation mobile/desktop */
+        /* Responsive Design - Améliorations pour la synchronisation mobile/desktop */
         @media (max-width: 1200px) {
             .logo {
                 width: 130px;
                 height: 130px;
+            }
+            
+            .company-name {
+                font-size: 1.6rem;
             }
         }
         
@@ -1269,9 +1273,18 @@
                 grid-template-columns: 1fr;
             }
             
+            /* Ajustements pour le logo en mode tablette */
             .logo {
                 width: 120px;
                 height: 120px;
+            }
+            
+            .company-name {
+                font-size: 1.5rem;
+            }
+            
+            .company-slogan {
+                font-size: 0.9rem;
             }
         }
         
@@ -1286,23 +1299,31 @@
                 margin-bottom: 1rem;
                 flex-direction: column;
                 text-align: center;
+                width: 100%;
             }
             
             .logo {
-                width: 120px;
-                height: 120px;
+                width: 140px; /* Taille augmentée pour mobile */
+                height: 140px; /* Taille augmentée pour mobile */
                 margin-right: 0;
                 margin-bottom: 15px;
+                align-self: center;
             }
             
             nav ul {
                 justify-content: center;
                 flex-wrap: wrap;
                 margin-top: 15px;
+                width: 100%;
             }
             
             nav ul li {
                 margin: 0.5rem;
+            }
+            
+            nav ul li a {
+                font-size: 1rem; /* Taille de police uniforme */
+                padding: 10px 15px; /* Padding uniforme */
             }
             
             .hero {
@@ -1358,21 +1379,34 @@
         
         @media (max-width: 576px) {
             .logo {
-                width: 100px;
-                height: 100px;
+                width: 120px;
+                height: 120px;
             }
             
             .company-name {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             
             .company-slogan {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.3rem 0;
+                width: 100%;
+                text-align: center;
             }
             
             nav ul li a {
-                font-size: 0.9rem;
-                padding: 6px 10px;
+                display: block;
+                width: 100%;
+                padding: 10px;
+                font-size: 1rem;
             }
             
             .hero h1 {
@@ -1388,14 +1422,13 @@
                 font-size: 1rem;
             }
             
-            .logo-container {
-                flex-direction: column;
-                text-align: center;
+            /* Ajustements pour les cartes de service */
+            .service-card {
+                margin: 0 10px;
             }
             
-            .logo {
-                margin-right: 0;
-                margin-bottom: 10px;
+            .service-content {
+                padding: 1.5rem;
             }
         }
 
@@ -1416,6 +1449,7 @@
             border-radius: 5px;
             display: none;
         }
+        
         .form-success {
             background-color: #d4edda;
             color: #155724;
@@ -1487,37 +1521,30 @@
             min-height: 80px;
         }
         
-        /* Menu mobile */
-        .mobile-menu-toggle {
-            display: none;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
+        /* Correction pour l'affichage mobile du header */
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
+            .logo-container {
+                flex-direction: column;
             }
             
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .company-name, .company-slogan {
                 text-align: center;
             }
-            
-            nav ul.show {
-                display: flex;
+        }
+        
+        /* Amélioration de la visibilité du logo sur mobile */
+        @media (max-width: 480px) {
+            .logo {
+                width: 110px;
+                height: 110px;
             }
             
-            nav ul li {
-                margin: 10px 0;
+            .company-name {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -1534,13 +1561,8 @@
                 <div class="company-slogan" id="header-company-slogan">Votre sécurité est notre priorité depuis 2024</div>
             </div>
         </div>
-        
-        <button class="mobile-menu-toggle" id="mobileMenuToggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        
         <nav>
-            <ul id="navMenu">
+            <ul>
                 <li><a href="#" onclick="showSection('home')">Accueil</a></li>
                 <li><a href="#services" onclick="showSection('services')">Services</a></li>
                 <li><a href="#about" onclick="showSection('about')">À propos</a></li>
@@ -1725,7 +1747,7 @@
                 </div>
             </div>
             
-           <div class="service-gallery" id="service2-gallery">
+            <div class="service-gallery" id="service2-gallery">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ronde de sécurité nocturne">
                 </div>
@@ -1817,7 +1839,7 @@
             <div class="about-text">
                 <h2 id="about-title">À propos de FOR SÉCURITÉ PRIVÉE (4SP)</h2>
                 <p id="about-text-1">Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</p>
-                <p id="about-text-2">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en case d'incident.</p>
+                <p id="about-text-2">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</p>
                 
                 <h3 id="about-values-title">Nos valeurs</h3>
                 <div class="values-grid">
@@ -2153,9 +2175,9 @@
                         <label for="about-text-1">Premier Paragraphe À Propos</label>
                         <textarea id="about-text-1" class="about-text-editor">Forte de plus de 50 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</textarea>
                     </div>
-                   <div class="admin-form-group">
+                    <div class="admin-form-group">
                         <label for="about-text-2">Deuxième Paragraphe À Propos</label>
-                        <textarea id="about-text-2" class="about-text-editor">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</textarea>
+                        <textarea id="about-text-2" class="about-text-editor">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en case d'incident.</textarea>
                     </div>
                     <div class="admin-form-group">
                         <label for="about-values-title">Titre des Valeurs</label>
@@ -2194,7 +2216,7 @@
                         <input type="text" id="value-title-3" value="Proximité">
                     </div>
                     <div class="admin-form-group">
-                        <label for="value-desc-3">Description Valeur 3</label>
+                       <label for="value-desc-3">Description Valeur 3</label>
                         <input type="text" id="value-desc-3" value="À votre écoute">
                     </div>
                     
@@ -2277,6 +2299,7 @@
                         <label for="footer-phone">Téléphone</label>
                         <input type="text" id="footer-phone" value="06 60 35 01 97">
                     </div>
+                    
                     <div class="admin-form-group">
                         <label for="footer-email">Email</label>
                         <input type="text" id="footer-email" value="forsecuriteprivee@gmail.com">
@@ -2593,7 +2616,7 @@
                 console.log("Démarrage du monitoring SEO...");
                 
                 // Simuler un suivi régulier
-                setInterval(() {
+                setInterval(() => {
                     this.trackKeywordPositions();
                 }, 604800000); // Weekly tracking
             },
@@ -3218,7 +3241,7 @@
             const commercialText2 = document.getElementById('commercial-text-2').value;
             const aboutTitle = document.getElementById('about-title').value;
             const aboutText1 = document.getElementById('about-text-1').value;
-            const aboutText2 = document.getElementById('about-text-2').value;
+const aboutText2 = document.getElementById('about-text-2').value;
             const aboutValuesTitle = document.getElementById('about-values-title').value;
             const reportsDescription = document.getElementById('reports-description').value;
             
@@ -3390,7 +3413,7 @@
         
         function saveSEO() {
             const metaTitle = document.getElementById('meta-title').value;
-            const metaDescription = document.getElementById('meta-description').value;
+const metaDescription = document.getElementById('meta-description').value;
             
             // Sauvegarder dans le localStorage
             localStorage.setItem('metaTitle', metaTitle);
@@ -3410,8 +3433,7 @@
         
         function saveAppearance() {
             const primaryColor = document.getElementById('primary-color').value;
-
-              const secondaryColor = document.getElementById('secondary-color').value;
+            const secondaryColor = document.getElementById('secondary-color').value;
             const accentColor = document.getElementById('accent-color').value;
             
             // Sauvegarder dans le localStorage
@@ -3533,204 +3555,195 @@
             } catch (error) {
                 // Afficher message d'erreur
                 messageElement.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
-                    messageElement.className = 'form-message form-error';
-                    messageElement.style.display = 'block';
-                } finally {
-                    // Cacher l'indicateur de chargement
-                    btnText.textContent = 'Envoyer la demande';
-                    btnLoading.style.display = 'none';
-                    submitBtn.disabled = false;
-                    
-                    // Faire défiler jusqu'au message
-                    messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-
-            // Gestion de la confirmation après redirection
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
-                const messageElement = document.getElementById('form-message');
-                messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
-                messageElement.className = 'form-message form-success';
+                messageElement.className = 'form-message form-error';
                 messageElement.style.display = 'block';
+            } finally {
+                // Cacher l'indicateur de chargement
+                btnText.textContent = 'Envoyer la demande';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
                 
                 // Faire défiler jusqu'au message
-                setTimeout(() => {
-                    messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 500);
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        // Gestion de la confirmation après redirection
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
+            const messageElement = document.getElementById('form-message');
+            messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
+            messageElement.className = 'form-message form-success';
+            messageElement.style.display = 'block';
+            
+            // Faire défiler jusqu'au message
+            setTimeout(() => {
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+        }
+        
+        // Fermer le panel admin en cliquant à l'extérieur
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('adminPanel')) {
+                closeAdmin();
+            }
+            if (e.target === document.getElementById('reportModal')) {
+                closeModal();
+            }
+        });
+        
+        // Animation au défilement
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.service-card, .value-item, .about-image, .report-card');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (position < screenPosition) {
+                    element.classList.add('fade-in');
+                }
+            });
+        });
+        
+        // Charger les données sauvegardées au chargement de la page
+        window.addEventListener('DOMContentLoaded', function() {
+            // Charger les données des services
+            const services = ['service1', 'service2', 'service3'];
+            services.forEach(service => {
+                if (localStorage.getItem(service + 'Title')) {
+                    document.getElementById(service + '-title').textContent = localStorage.getItem(service + 'Title');
+                    document.getElementById(service + '-desc').textContent = localStorage.getItem(service + 'Desc');
+                    
+                    // Charger les caractéristiques
+                    const features = JSON.parse(localStorage.getItem(service + 'Features') || '[]');
+                    const featuresContainer = document.getElementById(service + '-features');
+                    if (featuresContainer) {
+                        featuresContainer.innerHTML = '';
+                        features.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.textContent = feature;
+                            featuresContainer.appendChild(li);
+                        });
+                    }
+                }
+            });
+            
+            // Charger le contenu principal
+            if (localStorage.getItem('heroTitle')) {
+                document.getElementById('hero-main-title').textContent = localStorage.getItem('heroTitle');
+                document.getElementById('hero-subtitle').textContent = localStorage.getItem('heroText');
+                document.getElementById('commercial-title').textContent = localStorage.getItem('commercialTitle');
+                document.getElementById('commercial-text').innerHTML = localStorage.getItem('commercialText');
+                document.getElementById('commercial-text-2').innerHTML = localStorage.getItem('commercialText2');
+                document.getElementById('about-title').textContent = localStorage.getItem('aboutTitle');
+                document.getElementById('about-text-1').textContent = localStorage.getItem('aboutText1');
+                document.getElementById('about-text-2').textContent = localStorage.getItem('aboutText2');
+                document.getElementById('about-values-title').textContent = localStorage.getItem('aboutValuesTitle');
+                document.getElementById('reports-description').textContent = localStorage.getItem('reportsDescription');
+                
+                // Header
+                document.getElementById('header-company-name').textContent = localStorage.getItem('headerCompanyName');
+                document.getElementById('header-company-slogan').textContent = localStorage.getItem('headerCompanySlogan');
+                
+                // Footer
+                document.getElementById('footer-title-1').textContent = localStorage.getItem('footerTitle1');
+                document.getElementById('footer-description-1').textContent = localStorage.getItem('footerDescription1');
+                document.getElementById('footer-agents-count').textContent = localStorage.getItem('footerAgentsCount');
+                document.getElementById('footer-title-2').textContent = localStorage.getItem('footerTitle2');
+                document.getElementById('footer-address').textContent = localStorage.getItem('footerAddress');
+                document.getElementById('footer-phone').textContent = localStorage.getItem('footerPhone');
+                document.getElementById('footer-email').textContent = localStorage.getItem('footerEmail');
+                document.getElementById('footer-title-3').textContent = localStorage.getItem('footerTitle3');
+                document.getElementById('footer-title-4').textContent = localStorage.getItem('footerTitle4');
+                document.getElementById('footer-year').textContent = localStorage.getItem('footerYear');
+                
+                // Contact
+                document.getElementById('contact-title').textContent = localStorage.getItem('contactTitle');
+                document.getElementById('contact-description').textContent = localStorage.getItem('contactDescription');
+                document.getElementById('contact-address').textContent = localStorage.getItem('contactAddress');
+                document.getElementById('contact-phone').textContent = localStorage.getItem('contactPhone');
+                document.getElementById('contact-email').textContent = localStorage.getItem('contactEmail');
+                document.getElementById('contact-availability').textContent = localStorage.getItem('contactAvailability');
+                document.getElementById('contact-agents').textContent = localStorage.getItem('contactAgents');
+                document.getElementById('contact-form-title').textContent = localStorage.getItem('contactFormTitle');
+                
+                // Valeurs
+                document.getElementById('value-title-1').textContent = localStorage.getItem('valueTitle1');
+                document.getElementById('value-desc-1').textContent = localStorage.getItem('valueDesc1');
+                document.getElementById('value-title-2').textContent = localStorage.getItem('valueTitle2');
+                document.getElementById('value-desc-2').textContent = localStorage.getItem('valueDesc2');
+                document.getElementById('value-title-3').textContent = localStorage.getItem('valueTitle3');
+                document.getElementById('value-desc-3').textContent = localStorage.getItem('valueDesc3');
+                document.getElementById('value-title-4').textContent = localStorage.getItem('valueTitle4');
+                document.getElementById('value-desc-4').textContent = localStorage.getItem('valueDesc4');
             }
             
-            // Fermer le panel admin en cliquant à l'extérieur
-            window.addEventListener('click', function(e) {
-                if (e.target === document.getElementById('adminPanel')) {
-                    closeAdmin();
-                }
-                if (e.target === document.getElementById('reportModal')) {
-                    closeModal();
-                }
-            });
-            
-            // Animation au défilement
-            window.addEventListener('scroll', function() {
-                const elements = document.querySelectorAll('.service-card, .value-item, .about-image, .report-card');
-                elements.forEach(element => {
-                    const position = element.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.3;
-                    if (position < screenPosition) {
-                        element.classList.add('fade-in');
-                    }
-                });
-            });
-            
-            // Menu mobile
-            document.getElementById('mobileMenuToggle').addEventListener('click', function() {
-                const navMenu = document.getElementById('navMenu');
-                navMenu.classList.toggle('show');
-            });
-            
-            // Fermer le menu mobile en cliquant sur un lien
-            document.querySelectorAll('nav ul li a').forEach(link => {
-                link.addEventListener('click', function() {
-                    const navMenu = document.getElementById('navMenu');
-                    navMenu.classList.remove('show');
-                });
-            });
-            
-            // Charger les données sauvegardées au chargement de la page
-            window.addEventListener('DOMContentLoaded', function() {
-                // Charger les données des services
-                const services = ['service1', 'service2', 'service3'];
+            if (localStorage.getItem('serviceImages')) {
+                serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
+                
+                // Mettre à jour les images des services
                 services.forEach(service => {
-                    if (localStorage.getItem(service + 'Title')) {
-                        document.getElementById(service + '-title').textContent = localStorage.getItem(service + 'Title');
-                        document.getElementById(service + '-desc').textContent = localStorage.getItem(service + 'Desc');
-                        
-                        // Charger les caractéristiques
-                        const features = JSON.parse(localStorage.getItem(service + 'Features') || '[]');
-                        const featuresContainer = document.getElementById(service + '-features');
-                        if (featuresContainer) {
-                            featuresContainer.innerHTML = '';
-                            features.forEach(feature => {
-                                const li = document.createElement('li');
-                                li.textContent = feature;
-                                featuresContainer.appendChild(li);
-                            });
-                        }
+                    if (serviceImages[service] && serviceImages[service].main) {
+                        document.getElementById(service + '-main-image').src = serviceImages[service].main;
+                    }
+                    
+                    // Mettre à jour les galeries
+                    const galleryContainer = document.getElementById(service + '-gallery');
+                    if (galleryContainer && serviceImages[service]) {
+                        galleryContainer.innerHTML = '';
+                        serviceImages[service].gallery.forEach(image => {
+                            if (image) {
+                                const galleryItem = document.createElement('div');
+                                galleryItem.className = 'gallery-item';
+                                galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
+                                galleryContainer.appendChild(galleryItem);
+                            }
+                        });
                     }
                 });
-                
-                // Charger le contenu principal
-                if (localStorage.getItem('heroTitle')) {
-                    document.getElementById('hero-main-title').textContent = localStorage.getItem('heroTitle');
-                    document.getElementById('hero-subtitle').textContent = localStorage.getItem('heroText');
-                    document.getElementById('commercial-title').textContent = localStorage.getItem('commercialTitle');
-                    document.getElementById('commercial-text').innerHTML = localStorage.getItem('commercialText');
-                    document.getElementById('commercial-text-2').innerHTML = localStorage.getItem('commercialText2');
-                    document.getElementById('about-title').textContent = localStorage.getItem('aboutTitle');
-                    document.getElementById('about-text-1').textContent = localStorage.getItem('aboutText1');
-                    document.getElementById('about-text-2').textContent = localStorage.getItem('aboutText2');
-                    document.getElementById('about-values-title').textContent = localStorage.getItem('aboutValuesTitle');
-                    document.getElementById('reports-description').textContent = localStorage.getItem('reportsDescription');
-                    
-                    // Header
-                    document.getElementById('header-company-name').textContent = localStorage.getItem('headerCompanyName');
-                    document.getElementById('header-company-slogan').textContent = localStorage.getItem('headerCompanySlogan');
-                    
-                    // Footer
-                    document.getElementById('footer-title-1').textContent = localStorage.getItem('footerTitle1');
-                    document.getElementById('footer-description-1').textContent = localStorage.getItem('footerDescription1');
-                    document.getElementById('footer-agents-count').textContent = localStorage.getItem('footerAgentsCount');
-                    document.getElementById('footer-title-2').textContent = localStorage.getItem('footerTitle2');
-                    document.getElementById('footer-address').textContent = localStorage.getItem('footerAddress');
-                    document.getElementById('footer-phone').textContent = localStorage.getItem('footerPhone');
-                    document.getElementById('footer-email').textContent = localStorage.getItem('footerEmail');
-                    document.getElementById('footer-title-3').textContent = localStorage.getItem('footerTitle3');
-                    document.getElementById('footer-title-4').textContent = localStorage.getItem('footerTitle4');
-                    document.getElementById('footer-year').textContent = localStorage.getItem('footerYear');
-                    
-                    // Contact
-                    document.getElementById('contact-title').textContent = localStorage.getItem('contactTitle');
-                    document.getElementById('contact-description').textContent = localStorage.getItem('contactDescription');
-                    document.getElementById('contact-address').textContent = localStorage.getItem('contactAddress');
-                    document.getElementById('contact-phone').textContent = localStorage.getItem('contactPhone');
-                    document.getElementById('contact-email').textContent = localStorage.getItem('contactEmail');
-                    document.getElementById('contact-availability').textContent = localStorage.getItem('contactAvailability');
-                    document.getElementById('contact-agents').textContent = localStorage.getItem('contactAgents');
-                    document.getElementById('contact-form-title').textContent = localStorage.getItem('contactFormTitle');
-                    
-                    // Valeurs
-                    document.getElementById('value-title-1').textContent = localStorage.getItem('valueTitle1');
-                    document.getElementById('value-desc-1').textContent = localStorage.getItem('valueDesc1');
-                    document.getElementById('value-title-2').textContent = localStorage.getItem('valueTitle2');
-                    document.getElementById('value-desc-2').textContent = localStorage.getItem('valueDesc2');
-                    document.getElementById('value-title-3').textContent = localStorage.getItem('valueTitle3');
-                    document.getElementById('value-desc-3').textContent = localStorage.getItem('valueDesc3');
-                    document.getElementById('value-title-4').textContent = localStorage.getItem('valueTitle4');
-                    document.getElementById('value-desc-4').textContent = localStorage.getItem('valueDesc4');
+            }
+            
+            if (localStorage.getItem('metaTitle')) {
+                document.title = localStorage.getItem('metaTitle');
+                const metaDescTag = document.querySelector('meta[name="description"]');
+                if (metaDescTag && localStorage.getItem('metaDescription')) {
+                    metaDescTag.setAttribute('content', localStorage.getItem('metaDescription'));
                 }
+            }
+            
+            if (localStorage.getItem('primaryColor')) {
+                document.documentElement.style.setProperty('--primary', localStorage.getItem('primaryColor'));
+                document.documentElement.style.setProperty('--secondary', localStorage.getItem('secondaryColor'));
+                document.documentElement.style.setProperty('--accent', localStorage.getItem('accentColor'));
                 
-                if (localStorage.getItem('serviceImages')) {
-                    serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
-                    
-                    // Mettre à jour les images des services
-                    services.forEach(service => {
-                        if (serviceImages[service] && serviceImages[service].main) {
-                            document.getElementById(service + '-main-image').src = serviceImages[service].main;
-                        }
-                        
-                        // Mettre à jour les galeries
-                        const galleryContainer = document.getElementById(service + '-gallery');
-                        if (galleryContainer && serviceImages[service]) {
-                            galleryContainer.innerHTML = '';
-                            serviceImages[service].gallery.forEach(image => {
-                                if (image) {
-                                    const galleryItem = document.createElement('div');
-                                    galleryItem.className = 'gallery-item';
-                                    galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
-                                    galleryContainer.appendChild(galleryItem);
-                                }
-                            });
-                        }
-                    });
-                }
+                document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
+                document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
+                document.getElementById('accent-color').value = localStorage.getItem('accentColor');
                 
-                if (localStorage.getItem('metaTitle')) {
-                    document.title = localStorage.getItem('metaTitle');
-                    const metaDescTag = document.querySelector('meta[name="description"]');
-                    if (metaDescTag && localStorage.getItem('metaDescription')) {
-                        metaDescTag.setAttribute('content', localStorage.getItem('metaDescription'));
-                    }
-                }
-                
-                if (localStorage.getItem('primaryColor')) {
-                    document.documentElement.style.setProperty('--primary', localStorage.getItem('primaryColor'));
-                    document.documentElement.style.setProperty('--secondary', localStorage.getItem('secondaryColor'));
-                    document.documentElement.style.setProperty('--accent', localStorage.getItem('accentColor'));
-                    
-                    document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
-                    document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
-                    document.getElementById('accent-color').value = localStorage.getItem('accentColor');
-                    
-                    // Mettre à jour les aperçus de couleur
-                    updateColorPreview('primary-color', 'primary-color-preview');
-                    updateColorPreview('secondary-color', 'secondary-color-preview');
-                    updateColorPreview('accent-color', 'accent-color-preview');
-                }
-                
-                if (localStorage.getItem('logo')) {
-                    document.getElementById('logo-image').src = localStorage.getItem('logo');
-                }
-                
-                if (localStorage.getItem('aboutMainImage')) {
-                    document.getElementById('about-main-image').src = localStorage.getItem('aboutMainImage');
-                }
-                
-                // Charger les rapports
-                loadReports();
-                
-                // Initialiser le module SEO avancé
-                advancedSEOOptimizer.init();
-            });
-        </script>
-    </body>
-    </html>    
+                // Mettre à jour les aperçus de couleur
+                updateColorPreview('primary-color', 'primary-color-preview');
+                updateColorPreview('secondary-color', 'secondary-color-preview');
+                updateColorPreview('accent-color', 'accent-color-preview');
+            }
+            
+            if (localStorage.getItem('logo')) {
+                document.getElementById('logo-image').src = localStorage.getItem('logo');
+            }
+            
+            if (localStorage.getItem('aboutMainImage')) {
+                document.getElementById('about-main-image').src = localStorage.getItem('aboutMainImage');
+            }
+            
+            // Charger les rapports
+            loadReports();
+            
+            // Initialiser le module SEO avancé
+            advancedSEOOptimizer.init();
+            
+            // Ajuster la hauteur du hero pour les mobiles
+            if (window.innerWidth <= 768) {
+                document.querySelector('.hero').style.minHeight = '80vh';
+            }
+        });
+    </script>
+</body>
+</html>
