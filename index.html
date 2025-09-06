@@ -88,8 +88,8 @@
         }
         
         .logo {
-            width: 150px; /* Augmenté de 120px à 150px */
-            height: 150px; /* Augmenté de 120px à 150px */
+            width: 120px; /* Augmenté de 80px à 120px */
+            height: 120px; /* Augmenté de 80px à 120px */
             background: var(--accent);
             border-radius: 12px;
             display: flex;
@@ -100,7 +100,6 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             transition: transform 0.3s;
-            flex-shrink: 0; /* Empêche le rétrécissement du logo */
         }
         
         .logo:hover {
@@ -1233,15 +1232,11 @@
             color: #333;
         }
         
-        /* Responsive Design - Améliorations pour la synchronisation mobile/desktop */
+        /* Responsive Design */
         @media (max-width: 1200px) {
             .logo {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .company-name {
-                font-size: 1.6rem;
+                width: 100px;
+                height: 100px;
             }
         }
         
@@ -1272,20 +1267,6 @@
             .service-images-grid {
                 grid-template-columns: 1fr;
             }
-            
-            /* Ajustements pour le logo en mode tablette */
-            .logo {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .company-name {
-                font-size: 1.5rem;
-            }
-            
-            .company-slogan {
-                font-size: 0.9rem;
-            }
         }
         
         @media (max-width: 768px) {
@@ -1299,31 +1280,23 @@
                 margin-bottom: 1rem;
                 flex-direction: column;
                 text-align: center;
-                width: 100%;
             }
             
             .logo {
-                width: 140px; /* Taille augmentée pour mobile */
-                height: 140px; /* Taille augmentée pour mobile */
+                width: 100px;
+                height: 100px;
                 margin-right: 0;
-                margin-bottom: 15px;
-                align-self: center;
+                margin-bottom: 10px;
             }
             
             nav ul {
                 justify-content: center;
                 flex-wrap: wrap;
                 margin-top: 15px;
-                width: 100%;
             }
             
             nav ul li {
                 margin: 0.5rem;
-            }
-            
-            nav ul li a {
-                font-size: 1rem; /* Taille de police uniforme */
-                padding: 10px 15px; /* Padding uniforme */
             }
             
             .hero {
@@ -1379,34 +1352,21 @@
         
         @media (max-width: 576px) {
             .logo {
-                width: 120px;
-                height: 120px;
+                width: 80px;
+                height: 80px;
             }
             
             .company-name {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
             
             .company-slogan {
-                font-size: 0.85rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 0.3rem 0;
-                width: 100%;
-                text-align: center;
+                font-size: 0.9rem;
             }
             
             nav ul li a {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                font-size: 1rem;
+                font-size: 0.9rem;
+                padding: 6px 10px;
             }
             
             .hero h1 {
@@ -1420,15 +1380,6 @@
             .btn {
                 padding: 12px 25px;
                 font-size: 1rem;
-            }
-            
-            /* Ajustements pour les cartes de service */
-            .service-card {
-                margin: 0 10px;
-            }
-            
-            .service-content {
-                padding: 1.5rem;
             }
         }
 
@@ -1519,33 +1470,6 @@
         
         .header-editor textarea {
             min-height: 80px;
-        }
-        
-        /* Correction pour l'affichage mobile du header */
-        @media (max-width: 768px) {
-            .logo-container {
-                flex-direction: column;
-            }
-            
-            .logo {
-                margin-bottom: 15px;
-            }
-            
-            .company-name, .company-slogan {
-                text-align: center;
-            }
-        }
-        
-        /* Amélioration de la visibilité du logo sur mobile */
-        @media (max-width: 480px) {
-            .logo {
-                width: 110px;
-                height: 110px;
-            }
-            
-            .company-name {
-                font-size: 1.3rem;
-            }
         }
     </style>
 </head>
@@ -2177,7 +2101,7 @@
                     </div>
                     <div class="admin-form-group">
                         <label for="about-text-2">Deuxième Paragraphe À Propos</label>
-                        <textarea id="about-text-2" class="about-text-editor">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en case d'incident.</textarea>
+                        <textarea id="about-text-2" class="about-text-editor">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</textarea>
                     </div>
                     <div class="admin-form-group">
                         <label for="about-values-title">Titre des Valeurs</label>
@@ -2216,7 +2140,7 @@
                         <input type="text" id="value-title-3" value="Proximité">
                     </div>
                     <div class="admin-form-group">
-                       <label for="value-desc-3">Description Valeur 3</label>
+                        <label for="value-desc-3">Description Valeur 3</label>
                         <input type="text" id="value-desc-3" value="À votre écoute">
                     </div>
                     
@@ -2915,7 +2839,7 @@
                     const galleryContainer = document.getElementById('service-gallery-images');
                     galleryContainer.innerHTML = '';
                     
-                    serviceImages[currentService].gallery.forEach((image, index) {
+                    serviceImages[currentService].gallery.forEach((image, index) => {
                         const galleryItem = document.createElement('div');
                         galleryItem.className = 'service-image-item';
                         galleryItem.innerHTML = `
@@ -3241,7 +3165,7 @@
             const commercialText2 = document.getElementById('commercial-text-2').value;
             const aboutTitle = document.getElementById('about-title').value;
             const aboutText1 = document.getElementById('about-text-1').value;
-const aboutText2 = document.getElementById('about-text-2').value;
+            const aboutText2 = document.getElementById('about-text-2').value;
             const aboutValuesTitle = document.getElementById('about-values-title').value;
             const reportsDescription = document.getElementById('reports-description').value;
             
@@ -3413,7 +3337,7 @@ const aboutText2 = document.getElementById('about-text-2').value;
         
         function saveSEO() {
             const metaTitle = document.getElementById('meta-title').value;
-const metaDescription = document.getElementById('meta-description').value;
+            const metaDescription = document.getElementById('meta-description').value;
             
             // Sauvegarder dans le localStorage
             localStorage.setItem('metaTitle', metaTitle);
@@ -3738,11 +3662,6 @@ const metaDescription = document.getElementById('meta-description').value;
             
             // Initialiser le module SEO avancé
             advancedSEOOptimizer.init();
-            
-            // Ajuster la hauteur du hero pour les mobiles
-            if (window.innerWidth <= 768) {
-                document.querySelector('.hero').style.minHeight = '80vh';
-            }
         });
     </script>
 </body>
