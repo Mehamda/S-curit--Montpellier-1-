@@ -2699,26 +2699,27 @@
         }
         
         function switchTab(tabId, event) {
-            // Masquer tous les onglets
-            document.querySelectorAll('.admin-section').forEach(tab => {
-                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
-                    tab.classList.remove('active');
-                }
-            });
-            
-            // Afficher l'onglet sélectionné
-            document.getElementById(tabId).classList.add('active');
-            
-            // Mettre à jour les onglets actifs
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Ajouter la classe active à l'onglet cliqué
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+    // Masquer tous les onglets
+    document.querySelectorAll('.admin-section').forEach(tab => {
+        if (!tab.id.includes('Section')) { // Modification ici
+            tab.classList.remove('active');
         }
+    });
+    
+    // Afficher l'onglet sélectionné
+    document.getElementById(tabId).classList.add('active');
+    
+    // Mettre à jour les onglets actifs
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Ajouter la classe active à l'onglet cliqué
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+}
+
         
         function loadAdminData() {
             // Charger les données existantes dans le formulaire d'administration
@@ -2791,7 +2792,15 @@
             
             console.log("Données administrateur chargées");
         }
-        
+        // Ajouter le chargement des valeurs
+    document.querySelectorAll('[id]').forEach(element => {
+        const savedValue = localStorage.getItem(element.id);
+        if (savedValue && element.tagName !== 'IMG') {
+            element.value = savedValue;
+        }
+    });
+}
+
         function updateColorPreview(colorInputId, previewId) {
             const colorValue = document.getElementById(colorInputId).value;
             const previewElement = document.getElementById(previewId);
