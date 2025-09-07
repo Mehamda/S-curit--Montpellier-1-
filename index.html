@@ -1972,8 +1972,42 @@
                     <div class="admin-tab" onclick="switchTab('seo-tab', event)">SEO</div>
                     <div class="admin-tab" onclick="switchTab('appearance-tab', event)">Apparence</div>
                 </div>
-                
-                <div id="services-tab" class="admin-section active">
+    <!-- AJOUTEZ CETTE LIGNE -->
+    <div class="admin-tab" onclick="switchTab('backup-tab', event)">Sauvegarde</div>
+</div>
+                    <div id="services-tab" class="admin-section active">...</div>
+<div id="reports-tab" class="admin-section">...</div>
+<div id="content-tab" class="admin-section">...</div>
+<div id="header-tab" class="admin-section">...</div>
+<div id="footer-tab" class="admin-section">...</div>
+<div id="contact-tab" class="admin-section">...</div>
+<div id="seo-tab" class="admin-section">...</div>
+<div id="appearance-tab" class="admin-section">...</div>
+<!-- AJOUTEZ CETTE SECTION -->
+<div id="backup-tab" class="admin-section">
+    <h3>Sauvegarde et Restauration</h3>
+    <p>Exportez toutes les données du site pour les sauvegarder ou les importer sur un autre appareil.</p>
+    
+    <button class="admin-btn" onclick="exportData()">
+        <i class="fas fa-download"></i> Exporter toutes les données
+    </button>
+    
+    <div class="admin-form-group" style="margin-top: 20px;">
+        <label for="import-file">Importer des données de sauvegarde</label>
+        <input type="file" id="import-file" accept=".json" onchange="importData(this.files[0])">
+        <div class="admin-help-text">Attention : cela écrasera toutes les données actuelles.</div>
+    </div>
+    
+    <div class="admin-help-text" style="margin-top: 30px;">
+        <h4>Instructions :</h4>
+        <ul>
+            <li>L'export crée un fichier JSON contenant toutes les données du site</li>
+            <li>Vous pouvez utiliser ce fichier pour migrer vers un autre appareil</li>
+            <li>L'import remplacera intégralement toutes les données actuelles</li>
+            <li>Il est recommandé de faire un export avant chaque import</li>
+        </ul>
+    </div>
+</div>
                     <h3>Gestion des Services</h3>
                     
                     <div class="admin-form-group">
@@ -2599,6 +2633,111 @@
         };
         
         // Fonctions de navigation
+        // Événement personnalisé pour les mises à jour
+const updateEvent = new Event('contentUpdated');
+
+// Écouter les changements dans le localStorage
+window.addEventListener('storage', function(e) {
+    if (e.key && e.newValue) {
+        // Mettre à jour l'interface
+        updateContent(e.key, e.newValue);
+        window.dispatchEvent(updateEvent);
+    }
+});
+
+function updateContent(key, value) {
+    // Mapper les clés de stockage aux éléments DOM
+    const keyMap = {
+        'heroTitle': ['hero-main-title'],
+        'heroText': ['hero-subtitle'],
+        'commercialTitle': ['commercial-title'],
+        'commercialText': ['commercial-text'],
+        'commercialText2': ['commercial-text-2'],
+        'aboutTitle': ['about-title'],
+        'aboutText1': ['about-text-1'],
+        'aboutText2': ['about-text-2'],
+        'aboutValuesTitle': ['about-values-title'],
+        'reportsDescription': ['reports-description'],
+        'headerCompanyName': ['header-company-name'],
+        'headerCompanySlogan': ['header-company-slogan'],
+        'footerTitle1': ['footer-title-1'],
+        'footerDescription1': ['footer-description-1'],
+        'footerAgentsCount': ['footer-agents-count'],
+        'footerTitle2': ['footer-title-2'],
+        'footerAddress': ['footer-address'],
+        'footerPhone': ['footer-phone'],
+        'footerEmail': ['footer-email'],
+        'footerTitle3': ['footer-title-3'],
+        'footerTitle4': ['footer-title-4'],
+        'footerYear': ['footer-year'],
+        'contactTitle': ['contact-title'],
+        'contactDescription': ['contact-description'],
+        'contactAddress': ['contact-address'],
+        'contactPhone': ['contact-phone'],
+        'contactEmail': ['contact-email'],
+        'contactAvailability': ['contact-availability'],
+        'contactAgents': ['contact-agents'],
+        'contactFormTitle': ['contact-form-title'],
+        'valueTitle1': ['value-title-1'],
+        'valueDesc1': ['value-desc-1'],
+        'valueTitle2': ['value-title-2'],
+        'valueDesc2': ['value-desc-2'],
+        'valueTitle3': ['value-title-3'],
+        'valueDesc3': ['value-desc-3'],
+        'valueTitle4': ['value-title-4'],
+        'valueDesc4': ['value-desc-4']
+    };
+    
+    if (keyMap[key]) {
+        keyMap[key].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.value = value;
+                } else {
+                    element.textContent = value;
+                }
+            }
+        });
+    }
+    
+    // Mise à jour spéciale pour les couleurs
+    if (key === 'primaryColor' || key === 'secondaryColor' || key === 'accentColor') {
+        document.documentElement.style.setProperty('--' + key.replace(/([A-Z])/g, '-$1').toLowerCase(), value);
+    }
+    
+    // Mise à jour spéciale pour le titre de la page
+    if (key === 'metaTitle') {
+        document.title = value;
+    }
+    
+    // Mise à jour spéciale pour la meta description
+    if (key === 'metaDescription') {
+        const metaDescTag = document.querySelector('meta[name="description"]');
+        if (metaDescTag) {
+            metaDescTag.setAttribute('content', value);
+        }
+    }
+    
+    // Mise à jour spéciale pour les images de service
+    if (key === 'serviceImages') {
+        try {
+            serviceImages = JSON.parse(value);
+            // Mettre à jour les images des services
+            const services = ['service1', 'service2', 'service3'];
+            services.forEach(service => {
+                if (serviceImages[service] && serviceImages[service].main) {
+                    const imgElement = document.getElementById(service + '-main-image');
+                    if (imgElement) {
+                        imgElement.src = serviceImages[service].main;
+                    }
+                }
+            });
+        } catch (e) {
+            console.error("Erreur lors du parsing des images de service:", e);
+        }
+    }
+}
         function showSection(sectionId) {
             // Masquer toutes les sections de détail de service
             document.querySelectorAll('.service-detail').forEach(section => {
@@ -2686,30 +2825,39 @@
                 alert("Mot de passe incorrect. Veuillez réessayer.");
             }
         }
-        
         function switchTab(tabId, event) {
-            // Masquer tous les onglets
-            document.querySelectorAll('.admin-section').forEach(tab => {
-                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
-                    tab.classList.remove('active');
-                }
-            });
-            
-            // Afficher l'onglet sélectionné
-            document.getElementById(tabId).classList.add('active');
-            
-            // Mettre à jour les onglets actifs
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Ajouter la classe active à l'onglet cliqué
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+    // Masquer tous les onglets de contenu
+    document.querySelectorAll('.admin-section').forEach(tab => {
+        if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
+            tab.classList.remove('active');
         }
+    });
+    
+    // Afficher l'onglet sélectionné
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+    }
+    
+    // Mettre à jour les onglets de navigation
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Ajouter la classe active à l'onglet cliqué
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+    
+    // Charger les données spécifiques à l'onglet si nécessaire
+    if (tabId === 'services-tab') {
+        loadServiceData();
+    } else if (tabId === 'reports-tab') {
+        loadReports();
+    }
+}
         
-        function loadAdminData() {
+         function loadAdminData() {
             // Charger les données existantes dans le formulaire d'administration
             // Depuis le localStorage
             if (localStorage.getItem('heroTitle')) {
@@ -2892,26 +3040,33 @@
         }
         
         function previewMainImage(input) {
-            const file = input.files[0];
-            if (file) {
-                // Vérifier le type de fichier
-                if (!file.type.match('image.*')) {
-                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    serviceImages[currentService].main = e.target.result;
-                    localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
-                    
-                    const preview = document.getElementById('service-main-image-preview');
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
-                };
-                reader.readAsDataURL(file);
-            }
+    const file = input.files[0];
+    if (file) {
+        // Vérifier le type et la taille du fichier
+        if (!file.type.match('image.*')) {
+            alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
+            return;
         }
         
+        if (file.size > 5 * 1024 * 1024) { // 5MB max
+            alert("L'image est trop volumineuse. Taille maximale : 5MB");
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            serviceImages[currentService].main = e.target.result;
+            localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+            
+            const preview = document.getElementById('service-main-image-preview');
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
+            
+            // Mettre à jour l'image sur le site en direct
+            document.getElementById(currentService + '-main-image').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
         function addGalleryImage() {
             const gallery = serviceImages[currentService].gallery;
             
@@ -3354,7 +3509,98 @@
             
             alert("Paramètres SEO enregistrés avec succès!");
         }
+        function exportData() {
+    const allData = {};
+    
+    // Récupérer toutes les données du localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        allData[key] = localStorage.getItem(key);
+    }
+    
+    // Ajouter les images des services
+    allData.serviceImages = JSON.stringify(serviceImages);
+    
+    // Créer un blob pour le téléchargement
+    const dataStr = JSON.stringify(allData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    
+    // Créer un lien de téléchargement
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = '4sp-website-backup-' + new Date().toISOString().split('T')[0] + '.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    alert("Sauvegarde exportée avec succès!");
+}
+
+function importData(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        if (!confirm("Êtes-vous sûr de vouloir importer ces données? Cela écrasera toutes les données actuelles.")) {
+            return;
+        }
         
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            // Vider le localStorage actuel
+            localStorage.clear();
+            
+            // Sauvegarder toutes les nouvelles données
+            for (const key in data) {
+                if (key === 'serviceImages') {
+                    serviceImages = JSON.parse(data[key]);
+                    localStorage.setItem('serviceImages', data[key]);
+                } else {
+                    localStorage.setItem(key, data[key]);
+                }
+            }
+            
+            // Recharger la page pour appliquer les changements
+            alert("Données importées avec succès! La page va se recharger.");
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        } catch (error) {
+            alert("Erreur lors de l'import des données: " + error.message);
+            console.error("Import error:", error);
+        }
+    };
+    reader.onerror = function() {
+        alert("Erreur lors de la lecture du fichier");
+    };
+    reader.readAsText(file);
+}
+        function saveAllData() {
+    // Sauvegarder le contenu
+    saveContent();
+    
+    // Sauvegarder l'en-tête
+    saveHeader();
+    
+    // Sauvegarder le pied de page
+    saveFooter();
+    
+    // Sauvegarder les contacts
+    saveContact();
+    
+    // Sauvegarder le SEO
+    saveSEO();
+    
+    // Sauvegarder l'apparence
+    saveAppearance();
+    
+    // Sauvegarder les services
+    saveServiceData();
+    
+    // Déclencher l'événement de mise à jour pour la synchronisation
+    window.dispatchEvent(new Event('storage'));
+    
+    alert("Toutes les données ont été enregistrées avec succès!");
+}
         function saveAppearance() {
             const primaryColor = document.getElementById('primary-color').value;
             const secondaryColor = document.getElementById('secondary-color').value;
