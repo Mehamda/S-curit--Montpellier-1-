@@ -1958,7 +1958,66 @@
                     <button class="admin-btn" onclick="checkPassword()">Se connecter</button>
                 </div>
             </div>
-            
+function enableFullControl() {
+    // Rendre tous les éléments éditable directement
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, span').forEach(element => {
+        element.setAttribute('contenteditable', 'true');
+        element.addEventListener('blur', function() {
+            // Sauvegarder le contenu modifié
+            const id = this.id || this.className || 'custom-' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem(id, this.innerHTML);
+        });
+    });
+    
+    // Ajouter un bouton pour activer/désactiver le mode édition complète
+    const editToggle = document.createElement('button');
+    editToggle.textContent = 'Mode Édition Complète';
+    editToggle.style.position = 'fixed';
+    editToggle.style.top = '100px';
+    editToggle.style.right = '20px';
+    editToggle.style.zIndex = '10000';
+    editToggle.style.padding = '10px';
+    editToggle.style.backgroundColor = 'var(--primary)';
+    editToggle.style.color = 'white';
+    editToggle.style.border = 'none';
+    editToggle.style.borderRadius = '5px';
+    editToggle.style.cursor = 'pointer';
+    
+    editToggle.addEventListener('click', function() {
+        const isEditable = document.body.getAttribute('contenteditable') === 'true';
+        if (isEditable) {
+            document.body.setAttribute('contenteditable', 'false');
+            this.textContent = 'Mode Édition Complète';
+            this.style.backgroundColor = 'var(--primary)';
+        } else {
+            document.body.setAttribute('contenteditable', 'true');
+            this.textContent = 'Désactiver Édition';
+            this.style.backgroundColor = 'var(--secondary)';
+        }
+    });
+    
+    document.body.appendChild(editToggle);
+}
+
+// Appeler cette fonction après la connexion admin
+function checkPassword() {
+    const password = document.getElementById('adminPassword').value;
+    if (password === adminPassword) {
+        isAdminAuthenticated = true;
+        document.getElementById('loginSection').classList.remove('active');
+        document.getElementById('adminMainSection').classList.add('active');
+        
+        // Charger les données existantes
+        loadAdminData();
+        loadServiceData();
+        loadReports();
+        
+        // Activer le contrôle total
+        enableFullControl();
+    } else {
+        alert("Mot de passe incorrect. Veuillez réessayer.");
+    }
+}
             <div id="adminMainSection" class="admin-section">
                 <h2>Panel d'Administration FOR SÉCURITÉ PRIVÉE</h2>
                 
@@ -1973,17 +2032,6 @@
                     <div class="admin-tab" onclick="switchTab('appearance-tab', event)">Apparence</div>
                 </div>
                 
-<!-- Ajouter un onglet pour la gestion des utilisateurs -->
-<div id="users-tab" class="admin-section">
-    <h3>Gestion des Utilisateurs</h3>
-    <div class="admin-form-group">
-        <label for="admin-users">Utilisateurs Administrateur</label>
-        <div id="admin-users-list">
-            <!-- Liste des utilisateurs -->
-        </div>
-        <button class="admin-btn" onclick="addAdminUser()">Ajouter un utilisateur</button>
-    </div>
-</div>
                 <div id="services-tab" class="admin-section active">
                     <h3>Gestion des Services</h3>
                     
@@ -2699,27 +2747,26 @@
         }
         
         function switchTab(tabId, event) {
-    // Masquer tous les onglets
-    document.querySelectorAll('.admin-section').forEach(tab => {
-        if (!tab.id.includes('Section')) { // Modification ici
-            tab.classList.remove('active');
+            // Masquer tous les onglets
+            document.querySelectorAll('.admin-section').forEach(tab => {
+                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Afficher l'onglet sélectionné
+            document.getElementById(tabId).classList.add('active');
+            
+            // Mettre à jour les onglets actifs
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Ajouter la classe active à l'onglet cliqué
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
-    });
-    
-    // Afficher l'onglet sélectionné
-    document.getElementById(tabId).classList.add('active');
-    
-    // Mettre à jour les onglets actifs
-    document.querySelectorAll('.admin-tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Ajouter la classe active à l'onglet cliqué
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-    }
-}
-
         
         function loadAdminData() {
             // Charger les données existantes dans le formulaire d'administration
@@ -2792,15 +2839,7 @@
             
             console.log("Données administrateur chargées");
         }
-        // Ajouter le chargement des valeurs
-    document.querySelectorAll('[id]').forEach(element => {
-        const savedValue = localStorage.getItem(element.id);
-        if (savedValue && element.tagName !== 'IMG') {
-            element.value = savedValue;
-        }
-    });
-}
-
+        
         function updateColorPreview(colorInputId, previewId) {
             const colorValue = document.getElementById(colorInputId).value;
             const previewElement = document.getElementById(previewId);
@@ -3001,54 +3040,53 @@
             
             localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
             
-            // Mettre à jour l'affichage sur le site
-            document.getElementById(currentService + '-title').textContent = title;
-            document.getElementById(currentService + '-desc').textContent = description;
-            
-            // Mettre à jour l'image principale
-            if (serviceImages[currentService].main) {
-                document.getElementById(currentService + '-main-image').src = serviceImages[currentService].main;
+                // Mettre à jour l'affichage sur le site IMMÉDIATEMENT
+    document.getElementById(currentService + '-title').textContent = title;
+    document.getElementById(currentService + '-desc').textContent = description;
+    
+    // Mettre à jour les caractéristiques dans la carte de service
+    const featuresContainer = document.getElementById(currentService + '-features');
+    if (featuresContainer) {
+        featuresContainer.innerHTML = '';
+        features.forEach(feature => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            featuresContainer.appendChild(li);
+        });
+    }
+    
+    // Mettre à jour les caractéristiques détaillées dans la page de détail
+    const detailFeaturesContainer = document.getElementById(currentService + '-detail-features');
+    if (detailFeaturesContainer) {
+        detailFeaturesContainer.innerHTML = '';
+        features.forEach(feature => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            detailFeaturesContainer.appendChild(li);
+        });
+    }
+    
+    // Mettre à jour l'image principale
+    if (serviceImages[currentService].main) {
+        document.getElementById(currentService + '-main-image').src = serviceImages[currentService].main;
+    }
+    
+    // Mettre à jour la galerie
+    const galleryContainer = document.getElementById(currentService + '-gallery');
+    if (galleryContainer && serviceImages[currentService]) {
+        galleryContainer.innerHTML = '';
+        serviceImages[currentService].gallery.forEach(image => {
+            if (image) {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
+                galleryContainer.appendChild(galleryItem);
             }
-            
-            // Mettre à jour la galerie
-            const galleryContainer = document.getElementById(currentService + '-gallery');
-            if (galleryContainer && serviceImages[currentService]) {
-                galleryContainer.innerHTML = '';
-                serviceImages[currentService].gallery.forEach(image => {
-                    if (image) {
-                        const galleryItem = document.createElement('div');
-                        galleryItem.className = 'gallery-item';
-                        galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
-                        galleryContainer.appendChild(galleryItem);
-                    }
-                });
-            }
-            
-            // Mettre à jour les caractéristiques
-            const featuresContainer = document.getElementById(currentService + '-features');
-            if (featuresContainer) {
-                featuresContainer.innerHTML = '';
-                features.forEach(feature => {
-                    const li = document.createElement('li');
-                    li.textContent = feature;
-                    featuresContainer.appendChild(li);
-                });
-            }
-            
-            // Mettre à jour les caractéristiques détaillées
-            const detailFeaturesContainer = document.getElementById(currentService + '-detail-features');
-            if (detailFeaturesContainer) {
-                detailFeaturesContainer.innerHTML = '';
-                features.forEach(feature => {
-                    const li = document.createElement('li');
-                    li.textContent = feature;
-                    detailFeaturesContainer.appendChild(li);
-                });
-            }
-            
-            alert("Service enregistré et mis à jour avec succès!");
-        }
-        
+        });
+    }
+    
+    alert("Service enregistré et mis à jour avec succès!");
+} 
         function addReport() {
             const title = document.getElementById('report-title').value;
             const date = document.getElementById('report-date').value;
@@ -3221,177 +3259,215 @@
             localStorage.setItem('valueTitle4', valueTitle4);
             localStorage.setItem('valueDesc4', valueDesc4);
             
-            // Mettre à jour le contenu de la page en direct
-            document.getElementById('hero-main-title').textContent = heroTitle;
-            document.getElementById('hero-subtitle').textContent = heroText;
-            document.getElementById('commercial-title').textContent = commercialTitle;
-            document.getElementById('commercial-text').innerHTML = commercialText;
-            document.getElementById('commercial-text-2').innerHTML = commercialText2;
-            document.getElementById('about-title').textContent = aboutTitle;
-            document.getElementById('about-text-1').textContent = aboutText1;
-            document.getElementById('about-text-2').textContent = aboutText2;
-            document.getElementById('about-values-title').textContent = aboutValuesTitle;
-            document.getElementById('reports-description').textContent = reportsDescription;
-            
-            // Valeurs
-            document.getElementById('value-title-1').textContent = valueTitle1;
-            document.getElementById('value-desc-1').textContent = valueDesc1;
-            document.getElementById('value-title-2').textContent = valueTitle2;
-            document.getElementById('value-desc-2').textContent = valueDesc2;
-            document.getElementById('value-title-3').textContent = valueTitle3;
-            document.getElementById('value-desc-3').textContent = valueDesc3;
-            document.getElementById('value-title-4').textContent = valueTitle4;
-            document.getElementById('value-desc-4').textContent = valueDesc4;
-            
-            // Image à propos
-            const aboutImageInput = document.getElementById('about-main-image');
-            if (aboutImageInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('about-main-image').src = e.target.result;
-                    localStorage.setItem('aboutMainImage', e.target.result);
-                };
-                reader.readAsDataURL(aboutImageInput.files[0]);
-            }
-            
-            alert("Contenu enregistré et mis à jour avec succès!");
-        }
+     // Mettre à jour le contenu de la page en direct
+    document.getElementById('hero-main-title').textContent = heroTitle;
+    document.getElementById('hero-subtitle').textContent = heroText;
+    document.getElementById('commercial-title').textContent = commercialTitle;
+    
+    // Correction: Utiliser textContent au lieu de innerHTML pour la sécurité
+    document.getElementById('commercial-text').textContent = commercialText;
+    document.getElementById('commercial-text-2').textContent = commercialText2;
+    
+    document.getElementById('about-title').textContent = aboutTitle;
+    document.getElementById('about-text-1').textContent = aboutText1;
+    document.getElementById('about-text-2').textContent = aboutText2;
+    document.getElementById('about-values-title').textContent = aboutValuesTitle;
+    document.getElementById('reports-description').textContent = reportsDescription;
+    
+    // Valeurs
+    document.getElementById('value-title-1').textContent = valueTitle1;
+    document.getElementById('value-desc-1').textContent = valueDesc1;
+    document.getElementById('value-title-2').textContent = valueTitle2;
+    document.getElementById('value-desc-2').textContent = valueDesc2;
+    document.getElementById('value-title-3').textContent = valueTitle3;
+    document.getElementById('value-desc-3').textContent = valueDesc3;
+    document.getElementById('value-title-4').textContent = valueTitle4;
+    document.getElementById('value-desc-4').textContent = valueDesc4;
+    
+    // Image à propos - Mise à jour immédiate
+    const aboutImageInput = document.getElementById('about-main-image');
+    if (aboutImageInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('about-main-image').src = e.target.result;
+            localStorage.setItem('aboutMainImage', e.target.result);
+        };
+        reader.readAsDataURL(aboutImageInput.files[0]);
+    }
+    
+    alert("Contenu enregistré et mis à jour avec succès!");
+}
         
         function saveHeader() {
-            const companyName = document.getElementById('header-company-name').value;
-            const companySlogan = document.getElementById('header-company-slogan').value;
-            
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('headerCompanyName', companyName);
-            localStorage.setItem('headerCompanySlogan', companySlogan);
-            
-            // Mettre à jour l'affichage
-            document.getElementById('header-company-name').textContent = companyName;
-            document.getElementById('header-company-slogan').textContent = companySlogan;
-            
-            // Logo
-            const logoInput = document.getElementById('logo-upload');
-            if (logoInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('logo-image').src = e.target.result;
-                    localStorage.setItem('logo', e.target.result);
-                };
-                reader.readAsDataURL(logoInput.files[0]);
-            }
-            
-            alert("En-tête enregistré et mis à jour avec succès!");
-        }
-        
+    const companyName = document.getElementById('header-company-name').value;
+    const companySlogan = document.getElementById('header-company-slogan').value;
+    
+    // Sauvegarder dans le localStorage
+    localStorage.setItem('headerCompanyName', companyName);
+    localStorage.setItem('headerCompanySlogan', companySlogan);
+    
+    // Mettre à jour l'affichage IMMÉDIATEMENT
+    document.getElementById('header-company-name').textContent = companyName;
+    document.getElementById('header-company-slogan').textContent = companySlogan;
+    
+    // Logo - Mise à jour immédiate
+    const logoInput = document.getElementById('logo-upload');
+    if (logoInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('logo-image').src = e.target.result;
+            localStorage.setItem('logo', e.target.result);
+        };
+        reader.readAsDataURL(logoInput.files[0]);
+    }
+    
+    alert("En-tête enregistré et mis à jour avec succès!");
+}
         function saveFooter() {
-            const footerTitle1 = document.getElementById('footer-title-1').value;
-            const footerDescription1 = document.getElementById('footer-description-1').value;
-            const footerAgentsCount = document.getElementById('footer-agents-count').value;
-            const footerTitle2 = document.getElementById('footer-title-2').value;
-            const footerAddress = document.getElementById('footer-address').value;
-            const footerPhone = document.getElementById('footer-phone').value;
-            const footerEmail = document.getElementById('footer-email').value;
-            const footerTitle3 = document.getElementById('footer-title-3').value;
-            const footerTitle4 = document.getElementById('footer-title-4').value;
-            const footerYear = document.getElementById('footer-year').value;
-            
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('footerTitle1', footerTitle1);
-            localStorage.setItem('footerDescription1', footerDescription1);
-            localStorage.setItem('footerAgentsCount', footerAgentsCount);
-            localStorage.setItem('footerTitle2', footerTitle2);
-            localStorage.setItem('footerAddress', footerAddress);
-            localStorage.setItem('footerPhone', footerPhone);
-            localStorage.setItem('footerEmail', footerEmail);
-            localStorage.setItem('footerTitle3', footerTitle3);
-            localStorage.setItem('footerTitle4', footerTitle4);
-            localStorage.setItem('footerYear', footerYear);
-            
-            // Mettre à jour l'affichage
-            document.getElementById('footer-title-1').textContent = footerTitle1;
-            document.getElementById('footer-description-1').textContent = footerDescription1;
-            document.getElementById('footer-agents-count').textContent = footerAgentsCount;
-            document.getElementById('footer-title-2').textContent = footerTitle2;
-            document.getElementById('footer-address').textContent = footerAddress;
-            document.getElementById('footer-phone').textContent = footerPhone;
-            document.getElementById('footer-email').textContent = footerEmail;
-            document.getElementById('footer-title-3').textContent = footerTitle3;
-            document.getElementById('footer-title-4').textContent = footerTitle4;
-            document.getElementById('footer-year').textContent = footerYear;
-            
-            alert("Pied de page enregistré et mis à jour avec succès!");
-        }
-        
+    const footerTitle1 = document.getElementById('footer-title-1').value;
+    const footerDescription1 = document.getElementById('footer-description-1').value;
+    const footerAgentsCount = document.getElementById('footer-agents-count').value;
+    const footerTitle2 = document.getElementById('footer-title-2').value;
+    const footerAddress = document.getElementById('footer-address').value;
+    const footerPhone = document.getElementById('footer-phone').value;
+    const footerEmail = document.getElementById('footer-email').value;
+    const footerTitle3 = document.getElementById('footer-title-3').value;
+    const footerTitle4 = document.getElementById('footer-title-4').value;
+    const footerYear = document.getElementById('footer-year').value;
+    
+    // Sauvegarder dans le localStorage
+    localStorage.setItem('footerTitle1', footerTitle1);
+    localStorage.setItem('footerDescription1', footerDescription1);
+    localStorage.setItem('footerAgentsCount', footerAgentsCount);
+    localStorage.setItem('footerTitle2', footerTitle2);
+    localStorage.setItem('footerAddress', footerAddress);
+    localStorage.setItem('footerPhone', footerPhone);
+    localStorage.setItem('footerEmail', footerEmail);
+    localStorage.setItem('footerTitle3', footerTitle3);
+    localStorage.setItem('footerTitle4', footerTitle4);
+    localStorage.setItem('footerYear', footerYear);
+    
+    // Mettre à jour l'affichage IMMÉDIATEMENT
+    document.getElementById('footer-title-1').textContent = footerTitle1;
+    document.getElementById('footer-description-1').textContent = footerDescription1;
+    document.getElementById('footer-agents-count').textContent = footerAgentsCount;
+    document.getElementById('footer-title-2').textContent = footerTitle2;
+    document.getElementById('footer-address').textContent = footerAddress;
+    document.getElementById('footer-phone').textContent = footerPhone;
+    document.getElementById('footer-email').textContent = footerEmail;
+    document.getElementById('footer-title-3').textContent = footerTitle3;
+    document.getElementById('footer-title-4').textContent = footerTitle4;
+    document.getElementById('footer-year').textContent = footerYear;
+    
+    alert("Pied de page enregistré et mis à jour avec succès!");
+}
         function saveContact() {
-            const contactTitle = document.getElementById('contact-title').value;
-            const contactDescription = document.getElementById('contact-description').value;
-            const contactAddress = document.getElementById('contact-address').value;
-            const contactPhone = document.getElementById('contact-phone').value;
-            const contactEmail = document.getElementById('contact-email').value;
-            const contactAvailability = document.getElementById('contact-availability').value;
-            const contactAgents = document.getElementById('contact-agents').value;
-            const contactFormTitle = document.getElementById('contact-form-title').value;
-            
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('contactTitle', contactTitle);
-            localStorage.setItem('contactDescription', contactDescription);
-            localStorage.setItem('contactAddress', contactAddress);
-            localStorage.setItem('contactPhone', contactPhone);
-            localStorage.setItem('contactEmail', contactEmail);
-            localStorage.setItem('contactAvailability', contactAvailability);
-            localStorage.setItem('contactAgents', contactAgents);
-            localStorage.setItem('contactFormTitle', contactFormTitle);
-            
-            // Mettre à jour l'affichage
-            document.getElementById('contact-title').textContent = contactTitle;
-            document.getElementById('contact-description').textContent = contactDescription;
-            document.getElementById('contact-address').textContent = contactAddress;
-            document.getElementById('contact-phone').textContent = contactPhone;
-            document.getElementById('contact-email').textContent = contactEmail;
-            document.getElementById('contact-availability').textContent = contactAvailability;
-            document.getElementById('contact-agents').textContent = contactAgents;
-            document.getElementById('contact-form-title').textContent = contactFormTitle;
-            
-            alert("Informations de contact enregistrées et mises à jour avec succès!");
-        }
-        
+    const contactTitle = document.getElementById('contact-title').value;
+    const contactDescription = document.getElementById('contact-description').value;
+    const contactAddress = document.getElementById('contact-address').value;
+    const contactPhone = document.getElementById('contact-phone').value;
+    const contactEmail = document.getElementById('contact-email').value;
+    const contactAvailability = document.getElementById('contact-availability').value;
+    const contactAgents = document.getElementById('contact-agents').value;
+    const contactFormTitle = document.getElementById('contact-form-title').value;
+    
+    // Sauvegarder dans le localStorage
+    localStorage.setItem('contactTitle', contactTitle);
+    localStorage.setItem('contactDescription', contactDescription);
+    localStorage.setItem('contactAddress', contactAddress);
+    localStorage.setItem('contactPhone', contactPhone);
+    localStorage.setItem('contactEmail', contactEmail);
+    localStorage.setItem('contactAvailability', contactAvailability);
+    localStorage.setItem('contactAgents', contactAgents);
+    localStorage.setItem('contactFormTitle', contactFormTitle);
+    
+    // Mettre à jour l'affichage IMMÉDIATEMENT
+    document.getElementById('contact-title').textContent = contactTitle;
+    document.getElementById('contact-description').textContent = contactDescription;
+    document.getElementById('contact-address').textContent = contactAddress;
+    document.getElementById('contact-phone').textContent = contactPhone;
+    document.getElementById('contact-email').textContent = contactEmail;
+    document.getElementById('contact-availability').textContent = contactAvailability;
+    document.getElementById('contact-agents').textContent = contactAgents;
+    document.getElementById('contact-form-title').textContent = contactFormTitle;
+    
+    // Mettre à jour également la section contact dans le footer
+    document.getElementById('footer-address').textContent = contactAddress;
+    document.getElementById('footer-phone').textContent = contactPhone;
+    document.getElementById('footer-email').textContent = contactEmail;
+    
+    alert("Informations de contact enregistrées et mises à jour avec succès!");
+}
         function saveSEO() {
-            const metaTitle = document.getElementById('meta-title').value;
-            const metaDescription = document.getElementById('meta-description').value;
-            
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('metaTitle', metaTitle);
-            localStorage.setItem('metaDescription', metaDescription);
-            
-            // Mettre à jour la balise title
-            document.title = metaTitle;
-            
-            // Mettre à jour la meta description
-            const metaDescTag = document.querySelector('meta[name="description"]');
-            if (metaDescTag) {
-                metaDescTag.setAttribute('content', metaDescription);
-            }
-            
-            alert("Paramètres SEO enregistrés avec succès!");
-        }
-        
+    const metaTitle = document.getElementById('meta-title').value;
+    const metaDescription = document.getElementById('meta-description').value;
+    
+    // Sauvegarder dans le localStorage
+    localStorage.setItem('metaTitle', metaTitle);
+    localStorage.setItem('metaDescription', metaDescription);
+    
+    // Mettre à jour la balise title IMMÉDIATEMENT
+    document.title = metaTitle;
+    
+    // Mettre à jour la meta description IMMÉDIATEMENT
+    const metaDescTag = document.querySelector('meta[name="description"]');
+    if (metaDescTag) {
+        metaDescTag.setAttribute('content', metaDescription);
+    }
+    
+    // Mettre à jour la meta property og:title
+    const ogTitleTag = document.querySelector('meta[property="og:title"]');
+    if (ogTitleTag) {
+        ogTitleTag.setAttribute('content', metaTitle);
+    }
+    
+    // Mettre à jour la meta property og:description
+    const ogDescTag = document.querySelector('meta[property="og:description"]');
+    if (ogDescTag) {
+        ogDescTag.setAttribute('content', metaDescription);
+    }
+    
+    alert("Paramètres SEO enregistrés avec succès!");
+}
         function saveAppearance() {
-            const primaryColor = document.getElementById('primary-color').value;
-            const secondaryColor = document.getElementById('secondary-color').value;
-            const accentColor = document.getElementById('accent-color').value;
-            
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('primaryColor', primaryColor);
-            localStorage.setItem('secondaryColor', secondaryColor);
-            localStorage.setItem('accentColor', accentColor);
-            
-            // Mettre à jour les variables CSS
-            document.documentElement.style.setProperty('--primary', primaryColor);
-            document.documentElement.style.setProperty('--secondary', secondaryColor);
-            document.documentElement.style.setProperty('--accent', accentColor);
-            
-            alert("Apparence enregistrée et mise à jour avec succès!");
-        }
+    const primaryColor = document.getElementById('primary-color').value;
+    const secondaryColor = document.getElementById('secondary-color').value;
+    const accentColor = document.getElementById('accent-color').value;
+    
+    // Sauvegarder dans le localStorage
+    localStorage.setItem('primaryColor', primaryColor);
+    localStorage.setItem('secondaryColor', secondaryColor);
+    localStorage.setItem('accentColor', accentColor);
+    
+    // Mettre à jour les variables CSS IMMÉDIATEMENT
+    document.documentElement.style.setProperty('--primary', primaryColor);
+    document.documentElement.style.setProperty('--secondary', secondaryColor);
+    document.documentElement.style.setProperty('--accent', accentColor);
+    
+    // Mettre à jour tous les éléments qui utilisent ces couleurs
+    updateButtonColors(primaryColor);
+    updateHeaderColors(secondaryColor, accentColor);
+    
+    alert("Apparence enregistrée et mise à jour avec succès!");
+}
+
+// Fonctions helper pour mettre à jour les couleurs
+function updateButtonColors(primaryColor) {
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.style.backgroundColor = primaryColor;
+    });
+}
+
+function updateHeaderColors(secondaryColor, accentColor) {
+    const header = document.querySelector('header');
+    header.style.background = `linear-gradient(135deg, ${secondaryColor} 0%, var(--dark) 100%)`;
+    
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+        link.style.color = accentColor;
+    });
+}
         
         function previewLogo(input) {
             const file = input.files[0];
@@ -3557,6 +3633,38 @@
                     document.getElementById(service + '-title').textContent = localStorage.getItem(service + 'Title');
                     document.getElementById(service + '-desc').textContent = localStorage.getItem(service + 'Desc');
                     
+    // Charger l'apparence
+    if (localStorage.getItem('primaryColor')) {
+        document.documentElement.style.setProperty('--primary', localStorage.getItem('primaryColor'));
+        document.documentElement.style.setProperty('--secondary', localStorage.getItem('secondaryColor'));
+        document.documentElement.style.setProperty('--accent', localStorage.getItem('accentColor'));
+        
+        // Mettre à jour les aperçus dans l'admin
+        document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
+        document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
+        document.getElementById('accent-color').value = localStorage.getItem('accentColor');
+        
+        updateColorPreview('primary-color', 'primary-color-preview');
+        updateColorPreview('secondary-color', 'secondary-color-preview');
+        updateColorPreview('accent-color', 'accent-color-preview');
+    }
+    
+    // Charger le logo
+    if (localStorage.getItem('logo')) {
+        document.getElementById('logo-image').src = localStorage.getItem('logo');
+    }
+    
+    // Charger l'image about
+    if (localStorage.getItem('aboutMainImage')) {
+        document.getElementById('about-main-image').src = localStorage.getItem('aboutMainImage');
+    }
+    
+    // Charger les rapports
+    loadReports();
+    
+    // Initialiser le module SEO avancé
+    advancedSEOOptimizer.init();
+});
                     // Charger les caractéristiques
                     const features = JSON.parse(localStorage.getItem(service + 'Features') || '[]');
                     const featuresContainer = document.getElementById(service + '-features');
