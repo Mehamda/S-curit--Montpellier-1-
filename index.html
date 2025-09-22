@@ -17,6 +17,10 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1471,6 +1475,26 @@
         .header-editor textarea {
             min-height: 80px;
         }
+        
+        /* Styles pour la synchronisation */
+        .sync-status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .sync-online {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .sync-offline {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
     </style>
 </head>
 <body>
@@ -1909,7 +1933,7 @@
         <button class="legal-toggle" onclick="toggleLegalMentions()">Voir les mentions légales</button>
         <div class="legal-mentions" id="legalMentions">
             <h4>Mentions légales</h4>
-            <p>Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l’économie numérique, il est porté à la connaissance des utilisateurs du site for securite privee (4SP) les présentes mentions légales.</p>
+            <p>Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, il est porté à la connaissance des utilisateurs du site for securite privee (4SP) les présentes mentions légales.</p>
             <p>Le présent site est édité par :<br>
             4SP, SASU au capital social de 200,00 €<br>
             Siège social : 83 rue Yves Montand, 34080 Montpellier, France<br>
@@ -1923,7 +1947,7 @@
             Siège social : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
             Site web : https://pages.github.com</p>
             
-            <p>Autorisation administrative n° AUT-034-2124-01-03-20240960982 du 03 janvier 2025 délivré par le CNAPS conformément à l’article L612-9 du Code de la sécurité intérieure. « L'autorisation d'exercice ne confère aucune prérogative de puissance publique à l'entreprise ou aux personnes qui en bénéficient. » (article L612-14 du CSI).</p>
+            <p>Autorisation administrative n° AUT-034-2124-01-03-20240960982 du 03 janvier 2025 délivré par le CNAPS conformément à l'article L612-9 du Code de la sécurité intérieure. « L'autorisation d'exercice ne confère aucune prérogative de puissance publique à l'entreprise ou aux personnes qui en bénéficient. » (article L612-14 du CSI).</p>
         </div>
         
         <div class="footer-bottom">
@@ -1962,6 +1986,11 @@
             <div id="adminMainSection" class="admin-section">
                 <h2>Panel d'Administration FOR SÉCURITÉ PRIVÉE</h2>
                 
+                <!-- Indicateur de statut de synchronisation -->
+                <div id="syncStatus" class="sync-status sync-offline">
+                    <i class="fas fa-sync-alt"></i> Synchronisation: Chargement...
+                </div>
+                
                 <div class="admin-tabs">
                     <div class="admin-tab active" onclick="switchTab('services-tab', event)">Services</div>
                     <div class="admin-tab" onclick="switchTab('reports-tab', event)">Rapports</div>
@@ -1971,6 +2000,7 @@
                     <div class="admin-tab" onclick="switchTab('contact-tab', event)">Contact</div>
                     <div class="admin-tab" onclick="switchTab('seo-tab', event)">SEO</div>
                     <div class="admin-tab" onclick="switchTab('appearance-tab', event)">Apparence</div>
+                    <div class="admin-tab" onclick="switchTab('sync-tab', event)">Synchronisation</div>
                 </div>
                 
                 <div id="services-tab" class="admin-section active">
@@ -2356,29 +2386,318 @@
                         <p><strong>Conseil :</strong> Les couleurs seront appliquées immédiatement après l'enregistrement. Assurez-vous que le contraste entre les couleurs est suffisant pour une bonne accessibilité.</p>
                     </div>
                 </div>
+                
+                <div id="sync-tab" class="admin-section">
+                    <h3>Synchronisation Multi-Appareils</h3>
+                    
+                    <div class="admin-form-group">
+                        <label>Statut de synchronisation</label>
+                        <div id="sync-details" class="sync-status sync-offline">
+                            <i class="fas fa-info-circle"></i> Chargement des informations de synchronisation...
+                        </div>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="firebase-config">Configuration Firebase (pour développeurs)</label>
+                        <textarea id="firebase-config" class="admin-form-group" rows="6" placeholder='{
+  "apiKey": "votre_api_key",
+  "authDomain": "votre_projet.firebaseapp.com",
+  "projectId": "votre_projet",
+  "storageBucket": "votre_projet.firebasestorage.app",
+  "messagingSenderId": "123456789",
+  "appId": "votre_app_id"
+}'></textarea>
+                        <button class="admin-btn-secondary" onclick="saveFirebaseConfig()">Enregistrer la configuration</button>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label>Outils de synchronisation</label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="admin-btn-secondary" onclick="forceSync()">
+                                <i class="fas fa-sync"></i> Forcer la synchronisation
+                            </button>
+                            <button class="admin-btn-secondary" onclick="exportBackup()">
+                                <i class="fas fa-download"></i> Exporter sauvegarde
+                            </button>
+                            <button class="admin-btn-secondary" onclick="importBackup()">
+                                <i class="fas fa-upload"></i> Importer sauvegarde
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="backup-data">Données de sauvegarde</label>
+                        <textarea id="backup-data" class="admin-form-group" rows="6" placeholder="Les données de sauvegarde apparaîtront ici..."></textarea>
+                    </div>
+                    
+                    <div class="admin-help-text">
+                        <p><strong>Information :</strong> La synchronisation automatique utilise Firebase pour synchroniser vos données entre tous vos appareils. Assurez-vous de configurer Firebase correctement.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Stockage des données (simulé - en production, utiliser une base de données)
-        let adminPassword = "4SP@forsecuriteprivee2024"; // Mot de passe administrateur
-        let isAdminAuthenticated = false;
-        let currentService = 'service1';
-        let serviceImages = {
-            service1: {
-                main: '',
-                gallery: ['', '', '', '']
-            },
-            service2: {
-                main: '',
-                gallery: ['', '', '', '']
-            },
-            service3: {
-                main: '',
-                gallery: ['', '', '', '']
-            }
+        // ===== SYSTÈME DE SYNCHRONISATION MULTI-APPAREILS =====
+        
+        // Configuration Firebase par défaut (à personnaliser)
+        let firebaseConfig = {
+            apiKey: "votre_api_key_firebase",
+            authDomain: "votre-projet.firebaseapp.com",
+            projectId: "votre-projet",
+            storageBucket: "votre-projet.firebasestorage.app",
+            messagingSenderId: "123456789",
+            appId: "votre_app_id"
         };
+        
+        let db = null;
+        let isFirebaseInitialized = false;
+        let syncEnabled = false;
+        
+        // Initialiser Firebase
+        async function initializeFirebase() {
+            try {
+                // Charger la configuration sauvegardée
+                const savedConfig = localStorage.getItem('firebaseConfig');
+                if (savedConfig) {
+                    firebaseConfig = JSON.parse(savedConfig);
+                }
+                
+                if (typeof firebase !== 'undefined' && firebase.apps.length === 0) {
+                    firebase.initializeApp(firebaseConfig);
+                    db = firebase.firestore();
+                    isFirebaseInitialized = true;
+                    syncEnabled = true;
+                    
+                    console.log("Firebase initialisé avec succès");
+                    updateSyncStatus("Synchronisation Firebase active", true);
+                    
+                    // Écouter les changements en temps réel
+                    setupRealtimeSync();
+                    
+                    return true;
+                }
+            } catch (error) {
+                console.error("Erreur d'initialisation Firebase:", error);
+                updateSyncStatus("Synchronisation désactivée (Erreur Firebase)", false);
+                syncEnabled = false;
+            }
+            return false;
+        }
+        
+        // Mettre à jour le statut de synchronisation
+        function updateSyncStatus(message, isOnline) {
+            const statusElement = document.getElementById('syncStatus');
+            const detailsElement = document.getElementById('sync-details');
+            
+            if (statusElement) {
+                statusElement.textContent = `📡 ${message}`;
+                statusElement.className = `sync-status ${isOnline ? 'sync-online' : 'sync-offline'}`;
+            }
+            
+            if (detailsElement) {
+                detailsElement.innerHTML = `
+                    <i class="fas fa-${isOnline ? 'check-circle' : 'exclamation-triangle'}"></i> 
+                    ${message} | 
+                    Dernière sync: ${new Date().toLocaleTimeString()}
+                `;
+                detailsElement.className = `sync-status ${isOnline ? 'sync-online' : 'sync-offline'}`;
+            }
+        }
+        
+        // Configuration de la synchronisation en temps réel
+        function setupRealtimeSync() {
+            if (!isFirebaseInitialized) return;
+            
+            // Écouter les changements sur les données principales
+            const unsubscribe = db.collection('siteData')
+                .onSnapshot((snapshot) => {
+                    snapshot.docChanges().forEach((change) => {
+                        if (change.type === 'modified' || change.type === 'added') {
+                            const data = change.doc.data();
+                            console.log('Donnée synchronisée:', change.doc.id, data.value);
+                            
+                            // Mettre à jour le localStorage local
+                            localStorage.setItem(change.doc.id, data.value);
+                            
+                            // Mettre à jour l'interface si nécessaire
+                            updateUIFromSync(change.doc.id, data.value);
+                        }
+                    });
+                    updateSyncStatus("Synchronisation en temps réel active", true);
+                }, (error) => {
+                    console.error("Erreur synchronisation temps réel:", error);
+                    updateSyncStatus("Sync temps réel interrompue", false);
+                });
+        }
+        
+        // Mettre à jour l'interface depuis la synchronisation
+        function updateUIFromSync(key, value) {
+            // Mettre à jour les éléments UI en fonction de la clé synchronisée
+            const element = document.getElementById(key.replace('sync-', ''));
+            if (element) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.value = value;
+                } else {
+                    element.textContent = value;
+                }
+            }
+        }
+        
+        // Sauvegarder une donnée avec synchronisation
+        async function saveSyncedData(key, value) {
+            // Sauvegarde locale immédiate
+            localStorage.setItem(key, value);
+            
+            // Sauvegarde cloud si Firebase est actif
+            if (isFirebaseInitialized && syncEnabled) {
+                try {
+                    await db.collection('siteData').doc(key).set({
+                        value: value,
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
+                        syncedFrom: navigator.userAgent
+                    });
+                    console.log("Donnée synchronisée vers cloud:", key);
+                    return true;
+                } catch (error) {
+                    console.error("Erreur sauvegarde cloud, utilisation locale seulement:", error);
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+        // Charger une donnée avec priorité cloud
+        async function loadSyncedData(key) {
+            // Essayer d'abord le cloud
+            if (isFirebaseInitialized && syncEnabled) {
+                try {
+                    const doc = await db.collection('siteData').doc(key).get();
+                    if (doc.exists) {
+                        const data = doc.data();
+                        localStorage.setItem(key, data.value); // Mettre à jour le cache local
+                        return data.value;
+                    }
+                } catch (error) {
+                    console.error("Erreur chargement cloud, utilisation locale:", error);
+                }
+            }
+            
+            // Fallback vers le stockage local
+            return localStorage.getItem(key);
+        }
+        
+        // Sauvegarder des données JSON
+        async function saveSyncedJSON(key, value) {
+            return await saveSyncedData(key, JSON.stringify(value));
+        }
+        
+        // Charger des données JSON
+        async function loadSyncedJSON(key) {
+            const data = await loadSyncedData(key);
+            return data ? JSON.parse(data) : null;
+        }
+        
+        // Forcer la synchronisation manuelle
+        async function forceSync() {
+            updateSyncStatus("Synchronisation manuelle en cours...", true);
+            
+            try {
+                // Synchroniser toutes les données locales vers le cloud
+                const keys = Object.keys(localStorage);
+                let syncedCount = 0;
+                
+                for (const key of keys) {
+                    if (key.startsWith('firebase')) continue; // Ignorer la config Firebase
+                    
+                    const value = localStorage.getItem(key);
+                    if (await saveSyncedData(key, value)) {
+                        syncedCount++;
+                    }
+                }
+                
+                updateSyncStatus(`Synchronisation terminée: ${syncedCount} données mises à jour`, true);
+            } catch (error) {
+                console.error("Erreur synchronisation manuelle:", error);
+                updateSyncStatus("Erreur lors de la synchronisation", false);
+            }
+        }
+        
+        // Exporter une sauvegarde
+        function exportBackup() {
+            const backupData = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (!key.startsWith('firebase')) { // Exclure la config Firebase
+                    backupData[key] = localStorage.getItem(key);
+                }
+            }
+            
+            const backupString = JSON.stringify(backupData, null, 2);
+            document.getElementById('backup-data').value = backupString;
+            
+            // Créer un fichier de téléchargement
+            const blob = new Blob([backupString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup-4sp-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            
+            updateSyncStatus("Sauvegarde exportée avec succès", true);
+        }
+        
+        // Importer une sauvegarde
+        async function importBackup() {
+            const backupString = document.getElementById('backup-data').value;
+            if (!backupString) {
+                alert("Veuillez coller les données de sauvegarde d'abord");
+                return;
+            }
+            
+            try {
+                const backupData = JSON.parse(backupString);
+                let importedCount = 0;
+                
+                for (const [key, value] of Object.entries(backupData)) {
+                    localStorage.setItem(key, value);
+                    await saveSyncedData(key, value); // Synchroniser avec le cloud
+                    importedCount++;
+                }
+                
+                updateSyncStatus(`Sauvegarde importée: ${importedCount} données restaurées`, true);
+                alert(`Sauvegarde restaurée avec succès! ${importedCount} données importées.`);
+                
+                // Recharger la page pour appliquer les changements
+                setTimeout(() => location.reload(), 2000);
+            } catch (error) {
+                console.error("Erreur import sauvegarde:", error);
+                alert("Erreur lors de l'import de la sauvegarde. Format invalide.");
+            }
+        }
+        
+        // Sauvegarder la configuration Firebase
+        function saveFirebaseConfig() {
+            try {
+                const configText = document.getElementById('firebase-config').value;
+                const config = JSON.parse(configText);
+                localStorage.setItem('firebaseConfig', JSON.stringify(config));
+                firebaseConfig = config;
+                
+                // Réinitialiser Firebase avec la nouvelle config
+                if (firebase.apps.length > 0) {
+                    firebase.app().delete();
+                }
+                initializeFirebase();
+                
+                alert("Configuration Firebase sauvegardée avec succès!");
+            } catch (error) {
+                alert("Erreur: Configuration JSON invalide");
+            }
+        }
+        
+        // ===== FIN DU SYSTÈME DE SYNCHRONISATION =====
         
         // Module AI SEO avancé
         const advancedSEOOptimizer = {
@@ -2399,7 +2718,6 @@
             },
             
             analyzeContentQuality: function() {
-                // Analyse sémantique approfondie du contenu
                 const content = this.extractAllText();
                 const analysis = {
                     wordCount: content.length,
@@ -2412,7 +2730,6 @@
             },
             
             extractAllText: function() {
-                // Extraire tout le texte pertinent de la page
                 const contentElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, .service-features, .benefits-list');
                 let allText = '';
                 
@@ -2424,12 +2741,10 @@
             },
             
             calculateKeywordDensity: function(content) {
-                // Calculer la densité des mots-clés cibles
                 const density = {};
                 const words = content.toLowerCase().split(/\s+/);
                 const totalWords = words.length;
                 
-                // Compter les occurrences pour chaque mot-clé
                 for (const category in this.keywordClusters) {
                     this.keywordClusters[category].forEach(keyword => {
                         const keywordWords = keyword.toLowerCase().split(/\s+/);
@@ -2452,7 +2767,6 @@
             },
             
             calculateSemanticRelevance: function(content) {
-                // Calculer un score de pertinence sémantique
                 let score = 0;
                 let keywordCount = 0;
                 
@@ -2471,7 +2785,6 @@
             },
             
             calculateReadability: function(content) {
-                // Calculer un score de lisibilité (simplifié)
                 const words = content.split(/\s+/);
                 const sentences = content.split(/[.!?]+/);
                 const wordCount = words.length;
@@ -2483,13 +2796,11 @@
                 const longWords = words.filter(word => word.length > 6).length;
                 const percentageLongWords = (longWords / wordCount) * 100;
                 
-                // Score basé sur la longueur moyenne des phrases et le pourcentage de mots longs
                 let score = 100 - (avgWordsPerSentence * 1.5) - (percentageLongWords * 0.5);
                 return Math.max(0, Math.min(100, score));
             },
             
             generateContentStrategy: function() {
-                // Génération de stratégie de contenu basée sur l'analyse des concurrents
                 const strategy = {
                     pillarPages: this.identifyPillarTopics(),
                     clusterContent: this.generateContentIdeas(),
@@ -2510,7 +2821,6 @@
             generateContentIdeas: function() {
                 const ideas = [];
                 
-                // Générer des idées de contenu basées sur les mots-clés
                 for (const category in this.keywordClusters) {
                     this.keywordClusters[category].forEach(keyword => {
                         ideas.push({
@@ -2531,22 +2841,18 @@
             },
             
             implementStrategy: function(strategy) {
-                // Implémenter la stratégie de contenu (à compléter)
                 console.log("Stratégie de contenu SEO:", strategy);
             },
             
             monitorRankings: function() {
-                // Surveillance continue des positions avec alertes
                 console.log("Démarrage du monitoring SEO...");
                 
-                // Simuler un suivi régulier
                 setInterval(() => {
                     this.trackKeywordPositions();
-                }, 604800000); // Weekly tracking
+                }, 604800000);
             },
             
             trackKeywordPositions: function() {
-                // Simuler le tracking des positions (en production, utiliser une API)
                 console.log("Tracking des positions des mots-clés...");
             },
             
@@ -2561,7 +2867,6 @@
                     recommendations.push("Enrichir le contenu avec des termes sémantiquement liés");
                 }
                 
-                // Analyser la densité des mots-clés
                 for (const keyword in analysis.keywordDensity) {
                     const density = analysis.keywordDensity[keyword].density;
                     if (density < 0.5) {
@@ -2593,22 +2898,18 @@
             },
             
             setupAlerts: function() {
-                // Configurer des alertes pour les changements de position
                 console.log("Configuration des alertes SEO...");
             }
         };
         
         // Fonctions de navigation
         function showSection(sectionId) {
-            // Masquer toutes les sections de détail de service
             document.querySelectorAll('.service-detail').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Masquer le modal de rapport
             document.getElementById('reportModal').style.display = 'none';
             
-            // Afficher la section demandée
             if (sectionId === 'home') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (sectionId === 'services') {
@@ -2623,12 +2924,10 @@
         }
         
         function showService(serviceId) {
-            // Masquer toutes les sections de détail de service
             document.querySelectorAll('.service-detail').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Afficher le service demandé
             document.getElementById(serviceId).classList.add('active');
             document.getElementById(serviceId).scrollIntoView({ behavior: 'smooth' });
         }
@@ -2637,7 +2936,6 @@
             const modal = document.getElementById('reportModal');
             const modalContent = document.getElementById('modal-content');
             
-            // Charger le contenu du rapport
             const reports = JSON.parse(localStorage.getItem('reports') || '[]');
             const report = reports.find(r => r.id === reportId);
             
@@ -2660,7 +2958,6 @@
         // Fonctions d'administration
         function openAdmin() {
             document.getElementById('adminPanel').style.display = 'block';
-            // Réinitialiser à l'onglet de connexion
             document.getElementById('loginSection').classList.add('active');
             document.getElementById('adminMainSection').classList.remove('active');
             document.getElementById('adminPassword').value = '';
@@ -2678,7 +2975,6 @@
                 document.getElementById('loginSection').classList.remove('active');
                 document.getElementById('adminMainSection').classList.add('active');
                 
-                // Charger les données existantes
                 loadAdminData();
                 loadServiceData();
                 loadReports();
@@ -2688,97 +2984,111 @@
         }
         
         function switchTab(tabId, event) {
-            // Masquer tous les onglets
             document.querySelectorAll('.admin-section').forEach(tab => {
                 if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
                     tab.classList.remove('active');
                 }
             });
             
-            // Afficher l'onglet sélectionné
             document.getElementById(tabId).classList.add('active');
             
-            // Mettre à jour les onglets actifs
             document.querySelectorAll('.admin-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Ajouter la classe active à l'onglet cliqué
             if (event && event.currentTarget) {
                 event.currentTarget.classList.add('active');
             }
         }
         
-        function loadAdminData() {
-            // Charger les données existantes dans le formulaire d'administration
-            // Depuis le localStorage
-            if (localStorage.getItem('heroTitle')) {
-                document.getElementById('hero-title').value = localStorage.getItem('heroTitle');
-                document.getElementById('hero-text').value = localStorage.getItem('heroText');
-                document.getElementById('commercial-title').value = localStorage.getItem('commercialTitle');
-                document.getElementById('commercial-text').value = localStorage.getItem('commercialText');
-                document.getElementById('commercial-text-2').value = localStorage.getItem('commercialText2');
-                document.getElementById('about-title').value = localStorage.getItem('aboutTitle');
-                document.getElementById('about-text-1').value = localStorage.getItem('aboutText1');
-                document.getElementById('about-text-2').value = localStorage.getItem('aboutText2');
-                document.getElementById('about-values-title').value = localStorage.getItem('aboutValuesTitle');
-                document.getElementById('reports-description').value = localStorage.getItem('reportsDescription');
+        // Mot de passe administrateur
+        const adminPassword = "4SP@forsecuriteprivee2024";
+        let isAdminAuthenticated = false;
+        let currentService = 'service1';
+        let serviceImages = {
+            service1: { main: '', gallery: ['', '', '', ''] },
+            service2: { main: '', gallery: ['', '', '', ''] },
+            service3: { main: '', gallery: ['', '', '', ''] }
+        };
+        
+        // Charger les données administrateur (AVEC SYNCHRONISATION)
+        async function loadAdminData() {
+            // Charger les données avec priorité cloud
+            const heroTitle = await loadSyncedData('heroTitle');
+            if (heroTitle) {
+                document.getElementById('hero-title').value = heroTitle;
+                document.getElementById('hero-text').value = await loadSyncedData('heroText') || '';
+                document.getElementById('commercial-title').value = await loadSyncedData('commercialTitle') || '';
+                document.getElementById('commercial-text').value = await loadSyncedData('commercialText') || '';
+                document.getElementById('commercial-text-2').value = await loadSyncedData('commercialText2') || '';
+                document.getElementById('about-title').value = await loadSyncedData('aboutTitle') || '';
+                document.getElementById('about-text-1').value = await loadSyncedData('aboutText1') || '';
+                document.getElementById('about-text-2').value = await loadSyncedData('aboutText2') || '';
+                document.getElementById('about-values-title').value = await loadSyncedData('aboutValuesTitle') || '';
+                document.getElementById('reports-description').value = await loadSyncedData('reportsDescription') || '';
                 
                 // Header
-                document.getElementById('header-company-name').value = localStorage.getItem('headerCompanyName');
-                document.getElementById('header-company-slogan').value = localStorage.getItem('headerCompanySlogan');
+                document.getElementById('header-company-name').value = await loadSyncedData('headerCompanyName') || '';
+                document.getElementById('header-company-slogan').value = await loadSyncedData('headerCompanySlogan') || '';
                 
                 // Footer
-                document.getElementById('footer-title-1').value = localStorage.getItem('footerTitle1');
-                document.getElementById('footer-description-1').value = localStorage.getItem('footerDescription1');
-                document.getElementById('footer-agents-count').value = localStorage.getItem('footerAgentsCount');
-                document.getElementById('footer-title-2').value = localStorage.getItem('footerTitle2');
-                document.getElementById('footer-address').value = localStorage.getItem('footerAddress');
-                document.getElementById('footer-phone').value = localStorage.getItem('footerPhone');
-                document.getElementById('footer-email').value = localStorage.getItem('footerEmail');
-                document.getElementById('footer-title-3').value = localStorage.getItem('footerTitle3');
-                document.getElementById('footer-title-4').value = localStorage.getItem('footerTitle4');
-                document.getElementById('footer-year').value = localStorage.getItem('footerYear');
+                document.getElementById('footer-title-1').value = await loadSyncedData('footerTitle1') || '';
+                document.getElementById('footer-description-1').value = await loadSyncedData('footerDescription1') || '';
+                document.getElementById('footer-agents-count').value = await loadSyncedData('footerAgentsCount') || '';
+                document.getElementById('footer-title-2').value = await loadSyncedData('footerTitle2') || '';
+                document.getElementById('footer-address').value = await loadSyncedData('footerAddress') || '';
+                document.getElementById('footer-phone').value = await loadSyncedData('footerPhone') || '';
+                document.getElementById('footer-email').value = await loadSyncedData('footerEmail') || '';
+                document.getElementById('footer-title-3').value = await loadSyncedData('footerTitle3') || '';
+                document.getElementById('footer-title-4').value = await loadSyncedData('footerTitle4') || '';
+                document.getElementById('footer-year').value = await loadSyncedData('footerYear') || '';
                 
                 // Contact
-                document.getElementById('contact-title').value = localStorage.getItem('contactTitle');
-                document.getElementById('contact-description').value = localStorage.getItem('contactDescription');
-                document.getElementById('contact-address').value = localStorage.getItem('contactAddress');
-                document.getElementById('contact-phone').value = localStorage.getItem('contactPhone');
-                document.getElementById('contact-email').value = localStorage.getItem('contactEmail');
-                document.getElementById('contact-availability').value = localStorage.getItem('contactAvailability');
-                document.getElementById('contact-agents').value = localStorage.getItem('contactAgents');
-                document.getElementById('contact-form-title').value = localStorage.getItem('contactFormTitle');
+                document.getElementById('contact-title').value = await loadSyncedData('contactTitle') || '';
+                document.getElementById('contact-description').value = await loadSyncedData('contactDescription') || '';
+                document.getElementById('contact-address').value = await loadSyncedData('contactAddress') || '';
+                document.getElementById('contact-phone').value = await loadSyncedData('contactPhone') || '';
+                document.getElementById('contact-email').value = await loadSyncedData('contactEmail') || '';
+                document.getElementById('contact-availability').value = await loadSyncedData('contactAvailability') || '';
+                document.getElementById('contact-agents').value = await loadSyncedData('contactAgents') || '';
+                document.getElementById('contact-form-title').value = await loadSyncedData('contactFormTitle') || '';
                 
                 // Valeurs
-                document.getElementById('value-title-1').value = localStorage.getItem('valueTitle1');
-                document.getElementById('value-desc-1').value = localStorage.getItem('valueDesc1');
-                document.getElementById('value-title-2').value = localStorage.getItem('valueTitle2');
-                document.getElementById('value-desc-2').value = localStorage.getItem('valueDesc2');
-                document.getElementById('value-title-3').value = localStorage.getItem('valueTitle3');
-                document.getElementById('value-desc-3').value = localStorage.getItem('valueDesc3');
-                document.getElementById('value-title-4').value = localStorage.getItem('valueTitle4');
-                document.getElementById('value-desc-4').value = localStorage.getItem('valueDesc4');
+                document.getElementById('value-title-1').value = await loadSyncedData('valueTitle1') || '';
+                document.getElementById('value-desc-1').value = await loadSyncedData('valueDesc1') || '';
+                document.getElementById('value-title-2').value = await loadSyncedData('valueTitle2') || '';
+                document.getElementById('value-desc-2').value = await loadSyncedData('valueDesc2') || '';
+                document.getElementById('value-title-3').value = await loadSyncedData('valueTitle3') || '';
+                document.getElementById('value-desc-3').value = await loadSyncedData('valueDesc3') || '';
+                document.getElementById('value-title-4').value = await loadSyncedData('valueTitle4') || '';
+                document.getElementById('value-desc-4').value = await loadSyncedData('valueDesc4') || '';
             }
             
-            // Charger les données des images
-            if (localStorage.getItem('serviceImages')) {
-                serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
+            // Charger les images des services
+            const savedServiceImages = await loadSyncedJSON('serviceImages');
+            if (savedServiceImages) {
+                serviceImages = savedServiceImages;
             }
             
             // Charger les couleurs
-            if (localStorage.getItem('primaryColor')) {
-                document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
-                document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
-                document.getElementById('accent-color').value = localStorage.getItem('accentColor');
+            const primaryColor = await loadSyncedData('primaryColor');
+            if (primaryColor) {
+                document.getElementById('primary-color').value = primaryColor;
+                document.getElementById('secondary-color').value = await loadSyncedData('secondaryColor') || '#000000';
+                document.getElementById('accent-color').value = await loadSyncedData('accentColor') || '#ffffff';
                 
-                // Mettre à jour les aperçus de couleur
                 updateColorPreview('primary-color', 'primary-color-preview');
                 updateColorPreview('secondary-color', 'secondary-color-preview');
                 updateColorPreview('accent-color', 'accent-color-preview');
             }
             
-            console.log("Données administrateur chargées");
+            // Charger la configuration Firebase
+            const savedFirebaseConfig = localStorage.getItem('firebaseConfig');
+            if (savedFirebaseConfig) {
+                document.getElementById('firebase-config').value = savedFirebaseConfig;
+            }
+            
+            console.log("Données administrateur chargées avec synchronisation");
         }
         
         function updateColorPreview(colorInputId, previewId) {
@@ -2787,7 +3097,6 @@
             if (previewElement) {
                 previewElement.style.backgroundColor = colorValue;
                 
-                // Ajouter une bordure pour les couleurs claires
                 if (colorValue === '#ffffff' || colorValue === '#fff' || colorValue === 'white') {
                     previewElement.style.border = '1px solid #ccc';
                 } else {
@@ -2796,16 +3105,16 @@
             }
         }
         
-        function loadServiceData() {
+        async function loadServiceData() {
             currentService = document.getElementById('service-selector').value;
             
-            // Charger les données du service sélectionné
-            if (localStorage.getItem(currentService + 'Title')) {
-                document.getElementById('service-title').value = localStorage.getItem(currentService + 'Title') || '';
-                document.getElementById('service-desc').value = localStorage.getItem(currentService + 'Desc') || '';
+            const serviceTitle = await loadSyncedData(currentService + 'Title');
+            if (serviceTitle) {
+                document.getElementById('service-title').value = serviceTitle;
+                document.getElementById('service-desc').value = await loadSyncedData(currentService + 'Desc') || '';
                 
                 // Charger les caractéristiques
-                const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+                const features = await loadSyncedJSON(currentService + 'Features') || [];
                 const featuresContainer = document.getElementById('service-features-container');
                 featuresContainer.innerHTML = '';
                 
@@ -2827,7 +3136,6 @@
                 
                 // Charger les images
                 if (serviceImages[currentService]) {
-                    // Image principale
                     const mainImagePreview = document.getElementById('service-main-image-preview');
                     if (serviceImages[currentService].main) {
                         mainImagePreview.innerHTML = `<img src="${serviceImages[currentService].main}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
@@ -2835,7 +3143,6 @@
                         mainImagePreview.innerHTML = '<div class="image-placeholder">Aucune image</div>';
                     }
                     
-                    // Images de galerie
                     const galleryContainer = document.getElementById('service-gallery-images');
                     galleryContainer.innerHTML = '';
                     
@@ -2860,7 +3167,6 @@
                         galleryContainer.appendChild(galleryItem);
                     });
                     
-                    // Mettre à jour l'état du bouton d'ajout
                     const addButton = document.getElementById('add-gallery-image-btn');
                     const galleryCount = serviceImages[currentService].gallery.filter(img => img !== '').length;
                     addButton.disabled = galleryCount >= 4;
@@ -2868,42 +3174,38 @@
             }
         }
         
-        function addFeature() {
-            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
-            
+        async function addFeature() {
+            const features = await loadSyncedJSON(currentService + 'Features') || [];
             features.push('Nouvelle caractéristique');
-            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
-            
-            loadServiceData(); // Recharger pour afficher la nouvelle caractéristique
+            await saveSyncedJSON(currentService + 'Features', features);
+            loadServiceData();
         }
         
-        function updateFeature(index, value) {
-            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+        async function updateFeature(index, value) {
+            const features = await loadSyncedJSON(currentService + 'Features') || [];
             features[index] = value;
-            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
+            await saveSyncedJSON(currentService + 'Features', features);
         }
         
-        function removeFeature(index) {
-            const features = JSON.parse(localStorage.getItem(currentService + 'Features') || '[]');
+        async function removeFeature(index) {
+            const features = await loadSyncedJSON(currentService + 'Features') || [];
             features.splice(index, 1);
-            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
-            
-            loadServiceData(); // Recharger pour mettre à jour l'affichage
+            await saveSyncedJSON(currentService + 'Features', features);
+            loadServiceData();
         }
         
         function previewMainImage(input) {
             const file = input.files[0];
             if (file) {
-                // Vérifier le type de fichier
                 if (!file.type.match('image.*')) {
                     alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
                     return;
                 }
                 
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     serviceImages[currentService].main = e.target.result;
-                    localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+                    await saveSyncedJSON('serviceImages', serviceImages);
                     
                     const preview = document.getElementById('service-main-image-preview');
                     preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
@@ -2914,19 +3216,14 @@
         
         function addGalleryImage() {
             const gallery = serviceImages[currentService].gallery;
-            
-            // Vérifier si nous avons moins de 4 images
             const imageCount = gallery.filter(img => img !== '').length;
             if (imageCount >= 4) {
                 alert("Vous avez atteint le nombre maximum d'images (4) pour cette galerie.");
                 return;
             }
             
-            // Trouver le premier emplacement vide
             const emptyIndex = gallery.findIndex(img => img === '');
-            
             if (emptyIndex !== -1) {
-                // Simuler un clic sur l'input file du premier emplacement vide
                 const galleryItems = document.querySelectorAll('.service-image-item');
                 if (galleryItems[emptyIndex]) {
                     const fileInput = galleryItems[emptyIndex].querySelector('input[type="file"]');
@@ -2935,62 +3232,55 @@
             }
         }
         
-        function updateGalleryImage(index, input) {
+        async function updateGalleryImage(index, input) {
             const file = input.files[0];
             if (file) {
-                // Vérifier le type de fichier
                 if (!file.type.match('image.*')) {
                     alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
                     return;
                 }
                 
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     serviceImages[currentService].gallery[index] = e.target.result;
-                    localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
-                    
-                    // Mettre à jour l'affichage
+                    await saveSyncedJSON('serviceImages', serviceImages);
                     loadServiceData();
                 };
                 reader.readAsDataURL(file);
             }
         }
         
-        function removeGalleryImage(index) {
+        async function removeGalleryImage(index) {
             serviceImages[currentService].gallery[index] = '';
-            localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
-            
-            // Mettre à jour l'affichage
+            await saveSyncedJSON('serviceImages', serviceImages);
             loadServiceData();
         }
         
-        function saveServiceData() {
+        async function saveServiceData() {
             const title = document.getElementById('service-title').value;
             const description = document.getElementById('service-desc').value;
             
-            // Sauvegarder les données
-            localStorage.setItem(currentService + 'Title', title);
-            localStorage.setItem(currentService + 'Desc', description);
+            // Sauvegarder avec synchronisation
+            await saveSyncedData(currentService + 'Title', title);
+            await saveSyncedData(currentService + 'Desc', description);
             
             // Sauvegarder les caractéristiques
             const features = [];
             document.querySelectorAll('#service-features-container input').forEach(input => {
                 features.push(input.value);
             });
-            localStorage.setItem(currentService + 'Features', JSON.stringify(features));
+            await saveSyncedJSON(currentService + 'Features', features);
             
-            localStorage.setItem('serviceImages', JSON.stringify(serviceImages));
+            await saveSyncedJSON('serviceImages', serviceImages);
             
             // Mettre à jour l'affichage sur le site
             document.getElementById(currentService + '-title').textContent = title;
             document.getElementById(currentService + '-desc').textContent = description;
             
-            // Mettre à jour l'image principale
             if (serviceImages[currentService].main) {
                 document.getElementById(currentService + '-main-image').src = serviceImages[currentService].main;
             }
             
-            // Mettre à jour la galerie
             const galleryContainer = document.getElementById(currentService + '-gallery');
             if (galleryContainer && serviceImages[currentService]) {
                 galleryContainer.innerHTML = '';
@@ -3004,7 +3294,6 @@
                 });
             }
             
-            // Mettre à jour les caractéristiques
             const featuresContainer = document.getElementById(currentService + '-features');
             if (featuresContainer) {
                 featuresContainer.innerHTML = '';
@@ -3015,7 +3304,6 @@
                 });
             }
             
-            // Mettre à jour les caractéristiques détaillées
             const detailFeaturesContainer = document.getElementById(currentService + '-detail-features');
             if (detailFeaturesContainer) {
                 detailFeaturesContainer.innerHTML = '';
@@ -3026,10 +3314,10 @@
                 });
             }
             
-            alert("Service enregistré et mis à jour avec succès!");
+            alert("Service enregistré et synchronisé avec succès!");
         }
         
-        function addReport() {
+        async function addReport() {
             const title = document.getElementById('report-title').value;
             const date = document.getElementById('report-date').value;
             const content = document.getElementById('report-content').value;
@@ -3039,15 +3327,11 @@
                 return;
             }
             
-            // Générer un ID unique pour le rapport
             const reportId = 'report_' + Date.now();
-            
-            // Récupérer l'image si elle existe
             const reportImagePreview = document.getElementById('reportImagePreview');
             const image = reportImagePreview.querySelector('img') ? reportImagePreview.querySelector('img').src : '';
             
-            // Ajouter le rapport à la liste
-            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+            const reports = await loadSyncedJSON('reports') || [];
             reports.push({
                 id: reportId,
                 title,
@@ -3056,29 +3340,24 @@
                 image
             });
             
-            localStorage.setItem('reports', JSON.stringify(reports));
-            
-            // Recharger les rapports
+            await saveSyncedJSON('reports', reports);
             loadReports();
             
-            // Réinitialiser le formulaire
             document.getElementById('report-title').value = '';
             document.getElementById('report-date').value = '';
             document.getElementById('report-content').value = '';
             document.getElementById('reportImagePreview').innerHTML = '';
             
-            alert("Rapport ajouté avec succès!");
+            alert("Rapport ajouté et synchronisé avec succès!");
         }
         
-        function loadReports() {
-            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+        async function loadReports() {
+            const reports = await loadSyncedJSON('reports') || [];
             const reportsContainer = document.getElementById('existing-reports');
             const reportsGrid = document.getElementById('reports-grid');
             
-            // Trier les rapports par date (du plus récent au plus ancien)
             reports.sort((a, b) => new Date(b.date) - new Date(a.date));
             
-            // Afficher les rapports dans l'admin
             if (reportsContainer) {
                 reportsContainer.innerHTML = '';
                 
@@ -3094,7 +3373,6 @@
                 });
             }
             
-            // Afficher les rapports sur le site
             if (reportsGrid) {
                 reportsGrid.innerHTML = '';
                 
@@ -3121,17 +3399,15 @@
             }
         }
         
-        function editReport(reportId) {
-            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+        async function editReport(reportId) {
+            const reports = await loadSyncedJSON('reports') || [];
             const report = reports.find(r => r.id === reportId);
             
             if (report) {
-                // Remplir le formulaire avec les données du rapport
                 document.getElementById('report-title').value = report.title;
                 document.getElementById('report-date').value = report.date;
                 document.getElementById('report-content').value = report.content;
                 
-                // Afficher l'image si elle existe
                 const reportImagePreview = document.getElementById('reportImagePreview');
                 if (report.image) {
                     reportImagePreview.innerHTML = `<img src="${report.image}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
@@ -3139,17 +3415,14 @@
                     reportImagePreview.innerHTML = '';
                 }
                 
-                // Supprimer l'ancien rapport
                 deleteReport(reportId, false);
             }
         }
         
-        function deleteReport(reportId, showAlert = true) {
-            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+        async function deleteReport(reportId, showAlert = true) {
+            const reports = await loadSyncedJSON('reports') || [];
             const updatedReports = reports.filter(r => r.id !== reportId);
-            localStorage.setItem('reports', JSON.stringify(updatedReports));
-            
-            // Recharger les rapports
+            await saveSyncedJSON('reports', updatedReports);
             loadReports();
             
             if (showAlert) {
@@ -3157,7 +3430,7 @@
             }
         }
         
-        function saveContent() {
+        async function saveContent() {
             const heroTitle = document.getElementById('hero-title').value;
             const heroText = document.getElementById('hero-text').value;
             const commercialTitle = document.getElementById('commercial-title').value;
@@ -3179,27 +3452,27 @@
             const valueTitle4 = document.getElementById('value-title-4').value;
             const valueDesc4 = document.getElementById('value-desc-4').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('heroTitle', heroTitle);
-            localStorage.setItem('heroText', heroText);
-            localStorage.setItem('commercialTitle', commercialTitle);
-            localStorage.setItem('commercialText', commercialText);
-            localStorage.setItem('commercialText2', commercialText2);
-            localStorage.setItem('aboutTitle', aboutTitle);
-            localStorage.setItem('aboutText1', aboutText1);
-            localStorage.setItem('aboutText2', aboutText2);
-            localStorage.setItem('aboutValuesTitle', aboutValuesTitle);
-            localStorage.setItem('reportsDescription', reportsDescription);
+            // Sauvegarder avec synchronisation
+            await saveSyncedData('heroTitle', heroTitle);
+            await saveSyncedData('heroText', heroText);
+            await saveSyncedData('commercialTitle', commercialTitle);
+            await saveSyncedData('commercialText', commercialText);
+            await saveSyncedData('commercialText2', commercialText2);
+            await saveSyncedData('aboutTitle', aboutTitle);
+            await saveSyncedData('aboutText1', aboutText1);
+            await saveSyncedData('aboutText2', aboutText2);
+            await saveSyncedData('aboutValuesTitle', aboutValuesTitle);
+            await saveSyncedData('reportsDescription', reportsDescription);
             
             // Valeurs
-            localStorage.setItem('valueTitle1', valueTitle1);
-            localStorage.setItem('valueDesc1', valueDesc1);
-            localStorage.setItem('valueTitle2', valueTitle2);
-            localStorage.setItem('valueDesc2', valueDesc2);
-            localStorage.setItem('valueTitle3', valueTitle3);
-            localStorage.setItem('valueDesc3', valueDesc3);
-            localStorage.setItem('valueTitle4', valueTitle4);
-            localStorage.setItem('valueDesc4', valueDesc4);
+            await saveSyncedData('valueTitle1', valueTitle1);
+            await saveSyncedData('valueDesc1', valueDesc1);
+            await saveSyncedData('valueTitle2', valueTitle2);
+            await saveSyncedData('valueDesc2', valueDesc2);
+            await saveSyncedData('valueTitle3', valueTitle3);
+            await saveSyncedData('valueDesc3', valueDesc3);
+            await saveSyncedData('valueTitle4', valueTitle4);
+            await saveSyncedData('valueDesc4', valueDesc4);
             
             // Mettre à jour le contenu de la page en direct
             document.getElementById('hero-main-title').textContent = heroTitle;
@@ -3227,43 +3500,40 @@
             const aboutImageInput = document.getElementById('about-main-image');
             if (aboutImageInput.files.length > 0) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     document.getElementById('about-main-image').src = e.target.result;
-                    localStorage.setItem('aboutMainImage', e.target.result);
+                    await saveSyncedData('aboutMainImage', e.target.result);
                 };
                 reader.readAsDataURL(aboutImageInput.files[0]);
             }
             
-            alert("Contenu enregistré et mis à jour avec succès!");
+            alert("Contenu enregistré et synchronisé avec succès!");
         }
         
-        function saveHeader() {
+        async function saveHeader() {
             const companyName = document.getElementById('header-company-name').value;
             const companySlogan = document.getElementById('header-company-slogan').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('headerCompanyName', companyName);
-            localStorage.setItem('headerCompanySlogan', companySlogan);
+            await saveSyncedData('headerCompanyName', companyName);
+            await saveSyncedData('headerCompanySlogan', companySlogan);
             
-            // Mettre à jour l'affichage
             document.getElementById('header-company-name').textContent = companyName;
             document.getElementById('header-company-slogan').textContent = companySlogan;
             
-            // Logo
             const logoInput = document.getElementById('logo-upload');
             if (logoInput.files.length > 0) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     document.getElementById('logo-image').src = e.target.result;
-                    localStorage.setItem('logo', e.target.result);
+                    await saveSyncedData('logo', e.target.result);
                 };
                 reader.readAsDataURL(logoInput.files[0]);
             }
             
-            alert("En-tête enregistré et mis à jour avec succès!");
+            alert("En-tête enregistré et synchronisé avec succès!");
         }
         
-        function saveFooter() {
+        async function saveFooter() {
             const footerTitle1 = document.getElementById('footer-title-1').value;
             const footerDescription1 = document.getElementById('footer-description-1').value;
             const footerAgentsCount = document.getElementById('footer-agents-count').value;
@@ -3275,19 +3545,17 @@
             const footerTitle4 = document.getElementById('footer-title-4').value;
             const footerYear = document.getElementById('footer-year').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('footerTitle1', footerTitle1);
-            localStorage.setItem('footerDescription1', footerDescription1);
-            localStorage.setItem('footerAgentsCount', footerAgentsCount);
-            localStorage.setItem('footerTitle2', footerTitle2);
-            localStorage.setItem('footerAddress', footerAddress);
-            localStorage.setItem('footerPhone', footerPhone);
-            localStorage.setItem('footerEmail', footerEmail);
-            localStorage.setItem('footerTitle3', footerTitle3);
-            localStorage.setItem('footerTitle4', footerTitle4);
-            localStorage.setItem('footerYear', footerYear);
+            await saveSyncedData('footerTitle1', footerTitle1);
+            await saveSyncedData('footerDescription1', footerDescription1);
+            await saveSyncedData('footerAgentsCount', footerAgentsCount);
+            await saveSyncedData('footerTitle2', footerTitle2);
+            await saveSyncedData('footerAddress', footerAddress);
+            await saveSyncedData('footerPhone', footerPhone);
+            await saveSyncedData('footerEmail', footerEmail);
+            await saveSyncedData('footerTitle3', footerTitle3);
+            await saveSyncedData('footerTitle4', footerTitle4);
+            await saveSyncedData('footerYear', footerYear);
             
-            // Mettre à jour l'affichage
             document.getElementById('footer-title-1').textContent = footerTitle1;
             document.getElementById('footer-description-1').textContent = footerDescription1;
             document.getElementById('footer-agents-count').textContent = footerAgentsCount;
@@ -3299,10 +3567,10 @@
             document.getElementById('footer-title-4').textContent = footerTitle4;
             document.getElementById('footer-year').textContent = footerYear;
             
-            alert("Pied de page enregistré et mis à jour avec succès!");
+            alert("Pied de page enregistré et synchronisé avec succès!");
         }
         
-        function saveContact() {
+        async function saveContact() {
             const contactTitle = document.getElementById('contact-title').value;
             const contactDescription = document.getElementById('contact-description').value;
             const contactAddress = document.getElementById('contact-address').value;
@@ -3312,17 +3580,15 @@
             const contactAgents = document.getElementById('contact-agents').value;
             const contactFormTitle = document.getElementById('contact-form-title').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('contactTitle', contactTitle);
-            localStorage.setItem('contactDescription', contactDescription);
-            localStorage.setItem('contactAddress', contactAddress);
-            localStorage.setItem('contactPhone', contactPhone);
-            localStorage.setItem('contactEmail', contactEmail);
-            localStorage.setItem('contactAvailability', contactAvailability);
-            localStorage.setItem('contactAgents', contactAgents);
-            localStorage.setItem('contactFormTitle', contactFormTitle);
+            await saveSyncedData('contactTitle', contactTitle);
+            await saveSyncedData('contactDescription', contactDescription);
+            await saveSyncedData('contactAddress', contactAddress);
+            await saveSyncedData('contactPhone', contactPhone);
+            await saveSyncedData('contactEmail', contactEmail);
+            await saveSyncedData('contactAvailability', contactAvailability);
+            await saveSyncedData('contactAgents', contactAgents);
+            await saveSyncedData('contactFormTitle', contactFormTitle);
             
-            // Mettre à jour l'affichage
             document.getElementById('contact-title').textContent = contactTitle;
             document.getElementById('contact-description').textContent = contactDescription;
             document.getElementById('contact-address').textContent = contactAddress;
@@ -3332,21 +3598,18 @@
             document.getElementById('contact-agents').textContent = contactAgents;
             document.getElementById('contact-form-title').textContent = contactFormTitle;
             
-            alert("Informations de contact enregistrées et mises à jour avec succès!");
+            alert("Informations de contact enregistrées et synchronisées avec succès!");
         }
         
-        function saveSEO() {
+        async function saveSEO() {
             const metaTitle = document.getElementById('meta-title').value;
             const metaDescription = document.getElementById('meta-description').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('metaTitle', metaTitle);
-            localStorage.setItem('metaDescription', metaDescription);
+            await saveSyncedData('metaTitle', metaTitle);
+            await saveSyncedData('metaDescription', metaDescription);
             
-            // Mettre à jour la balise title
             document.title = metaTitle;
             
-            // Mettre à jour la meta description
             const metaDescTag = document.querySelector('meta[name="description"]');
             if (metaDescTag) {
                 metaDescTag.setAttribute('content', metaDescription);
@@ -3355,40 +3618,35 @@
             alert("Paramètres SEO enregistrés avec succès!");
         }
         
-        function saveAppearance() {
+        async function saveAppearance() {
             const primaryColor = document.getElementById('primary-color').value;
             const secondaryColor = document.getElementById('secondary-color').value;
             const accentColor = document.getElementById('accent-color').value;
             
-            // Sauvegarder dans le localStorage
-            localStorage.setItem('primaryColor', primaryColor);
-            localStorage.setItem('secondaryColor', secondaryColor);
-            localStorage.setItem('accentColor', accentColor);
+            await saveSyncedData('primaryColor', primaryColor);
+            await saveSyncedData('secondaryColor', secondaryColor);
+            await saveSyncedData('accentColor', accentColor);
             
-            // Mettre à jour les variables CSS
             document.documentElement.style.setProperty('--primary', primaryColor);
             document.documentElement.style.setProperty('--secondary', secondaryColor);
             document.documentElement.style.setProperty('--accent', accentColor);
             
-            alert("Apparence enregistrée et mise à jour avec succès!");
+            alert("Apparence enregistrée et synchronisée avec succès!");
         }
         
         function previewLogo(input) {
             const file = input.files[0];
             if (file) {
-                // Vérifier le type de fichier
                 if (!file.type.match('image.*')) {
                     alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
                     return;
                 }
                 
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Mettre à jour le logo
+                reader.onload = async function(e) {
                     document.getElementById('logo-image').src = e.target.result;
-                    localStorage.setItem('logo', e.target.result);
+                    await saveSyncedData('logo', e.target.result);
                     
-                    // Mettre à jour l'aperçu
                     const preview = document.getElementById('logo-preview');
                     preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
                 };
@@ -3405,7 +3663,6 @@
             const file = input.files[0];
             
             if (file) {
-                // Vérifier le type de fichier
                 if (!file.type.match('image.*')) {
                     alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
                     preview.innerHTML = '';
@@ -3424,7 +3681,6 @@
             }
         }
         
-        // Fonction pour basculer l'affichage des mentions légales
         function toggleLegalMentions() {
             const legalMentions = document.getElementById('legalMentions');
             legalMentions.classList.toggle('expanded');
@@ -3441,11 +3697,9 @@
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Masquer les messages précédents
             const messageElement = document.getElementById('form-message');
             messageElement.style.display = 'none';
             
-            // Afficher l'indicateur de chargement
             const submitBtn = document.getElementById('submit-btn');
             const btnText = document.getElementById('btn-text');
             const btnLoading = document.getElementById('btn-loading');
@@ -3455,7 +3709,6 @@
             submitBtn.disabled = true;
             
             try {
-                // Envoyer les données via Formspree
                 const formData = new FormData(this);
                 const response = await fetch(this.action, {
                     method: 'POST',
@@ -3466,28 +3719,21 @@
                 });
                 
                 if (response.ok) {
-                    // Afficher message de succès
                     messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
                     messageElement.className = 'form-message form-success';
                     messageElement.style.display = 'block';
-                    
-                    // Réinitialiser le formulaire
                     this.reset();
                 } else {
                     throw new Error('Erreur lors de l\'envoi');
                 }
             } catch (error) {
-                // Afficher message d'erreur
                 messageElement.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
                 messageElement.className = 'form-message form-error';
                 messageElement.style.display = 'block';
             } finally {
-                // Cacher l'indicateur de chargement
                 btnText.textContent = 'Envoyer la demande';
                 btnLoading.style.display = 'none';
                 submitBtn.disabled = false;
-                
-                // Faire défiler jusqu'au message
                 messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
@@ -3500,7 +3746,6 @@
             messageElement.className = 'form-message form-success';
             messageElement.style.display = 'block';
             
-            // Faire défiler jusqu'au message
             setTimeout(() => {
                 messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 500);
@@ -3529,16 +3774,19 @@
         });
         
         // Charger les données sauvegardées au chargement de la page
-        window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', async function() {
+            // Initialiser Firebase et la synchronisation
+            await initializeFirebase();
+            
             // Charger les données des services
             const services = ['service1', 'service2', 'service3'];
-            services.forEach(service => {
-                if (localStorage.getItem(service + 'Title')) {
-                    document.getElementById(service + '-title').textContent = localStorage.getItem(service + 'Title');
-                    document.getElementById(service + '-desc').textContent = localStorage.getItem(service + 'Desc');
+            for (const service of services) {
+                const serviceTitle = await loadSyncedData(service + 'Title');
+                if (serviceTitle) {
+                    document.getElementById(service + '-title').textContent = serviceTitle;
+                    document.getElementById(service + '-desc').textContent = await loadSyncedData(service + 'Desc') || '';
                     
-                    // Charger les caractéristiques
-                    const features = JSON.parse(localStorage.getItem(service + 'Features') || '[]');
+                    const features = await loadSyncedJSON(service + 'Features') || [];
                     const featuresContainer = document.getElementById(service + '-features');
                     if (featuresContainer) {
                         featuresContainer.innerHTML = '';
@@ -3549,68 +3797,69 @@
                         });
                     }
                 }
-            });
-            
-            // Charger le contenu principal
-            if (localStorage.getItem('heroTitle')) {
-                document.getElementById('hero-main-title').textContent = localStorage.getItem('heroTitle');
-                document.getElementById('hero-subtitle').textContent = localStorage.getItem('heroText');
-                document.getElementById('commercial-title').textContent = localStorage.getItem('commercialTitle');
-                document.getElementById('commercial-text').innerHTML = localStorage.getItem('commercialText');
-                document.getElementById('commercial-text-2').innerHTML = localStorage.getItem('commercialText2');
-                document.getElementById('about-title').textContent = localStorage.getItem('aboutTitle');
-                document.getElementById('about-text-1').textContent = localStorage.getItem('aboutText1');
-                document.getElementById('about-text-2').textContent = localStorage.getItem('aboutText2');
-                document.getElementById('about-values-title').textContent = localStorage.getItem('aboutValuesTitle');
-                document.getElementById('reports-description').textContent = localStorage.getItem('reportsDescription');
-                
-                // Header
-                document.getElementById('header-company-name').textContent = localStorage.getItem('headerCompanyName');
-                document.getElementById('header-company-slogan').textContent = localStorage.getItem('headerCompanySlogan');
-                
-                // Footer
-                document.getElementById('footer-title-1').textContent = localStorage.getItem('footerTitle1');
-                document.getElementById('footer-description-1').textContent = localStorage.getItem('footerDescription1');
-                document.getElementById('footer-agents-count').textContent = localStorage.getItem('footerAgentsCount');
-                document.getElementById('footer-title-2').textContent = localStorage.getItem('footerTitle2');
-                document.getElementById('footer-address').textContent = localStorage.getItem('footerAddress');
-                document.getElementById('footer-phone').textContent = localStorage.getItem('footerPhone');
-                document.getElementById('footer-email').textContent = localStorage.getItem('footerEmail');
-                document.getElementById('footer-title-3').textContent = localStorage.getItem('footerTitle3');
-                document.getElementById('footer-title-4').textContent = localStorage.getItem('footerTitle4');
-                document.getElementById('footer-year').textContent = localStorage.getItem('footerYear');
-                
-                // Contact
-                document.getElementById('contact-title').textContent = localStorage.getItem('contactTitle');
-                document.getElementById('contact-description').textContent = localStorage.getItem('contactDescription');
-                document.getElementById('contact-address').textContent = localStorage.getItem('contactAddress');
-                document.getElementById('contact-phone').textContent = localStorage.getItem('contactPhone');
-                document.getElementById('contact-email').textContent = localStorage.getItem('contactEmail');
-                document.getElementById('contact-availability').textContent = localStorage.getItem('contactAvailability');
-                document.getElementById('contact-agents').textContent = localStorage.getItem('contactAgents');
-                document.getElementById('contact-form-title').textContent = localStorage.getItem('contactFormTitle');
-                
-                // Valeurs
-                document.getElementById('value-title-1').textContent = localStorage.getItem('valueTitle1');
-                document.getElementById('value-desc-1').textContent = localStorage.getItem('valueDesc1');
-                document.getElementById('value-title-2').textContent = localStorage.getItem('valueTitle2');
-                document.getElementById('value-desc-2').textContent = localStorage.getItem('valueDesc2');
-                document.getElementById('value-title-3').textContent = localStorage.getItem('valueTitle3');
-                document.getElementById('value-desc-3').textContent = localStorage.getItem('valueDesc3');
-                document.getElementById('value-title-4').textContent = localStorage.getItem('valueTitle4');
-                document.getElementById('value-desc-4').textContent = localStorage.getItem('valueDesc4');
             }
             
-            if (localStorage.getItem('serviceImages')) {
-                serviceImages = JSON.parse(localStorage.getItem('serviceImages'));
+            // Charger le contenu principal avec synchronisation
+            const heroTitle = await loadSyncedData('heroTitle');
+            if (heroTitle) {
+                document.getElementById('hero-main-title').textContent = heroTitle;
+                document.getElementById('hero-subtitle').textContent = await loadSyncedData('heroText') || '';
+                document.getElementById('commercial-title').textContent = await loadSyncedData('commercialTitle') || '';
+                document.getElementById('commercial-text').innerHTML = await loadSyncedData('commercialText') || '';
+                document.getElementById('commercial-text-2').innerHTML = await loadSyncedData('commercialText2') || '';
+                document.getElementById('about-title').textContent = await loadSyncedData('aboutTitle') || '';
+                document.getElementById('about-text-1').textContent = await loadSyncedData('aboutText1') || '';
+                document.getElementById('about-text-2').textContent = await loadSyncedData('aboutText2') || '';
+                document.getElementById('about-values-title').textContent = await loadSyncedData('aboutValuesTitle') || '';
+                document.getElementById('reports-description').textContent = await loadSyncedData('reportsDescription') || '';
                 
-                // Mettre à jour les images des services
+                // Header
+                document.getElementById('header-company-name').textContent = await loadSyncedData('headerCompanyName') || '';
+                document.getElementById('header-company-slogan').textContent = await loadSyncedData('headerCompanySlogan') || '';
+                
+                // Footer
+                document.getElementById('footer-title-1').textContent = await loadSyncedData('footerTitle1') || '';
+                document.getElementById('footer-description-1').textContent = await loadSyncedData('footerDescription1') || '';
+                document.getElementById('footer-agents-count').textContent = await loadSyncedData('footerAgentsCount') || '';
+                document.getElementById('footer-title-2').textContent = await loadSyncedData('footerTitle2') || '';
+                document.getElementById('footer-address').textContent = await loadSyncedData('footerAddress') || '';
+                document.getElementById('footer-phone').textContent = await loadSyncedData('footerPhone') || '';
+                document.getElementById('footer-email').textContent = await loadSyncedData('footerEmail') || '';
+                document.getElementById('footer-title-3').textContent = await loadSyncedData('footerTitle3') || '';
+                document.getElementById('footer-title-4').textContent = await loadSyncedData('footerTitle4') || '';
+                document.getElementById('footer-year').textContent = await loadSyncedData('footerYear') || '';
+                
+                // Contact
+                document.getElementById('contact-title').textContent = await loadSyncedData('contactTitle') || '';
+                document.getElementById('contact-description').textContent = await loadSyncedData('contactDescription') || '';
+                document.getElementById('contact-address').textContent = await loadSyncedData('contactAddress') || '';
+                document.getElementById('contact-phone').textContent = await loadSyncedData('contactPhone') || '';
+                document.getElementById('contact-email').textContent = await loadSyncedData('contactEmail') || '';
+                document.getElementById('contact-availability').textContent = await loadSyncedData('contactAvailability') || '';
+                document.getElementById('contact-agents').textContent = await loadSyncedData('contactAgents') || '';
+                document.getElementById('contact-form-title').textContent = await loadSyncedData('contactFormTitle') || '';
+                
+                // Valeurs
+                document.getElementById('value-title-1').textContent = await loadSyncedData('valueTitle1') || '';
+                document.getElementById('value-desc-1').textContent = await loadSyncedData('valueDesc1') || '';
+                document.getElementById('value-title-2').textContent = await loadSyncedData('valueTitle2') || '';
+                document.getElementById('value-desc-2').textContent = await loadSyncedData('valueDesc2') || '';
+                document.getElementById('value-title-3').textContent = await loadSyncedData('valueTitle3') || '';
+                document.getElementById('value-desc-3').textContent = await loadSyncedData('valueDesc3') || '';
+                document.getElementById('value-title-4').textContent = await loadSyncedData('valueTitle4') || '';
+                document.getElementById('value-desc-4').textContent = await loadSyncedData('valueDesc4') || '';
+            }
+            
+            // Charger les images des services
+            const savedServiceImages = await loadSyncedJSON('serviceImages');
+            if (savedServiceImages) {
+                serviceImages = savedServiceImages;
+                
                 services.forEach(service => {
                     if (serviceImages[service] && serviceImages[service].main) {
                         document.getElementById(service + '-main-image').src = serviceImages[service].main;
                     }
                     
-                    // Mettre à jour les galeries
                     const galleryContainer = document.getElementById(service + '-gallery');
                     if (galleryContainer && serviceImages[service]) {
                         galleryContainer.innerHTML = '';
@@ -3626,35 +3875,34 @@
                 });
             }
             
-            if (localStorage.getItem('metaTitle')) {
-                document.title = localStorage.getItem('metaTitle');
+            // Charger les métadonnées SEO
+            const metaTitle = await loadSyncedData('metaTitle');
+            if (metaTitle) {
+                document.title = metaTitle;
                 const metaDescTag = document.querySelector('meta[name="description"]');
-                if (metaDescTag && localStorage.getItem('metaDescription')) {
-                    metaDescTag.setAttribute('content', localStorage.getItem('metaDescription'));
+                if (metaDescTag) {
+                    metaDescTag.setAttribute('content', await loadSyncedData('metaDescription') || '');
                 }
             }
             
-            if (localStorage.getItem('primaryColor')) {
-                document.documentElement.style.setProperty('--primary', localStorage.getItem('primaryColor'));
-                document.documentElement.style.setProperty('--secondary', localStorage.getItem('secondaryColor'));
-                document.documentElement.style.setProperty('--accent', localStorage.getItem('accentColor'));
-                
-                document.getElementById('primary-color').value = localStorage.getItem('primaryColor');
-                document.getElementById('secondary-color').value = localStorage.getItem('secondaryColor');
-                document.getElementById('accent-color').value = localStorage.getItem('accentColor');
-                
-                // Mettre à jour les aperçus de couleur
-                updateColorPreview('primary-color', 'primary-color-preview');
-                updateColorPreview('secondary-color', 'secondary-color-preview');
-                updateColorPreview('accent-color', 'accent-color-preview');
+            // Charger les couleurs
+            const primaryColor = await loadSyncedData('primaryColor');
+            if (primaryColor) {
+                document.documentElement.style.setProperty('--primary', primaryColor);
+                document.documentElement.style.setProperty('--secondary', await loadSyncedData('secondaryColor') || '#000000');
+                document.documentElement.style.setProperty('--accent', await loadSyncedData('accentColor') || '#ffffff');
             }
             
-            if (localStorage.getItem('logo')) {
-                document.getElementById('logo-image').src = localStorage.getItem('logo');
+            // Charger le logo
+            const logo = await loadSyncedData('logo');
+            if (logo) {
+                document.getElementById('logo-image').src = logo;
             }
             
-            if (localStorage.getItem('aboutMainImage')) {
-                document.getElementById('about-main-image').src = localStorage.getItem('aboutMainImage');
+            // Charger l'image à propos
+            const aboutMainImage = await loadSyncedData('aboutMainImage');
+            if (aboutMainImage) {
+                document.getElementById('about-main-image').src = aboutMainImage;
             }
             
             // Charger les rapports
