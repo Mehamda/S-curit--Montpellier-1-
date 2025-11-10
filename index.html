@@ -57,6 +57,10 @@
             --dark: #2c2c2c; /* Noir plus clair */
             --light: #f5f5f5; /* Gris très clair */
             --text: #333333; /* Texte foncé */
+            --container-padding: clamp(1rem, 4vw, 2rem);
+            --section-padding: clamp(3rem, 8vw, 6rem);
+            --heading-size: clamp(1.8rem, 5vw, 2.8rem);
+            --text-size: clamp(1rem, 2.5vw, 1.2rem);
         }
         
         * {
@@ -66,18 +70,23 @@
             font-family: 'Montserrat', sans-serif;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: var(--text-size);
         }
         
         /* Header */
         header {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
             color: var(--accent);
-            padding: 1rem 2rem;
+            padding: 1rem var(--container-padding);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -93,18 +102,19 @@
         }
         
         .logo {
-            width: 120px;
-            height: 120px;
+            width: clamp(80px, 12vw, 120px);
+            height: clamp(80px, 12vw, 120px);
             background: var(--accent);
             border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 15px;
+            margin-right: clamp(0.5rem, 2vw, 1rem);
             border: 3px solid var(--primary);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             transition: transform 0.3s;
+            flex-shrink: 0;
         }
         
         .logo:hover {
@@ -119,14 +129,15 @@
         }
         
         .company-name {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: 800;
             letter-spacing: 0.5px;
             color: var(--accent);
+            line-height: 1.2;
         }
         
         .company-slogan {
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             opacity: 0.9;
             font-weight: 300;
             color: var(--accent);
@@ -135,10 +146,12 @@
         nav ul {
             display: flex;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         
         nav ul li {
-            margin-left: 20px;
+            margin-left: clamp(0.5rem, 1.5vw, 1.25rem);
         }
         
         nav ul li a {
@@ -146,9 +159,10 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            padding: 8px 15px;
+            padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
             border-radius: 4px;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            white-space: nowrap;
         }
         
         nav ul li a:hover {
@@ -156,10 +170,21 @@
             transform: translateY(-2px);
         }
         
+        /* Menu mobile */
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            height: 90vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -167,11 +192,11 @@
             text-align: center;
             color: var(--accent);
             position: relative;
-            padding: 0 2rem;
+            padding: 0 var(--container-padding);
         }
         
         .hero-content {
-            max-width: 900px;
+            max-width: min(900px, 90vw);
             animation: fadeIn 1.5s ease-in-out;
         }
         
@@ -181,14 +206,15 @@
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 7vw, 3.5rem);
             margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             font-weight: 800;
+            line-height: 1.2;
         }
         
         .hero p {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             margin-bottom: 2.5rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             font-weight: 300;
@@ -198,7 +224,7 @@
             display: inline-block;
             background: var(--primary);
             color: var(--accent);
-            padding: 15px 40px;
+            padding: clamp(0.75rem, 2.5vw, 1rem) clamp(1.5rem, 5vw, 2.5rem);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
@@ -206,9 +232,10 @@
             box-shadow: 0 4px 15px rgba(227, 6, 19, 0.3);
             border: none;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             letter-spacing: 1px;
             text-transform: uppercase;
+            white-space: nowrap;
         }
         
         .btn:hover {
@@ -223,25 +250,25 @@
         
         /* Commercial Presentation */
         .commercial-presentation {
-            padding: 6rem 2rem;
+            padding: var(--section-padding) var(--container-padding);
             text-align: center;
             background: var(--accent);
         }
         
         .commercial-content {
-            max-width: 1000px;
+            max-width: min(1000px, 90vw);
             margin: 0 auto;
         }
         
         .commercial-content h2 {
-            font-size: 2.8rem;
+            font-size: var(--heading-size);
             color: var(--secondary);
             margin-bottom: 2rem;
             font-weight: 700;
         }
         
         .commercial-content p {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             margin-bottom: 2rem;
             color: var(--text);
             line-height: 1.8;
@@ -254,13 +281,13 @@
         
         /* Services Section */
         .services {
-            padding: 6rem 2rem;
+            padding: var(--section-padding) var(--container-padding);
             text-align: center;
             background: var(--light);
         }
         
         .section-title {
-            font-size: 2.8rem;
+            font-size: var(--heading-size);
             margin-bottom: 3rem;
             color: var(--secondary);
             position: relative;
@@ -282,8 +309,8 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: clamp(1.5rem, 4vw, 3rem);
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -321,7 +348,7 @@
         }
         
         .service-image {
-            height: 250px;
+            height: clamp(200px, 40vw, 250px);
             overflow: hidden;
         }
         
@@ -337,11 +364,11 @@
         }
         
         .service-content {
-            padding: 2.5rem;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
         }
         
         .service-icon {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
             color: var(--secondary);
             margin-bottom: 1.5rem;
             transition: all 0.3s;
@@ -353,7 +380,7 @@
         }
         
         .service-card h3 {
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             margin-bottom: 1.2rem;
             color: var(--secondary);
             transition: all 0.3s;
@@ -394,7 +421,7 @@
         /* Service Detail Pages */
         .service-detail {
             display: none;
-            padding: 6rem 2rem;
+            padding: var(--section-padding) var(--container-padding);
             background: var(--accent);
         }
         
@@ -404,7 +431,7 @@
         
         .service-hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-            padding: 4rem 2rem;
+            padding: clamp(2rem, 6vw, 4rem) var(--container-padding);
             text-align: center;
             color: var(--accent);
             border-radius: 15px;
@@ -418,14 +445,14 @@
         
         .service-detail-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(1.5rem, 4vw, 3rem);
             align-items: center;
         }
         
         .service-benefits {
             background: var(--light);
-            padding: 2.5rem;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
             border-radius: 15px;
         }
         
@@ -450,7 +477,7 @@
         
         .service-gallery {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
             gap: 1rem;
             margin-top: 2rem;
         }
@@ -458,7 +485,7 @@
         .gallery-item {
             border-radius: 10px;
             overflow: hidden;
-            height: 200px;
+            height: clamp(150px, 30vw, 200px);
         }
         
         .gallery-item img {
@@ -474,7 +501,7 @@
         
         /* About Section */
         .about {
-            padding: 6rem 2rem;
+            padding: var(--section-padding) var(--container-padding);
             background: var(--light);
         }
         
@@ -482,13 +509,13 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(2rem, 5vw, 4rem);
             align-items: center;
         }
         
         .about-text h2 {
-            font-size: 2.8rem;
+            font-size: var(--heading-size);
             color: var(--secondary);
             margin-bottom: 2rem;
             font-weight: 700;
@@ -496,15 +523,15 @@
         
         .about-text p {
             margin-bottom: 1.8rem;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             line-height: 1.8;
             color: var(--text);
         }
         
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
             margin-top: 3rem;
             z-index: 2;
             position: relative;
@@ -512,7 +539,7 @@
         
         .value-item {
             background: var(--accent);
-            padding: 2rem;
+            padding: clamp(1.5rem, 3vw, 2rem);
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
@@ -524,20 +551,20 @@
         }
         
         .value-item i {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 2.5rem);
             color: var(--primary);
             margin-bottom: 1.2rem;
         }
         
         .value-item h4 {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
             color: var(--secondary);
             margin-bottom: 0.8rem;
             font-weight: 600;
         }
         
         .value-item p {
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             color: #666;
         }
         
@@ -560,7 +587,7 @@
         
         /* Contact Section */
         .contact {
-            padding: 6rem 2rem;
+            padding: var(--section-padding) var(--container-padding);
             background: linear-gradient(to right, var(--secondary), var(--dark));
             color: var(--accent);
         }
@@ -569,18 +596,18 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(2rem, 5vw, 4rem);
         }
         
         .contact-info h2 {
-            font-size: 2.8rem;
+            font-size: var(--heading-size);
             margin-bottom: 2rem;
             font-weight: 700;
         }
         
         .contact-info p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             margin-bottom: 2.5rem;
             line-height: 1.8;
             opacity: 0.9;
@@ -595,11 +622,11 @@
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
         }
         
         .contact-details i {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: var(--primary);
             margin-right: 1rem;
             width: 30px;
@@ -607,14 +634,14 @@
         
         .contact-form {
             background: var(--accent);
-            padding: 3rem;
+            padding: clamp(1.5rem, 4vw, 3rem);
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         
         .contact-form h3 {
             color: var(--secondary);
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             margin-bottom: 2rem;
             text-align: center;
             font-weight: 600;
@@ -671,7 +698,7 @@
         footer {
             background: var(--secondary);
             color: var(--accent);
-            padding: 4rem 2rem 2rem;
+            padding: clamp(2rem, 5vw, 4rem) var(--container-padding) clamp(1rem, 3vw, 2rem);
             text-align: center;
             position: relative;
         }
@@ -680,13 +707,13 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: clamp(1.5rem, 4vw, 3rem);
             margin-bottom: 3rem;
         }
         
         .footer-section h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
@@ -738,8 +765,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: clamp(35px, 8vw, 45px);
+            height: clamp(35px, 8vw, 45px);
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             transition: all 0.3s;
@@ -839,7 +866,7 @@
             margin: 50px auto;
             padding: 30px;
             border-radius: 10px;
-            max-width: 900px;
+            max-width: min(900px, 90vw);
             position: relative;
         }
         
@@ -1058,7 +1085,7 @@
         
         .service-images-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -1102,7 +1129,7 @@
         
         /* Nouvelle section Rapports d'Activité */
         .activity-reports {
-            padding: 6rem 2rem;
+            padding: var(--section-padding) var(--container-padding);
             background: var(--accent);
         }
         
@@ -1113,8 +1140,8 @@
         
         .reports-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
             margin-top: 3rem;
         }
         
@@ -1131,7 +1158,7 @@
         }
         
         .report-image {
-            height: 200px;
+            height: clamp(150px, 30vw, 200px);
             overflow: hidden;
         }
         
@@ -1142,7 +1169,7 @@
         }
         
         .report-content {
-            padding: 1.5rem;
+            padding: clamp(1rem, 3vw, 1.5rem);
         }
         
         .report-date {
@@ -1152,7 +1179,7 @@
         }
         
         .report-title {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
             margin-bottom: 1rem;
             color: var(--secondary);
         }
@@ -1190,14 +1217,14 @@
             background: rgba(0, 0, 0, 0.8);
             z-index: 10001;
             overflow-y: auto;
-            padding: 2rem;
+            padding: var(--container-padding);
         }
         
         .modal-content {
             background: white;
-            max-width: 800px;
+            max-width: min(800px, 90vw);
             margin: 2rem auto;
-            padding: 2rem;
+            padding: clamp(1rem, 4vw, 2rem);
             border-radius: 12px;
             position: relative;
         }
@@ -1213,7 +1240,7 @@
         
         .modal-image {
             width: 100%;
-            height: 300px;
+            height: clamp(200px, 40vw, 300px);
             overflow: hidden;
             border-radius: 8px;
             margin-bottom: 1.5rem;
@@ -1232,7 +1259,7 @@
         }
         
         .modal-title {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             margin-bottom: 1rem;
             color: var(--secondary);
         }
@@ -1242,28 +1269,28 @@
             color: #333;
         }
         
-        /* Responsive Design */
+        /* Responsive Design amélioré */
         @media (max-width: 1200px) {
             .logo {
-                width: 100px;
-                height: 100px;
+                width: clamp(80px, 10vw, 100px);
+                height: clamp(80px, 10vw, 100px);
             }
         }
         
         @media (max-width: 992px) {
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: clamp(1.8rem, 6vw, 2.8rem);
             }
             
             .hero p {
-                font-size: 1.5rem;
+                font-size: clamp(1rem, 3.5vw, 1.5rem);
             }
             
             .about-content,
             .contact-container,
             .service-detail-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: clamp(1.5rem, 4vw, 3rem);
             }
             
             .contact-form {
@@ -1271,11 +1298,11 @@
             }
             
             .service-gallery {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
             }
             
             .service-images-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
             }
         }
         
@@ -1293,33 +1320,38 @@
             }
             
             .logo {
-                width: 100px;
-                height: 100px;
+                width: clamp(70px, 15vw, 100px);
+                height: clamp(70px, 15vw, 100px);
                 margin-right: 0;
                 margin-bottom: 10px;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 1rem;
             }
             
             nav ul {
                 justify-content: center;
                 flex-wrap: wrap;
-                margin-top: 15px;
+                margin-top: 0;
             }
             
             nav ul li {
-                margin: 0.5rem;
+                margin: 0.25rem;
             }
             
             .hero {
                 height: auto;
-                padding: 6rem 1rem;
+                padding: clamp(4rem, 10vw, 6rem) 1rem;
             }
             
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: clamp(1.5rem, 5vw, 2.2rem);
             }
             
             .hero p {
-                font-size: 1.2rem;
+                font-size: clamp(0.9rem, 3vw, 1.2rem);
             }
             
             .services-grid {
@@ -1327,17 +1359,17 @@
             }
             
             .values-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
             }
             
             .section-title {
-                font-size: 2.2rem;
+                font-size: clamp(1.8rem, 5vw, 2.2rem);
             }
             
             .commercial-content h2,
             .about-text h2,
             .contact-info h2 {
-                font-size: 2.2rem;
+                font-size: clamp(1.8rem, 5vw, 2.2rem);
             }
             
             .admin-tabs {
@@ -1358,38 +1390,105 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
+            
+            /* Menu mobile */
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--secondary);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 0.75rem;
+                text-align: center;
+            }
         }
         
         @media (max-width: 576px) {
             .logo {
-                width: 80px;
-                height: 80px;
+                width: clamp(60px, 12vw, 80px);
+                height: clamp(60px, 12vw, 80px);
             }
             
             .company-name {
-                font-size: 1.5rem;
+                font-size: clamp(1rem, 4vw, 1.5rem);
             }
             
             .company-slogan {
-                font-size: 0.9rem;
+                font-size: clamp(0.7rem, 2.5vw, 0.9rem);
             }
             
             nav ul li a {
-                font-size: 0.9rem;
-                padding: 6px 10px;
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+                padding: 0.5rem 0.75rem;
             }
             
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: clamp(1.3rem, 4.5vw, 1.8rem);
             }
             
             .hero p {
-                font-size: 1rem;
+                font-size: clamp(0.8rem, 2.5vw, 1rem);
             }
             
             .btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+                font-size: clamp(0.8rem, 2.5vw, 1rem);
+            }
+            
+            .service-content {
+                padding: 1.5rem 1rem;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .admin-content {
+                padding: 20px;
+                margin: 20px auto;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            :root {
+                --container-padding: 0.75rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                margin: 0 0.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1449,7 +1548,7 @@
         }
         
         .admin-section-title {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: var(--secondary);
         }
         
@@ -1507,6 +1606,68 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+        
+        /* Améliorations pour les très petits écrans */
+        @media (max-width: 320px) {
+            .logo {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .company-name {
+                font-size: 1rem;
+            }
+            
+            .company-slogan {
+                font-size: 0.7rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.2rem;
+            }
+            
+            .hero p {
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Améliorations pour les très grands écrans */
+        @media (min-width: 1600px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .reports-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Améliorations pour l'accessibilité */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Améliorations pour le mode sombre */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #1a1a1a;
+                --text: #e0e0e0;
+                --accent: #2c2c2c;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1521,8 +1682,11 @@
                 <div class="company-slogan" id="header-company-slogan">Votre sécurité est notre priorité depuis 2024</div>
             </div>
         </div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
         <nav>
-            <ul>
+            <ul id="mainNav">
                 <li><a href="#" onclick="showSection('home')">Accueil</a></li>
                 <li><a href="#services" onclick="showSection('services')">Services</a></li>
                 <li><a href="#about" onclick="showSection('about')">À propos</a></li>
@@ -1902,7 +2066,7 @@
         </div>
         
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.55942739232!2d3.848876176955411!3d43.61087915538826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6af5f48ab0c1f%3A0x9e1e43a9c2c94b3a!2s83%20Rue%20Yves%20Montand%2C%2034080%20Montpellier!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" title="Localisation FOR SÉCURITÉ PRIVÉE Montpellier"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.55942739232!2d3.848876176955411!2d43.61087915538826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6af5f48ab0c1f%3A0x9e1e43a9c2c94b3a!2s83%20Rue%20Yves%20Montand%2C%2034080%20Montpellier!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" title="Localisation FOR SÉCURITÉ PRIVÉE Montpellier"></iframe>
         </div>
     </section>
     
@@ -2451,6 +2615,118 @@
     </div>
 
     <script>
+        // ===== GESTION RESPONSIVE AMÉLIORÉE =====
+        
+        // Fonction pour gérer le menu mobile
+        function initMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuToggle && mainNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('show');
+                    // Changer l'icône du menu
+                    const icon = mobileMenuToggle.querySelector('i');
+                    if (mainNav.classList.contains('show')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Fermer le menu en cliquant sur un lien
+                const navLinks = mainNav.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mainNav.classList.remove('show');
+                        mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                        mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                    });
+                });
+                
+                // Fermer le menu en cliquant à l'extérieur
+                document.addEventListener('click', function(event) {
+                    if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                        mainNav.classList.remove('show');
+                        mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                        mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                    }
+                });
+            }
+        }
+        
+        // Fonction pour ajuster les images selon l'appareil
+        function optimizeImagesForDevice() {
+            const images = document.querySelectorAll('img');
+            const isMobile = window.innerWidth <= 768;
+            
+            images.forEach(img => {
+                // S'assurer que les images sont responsives
+                if (!img.hasAttribute('loading')) {
+                    img.setAttribute('loading', 'lazy');
+                }
+                
+                // Optimiser les images pour mobile
+                if (isMobile) {
+                    // Réduire la qualité des images sur mobile si nécessaire
+                    if (img.src.includes('unsplash.com') && !img.src.includes('w=')) {
+                        // Ajouter des paramètres de taille pour les images Unsplash
+                        const newSrc = img.src + (img.src.includes('?') ? '&' : '?') + 'w=800&q=80';
+                        img.src = newSrc;
+                    }
+                }
+            });
+        }
+        
+        // Fonction pour ajuster les iframes selon l'appareil
+        function optimizeIframesForDevice() {
+            const iframes = document.querySelectorAll('iframe');
+            const isMobile = window.innerWidth <= 768;
+            
+            iframes.forEach(iframe => {
+                if (isMobile) {
+                    // Ajuster la hauteur des iframes sur mobile
+                    iframe.style.height = '300px';
+                } else {
+                    iframe.style.height = '400px';
+                }
+            });
+        }
+        
+        // Fonction pour détecter et ajuster selon l'appareil
+        function detectDeviceAndAdjust() {
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+            const isDesktop = window.innerWidth > 1024;
+            
+            // Ajouter des classes CSS selon l'appareil
+            document.body.classList.remove('mobile-device', 'tablet-device', 'desktop-device');
+            
+            if (isMobile) {
+                document.body.classList.add('mobile-device');
+            } else if (isTablet) {
+                document.body.classList.add('tablet-device');
+            } else {
+                document.body.classList.add('desktop-device');
+            }
+            
+            // Ajustements spécifiques selon l'appareil
+            optimizeImagesForDevice();
+            optimizeIframesForDevice();
+            
+            // Ajuster la hauteur de la section hero
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                if (isMobile) {
+                    hero.style.minHeight = '70vh';
+                } else {
+                    hero.style.minHeight = '90vh';
+                }
+            }
+        }
+        
         // ===== SYSTÈME DE SYNCHRONISATION MULTI-APPAREILS AMÉLIORÉ =====
         
         // Configuration Firebase par défaut (à personnaliser)
@@ -2859,8 +3135,6 @@
             }
         }
         
-        // ===== FIN DU SYSTÈME DE SYNCHRONISATION AMÉLIORÉ =====
-
         // ===== FONCTIONS EXISTANTES (AVEC SYNCHRONISATION INTÉGRÉE) =====
         
         // Fonctions de navigation
@@ -3746,6 +4020,12 @@
         
         // Initialiser les données au chargement de la page
         window.addEventListener('DOMContentLoaded', async function() {
+            // Initialiser le menu mobile
+            initMobileMenu();
+            
+            // Détecter et ajuster selon l'appareil
+            detectDeviceAndAdjust();
+            
             // Initialiser Firebase et la synchronisation
             await initializeFirebase();
             
@@ -3878,6 +4158,11 @@
             
             // Charger les rapports
             loadReports();
+        });
+        
+        // Écouter les changements de taille de fenêtre
+        window.addEventListener('resize', function() {
+            detectDeviceAndAdjust();
         });
     </script>
 </body>
