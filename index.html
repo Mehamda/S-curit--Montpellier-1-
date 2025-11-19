@@ -49,6 +49,23 @@
     }
     </script>
     
+    <script>
+      // Force browser to always load updated files
+      const version = Date.now(); // change automatically every update
+
+      document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
+        link.href = link.href.split('?')[0] + '?v=' + version;
+      });
+
+      document.querySelectorAll("script[src]").forEach(script => {
+        script.src = script.src.split('?')[0] + '?v=' + version;
+      });
+
+      document.querySelectorAll("img").forEach(img => {
+        img.src = img.src.split('?')[0] + '?v=' + version;
+      });
+    </script>
+    
     <style>
         :root {
             --primary: #e30613; /* Rouge */
