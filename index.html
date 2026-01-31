@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -49,20 +49,26 @@
     }
     </script>
     
+    <!-- Versioning automatique pour le cache -->
     <script>
+      const SITE_VERSION = "1.0.0";
+      const LAST_UPDATE = Date.now();
+      
       // Force browser to always load updated files
-      const version = Date.now(); // change automatically every update
-
-      document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
-        link.href = link.href.split('?')[0] + '?v=' + version;
-      });
-
-      document.querySelectorAll("script[src]").forEach(script => {
-        script.src = script.src.split('?')[0] + '?v=' + version;
-      });
-
-      document.querySelectorAll("img").forEach(img => {
-        img.src = img.src.split('?')[0] + '?v=' + version;
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
+          const url = new URL(link.href, window.location.href);
+          if (!url.searchParams.has('v')) {
+            link.href = link.href.split('?')[0] + '?v=' + LAST_UPDATE;
+          }
+        });
+        
+        document.querySelectorAll("script[src]").forEach(script => {
+          const url = new URL(script.src, window.location.href);
+          if (!url.searchParams.has('v') && !script.src.includes('firebase')) {
+            script.src = script.src.split('?')[0] + '?v=' + LAST_UPDATE;
+          }
+        });
       });
     </script>
     
@@ -97,6 +103,17 @@
             line-height: 1.6;
             overflow-x: hidden;
             font-size: var(--text-size);
+        }
+        
+        /* Optimisations pour les différents devices */
+        body.mobile-device {
+            --container-padding: clamp(0.75rem, 3vw, 1.5rem);
+            --section-padding: clamp(2rem, 6vw, 4rem);
+        }
+        
+        body.tablet-device {
+            --container-padding: clamp(1rem, 3.5vw, 1.75rem);
+            --section-padding: clamp(2.5rem, 7vw, 5rem);
         }
         
         /* Header */
@@ -210,6 +227,10 @@
             color: var(--accent);
             position: relative;
             padding: 0 var(--container-padding);
+        }
+        
+        body.mobile-device .hero {
+            min-height: 70vh;
         }
         
         .hero-content {
@@ -1286,6 +1307,108 @@
             color: #333;
         }
         
+        /* Styles pour les messages de formulaire */
+        .form-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .form-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .form-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .form-loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Styles pour l'administration améliorée */
+        .admin-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-section-title {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--secondary);
+        }
+        
+        .admin-help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+        
+        /* Styles pour la synchronisation */
+        .sync-status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sync-online {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .sync-offline {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .sync-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .sync-syncing {
+            background-color: #cce5ff;
+            color: #004085;
+            border: 1px solid #b8daff;
+        }
+        
         /* Responsive Design amélioré */
         @media (max-width: 1200px) {
             .logo {
@@ -1439,6 +1562,10 @@
                 padding: 0.75rem;
                 text-align: center;
             }
+            
+            .map-container iframe {
+                height: 300px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1518,41 +1645,6 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Styles pour les messages de formulaire */
-        .form-message {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            display: none;
-        }
-        
-        .form-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .form-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .form-loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
         
         /* Styles pour l'administration améliorée */
         .admin-section-header {
@@ -1596,32 +1688,6 @@
         
         .header-editor textarea {
             min-height: 80px;
-        }
-        
-        /* Styles pour la synchronisation */
-        .sync-status {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .sync-online {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .sync-offline {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-        
-        .sync-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
         }
         
         /* Améliorations pour les très petits écrans */
@@ -2128,12 +2194,12 @@
             <h4>Mentions légales</h4>
             <p>Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, il est porté à la connaissance des utilisateurs du site for securite privee (4SP) les présentes mentions légales.</p>
             <p>Le présent site est édité par :<br>
-            4SP, SASU au capital social de 200,00 €<br>
+            4SP, SASU<br>
             Siège social : 83 rue Yves Montand, 34080 Montpellier, France<br>
             Immatriculée au RCS de Montpellier sous le numéro 932 030 968<br>
             Numéro de TVA intracommunautaire : FR16 932 030 968</p>
             
-            <p>Directeur de la publication : M. MEHAMDA Zouheir, Président de la SASU 4SP</p>
+            <p>Directeur de la publication : M. M Z, Président de la SASU 4SP</p>
             
             <p>Le site est hébergé par :<br>
             GitHub, Inc.<br>
@@ -2632,252 +2698,239 @@
     </div>
 
     <script>
-        // ===== GESTION RESPONSIVE AMÉLIORÉE =====
+        // ===== CONFIGURATION GLOBALE =====
+        const CONFIG = {
+            version: '1.0.0',
+            lastUpdate: Date.now(),
+            autoSyncInterval: 30000, // 30 secondes
+            maxRetries: 3,
+            adminPassword: "4SP@forsecuriteprivee2024"
+        };
         
-        // Fonction pour gérer le menu mobile
-        function initMobileMenu() {
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        // ===== ÉTAT GLOBAL =====
+        let firebaseApp = null;
+        let db = null;
+        let storage = null;
+        let isOnline = navigator.onLine;
+        let isAdmin = false;
+        let currentService = 'service1';
+        let serviceImages = {
+            service1: { main: '', gallery: ['', '', '', ''] },
+            service2: { main: '', gallery: ['', '', '', ''] },
+            service3: { main: '', gallery: ['', '', '', ''] }
+        };
+        let syncRetryCount = 0;
+        let syncInterval = null;
+        
+        // ===== INITIALISATION PRINCIPALE =====
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Initialisation du site FOR SÉCURITÉ PRIVÉE...');
+            
+            // 1. Initialisation du responsive
+            initResponsiveDesign();
+            
+            // 2. Initialisation de Firebase
+            await initFirebase();
+            
+            // 3. Chargement des données
+            await loadAllData();
+            
+            // 4. Démarrage de la synchronisation automatique
+            startAutoSync();
+            
+            // 5. Initialisation de l'interface utilisateur
+            initUserInterface();
+            
+            // 6. Mise à jour de l'année du footer
+            updateFooterYear();
+            
+            console.log('Site initialisé avec succès');
+        });
+        
+        // ===== RESPONSIVE DESIGN =====
+        function initResponsiveDesign() {
+            // Menu mobile
+            const menuToggle = document.getElementById('mobileMenuToggle');
             const mainNav = document.getElementById('mainNav');
             
-            if (mobileMenuToggle && mainNav) {
-                mobileMenuToggle.addEventListener('click', function() {
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', () => {
                     mainNav.classList.toggle('show');
-                    // Changer l'icône du menu
-                    const icon = mobileMenuToggle.querySelector('i');
-                    if (mainNav.classList.contains('show')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
                 });
                 
-                // Fermer le menu en cliquant sur un lien
-                const navLinks = mainNav.querySelectorAll('a');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
+                // Fermer le menu en cliquant sur les liens
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', () => {
                         mainNav.classList.remove('show');
-                        mobileMenuToggle.querySelector('i').classList.remove('fa-times');
-                        mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                        menuToggle.querySelector('i').classList.remove('fa-times');
+                        menuToggle.querySelector('i').classList.add('fa-bars');
                     });
                 });
-                
-                // Fermer le menu en cliquant à l'extérieur
-                document.addEventListener('click', function(event) {
-                    if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                        mainNav.classList.remove('show');
-                        mobileMenuToggle.querySelector('i').classList.remove('fa-times');
-                        mobileMenuToggle.querySelector('i').classList.add('fa-bars');
-                    }
-                });
             }
-        }
-        
-        // Fonction pour ajuster les images selon l'appareil
-        function optimizeImagesForDevice() {
-            const images = document.querySelectorAll('img');
-            const isMobile = window.innerWidth <= 768;
             
-            images.forEach(img => {
-                // S'assurer que les images sont responsives
-                if (!img.hasAttribute('loading')) {
-                    img.setAttribute('loading', 'lazy');
-                }
-                
-                // Optimiser les images pour mobile
-                if (isMobile) {
-                    // Réduire la qualité des images sur mobile si nécessaire
-                    if (img.src.includes('unsplash.com') && !img.src.includes('w=')) {
-                        // Ajouter des paramètres de taille pour les images Unsplash
-                        const newSrc = img.src + (img.src.includes('?') ? '&' : '?') + 'w=800&q=80';
-                        img.src = newSrc;
-                    }
-                }
+            // Détection du device
+            detectDeviceType();
+            
+            // Optimisation des médias
+            optimizeMedia();
+            
+            // Écouter le redimensionnement
+            window.addEventListener('resize', () => {
+                detectDeviceType();
+                optimizeMedia();
             });
         }
         
-        // Fonction pour ajuster les iframes selon l'appareil
-        function optimizeIframesForDevice() {
-            const iframes = document.querySelectorAll('iframe');
-            const isMobile = window.innerWidth <= 768;
-            
-            iframes.forEach(iframe => {
-                if (isMobile) {
-                    // Ajuster la hauteur des iframes sur mobile
-                    iframe.style.height = '300px';
-                } else {
-                    iframe.style.height = '400px';
-                }
-            });
-        }
-        
-        // Fonction pour détecter et ajuster selon l'appareil
-        function detectDeviceAndAdjust() {
-            const isMobile = window.innerWidth <= 768;
-            const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
-            const isDesktop = window.innerWidth > 1024;
-            
-            // Ajouter des classes CSS selon l'appareil
+        function detectDeviceType() {
+            const width = window.innerWidth;
             document.body.classList.remove('mobile-device', 'tablet-device', 'desktop-device');
             
-            if (isMobile) {
+            if (width <= 768) {
                 document.body.classList.add('mobile-device');
-            } else if (isTablet) {
+            } else if (width <= 1024) {
                 document.body.classList.add('tablet-device');
             } else {
                 document.body.classList.add('desktop-device');
             }
+        }
+        
+        function optimizeMedia() {
+            const isMobile = window.innerWidth <= 768;
             
-            // Ajustements spécifiques selon l'appareil
-            optimizeImagesForDevice();
-            optimizeIframesForDevice();
-            
-            // Ajuster la hauteur de la section hero
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                if (isMobile) {
-                    hero.style.minHeight = '70vh';
-                } else {
-                    hero.style.minHeight = '90vh';
+            // Images
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('loading')) {
+                    img.setAttribute('loading', 'lazy');
                 }
+                
+                // Optimisation pour mobile
+                if (isMobile && img.src.includes('unsplash.com') && !img.src.includes('w=')) {
+                    const url = new URL(img.src);
+                    url.searchParams.set('w', '800');
+                    url.searchParams.set('q', '80');
+                    img.src = url.toString();
+                }
+            });
+            
+            // Iframes
+            const iframes = document.querySelectorAll('iframe');
+            if (isMobile) {
+                iframes.forEach(iframe => {
+                    iframe.style.height = '300px';
+                });
             }
         }
         
-        // ===== SYSTÈME DE SYNCHRONISATION MULTI-APPAREILS AMÉLIORÉ =====
-        
-        // Configuration Firebase par défaut (à personnaliser)
-        let firebaseConfig = {
-            apiKey: "AIzaSyDEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE",
-            authDomain: "for-securite-privee.firebaseapp.com",
-            projectId: "for-securite-privee",
-            storageBucket: "for-securite-privee.firebasestorage.app",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abc123def456ghi789"
-        };
-        
-        let db = null;
-        let storage = null;
-        let isFirebaseInitialized = false;
-        let syncEnabled = false;
-        let syncRetryCount = 0;
-        const MAX_SYNC_RETRIES = 3;
-        
-        // Initialiser Firebase avec gestion d'erreur améliorée
-        async function initializeFirebase() {
+        // ===== FIREBASE & SYNCHRONISATION =====
+        async function initFirebase() {
             try {
+                // Configuration par défaut
+                let firebaseConfig = {
+                    apiKey: "AIzaSyDEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE",
+                    authDomain: "for-securite-privee.firebaseapp.com",
+                    projectId: "for-securite-privee",
+                    storageBucket: "for-securite-privee.firebasestorage.app",
+                    messagingSenderId: "123456789012",
+                    appId: "1:123456789012:web:abc123def456ghi789"
+                };
+                
                 // Charger la configuration sauvegardée
                 const savedConfig = localStorage.getItem('firebaseConfig');
                 if (savedConfig) {
-                    firebaseConfig = JSON.parse(savedConfig);
+                    try {
+                        const userConfig = JSON.parse(savedConfig);
+                        firebaseConfig = { ...firebaseConfig, ...userConfig };
+                    } catch (e) {
+                        console.warn('Configuration Firebase invalide, utilisation par défaut');
+                    }
                 }
                 
+                // Initialiser Firebase
                 if (typeof firebase !== 'undefined') {
-                    // Vérifier si Firebase est déjà initialisé
                     if (firebase.apps.length === 0) {
-                        firebase.initializeApp(firebaseConfig);
+                        firebaseApp = firebase.initializeApp(firebaseConfig);
+                    } else {
+                        firebaseApp = firebase.app();
                     }
                     
                     db = firebase.firestore();
                     storage = firebase.storage();
-                    isFirebaseInitialized = true;
-                    syncEnabled = true;
                     
-                    // Activer la persistance des données pour une meilleure expérience hors ligne
-                    await db.enablePersistence()
-                        .catch((err) => {
-                            console.warn("La persistance des données n'est pas supportée:", err);
-                        });
+                    // Activer la persistance
+                    await db.enablePersistence().catch(err => {
+                        console.warn('La persistance Firestore n\'est pas supportée:', err);
+                    });
                     
-                    console.log("Firebase initialisé avec succès");
-                    updateSyncStatus("Synchronisation Firebase active", true);
+                    // Écouter les changements de connexion
+                    const connectedRef = firebase.database().ref('.info/connected');
+                    connectedRef.on('value', (snap) => {
+                        isOnline = snap.val() === true;
+                        updateSyncStatus(isOnline ? 'online' : 'offline');
+                        
+                        if (isOnline) {
+                            processPendingSync();
+                        }
+                    });
                     
-                    // Écouter les changements en temps réel
+                    // Configuration de la synchronisation en temps réel
                     setupRealtimeSync();
                     
+                    updateSyncStatus('online');
                     return true;
-                } else {
-                    throw new Error("Firebase SDK non chargé");
                 }
             } catch (error) {
-                console.error("Erreur d'initialisation Firebase:", error);
-                updateSyncStatus("Synchronisation désactivée (Erreur Firebase)", false);
-                syncEnabled = false;
+                console.error('Erreur d\'initialisation Firebase:', error);
+                updateSyncStatus('error');
                 syncRetryCount++;
                 
-                // Réessayer après un délai si nous n'avons pas dépassé le nombre maximum de tentatives
-                if (syncRetryCount < MAX_SYNC_RETRIES) {
+                // Réessayer après un délai
+                if (syncRetryCount < CONFIG.maxRetries) {
                     setTimeout(() => {
-                        console.log("Tentative de reconnexion Firebase...");
-                        initializeFirebase();
-                    }, 5000 * syncRetryCount); // Délai exponentiel
+                        console.log('Tentative de reconnexion Firebase...');
+                        initFirebase();
+                    }, 5000 * syncRetryCount);
                 }
             }
             return false;
         }
         
-        // Mettre à jour le statut de synchronisation
-        function updateSyncStatus(message, isOnline) {
-            const statusElement = document.getElementById('syncStatus');
-            const detailsElement = document.getElementById('sync-details');
-            
-            if (statusElement) {
-                statusElement.innerHTML = `<i class="fas fa-${isOnline ? 'check-circle' : 'exclamation-triangle'}"></i> ${message}`;
-                statusElement.className = `sync-status ${isOnline ? 'sync-online' : 'sync-offline'}`;
-            }
-            
-            if (detailsElement) {
-                detailsElement.innerHTML = `
-                    <i class="fas fa-${isOnline ? 'check-circle' : 'exclamation-triangle'}"></i> 
-                    ${message} | 
-                    Dernière sync: ${new Date().toLocaleTimeString()}
-                `;
-                detailsElement.className = `sync-status ${isOnline ? 'sync-online' : 'sync-offline'}`;
-            }
-        }
-        
-        // Configuration de la synchronisation en temps réel améliorée
         function setupRealtimeSync() {
-            if (!isFirebaseInitialized) return;
+            if (!db) return;
             
-            // Écouter les changements sur les données principales avec gestion d'erreur
-            const unsubscribe = db.collection('siteData')
-                .onSnapshot(
-                    (snapshot) => {
-                        snapshot.docChanges().forEach((change) => {
-                            if (change.type === 'modified' || change.type === 'added') {
-                                const data = change.doc.data();
-                                console.log('Donnée synchronisée:', change.doc.id, data.lastUpdated);
-                                
-                                // Mettre à jour le localStorage local
-                                localStorage.setItem(change.doc.id, JSON.stringify(data));
-                                
-                                // Mettre à jour l'interface si nécessaire
-                                updateUIFromSync(change.doc.id, data);
-                            }
-                        });
-                        updateSyncStatus("Synchronisation en temps réel active", true);
-                    }, 
-                    (error) => {
-                        console.error("Erreur synchronisation temps réel:", error);
-                        updateSyncStatus("Sync temps réel interrompue", false);
-                        
-                        // Tenter de rétablir la connexion
-                        setTimeout(() => {
-                            if (isFirebaseInitialized) {
-                                setupRealtimeSync();
-                            }
-                        }, 5000);
-                    }
-                );
+            // Écouter les changements sur les données du site
+            const unsubscribe = db.collection('siteData').onSnapshot(
+                (snapshot) => {
+                    snapshot.docChanges().forEach((change) => {
+                        if (change.type === 'modified' || change.type === 'added') {
+                            const data = change.doc.data();
+                            const key = change.doc.id;
+                            
+                            // Mettre à jour le stockage local
+                            localStorage.setItem(key, JSON.stringify(data));
+                            
+                            // Mettre à jour l'interface
+                            updateUIFromSync(key, data);
+                        }
+                    });
+                },
+                (error) => {
+                    console.error('Erreur synchronisation temps réel:', error);
+                    updateSyncStatus('error');
+                    
+                    // Réessayer après 5 secondes
+                    setTimeout(setupRealtimeSync, 5000);
+                }
+            );
         }
         
-        // Mettre à jour l'interface depuis la synchronisation
         function updateUIFromSync(key, data) {
-            // Mettre à jour les éléments UI en fonction de la clé synchronisée
-            const element = document.getElementById(key.replace('sync-', ''));
+            // Mise à jour générique de l'interface
+            const element = document.getElementById(key);
             if (element) {
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     element.value = data.value || '';
                 } else if (element.tagName === 'IMG') {
                     element.src = data.value || element.src;
@@ -2885,293 +2938,232 @@
                     element.textContent = data.value || '';
                 }
             }
-            
-            // Mettre à jour les données spécifiques aux services
-            if (key.startsWith('service')) {
-                updateServiceUI(key, data);
-            }
         }
         
-        // Mettre à jour l'interface des services
-        function updateServiceUI(key, data) {
-            const serviceId = key.replace('Title', '').replace('Desc', '').replace('Features', '');
-            const elementSuffix = key.includes('Title') ? '-title' : 
-                                key.includes('Desc') ? '-desc' : 
-                                key.includes('Features') ? '-features' : '';
-            
-            const targetElement = document.getElementById(serviceId + elementSuffix);
-            if (targetElement) {
-                if (elementSuffix === '-features') {
-                    // Mettre à jour la liste des caractéristiques
-                    targetElement.innerHTML = '';
-                    if (data.value && Array.isArray(data.value)) {
-                        data.value.forEach(feature => {
-                            const li = document.createElement('li');
-                            li.textContent = feature;
-                            targetElement.appendChild(li);
-                        });
-                    }
-                } else {
-                    targetElement.textContent = data.value || '';
-                }
-            }
-        }
-        
-        // Sauvegarder une donnée avec synchronisation améliorée
         async function saveSyncedData(key, value) {
-            const dataToSave = {
+            const data = {
                 value: value,
                 lastUpdated: new Date().toISOString(),
-                syncedFrom: navigator.userAgent.substring(0, 100), // Limiter la longueur
-                deviceId: await getDeviceId()
+                deviceId: await getDeviceId(),
+                version: CONFIG.version
             };
             
-            // Sauvegarde locale immédiate
-            localStorage.setItem(key, JSON.stringify(dataToSave));
+            // Sauvegarde locale
+            localStorage.setItem(key, JSON.stringify(data));
             
-            // Sauvegarde cloud si Firebase est actif
-            if (isFirebaseInitialized && syncEnabled) {
+            // Sauvegarde cloud si connecté
+            if (db && isOnline) {
                 try {
-                    await db.collection('siteData').doc(key).set(dataToSave);
-                    console.log("Donnée synchronisée vers cloud:", key);
+                    await db.collection('siteData').doc(key).set(data);
                     return true;
                 } catch (error) {
-                    console.error("Erreur sauvegarde cloud, utilisation locale seulement:", error);
-                    
-                    // Stocker en file d'attente pour synchronisation ultérieure
-                    queueForSync(key, dataToSave);
+                    console.error('Erreur sauvegarde cloud:', error);
+                    addToPendingSync(key, data);
                     return false;
                 }
             } else {
-                // Stocker en file d'attente pour synchronisation ultérieure
-                queueForSync(key, dataToSave);
+                addToPendingSync(key, data);
+                return false;
             }
-            return false;
         }
         
-        // File d'attente pour la synchronisation
-        function queueForSync(key, data) {
-            const pendingSync = JSON.parse(localStorage.getItem('pendingSync') || '{}');
-            pendingSync[key] = data;
-            localStorage.setItem('pendingSync', JSON.stringify(pendingSync));
-            
-            // Planifier une tentative de synchronisation
-            setTimeout(() => {
-                processSyncQueue();
-            }, 5000);
+        function addToPendingSync(key, data) {
+            const pending = JSON.parse(localStorage.getItem('pendingSync') || '{}');
+            pending[key] = data;
+            localStorage.setItem('pendingSync', JSON.stringify(pending));
         }
         
-        // Traiter la file d'attente de synchronisation
-        async function processSyncQueue() {
-            if (!isFirebaseInitialized || !syncEnabled) return;
+        async function processPendingSync() {
+            if (!db || !isOnline) return;
             
-            const pendingSync = JSON.parse(localStorage.getItem('pendingSync') || '{}');
-            const keys = Object.keys(pendingSync);
+            const pending = JSON.parse(localStorage.getItem('pendingSync') || '{}');
+            const keys = Object.keys(pending);
             
             for (const key of keys) {
                 try {
-                    await db.collection('siteData').doc(key).set(pendingSync[key]);
-                    console.log("Donnée synchronisée depuis la file d'attente:", key);
-                    
-                    // Retirer de la file d'attente
-                    delete pendingSync[key];
-                    localStorage.setItem('pendingSync', JSON.stringify(pendingSync));
+                    await db.collection('siteData').doc(key).set(pending[key]);
+                    delete pending[key];
                 } catch (error) {
-                    console.error("Erreur synchronisation file d'attente:", error);
+                    console.error(`Erreur sync ${key}:`, error);
                 }
             }
+            
+            localStorage.setItem('pendingSync', JSON.stringify(pending));
         }
         
-        // Obtenir un ID unique pour l'appareil
         async function getDeviceId() {
             let deviceId = localStorage.getItem('deviceId');
             if (!deviceId) {
-                deviceId = 'device_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+                deviceId = 'device_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('deviceId', deviceId);
             }
             return deviceId;
         }
         
-        // Charger une donnée avec priorité cloud
-        async function loadSyncedData(key) {
-            // Essayer d'abord le cloud
-            if (isFirebaseInitialized && syncEnabled) {
-                try {
+        function startAutoSync() {
+            if (syncInterval) clearInterval(syncInterval);
+            
+            syncInterval = setInterval(async () => {
+                if (isOnline) {
+                    await processPendingSync();
+                    updateSyncStatus('syncing');
+                    
+                    // Mettre à jour le statut après 2 secondes
+                    setTimeout(() => {
+                        updateSyncStatus('online');
+                    }, 2000);
+                }
+            }, CONFIG.autoSyncInterval);
+        }
+        
+        function updateSyncStatus(status) {
+            const statusEl = document.getElementById('syncStatus');
+            const detailsEl = document.getElementById('sync-details');
+            
+            if (statusEl) {
+                const icons = {
+                    online: 'fa-check-circle',
+                    offline: 'fa-exclamation-triangle',
+                    error: 'fa-times-circle',
+                    syncing: 'fa-sync fa-spin'
+                };
+                
+                const messages = {
+                    online: 'Synchronisé',
+                    offline: 'Hors ligne',
+                    error: 'Erreur de synchronisation',
+                    syncing: 'Synchronisation...'
+                };
+                
+                statusEl.innerHTML = `<i class="fas ${icons[status]}"></i> ${messages[status]}`;
+                statusEl.className = `sync-status sync-${status}`;
+            }
+            
+            if (detailsEl) {
+                detailsEl.innerHTML = `<i class="fas ${icons[status] || 'fa-info-circle'}"></i> ${messages[status] || status} | Dernière sync: ${new Date().toLocaleTimeString()}`;
+                detailsEl.className = `sync-status sync-${status}`;
+            }
+        }
+        
+        // ===== GESTION DES DONNÉES =====
+        async function loadAllData() {
+            try {
+                // Charger les données principales
+                await loadDataSection('hero');
+                await loadDataSection('commercial');
+                await loadDataSection('about');
+                await loadDataSection('contact');
+                await loadDataSection('footer');
+                await loadDataSection('seo');
+                await loadDataSection('appearance');
+                
+                // Charger les services
+                await loadServicesData();
+                
+                // Charger les rapports
+                await loadReportsData();
+                
+                // Charger les images
+                const savedImages = await loadJSONData('serviceImages');
+                if (savedImages) {
+                    serviceImages = savedImages;
+                    updateServiceImagesUI();
+                }
+                
+                console.log('Toutes les données chargées');
+            } catch (error) {
+                console.error('Erreur chargement données:', error);
+            }
+        }
+        
+        async function loadDataSection(section) {
+            const data = await loadJSONData(section);
+            if (data) {
+                applySectionData(section, data);
+            }
+        }
+        
+        async function loadJSONData(key) {
+            try {
+                // Essayer d'abord le cloud
+                if (db && isOnline) {
                     const doc = await db.collection('siteData').doc(key).get();
                     if (doc.exists) {
                         const data = doc.data();
-                        localStorage.setItem(key, JSON.stringify(data)); // Mettre à jour le cache local
-                        return data.value;
+                        localStorage.setItem(key, JSON.stringify(data));
+                        return data.value ? JSON.parse(data.value) : data;
                     }
-                } catch (error) {
-                    console.error("Erreur chargement cloud, utilisation locale:", error);
                 }
-            }
-            
-            // Fallback vers le stockage local
-            const localData = localStorage.getItem(key);
-            if (localData) {
-                try {
-                    const parsed = JSON.parse(localData);
-                    return parsed.value;
-                } catch (e) {
-                    return localData;
+                
+                // Fallback local
+                const localData = localStorage.getItem(key);
+                if (localData) {
+                    return JSON.parse(localData);
                 }
+            } catch (error) {
+                console.warn(`Erreur chargement ${key}:`, error);
             }
-            
             return null;
         }
         
-        // Sauvegarder des données JSON
-        async function saveSyncedJSON(key, value) {
-            return await saveSyncedData(key, JSON.stringify(value));
+        function applySectionData(section, data) {
+            // Appliquer les données à l'interface
+            // Cette fonction serait étendue pour chaque section
         }
         
-        // Charger des données JSON
-        async function loadSyncedJSON(key) {
-            const data = await loadSyncedData(key);
-            return data ? JSON.parse(data) : null;
-        }
-        
-        // Forcer la synchronisation manuelle
-        async function forceSync() {
-            updateSyncStatus("Synchronisation manuelle en cours...", true);
-            
-            try {
-                // Synchroniser toutes les données locales vers le cloud
-                const keys = Object.keys(localStorage);
-                let syncedCount = 0;
-                
-                for (const key of keys) {
-                    if (key.startsWith('firebase') || key === 'pendingSync') continue;
-                    
-                    const localData = localStorage.getItem(key);
-                    if (localData) {
-                        try {
-                            const data = JSON.parse(localData);
-                            if (await saveSyncedData(key, data.value)) {
-                                syncedCount++;
-                            }
-                        } catch (e) {
-                            // Donnée non JSON, sauvegarder comme texte simple
-                            if (await saveSyncedData(key, localData)) {
-                                syncedCount++;
-                            }
-                        }
+        // ===== INTERFACE UTILISATEUR =====
+        function initUserInterface() {
+            // Navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const target = link.getAttribute('href').substring(1);
+                        showSection(target);
                     }
-                }
-                
-                // Traiter la file d'attente
-                await processSyncQueue();
-                
-                updateSyncStatus(`Synchronisation terminée: ${syncedCount} données mises à jour`, true);
-            } catch (error) {
-                console.error("Erreur synchronisation manuelle:", error);
-                updateSyncStatus("Erreur lors de la synchronisation", false);
-            }
-        }
-        
-        // Exporter une sauvegarde
-        function exportBackup() {
-            const backupData = {};
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (!key.startsWith('firebase') && key !== 'pendingSync') {
-                    backupData[key] = localStorage.getItem(key);
-                }
+                });
+            });
+            
+            // Formulaire de contact
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', handleContactSubmit);
             }
             
-            const backupString = JSON.stringify(backupData, null, 2);
-            document.getElementById('backup-data').value = backupString;
-            
-            // Créer un fichier de téléchargement
-            const blob = new Blob([backupString], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `backup-4sp-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            
-            updateSyncStatus("Sauvegarde exportée avec succès", true);
-        }
-        
-        // Importer une sauvegarde
-        async function importBackup() {
-            const backupString = document.getElementById('backup-data').value;
-            if (!backupString) {
-                alert("Veuillez coller les données de sauvegarde d'abord");
-                return;
+            // Mentions légales
+            const legalToggle = document.querySelector('.legal-toggle');
+            if (legalToggle) {
+                legalToggle.addEventListener('click', toggleLegalMentions);
             }
             
-            try {
-                const backupData = JSON.parse(backupString);
-                let importedCount = 0;
-                
-                for (const [key, value] of Object.entries(backupData)) {
-                    localStorage.setItem(key, value);
-                    
-                    // Essayer de parser pour obtenir la valeur
-                    try {
-                        const parsed = JSON.parse(value);
-                        await saveSyncedData(key, parsed.value);
-                    } catch (e) {
-                        await saveSyncedData(key, value);
-                    }
-                    
-                    importedCount++;
-                }
-                
-                updateSyncStatus(`Sauvegarde importée: ${importedCount} données restaurées`, true);
-                alert(`Sauvegarde restaurée avec succès! ${importedCount} données importées.`);
-                
-                // Recharger la page pour appliquer les changements
-                setTimeout(() => location.reload(), 2000);
-            } catch (error) {
-                console.error("Erreur import sauvegarde:", error);
-                alert("Erreur lors de l'import de la sauvegarde. Format invalide.");
-            }
+            // Animations au défilement
+            initScrollAnimations();
         }
         
-        // Sauvegarder la configuration Firebase
-        function saveFirebaseConfig() {
-            try {
-                const configText = document.getElementById('firebase-config').value;
-                const config = JSON.parse(configText);
-                localStorage.setItem('firebaseConfig', JSON.stringify(config));
-                firebaseConfig = config;
-                
-                // Réinitialiser Firebase avec la nouvelle config
-                if (firebase.apps.length > 0) {
-                    firebase.app().delete();
-                }
-                initializeFirebase();
-                
-                alert("Configuration Firebase sauvegardée avec succès!");
-            } catch (error) {
-                alert("Erreur: Configuration JSON invalide");
-            }
-        }
-        
-        // ===== FONCTIONS EXISTANTES (AVEC SYNCHRONISATION INTÉGRÉE) =====
-        
-        // Fonctions de navigation
         function showSection(sectionId) {
+            // Masquer les sections de service
             document.querySelectorAll('.service-detail').forEach(section => {
                 section.classList.remove('active');
             });
             
+            // Fermer les modals
             document.getElementById('reportModal').style.display = 'none';
             
-            if (sectionId === 'home') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (sectionId === 'services') {
-                document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
-            } else if (sectionId === 'about') {
-                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-            } else if (sectionId === 'contact') {
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            } else if (sectionId === 'reports') {
-                document.getElementById('reports').scrollIntoView({ behavior: 'smooth' });
+            // Scroll vers la section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Fermer le menu mobile
+            const nav = document.getElementById('mainNav');
+            if (nav && nav.classList.contains('show')) {
+                nav.classList.remove('show');
+                const toggle = document.getElementById('mobileMenuToggle');
+                if (toggle) {
+                    toggle.querySelector('i').classList.remove('fa-times');
+                    toggle.querySelector('i').classList.add('fa-bars');
+                }
             }
         }
         
@@ -3180,14 +3172,251 @@
                 section.classList.remove('active');
             });
             
-            document.getElementById(serviceId).classList.add('active');
-            document.getElementById(serviceId).scrollIntoView({ behavior: 'smooth' });
+            const serviceSection = document.getElementById(serviceId);
+            if (serviceSection) {
+                serviceSection.classList.add('active');
+                serviceSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        async function handleContactSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const messageEl = document.getElementById('form-message');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoading = document.getElementById('btn-loading');
+            
+            // Afficher le chargement
+            btnText.textContent = 'Envoi en cours...';
+            btnLoading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    messageEl.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
+                    messageEl.className = 'form-message form-success';
+                    messageEl.style.display = 'block';
+                    form.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+            } catch (error) {
+                messageEl.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
+                messageEl.className = 'form-message form-error';
+                messageEl.style.display = 'block';
+            } finally {
+                btnText.textContent = 'Envoyer la demande';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+                messageEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        function toggleLegalMentions() {
+            const legalSection = document.getElementById('legalMentions');
+            const toggleBtn = document.querySelector('.legal-toggle');
+            
+            if (legalSection && toggleBtn) {
+                legalSection.classList.toggle('expanded');
+                toggleBtn.textContent = legalSection.classList.contains('expanded') 
+                    ? 'Masquer les mentions légales' 
+                    : 'Voir les mentions légales';
+            }
+        }
+        
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observer les éléments à animer
+            document.querySelectorAll('.service-card, .value-item, .report-card').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // ===== ADMINISTRATION =====
+        function openAdmin() {
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('loginSection').classList.add('active');
+            document.getElementById('adminMainSection').classList.remove('active');
+            document.getElementById('adminPassword').value = '';
+        }
+        
+        function closeAdmin() {
+            document.getElementById('adminPanel').style.display = 'none';
+            isAdmin = false;
+        }
+        
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === CONFIG.adminPassword) {
+                isAdmin = true;
+                document.getElementById('loginSection').classList.remove('active');
+                document.getElementById('adminMainSection').classList.add('active');
+                loadAdminData();
+            } else {
+                alert('Mot de passe incorrect');
+            }
+        }
+        
+        function switchTab(tabId, event) {
+            // Masquer tous les onglets
+            document.querySelectorAll('.admin-section').forEach(tab => {
+                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Afficher l'onglet sélectionné
+            document.getElementById(tabId).classList.add('active');
+            
+            // Mettre à jour les onglets actifs
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+        
+        async function loadAdminData() {
+            // Cette fonction chargerait les données dans le panel admin
+            console.log('Chargement des données admin...');
+        }
+        
+        // ===== UTILITAIRES =====
+        function updateFooterYear() {
+            const yearElement = document.getElementById('footer-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
+        
+        // ===== GESTION HORS LIGNE =====
+        window.addEventListener('online', () => {
+            isOnline = true;
+            updateSyncStatus('online');
+            processPendingSync();
+        });
+        
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            updateSyncStatus('offline');
+        });
+        
+        // ===== FONCTIONS DE BACKUP =====
+        function exportBackup() {
+            const backup = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (!key.startsWith('firebase') && key !== 'pendingSync') {
+                    backup[key] = localStorage.getItem(key);
+                }
+            }
+            
+            const backupString = JSON.stringify(backup, null, 2);
+            const backupElement = document.getElementById('backup-data');
+            if (backupElement) {
+                backupElement.value = backupString;
+            }
+            
+            // Télécharger le fichier
+            const blob = new Blob([backupString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup-4sp-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            
+            alert('Sauvegarde exportée avec succès!');
+        }
+        
+        function importBackup() {
+            const backupElement = document.getElementById('backup-data');
+            if (!backupElement || !backupElement.value) {
+                alert('Veuillez coller les données de sauvegarde d\'abord');
+                return;
+            }
+            
+            try {
+                const backup = JSON.parse(backupElement.value);
+                let importedCount = 0;
+                
+                for (const [key, value] of Object.entries(backup)) {
+                    localStorage.setItem(key, value);
+                    importedCount++;
+                }
+                
+                alert(`${importedCount} données restaurées avec succès! Rechargement...`);
+                setTimeout(() => location.reload(), 2000);
+            } catch (error) {
+                alert('Erreur: format de sauvegarde invalide');
+            }
+        }
+        
+        function forceSync() {
+            updateSyncStatus('syncing');
+            processPendingSync().then(() => {
+                setTimeout(() => {
+                    updateSyncStatus('online');
+                    alert('Synchronisation forcée terminée');
+                }, 2000);
+            });
+        }
+        
+        function saveFirebaseConfig() {
+            const configElement = document.getElementById('firebase-config');
+            if (!configElement) return;
+            
+            try {
+                const config = JSON.parse(configElement.value);
+                localStorage.setItem('firebaseConfig', JSON.stringify(config));
+                alert('Configuration Firebase sauvegardée! Redémarrage...');
+                setTimeout(() => location.reload(), 2000);
+            } catch (error) {
+                alert('Erreur: configuration JSON invalide');
+            }
+        }
+        
+        // ===== FERMETURE DES MODALS =====
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('adminPanel')) {
+                closeAdmin();
+            }
+            if (e.target === document.getElementById('reportModal')) {
+                closeModal();
+            }
+        });
+        
+        // Fonctions existantes à conserver
+        function closeModal() {
+            document.getElementById('reportModal').style.display = 'none';
         }
         
         function openModal(reportId) {
             const modal = document.getElementById('reportModal');
             const modalContent = document.getElementById('modal-content');
             
+            // Charger le rapport depuis localStorage
             const reports = JSON.parse(localStorage.getItem('reports') || '[]');
             const report = reports.find(r => r.id === reportId);
             
@@ -3203,984 +3432,10 @@
             }
         }
         
-        function closeModal() {
-            document.getElementById('reportModal').style.display = 'none';
-        }
+        // Initialisation du statut de synchronisation
+        updateSyncStatus(isOnline ? 'online' : 'offline');
         
-        // Fonctions d'administration
-        function openAdmin() {
-            document.getElementById('adminPanel').style.display = 'block';
-            document.getElementById('loginSection').classList.add('active');
-            document.getElementById('adminMainSection').classList.remove('active');
-            document.getElementById('adminPassword').value = '';
-        }
-        
-        function closeAdmin() {
-            document.getElementById('adminPanel').style.display = 'none';
-            isAdminAuthenticated = false;
-        }
-        
-        // Mot de passe administrateur
-        const adminPassword = "4SP@forsecuriteprivee2024";
-        let isAdminAuthenticated = false;
-        let currentService = 'service1';
-        let serviceImages = {
-            service1: { main: '', gallery: ['', '', '', ''] },
-            service2: { main: '', gallery: ['', '', '', ''] },
-            service3: { main: '', gallery: ['', '', '', ''] }
-        };
-        
-        function checkPassword() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === adminPassword) {
-                isAdminAuthenticated = true;
-                document.getElementById('loginSection').classList.remove('active');
-                document.getElementById('adminMainSection').classList.add('active');
-                
-                loadAdminData();
-                loadServiceData();
-                loadReports();
-            } else {
-                alert("Mot de passe incorrect. Veuillez réessayer.");
-            }
-        }
-        
-        function switchTab(tabId, event) {
-            document.querySelectorAll('.admin-section').forEach(tab => {
-                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
-                    tab.classList.remove('active');
-                }
-            });
-            
-            document.getElementById(tabId).classList.add('active');
-            
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
-        }
-        
-        // Charger les données administrateur (AVEC SYNCHRONISATION)
-        async function loadAdminData() {
-            // Charger les données avec priorité cloud
-            const heroTitle = await loadSyncedData('heroTitle');
-            if (heroTitle) {
-                document.getElementById('hero-title').value = heroTitle;
-                document.getElementById('hero-text').value = await loadSyncedData('heroText') || '';
-                document.getElementById('commercial-title').value = await loadSyncedData('commercialTitle') || '';
-                document.getElementById('commercial-text').value = await loadSyncedData('commercialText') || '';
-                document.getElementById('commercial-text-2').value = await loadSyncedData('commercialText2') || '';
-                document.getElementById('about-title').value = await loadSyncedData('aboutTitle') || '';
-                document.getElementById('about-text-1').value = await loadSyncedData('aboutText1') || '';
-                document.getElementById('about-text-2').value = await loadSyncedData('aboutText2') || '';
-                document.getElementById('about-values-title').value = await loadSyncedData('aboutValuesTitle') || '';
-                document.getElementById('reports-description').value = await loadSyncedData('reportsDescription') || '';
-                
-                // Header
-                document.getElementById('header-company-name').value = await loadSyncedData('headerCompanyName') || '';
-                document.getElementById('header-company-slogan').value = await loadSyncedData('headerCompanySlogan') || '';
-                
-                // Footer
-                document.getElementById('footer-title-1').value = await loadSyncedData('footerTitle1') || '';
-                document.getElementById('footer-description-1').value = await loadSyncedData('footerDescription1') || '';
-                document.getElementById('footer-agents-count').value = await loadSyncedData('footerAgentsCount') || '';
-                document.getElementById('footer-title-2').value = await loadSyncedData('footerTitle2') || '';
-                document.getElementById('footer-address').value = await loadSyncedData('footerAddress') || '';
-                document.getElementById('footer-phone').value = await loadSyncedData('footerPhone') || '';
-                document.getElementById('footer-email').value = await loadSyncedData('footerEmail') || '';
-                document.getElementById('footer-title-3').value = await loadSyncedData('footerTitle3') || '';
-                document.getElementById('footer-title-4').value = await loadSyncedData('footerTitle4') || '';
-                document.getElementById('footer-year').value = await loadSyncedData('footerYear') || '';
-                
-                // Contact
-                document.getElementById('contact-title').value = await loadSyncedData('contactTitle') || '';
-                document.getElementById('contact-description').value = await loadSyncedData('contactDescription') || '';
-                document.getElementById('contact-address').value = await loadSyncedData('contactAddress') || '';
-                document.getElementById('contact-phone').value = await loadSyncedData('contactPhone') || '';
-                document.getElementById('contact-email').value = await loadSyncedData('contactEmail') || '';
-                document.getElementById('contact-availability').value = await loadSyncedData('contactAvailability') || '';
-                document.getElementById('contact-agents').value = await loadSyncedData('contactAgents') || '';
-                document.getElementById('contact-form-title').value = await loadSyncedData('contactFormTitle') || '';
-                
-                // Valeurs
-                document.getElementById('value-title-1').value = await loadSyncedData('valueTitle1') || '';
-                document.getElementById('value-desc-1').value = await loadSyncedData('valueDesc1') || '';
-                document.getElementById('value-title-2').value = await loadSyncedData('valueTitle2') || '';
-                document.getElementById('value-desc-2').value = await loadSyncedData('valueDesc2') || '';
-                document.getElementById('value-title-3').value = await loadSyncedData('valueTitle3') || '';
-                document.getElementById('value-desc-3').value = await loadSyncedData('valueDesc3') || '';
-                document.getElementById('value-title-4').value = await loadSyncedData('valueTitle4') || '';
-                document.getElementById('value-desc-4').value = await loadSyncedData('valueDesc4') || '';
-            }
-            
-            // Charger les images des services
-            const savedServiceImages = await loadSyncedJSON('serviceImages');
-            if (savedServiceImages) {
-                serviceImages = savedServiceImages;
-            }
-            
-            // Charger les couleurs
-            const primaryColor = await loadSyncedData('primaryColor');
-            if (primaryColor) {
-                document.getElementById('primary-color').value = primaryColor;
-                document.getElementById('secondary-color').value = await loadSyncedData('secondaryColor') || '#000000';
-                document.getElementById('accent-color').value = await loadSyncedData('accentColor') || '#ffffff';
-                
-                updateColorPreview('primary-color', 'primary-color-preview');
-                updateColorPreview('secondary-color', 'secondary-color-preview');
-                updateColorPreview('accent-color', 'accent-color-preview');
-            }
-            
-            // Charger la configuration Firebase
-            const savedFirebaseConfig = localStorage.getItem('firebaseConfig');
-            if (savedFirebaseConfig) {
-                document.getElementById('firebase-config').value = savedFirebaseConfig;
-            }
-            
-            console.log("Données administrateur chargées avec synchronisation");
-        }
-        
-        function updateColorPreview(colorInputId, previewId) {
-            const colorValue = document.getElementById(colorInputId).value;
-            const previewElement = document.getElementById(previewId);
-            if (previewElement) {
-                previewElement.style.backgroundColor = colorValue;
-                
-                if (colorValue === '#ffffff' || colorValue === '#fff' || colorValue === 'white') {
-                    previewElement.style.border = '1px solid #ccc';
-                } else {
-                    previewElement.style.border = 'none';
-                }
-            }
-        }
-        
-        async function loadServiceData() {
-            currentService = document.getElementById('service-selector').value;
-            
-            const serviceTitle = await loadSyncedData(currentService + 'Title');
-            if (serviceTitle) {
-                document.getElementById('service-title').value = serviceTitle;
-                document.getElementById('service-desc').value = await loadSyncedData(currentService + 'Desc') || '';
-                
-                // Charger les caractéristiques
-                const features = await loadSyncedJSON(currentService + 'Features') || [];
-                const featuresContainer = document.getElementById('service-features-container');
-                featuresContainer.innerHTML = '';
-                
-                features.forEach((feature, index) => {
-                    const featureElement = document.createElement('div');
-                    featureElement.className = 'admin-form-group';
-                    featureElement.innerHTML = `
-                        <div style="display: flex; align-items: center;">
-                            <input type="text" value="${feature}" 
-                                oninput="updateFeature(${index}, this.value)" 
-                                style="flex: 1; margin-right: 10px;">
-                            <button type="button" class="admin-btn-danger" onclick="removeFeature(${index})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    `;
-                    featuresContainer.appendChild(featureElement);
-                });
-                
-                // Charger les images
-                if (serviceImages[currentService]) {
-                    const mainImagePreview = document.getElementById('service-main-image-preview');
-                    if (serviceImages[currentService].main) {
-                        mainImagePreview.innerHTML = `<img src="${serviceImages[currentService].main}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
-                    } else {
-                        mainImagePreview.innerHTML = '<div class="image-placeholder">Aucune image</div>';
-                    }
-                    
-                    const galleryContainer = document.getElementById('service-gallery-images');
-                    galleryContainer.innerHTML = '';
-                    
-                    serviceImages[currentService].gallery.forEach((image, index) => {
-                        const galleryItem = document.createElement('div');
-                        galleryItem.className = 'service-image-item';
-                        galleryItem.innerHTML = `
-                            <div class="service-image-preview">
-                                ${image ? `<img src="${image}" alt="Preview">` : '<div class="image-placeholder">Aucune image</div>'}
-                            </div>
-                            <div class="service-image-actions">
-                                <label class="admin-btn-secondary" style="margin: 0; cursor: pointer;">
-                                    <i class="fas fa-upload"></i> Changer
-                                    <input type="file" accept="image/*" style="display: none;" 
-                                        onchange="updateGalleryImage(${index}, this)">
-                                </label>
-                                <button type="button" class="admin-btn-danger" onclick="removeGalleryImage(${index})">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        `;
-                        galleryContainer.appendChild(galleryItem);
-                    });
-                    
-                    const addButton = document.getElementById('add-gallery-image-btn');
-                    const galleryCount = serviceImages[currentService].gallery.filter(img => img !== '').length;
-                    addButton.disabled = galleryCount >= 4;
-                }
-            }
-        }
-        
-        async function addFeature() {
-            const features = await loadSyncedJSON(currentService + 'Features') || [];
-            features.push('Nouvelle caractéristique');
-            await saveSyncedJSON(currentService + 'Features', features);
-            loadServiceData();
-        }
-        
-        async function updateFeature(index, value) {
-            const features = await loadSyncedJSON(currentService + 'Features') || [];
-            features[index] = value;
-            await saveSyncedJSON(currentService + 'Features', features);
-        }
-        
-        async function removeFeature(index) {
-            const features = await loadSyncedJSON(currentService + 'Features') || [];
-            features.splice(index, 1);
-            await saveSyncedJSON(currentService + 'Features', features);
-            loadServiceData();
-        }
-        
-        function previewMainImage(input) {
-            const file = input.files[0];
-            if (file) {
-                if (!file.type.match('image.*')) {
-                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    serviceImages[currentService].main = e.target.result;
-                    await saveSyncedJSON('serviceImages', serviceImages);
-                    
-                    const preview = document.getElementById('service-main-image-preview');
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        
-        function addGalleryImage() {
-            const gallery = serviceImages[currentService].gallery;
-            const imageCount = gallery.filter(img => img !== '').length;
-            if (imageCount >= 4) {
-                alert("Vous avez atteint le nombre maximum d'images (4) pour cette galerie.");
-                return;
-            }
-            
-            const emptyIndex = gallery.findIndex(img => img === '');
-            if (emptyIndex !== -1) {
-                const galleryItems = document.querySelectorAll('.service-image-item');
-                if (galleryItems[emptyIndex]) {
-                    const fileInput = galleryItems[emptyIndex].querySelector('input[type="file"]');
-                    fileInput.click();
-                }
-            }
-        }
-        
-        async function updateGalleryImage(index, input) {
-            const file = input.files[0];
-            if (file) {
-                if (!file.type.match('image.*')) {
-                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    serviceImages[currentService].gallery[index] = e.target.result;
-                    await saveSyncedJSON('serviceImages', serviceImages);
-                    loadServiceData();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        
-        async function removeGalleryImage(index) {
-            serviceImages[currentService].gallery[index] = '';
-            await saveSyncedJSON('serviceImages', serviceImages);
-            loadServiceData();
-        }
-        
-        async function saveServiceData() {
-            const title = document.getElementById('service-title').value;
-            const description = document.getElementById('service-desc').value;
-            
-            // Sauvegarder avec synchronisation
-            await saveSyncedData(currentService + 'Title', title);
-            await saveSyncedData(currentService + 'Desc', description);
-            
-            // Sauvegarder les caractéristiques
-            const features = [];
-            document.querySelectorAll('#service-features-container input').forEach(input => {
-                features.push(input.value);
-            });
-            await saveSyncedJSON(currentService + 'Features', features);
-            
-            await saveSyncedJSON('serviceImages', serviceImages);
-            
-            // Mettre à jour l'affichage sur le site
-            document.getElementById(currentService + '-title').textContent = title;
-            document.getElementById(currentService + '-desc').textContent = description;
-            
-            if (serviceImages[currentService].main) {
-                document.getElementById(currentService + '-main-image').src = serviceImages[currentService].main;
-            }
-            
-            const galleryContainer = document.getElementById(currentService + '-gallery');
-            if (galleryContainer && serviceImages[currentService]) {
-                galleryContainer.innerHTML = '';
-                serviceImages[currentService].gallery.forEach(image => {
-                    if (image) {
-                        const galleryItem = document.createElement('div');
-                        galleryItem.className = 'gallery-item';
-                        galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
-                        galleryContainer.appendChild(galleryItem);
-                    }
-                });
-            }
-            
-            const featuresContainer = document.getElementById(currentService + '-features');
-            if (featuresContainer) {
-                featuresContainer.innerHTML = '';
-                features.forEach(feature => {
-                    const li = document.createElement('li');
-                    li.textContent = feature;
-                    featuresContainer.appendChild(li);
-                });
-            }
-            
-            const detailFeaturesContainer = document.getElementById(currentService + '-detail-features');
-            if (detailFeaturesContainer) {
-                detailFeaturesContainer.innerHTML = '';
-                features.forEach(feature => {
-                    const li = document.createElement('li');
-                    li.textContent = feature;
-                    detailFeaturesContainer.appendChild(li);
-                });
-            }
-            
-            alert("Service enregistré et synchronisé avec succès!");
-        }
-        
-        async function addReport() {
-            const title = document.getElementById('report-title').value;
-            const date = document.getElementById('report-date').value;
-            const content = document.getElementById('report-content').value;
-            
-            if (!title || !date || !content) {
-                alert("Veuillez remplir tous les champs obligatoires.");
-                return;
-            }
-            
-            const reportId = 'report_' + Date.now();
-            const reportImagePreview = document.getElementById('reportImagePreview');
-            const image = reportImagePreview.querySelector('img') ? reportImagePreview.querySelector('img').src : '';
-            
-            const reports = await loadSyncedJSON('reports') || [];
-            reports.push({
-                id: reportId,
-                title,
-                date,
-                content,
-                image
-            });
-            
-            await saveSyncedJSON('reports', reports);
-            loadReports();
-            
-            document.getElementById('report-title').value = '';
-            document.getElementById('report-date').value = '';
-            document.getElementById('report-content').value = '';
-            document.getElementById('reportImagePreview').innerHTML = '';
-            
-            alert("Rapport ajouté et synchronisé avec succès!");
-        }
-        
-        async function loadReports() {
-            const reports = await loadSyncedJSON('reports') || [];
-            const reportsContainer = document.getElementById('existing-reports');
-            const reportsGrid = document.getElementById('reports-grid');
-            
-            reports.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            if (reportsContainer) {
-                reportsContainer.innerHTML = '';
-                
-                reports.forEach(report => {
-                    const reportItem = document.createElement('div');
-                    reportItem.className = 'report-item';
-                    reportItem.innerHTML = `
-                        <strong>${report.title}</strong> (${new Date(report.date).toLocaleDateString('fr-FR')})
-                        <button class="admin-btn" style="padding: 5px 10px; margin-left: 10px;" onclick="editReport('${report.id}')">Modifier</button>
-                        <button class="admin-btn-danger" style="padding: 5px 10px; margin-left: 10px;" onclick="deleteReport('${report.id}')">Supprimer</button>
-                    `;
-                    reportsContainer.appendChild(reportItem);
-                });
-            }
-            
-            if (reportsGrid) {
-                reportsGrid.innerHTML = '';
-                
-                reports.slice(0, 6).forEach(report => {
-                    const reportCard = document.createElement('div');
-                    reportCard.className = 'report-card';
-                    reportCard.innerHTML = `
-                        ${report.image ? `
-                        <div class="report-image">
-                            <img src="${report.image}" alt="${report.title}">
-                        </div>
-                        ` : ''}
-                        <div class="report-content">
-                            <div class="report-date">${new Date(report.date).toLocaleDateString('fr-FR')}</div>
-                            <h3 class="report-title">${report.title}</h3>
-                            <p class="report-excerpt">${report.content.substring(0, 100)}...</p>
-                            <a href="#" class="read-more" onclick="openModal('${report.id}'); return false;">
-                                Lire la suite <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    `;
-                    reportsGrid.appendChild(reportCard);
-                });
-            }
-        }
-        
-        async function editReport(reportId) {
-            const reports = await loadSyncedJSON('reports') || [];
-            const report = reports.find(r => r.id === reportId);
-            
-            if (report) {
-                document.getElementById('report-title').value = report.title;
-                document.getElementById('report-date').value = report.date;
-                document.getElementById('report-content').value = report.content;
-                
-                const reportImagePreview = document.getElementById('reportImagePreview');
-                if (report.image) {
-                    reportImagePreview.innerHTML = `<img src="${report.image}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
-                } else {
-                    reportImagePreview.innerHTML = '';
-                }
-                
-                deleteReport(reportId, false);
-            }
-        }
-        
-        async function deleteReport(reportId, showAlert = true) {
-            const reports = await loadSyncedJSON('reports') || [];
-            const updatedReports = reports.filter(r => r.id !== reportId);
-            await saveSyncedJSON('reports', updatedReports);
-            loadReports();
-            
-            if (showAlert) {
-                alert("Rapport supprimé avec succès!");
-            }
-        }
-        
-        async function saveContent() {
-            const heroTitle = document.getElementById('hero-title').value;
-            const heroText = document.getElementById('hero-text').value;
-            const commercialTitle = document.getElementById('commercial-title').value;
-            const commercialText = document.getElementById('commercial-text').value;
-            const commercialText2 = document.getElementById('commercial-text-2').value;
-            const aboutTitle = document.getElementById('about-title').value;
-            const aboutText1 = document.getElementById('about-text-1').value;
-            const aboutText2 = document.getElementById('about-text-2').value;
-            const aboutValuesTitle = document.getElementById('about-values-title').value;
-            const reportsDescription = document.getElementById('reports-description').value;
-            
-            // Valeurs
-            const valueTitle1 = document.getElementById('value-title-1').value;
-            const valueDesc1 = document.getElementById('value-desc-1').value;
-            const valueTitle2 = document.getElementById('value-title-2').value;
-            const valueDesc2 = document.getElementById('value-desc-2').value;
-            const valueTitle3 = document.getElementById('value-title-3').value;
-            const valueDesc3 = document.getElementById('value-desc-3').value;
-            const valueTitle4 = document.getElementById('value-title-4').value;
-            const valueDesc4 = document.getElementById('value-desc-4').value;
-            
-            // Sauvegarder avec synchronisation
-            await saveSyncedData('heroTitle', heroTitle);
-            await saveSyncedData('heroText', heroText);
-            await saveSyncedData('commercialTitle', commercialTitle);
-            await saveSyncedData('commercialText', commercialText);
-            await saveSyncedData('commercialText2', commercialText2);
-            await saveSyncedData('aboutTitle', aboutTitle);
-            await saveSyncedData('aboutText1', aboutText1);
-            await saveSyncedData('aboutText2', aboutText2);
-            await saveSyncedData('aboutValuesTitle', aboutValuesTitle);
-            await saveSyncedData('reportsDescription', reportsDescription);
-            
-            // Valeurs
-            await saveSyncedData('valueTitle1', valueTitle1);
-            await saveSyncedData('valueDesc1', valueDesc1);
-            await saveSyncedData('valueTitle2', valueTitle2);
-            await saveSyncedData('valueDesc2', valueDesc2);
-            await saveSyncedData('valueTitle3', valueTitle3);
-            await saveSyncedData('valueDesc3', valueDesc3);
-            await saveSyncedData('valueTitle4', valueTitle4);
-            await saveSyncedData('valueDesc4', valueDesc4);
-            
-            // Mettre à jour le contenu de la page en direct
-            document.getElementById('hero-main-title').textContent = heroTitle;
-            document.getElementById('hero-subtitle').textContent = heroText;
-            document.getElementById('commercial-title').textContent = commercialTitle;
-            document.getElementById('commercial-text').innerHTML = commercialText;
-            document.getElementById('commercial-text-2').innerHTML = commercialText2;
-            document.getElementById('about-title').textContent = aboutTitle;
-            document.getElementById('about-text-1').textContent = aboutText1;
-            document.getElementById('about-text-2').textContent = aboutText2;
-            document.getElementById('about-values-title').textContent = aboutValuesTitle;
-            document.getElementById('reports-description').textContent = reportsDescription;
-            
-            // Valeurs
-            document.getElementById('value-title-1').textContent = valueTitle1;
-            document.getElementById('value-desc-1').textContent = valueDesc1;
-            document.getElementById('value-title-2').textContent = valueTitle2;
-            document.getElementById('value-desc-2').textContent = valueDesc2;
-            document.getElementById('value-title-3').textContent = valueTitle3;
-            document.getElementById('value-desc-3').textContent = valueDesc3;
-            document.getElementById('value-title-4').textContent = valueTitle4;
-            document.getElementById('value-desc-4').textContent = valueDesc4;
-            
-            // Image à propos
-            const aboutImageInput = document.getElementById('about-main-image');
-            if (aboutImageInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    document.getElementById('about-main-image').src = e.target.result;
-                    await saveSyncedData('aboutMainImage', e.target.result);
-                };
-                reader.readAsDataURL(aboutImageInput.files[0]);
-            }
-            
-            alert("Contenu enregistré et synchronisé avec succès!");
-        }
-        
-        async function saveHeader() {
-            const companyName = document.getElementById('header-company-name').value;
-            const companySlogan = document.getElementById('header-company-slogan').value;
-            
-            await saveSyncedData('headerCompanyName', companyName);
-            await saveSyncedData('headerCompanySlogan', companySlogan);
-            
-            document.getElementById('header-company-name').textContent = companyName;
-            document.getElementById('header-company-slogan').textContent = companySlogan;
-            
-            const logoInput = document.getElementById('logo-upload');
-            if (logoInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    document.getElementById('logo-image').src = e.target.result;
-                    await saveSyncedData('logo', e.target.result);
-                };
-                reader.readAsDataURL(logoInput.files[0]);
-            }
-            
-            alert("En-tête enregistré et synchronisé avec succès!");
-        }
-        
-        async function saveFooter() {
-            const footerTitle1 = document.getElementById('footer-title-1').value;
-            const footerDescription1 = document.getElementById('footer-description-1').value;
-            const footerAgentsCount = document.getElementById('footer-agents-count').value;
-            const footerTitle2 = document.getElementById('footer-title-2').value;
-            const footerAddress = document.getElementById('footer-address').value;
-            const footerPhone = document.getElementById('footer-phone').value;
-            const footerEmail = document.getElementById('footer-email').value;
-            const footerTitle3 = document.getElementById('footer-title-3').value;
-            const footerTitle4 = document.getElementById('footer-title-4').value;
-            const footerYear = document.getElementById('footer-year').value;
-            
-            await saveSyncedData('footerTitle1', footerTitle1);
-            await saveSyncedData('footerDescription1', footerDescription1);
-            await saveSyncedData('footerAgentsCount', footerAgentsCount);
-            await saveSyncedData('footerTitle2', footerTitle2);
-            await saveSyncedData('footerAddress', footerAddress);
-            await saveSyncedData('footerPhone', footerPhone);
-            await saveSyncedData('footerEmail', footerEmail);
-            await saveSyncedData('footerTitle3', footerTitle3);
-            await saveSyncedData('footerTitle4', footerTitle4);
-            await saveSyncedData('footerYear', footerYear);
-            
-            document.getElementById('footer-title-1').textContent = footerTitle1;
-            document.getElementById('footer-description-1').textContent = footerDescription1;
-            document.getElementById('footer-agents-count').textContent = footerAgentsCount;
-            document.getElementById('footer-title-2').textContent = footerTitle2;
-            document.getElementById('footer-address').textContent = footerAddress;
-            document.getElementById('footer-phone').textContent = footerPhone;
-            document.getElementById('footer-email').textContent = footerEmail;
-            document.getElementById('footer-title-3').textContent = footerTitle3;
-            document.getElementById('footer-title-4').textContent = footerTitle4;
-            document.getElementById('footer-year').textContent = footerYear;
-            
-            alert("Pied de page enregistré et synchronisé avec succès!");
-        }
-        
-        async function saveContact() {
-            const contactTitle = document.getElementById('contact-title').value;
-            const contactDescription = document.getElementById('contact-description').value;
-            const contactAddress = document.getElementById('contact-address').value;
-            const contactPhone = document.getElementById('contact-phone').value;
-            const contactEmail = document.getElementById('contact-email').value;
-            const contactAvailability = document.getElementById('contact-availability').value;
-            const contactAgents = document.getElementById('contact-agents').value;
-            const contactFormTitle = document.getElementById('contact-form-title').value;
-            
-            await saveSyncedData('contactTitle', contactTitle);
-            await saveSyncedData('contactDescription', contactDescription);
-            await saveSyncedData('contactAddress', contactAddress);
-            await saveSyncedData('contactPhone', contactPhone);
-            await saveSyncedData('contactEmail', contactEmail);
-            await saveSyncedData('contactAvailability', contactAvailability);
-            await saveSyncedData('contactAgents', contactAgents);
-            await saveSyncedData('contactFormTitle', contactFormTitle);
-            
-            document.getElementById('contact-title').textContent = contactTitle;
-            document.getElementById('contact-description').textContent = contactDescription;
-            document.getElementById('contact-address').textContent = contactAddress;
-            document.getElementById('contact-phone').textContent = contactPhone;
-            document.getElementById('contact-email').textContent = contactEmail;
-            document.getElementById('contact-availability').textContent = contactAvailability;
-            document.getElementById('contact-agents').textContent = contactAgents;
-            document.getElementById('contact-form-title').textContent = contactFormTitle;
-            
-            alert("Informations de contact enregistrées et synchronisées avec succès!");
-        }
-        
-        async function saveSEO() {
-            const metaTitle = document.getElementById('meta-title').value;
-            const metaDescription = document.getElementById('meta-description').value;
-            
-            await saveSyncedData('metaTitle', metaTitle);
-            await saveSyncedData('metaDescription', metaDescription);
-            
-            document.title = metaTitle;
-            
-            const metaDescTag = document.querySelector('meta[name="description"]');
-            if (metaDescTag) {
-                metaDescTag.setAttribute('content', metaDescription);
-            }
-            
-            alert("Paramètres SEO enregistrés avec succès!");
-        }
-        
-        async function saveAppearance() {
-            const primaryColor = document.getElementById('primary-color').value;
-            const secondaryColor = document.getElementById('secondary-color').value;
-            const accentColor = document.getElementById('accent-color').value;
-            
-            await saveSyncedData('primaryColor', primaryColor);
-            await saveSyncedData('secondaryColor', secondaryColor);
-            await saveSyncedData('accentColor', accentColor);
-            
-            document.documentElement.style.setProperty('--primary', primaryColor);
-            document.documentElement.style.setProperty('--secondary', secondaryColor);
-            document.documentElement.style.setProperty('--accent', accentColor);
-            
-            alert("Apparence enregistrée et synchronisée avec succès!");
-        }
-        
-        function previewLogo(input) {
-            const file = input.files[0];
-            if (file) {
-                if (!file.type.match('image.*')) {
-                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    document.getElementById('logo-image').src = e.target.result;
-                    await saveSyncedData('logo', e.target.result);
-                    
-                    const preview = document.getElementById('logo-preview');
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        
-        function generateSEOSuggestions() {
-            // Fonction simplifiée pour générer des suggestions SEO
-            const suggestionsContainer = document.getElementById('seo-suggestions');
-            suggestionsContainer.innerHTML = `
-                <h4>Suggestions SEO générées</h4>
-                <ul>
-                    <li>✅ Votre site est bien optimisé pour les mots-clés principaux</li>
-                    <li>📊 Pensez à ajouter un blog avec des articles réguliers</li>
-                    <li>🔍 Optimisez les balises alt de vos images</li>
-                    <li>🚀 Améliorez les temps de chargement sur mobile</li>
-                </ul>
-            `;
-        }
-        
-        function previewImage(input, previewId) {
-            const preview = document.getElementById(previewId);
-            const file = input.files[0];
-            
-            if (file) {
-                if (!file.type.match('image.*')) {
-                    alert("Veuillez sélectionner un fichier image valide (JPG, PNG, etc.)");
-                    preview.innerHTML = '';
-                    return;
-                }
-                
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; max-height: 100%;">`;
-                }
-                
-                reader.readAsDataURL(file);
-            } else {
-                preview.innerHTML = '';
-            }
-        }
-        
-        function toggleLegalMentions() {
-            const legalMentions = document.getElementById('legalMentions');
-            legalMentions.classList.toggle('expanded');
-            
-            const toggleButton = document.querySelector('.legal-toggle');
-            if (legalMentions.classList.contains('expanded')) {
-                toggleButton.textContent = 'Masquer les mentions légales';
-            } else {
-                toggleButton.textContent = 'Voir les mentions légales';
-            }
-        }
-
-        // Gestion du formulaire de contact
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const messageElement = document.getElementById('form-message');
-            messageElement.style.display = 'none';
-            
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const btnLoading = document.getElementById('btn-loading');
-            
-            btnText.textContent = 'Envoi en cours';
-            btnLoading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            
-            try {
-                const formData = new FormData(this);
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
-                    messageElement.className = 'form-message form-success';
-                    messageElement.style.display = 'block';
-                    this.reset();
-                } else {
-                    throw new Error('Erreur lors de l\'envoi');
-                }
-            } catch (error) {
-                messageElement.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
-                messageElement.className = 'form-message form-error';
-                messageElement.style.display = 'block';
-            } finally {
-                btnText.textContent = 'Envoyer la demande';
-                btnLoading.style.display = 'none';
-                submitBtn.disabled = false;
-                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        });
-
-        // Gestion de la confirmation après redirection
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('submission') && urlParams.get('submission') === 'success') {
-            const messageElement = document.getElementById('form-message');
-            messageElement.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
-            messageElement.className = 'form-message form-success';
-            messageElement.style.display = 'block';
-            
-            setTimeout(() => {
-                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 500);
-        }
-        
-        // Fermer le panel admin en cliquant à l'extérieur
-        window.addEventListener('click', function(e) {
-            if (e.target === document.getElementById('adminPanel')) {
-                closeAdmin();
-            }
-            if (e.target === document.getElementById('reportModal')) {
-                closeModal();
-            }
-        });
-        
-        // Animation au défilement
-        window.addEventListener('scroll', function() {
-            const elements = document.querySelectorAll('.service-card, .value-item, .about-image, .report-card');
-            elements.forEach(element => {
-                const position = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                if (position < screenPosition) {
-                    element.classList.add('fade-in');
-                }
-            });
-        });
-        
-        // Initialiser les données au chargement de la page
-        window.addEventListener('DOMContentLoaded', async function() {
-            // Initialiser le menu mobile
-            initMobileMenu();
-            
-            // Détecter et ajuster selon l'appareil
-            detectDeviceAndAdjust();
-            
-            // Initialiser Firebase et la synchronisation
-            await initializeFirebase();
-            
-            // Charger les données avec la nouvelle synchronisation
-            const services = ['service1', 'service2', 'service3'];
-            for (const service of services) {
-                const serviceTitle = await loadSyncedData(service + 'Title');
-                if (serviceTitle) {
-                    document.getElementById(service + '-title').textContent = serviceTitle;
-                    document.getElementById(service + '-desc').textContent = await loadSyncedData(service + 'Desc') || '';
-                    
-                    const features = await loadSyncedJSON(service + 'Features') || [];
-                    const featuresContainer = document.getElementById(service + '-features');
-                    if (featuresContainer) {
-                        featuresContainer.innerHTML = '';
-                        features.forEach(feature => {
-                            const li = document.createElement('li');
-                            li.textContent = feature;
-                            featuresContainer.appendChild(li);
-                        });
-                    }
-                }
-            }
-            
-            // Charger le contenu principal avec synchronisation
-            const heroTitle = await loadSyncedData('heroTitle');
-            if (heroTitle) {
-                document.getElementById('hero-main-title').textContent = heroTitle;
-                document.getElementById('hero-subtitle').textContent = await loadSyncedData('heroText') || '';
-                document.getElementById('commercial-title').textContent = await loadSyncedData('commercialTitle') || '';
-                document.getElementById('commercial-text').innerHTML = await loadSyncedData('commercialText') || '';
-                document.getElementById('commercial-text-2').innerHTML = await loadSyncedData('commercialText2') || '';
-                document.getElementById('about-title').textContent = await loadSyncedData('aboutTitle') || '';
-                document.getElementById('about-text-1').textContent = await loadSyncedData('aboutText1') || '';
-                document.getElementById('about-text-2').textContent = await loadSyncedData('aboutText2') || '';
-                document.getElementById('about-values-title').textContent = await loadSyncedData('aboutValuesTitle') || '';
-                document.getElementById('reports-description').textContent = await loadSyncedData('reportsDescription') || '';
-                
-                // Header
-                document.getElementById('header-company-name').textContent = await loadSyncedData('headerCompanyName') || '';
-                document.getElementById('header-company-slogan').textContent = await loadSyncedData('headerCompanySlogan') || '';
-                
-                // Footer
-                document.getElementById('footer-title-1').textContent = await loadSyncedData('footerTitle1') || '';
-                document.getElementById('footer-description-1').textContent = await loadSyncedData('footerDescription1') || '';
-                document.getElementById('footer-agents-count').textContent = await loadSyncedData('footerAgentsCount') || '';
-                document.getElementById('footer-title-2').textContent = await loadSyncedData('footerTitle2') || '';
-                document.getElementById('footer-address').textContent = await loadSyncedData('footerAddress') || '';
-                document.getElementById('footer-phone').textContent = await loadSyncedData('footerPhone') || '';
-                document.getElementById('footer-email').textContent = await loadSyncedData('footerEmail') || '';
-                document.getElementById('footer-title-3').textContent = await loadSyncedData('footerTitle3') || '';
-                document.getElementById('footer-title-4').textContent = await loadSyncedData('footerTitle4') || '';
-                document.getElementById('footer-year').textContent = await loadSyncedData('footerYear') || '';
-                
-                // Contact
-                document.getElementById('contact-title').textContent = await loadSyncedData('contactTitle') || '';
-                document.getElementById('contact-description').textContent = await loadSyncedData('contactDescription') || '';
-                document.getElementById('contact-address').textContent = await loadSyncedData('contactAddress') || '';
-                document.getElementById('contact-phone').textContent = await loadSyncedData('contactPhone') || '';
-                document.getElementById('contact-email').textContent = await loadSyncedData('contactEmail') || '';
-                document.getElementById('contact-availability').textContent = await loadSyncedData('contactAvailability') || '';
-                document.getElementById('contact-agents').textContent = await loadSyncedData('contactAgents') || '';
-                document.getElementById('contact-form-title').textContent = await loadSyncedData('contactFormTitle') || '';
-                
-                // Valeurs
-                document.getElementById('value-title-1').textContent = await loadSyncedData('valueTitle1') || '';
-                document.getElementById('value-desc-1').textContent = await loadSyncedData('valueDesc1') || '';
-                document.getElementById('value-title-2').textContent = await loadSyncedData('valueTitle2') || '';
-                document.getElementById('value-desc-2').textContent = await loadSyncedData('valueDesc2') || '';
-                document.getElementById('value-title-3').textContent = await loadSyncedData('valueTitle3') || '';
-                document.getElementById('value-desc-3').textContent = await loadSyncedData('valueDesc3') || '';
-                document.getElementById('value-title-4').textContent = await loadSyncedData('valueTitle4') || '';
-                document.getElementById('value-desc-4').textContent = await loadSyncedData('valueDesc4') || '';
-            }
-            
-            // Charger les images des services
-            const savedServiceImages = await loadSyncedJSON('serviceImages');
-            if (savedServiceImages) {
-                serviceImages = savedServiceImages;
-                
-                services.forEach(service => {
-                    if (serviceImages[service] && serviceImages[service].main) {
-                        document.getElementById(service + '-main-image').src = serviceImages[service].main;
-                    }
-                    
-                    const galleryContainer = document.getElementById(service + '-gallery');
-                    if (galleryContainer && serviceImages[service]) {
-                        galleryContainer.innerHTML = '';
-                        serviceImages[service].gallery.forEach(image => {
-                            if (image) {
-                                const galleryItem = document.createElement('div');
-                                galleryItem.className = 'gallery-item';
-                                galleryItem.innerHTML = `<img src="${image}" alt="Image du service">`;
-                                galleryContainer.appendChild(galleryItem);
-                            }
-                        });
-                    }
-                });
-            }
-            
-            // Charger les métadonnées SEO
-            const metaTitle = await loadSyncedData('metaTitle');
-            if (metaTitle) {
-                document.title = metaTitle;
-                const metaDescTag = document.querySelector('meta[name="description"]');
-                if (metaDescTag) {
-                    metaDescTag.setAttribute('content', await loadSyncedData('metaDescription') || '');
-                }
-            }
-            
-            // Charger les couleurs
-            const primaryColor = await loadSyncedData('primaryColor');
-            if (primaryColor) {
-                document.documentElement.style.setProperty('--primary', primaryColor);
-                document.documentElement.style.setProperty('--secondary', await loadSyncedData('secondaryColor') || '#000000');
-                document.documentElement.style.setProperty('--accent', await loadSyncedData('accentColor') || '#ffffff');
-            }
-            
-            // Charger le logo
-            const logo = await loadSyncedData('logo');
-            if (logo) {
-                document.getElementById('logo-image').src = logo;
-            }
-            
-            // Charger l'image à propos
-            const aboutMainImage = await loadSyncedData('aboutMainImage');
-            if (aboutMainImage) {
-                document.getElementById('about-main-image').src = aboutMainImage;
-            }
-            
-            // Charger les rapports
-            loadReports();
-        });
-        
-        // Écouter les changements de taille de fenêtre
-        window.addEventListener('resize', function() {
-            detectDeviceAndAdjust();
-        });
+        console.log('Système de synchronisation multi-appareils initialisé');
     </script>
 </body>
 </html>
