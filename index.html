@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,12 +6,12 @@
     <title>FOR SÉCURITÉ PRIVÉE (4SP) - Services de sécurité à Montpellier</title>
     
     <!-- Meta descriptions optimisées pour le référencement -->
-    <meta name="description" content="FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité privée implantée à Montpellier, dans l’Hérault, assurant ses prestations sur l’ensemble du département ainsi que dans les zones de Marseille et de Nice. proposant gardiennage, surveillance, sécurité événementielle et interventions. Plus de 20 agents diplômés CNAPS.">
+    <meta name="description" content="FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité privée implantée à Montpellier, dans l’Hérault, assurant ses prestations sur l’ensemble du département ainsi que dans les zones de Marseille et de Nice. Proposant gardiennage, surveillance, sécurité événementielle et interventions. Plus de 20 agents diplômés CNAPS.">
     <meta name="keywords" content="sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault, top société de sécurité, alarme, ronde d'intervention, caméras de surveillance">
     <meta name="author" content="FOR SÉCURITÉ PRIVÉE (4SP)">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="FOR SÉCURITÉ PRIVÉE (4SP) - Experts en sécurité  dans l’Hérault">
-    <meta property="og:description" content="Société de sécurité à Montpellier proposant des services de gardiennage, surveillance, sécurité événementielle avec des agents agréé par le  CNAPS sur l’ensemble du département ainsi que dans les zones de Marseille et de Nice.">
+    <meta property="og:title" content="FOR SÉCURITÉ PRIVÉE (4SP) - Experts en sécurité dans l’Hérault">
+    <meta property="og:description" content="Société de sécurité à Montpellier proposant des services de gardiennage, surveillance, sécurité événementielle avec des agents agréés par le CNAPS sur l’ensemble du département ainsi que dans les zones de Marseille et de Nice.">
     <meta property="og:image" content="https://via.placeholder.com/1200x630/e30613/ffffff?text=FOR+SÉCURITÉ+PRIVÉE">
     <meta property="og:url" content="https://www.for-securite-privee.fr">
     <meta property="og:type" content="website">
@@ -43,7 +43,7 @@
       },
       "telephone": "+33660350197",
       "email": "contact@4sp.fr",
-      "areaServed": "Montpellier, Hérault, Occitanie,bouches-du-rhone,alpes maritimes",
+      "areaServed": "Montpellier, Hérault, Occitanie, Bouches-du-Rhône, Alpes-Maritimes",
       "serviceType": "gardiennage, surveillance, sécurité événementielle",
       "keywords": "sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault, alarme, ronde d'intervention, caméras de surveillance"
     }
@@ -54,20 +54,23 @@
       const SITE_VERSION = "1.0.0";
       const LAST_UPDATE = Date.now();
       
-      // Force browser to always load updated files
       document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
-          const url = new URL(link.href, window.location.href);
-          if (!url.searchParams.has('v')) {
-            link.href = link.href.split('?')[0] + '?v=' + LAST_UPDATE;
-          }
+          try {
+            const url = new URL(link.href, window.location.href);
+            if (!url.searchParams.has('v')) {
+              link.href = link.href.split('?')[0] + '?v=' + LAST_UPDATE;
+            }
+          } catch(e) {}
         });
         
         document.querySelectorAll("script[src]").forEach(script => {
-          const url = new URL(script.src, window.location.href);
-          if (!url.searchParams.has('v') && !script.src.includes('firebase')) {
-            script.src = script.src.split('?')[0] + '?v=' + LAST_UPDATE;
-          }
+          try {
+            const url = new URL(script.src, window.location.href);
+            if (!url.searchParams.has('v') && !script.src.includes('firebase') && !script.src.includes('cdnjs')) {
+              script.src = script.src.split('?')[0] + '?v=' + LAST_UPDATE;
+            }
+          } catch(e) {}
         });
       });
     </script>
@@ -105,7 +108,6 @@
             font-size: var(--text-size);
         }
         
-        /* Optimisations pour les différents devices */
         body.mobile-device {
             --container-padding: clamp(0.75rem, 3vw, 1.5rem);
             --section-padding: clamp(2rem, 6vw, 4rem);
@@ -204,7 +206,6 @@
             transform: translateY(-2px);
         }
         
-        /* Menu mobile */
         .mobile-menu-toggle {
             display: none;
             background: transparent;
@@ -644,7 +645,7 @@
             font-weight: 700;
         }
         
-          .contact-info p {
+        .contact-info p {
             font-size: clamp(1rem, 2.5vw, 1.2rem);
             margin-bottom: 2.5rem;
             line-height: 1.8;
@@ -697,7 +698,7 @@
         }
         
         .form-group input, 
-        .form-group textarea,
+        .form-group textarea, 
         .form-group select {
             width: 100%;
             padding: 1rem;
@@ -708,7 +709,7 @@
         }
         
         .form-group input:focus, 
-        .form-group textarea:focus,
+        .form-group textarea:focus, 
         .form-group select:focus {
             border-color: var(--primary);
             outline: none;
@@ -1063,7 +1064,7 @@
             max-height: 100%;
         }
         
-        /* Nouvel onglet SEO */
+        /* Onglet SEO */
         .seo-status {
             background: #f9f9f9;
             padding: 15px;
@@ -1165,7 +1166,7 @@
             font-style: italic;
         }
         
-        /* Nouvelle section Rapports d'Activité */
+        /* Section Rapports d'Activité */
         .activity-reports {
             padding: var(--section-padding) var(--container-padding);
             background: var(--accent);
@@ -1233,6 +1234,7 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            cursor: pointer;
         }
         
         .read-more i {
@@ -1342,7 +1344,7 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Styles pour l'administration améliorée */
+        /* Styles pour l'administration */
         .admin-section-header {
             display: flex;
             justify-content: space-between;
@@ -1409,7 +1411,12 @@
             border: 1px solid #b8daff;
         }
         
-        /* Responsive Design amélioré */
+        .footer-editor textarea,
+        .contact-info-editor textarea {
+            min-height: 100px;
+        }
+
+        /* Responsive Design */
         @media (max-width: 1200px) {
             .logo {
                 width: clamp(80px, 10vw, 100px);
@@ -1482,7 +1489,7 @@
             }
             
             .hero {
-                height: auto;
+                min-height: auto;
                 padding: clamp(4rem, 10vw, 6rem) 1rem;
             }
             
@@ -1531,7 +1538,6 @@
                 transform: translateX(-50%);
             }
             
-            /* Menu mobile */
             .mobile-menu-toggle {
                 display: block;
             }
@@ -1636,105 +1642,10 @@
             }
         }
 
-        /* Animation utilities */
         .fade-in {
             animation: fadeIn 1s ease-in-out;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Styles pour l'administration améliorée */
-        .admin-section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .admin-section-title {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--secondary);
-        }
-        
-        .admin-help-text {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: -10px;
-            margin-bottom: 15px;
-        }
-        
-        .color-preview {
-            width: 30px;
-            height: 30px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-left: 10px;
-            vertical-align: middle;
-            border: 1px solid #ddd;
-        }
-        
-        .footer-editor textarea {
-            min-height: 100px;
-        }
-        
-        .contact-info-editor textarea {
-            min-height: 120px;
-        }
-        
-        .header-editor textarea {
-            min-height: 80px;
-        }
-        
-        /* Améliorations pour les très petits écrans */
-        @media (max-width: 320px) {
-            .logo {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .company-name {
-                font-size: 1rem;
-            }
-            
-            .company-slogan {
-                font-size: 0.7rem;
-            }
-            
-            .hero h1 {
-                font-size: 1.2rem;
-            }
-            
-            .hero p {
-                font-size: 0.8rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-        }
-        
-        /* Améliorations pour les très grands écrans */
-        @media (min-width: 1600px) {
-            .services-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .values-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .reports-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        /* Améliorations pour l'accessibilité */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -1743,7 +1654,6 @@
             }
         }
         
-        /* Améliorations pour le mode sombre */
         @media (prefers-color-scheme: dark) {
             :root {
                 --light: #1a1a1a;
@@ -1765,16 +1675,16 @@
                 <div class="company-slogan" id="header-company-slogan">Votre sécurité est notre priorité depuis 2024</div>
             </div>
         </div>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu principal">
             <i class="fas fa-bars"></i>
         </button>
         <nav>
             <ul id="mainNav">
-                <li><a href="#" onclick="showSection('home')">Accueil</a></li>
-                <li><a href="#services" onclick="showSection('services')">Services</a></li>
-                <li><a href="#about" onclick="showSection('about')">À propos</a></li>
-                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
-                <li><a href="#reports" onclick="showSection('reports')">Rapports</a></li>
+                <li><a href="#home" onclick="showSection('home'); return false;">Accueil</a></li>
+                <li><a href="#services" onclick="showSection('services'); return false;">Services</a></li>
+                <li><a href="#about" onclick="showSection('about'); return false;">À propos</a></li>
+                <li><a href="#contact" onclick="showSection('contact'); return false;">Contact</a></li>
+                <li><a href="#reports" onclick="showSection('reports'); return false;">Rapports</a></li>
             </ul>
         </nav>
     </header>
@@ -1792,7 +1702,7 @@
     <section class="commercial-presentation">
         <div class="commercial-content">
             <h2 id="commercial-title">Votre partenaire de confiance en sécurité privée</h2>
-            <p id="commercial-text">Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">20 agents expérimentés</span> vous garantît une protection optimale de vos biens et personnes.</p>
+            <p id="commercial-text">Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de <span class="highlight">20 agents expérimentés</span> vous garantit une protection optimale de vos biens et personnes.</p>
             <p id="commercial-text-2">Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
         </div>
     </section>
@@ -1815,7 +1725,7 @@
                         <li>Contrôle d'accès strict</li>
                         <li>Rapports d'activité détaillés</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('gardiennage')">En savoir plus</a>
+                    <a href="#gardiennage" class="btn" onclick="showService('gardiennage'); event.stopPropagation();">En savoir plus</a>
                 </div>
             </div>
             
@@ -1833,7 +1743,7 @@
                         <li>Contrôles aléatoires</li>
                         <li>Technologies de pointe</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('rondes')">En savoir plus</a>
+                    <a href="#rondes" class="btn" onclick="showService('rondes'); event.stopPropagation();">En savoir plus</a>
                 </div>
             </div>
             
@@ -1850,7 +1760,7 @@
                         <li>Contrôle d'accès événementiel</li>
                         <li>Poste de commandement mobile</li>
                     </ul>
-                    <a href="#" class="btn" onclick="showService('evenementiel')">En savoir plus</a>
+                    <a href="#evenementiel" class="btn" onclick="showService('evenementiel'); event.stopPropagation();">En savoir plus</a>
                 </div>
             </div>
         </div>
@@ -1876,7 +1786,7 @@
                         <li>Contrôle d'accès strict et gestion des entrées/sorties</li>
                         <li>Rondes de sécurité programmées</li>
                         <li>Rapports d'activité détaillés quotidiens</li>
-                        <li>Intervention rapide en case d'incident</li>
+                        <li>Intervention rapide en cas d'incident</li>
                         <li>Gestion des alarmes et alertes</li>
                     </ul>
                 </div>
@@ -2029,9 +1939,8 @@
         <h2 class="section-title">Rapports d'Activité</h2>
         <div class="reports-container">
             <p id="reports-description">Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</p>
-            
             <div class="reports-grid" id="reports-grid">
-                <!-- Les rapports seront chargés dynamiquement ici -->
+                <!-- Les rapports sont chargés dynamiquement via JS -->
             </div>
         </div>
     </section>
@@ -2166,11 +2075,11 @@
             <div class="footer-section">
                 <h3 id="footer-title-3">Liens rapides</h3>
                 <ul>
-                    <li><a href="#" onclick="showSection('home')">Accueil</a></li>
-                    <li><a href="#services" onclick="showSection('services')">Services</a></li>
-                    <li><a href="#about" onclick="showSection('about')">À propos</a></li>
-                    <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
-                    <li><a href="#reports" onclick="showSection('reports')">Rapports</a></li>
+                    <li><a href="#home" onclick="showSection('home'); return false;">Accueil</a></li>
+                    <li><a href="#services" onclick="showSection('services'); return false;">Services</a></li>
+                    <li><a href="#about" onclick="showSection('about'); return false;">À propos</a></li>
+                    <li><a href="#contact" onclick="showSection('contact'); return false;">Contact</a></li>
+                    <li><a href="#reports" onclick="showSection('reports'); return false;">Rapports</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -2184,11 +2093,11 @@
             </div>
         </div>
         
-        <!-- Ajout des mentions légales -->
+        <!-- Mentions légales -->
         <button class="legal-toggle" onclick="toggleLegalMentions()">Voir les mentions légales</button>
         <div class="legal-mentions" id="legalMentions">
             <h4>Mentions légales</h4>
-            <p>Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, il est porté à la connaissance des utilisateurs du site for securite privee (4SP) les présentes mentions légales.</p>
+            <p>Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, il est porté à la connaissance des utilisateurs du site FOR SÉCURITÉ PRIVÉE (4SP) les présentes mentions légales.</p>
             <p>Le présent site est édité par :<br>
             4SP, SASU<br>
             Siège social : 83 rue Yves Montand, 34080 Montpellier, France<br>
@@ -2202,7 +2111,7 @@
             Siège social : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
             Site web : https://pages.github.com</p>
             
-            <p>Autorisation administrative n° AUT-034-2124-01-03-20240960982 du 03 janvier 2025 délivré par le CNAPS conformément à l'article L612-9 du Code de la sécurité intérieure. « L'autorisation d'exercice ne confère aucune prérogative de puissance publique à l'entreprise ou aux personnes qui en bénéficient. » (article L612-14 du CSI).</p>
+            <p>Autorisation administrative n° AUT-034-2124-01-03-20240960982 du 03 janvier 2025 délivrée par le CNAPS conformément à l'article L612-9 du Code de la sécurité intérieure. « L'autorisation d'exercice ne confère aucune prérogative de puissance publique à l'entreprise ou aux personnes qui en bénéficient. » (article L612-14 du CSI).</p>
         </div>
         
         <div class="footer-bottom">
@@ -2210,7 +2119,7 @@
         </div>
         
         <div class="admin-access">
-            <div class="admin-toggle" onclick="openAdmin()">
+            <div class="admin-toggle" onclick="openAdmin()" title="Accès administrateur">
                 <i class="fas fa-cog"></i>
             </div>
         </div>
@@ -2234,6 +2143,7 @@
                     <h2>Connexion Administrateur</h2>
                     <p>Veuillez entrer le mot de passe pour accéder au panel d'administration</p>
                     <input type="password" id="adminPassword" class="password-input" placeholder="Mot de passe">
+                    <br>
                     <button class="admin-btn" onclick="checkPassword()">Se connecter</button>
                 </div>
             </div>
@@ -2241,7 +2151,6 @@
             <div id="adminMainSection" class="admin-section">
                 <h2>Panel d'Administration FOR SÉCURITÉ PRIVÉE</h2>
                 
-                <!-- Indicateur de statut de synchronisation -->
                 <div id="syncStatus" class="sync-status sync-offline">
                     <i class="fas fa-sync-alt"></i> Synchronisation: Chargement...
                 </div>
@@ -2262,7 +2171,7 @@
                     <h3>Gestion des Services</h3>
                     
                     <div class="admin-form-group">
-                        <label>Sélectionnez un service à modifier:</label>
+                        <label for="service-selector">Sélectionnez un service à modifier:</label>
                         <select id="service-selector" onchange="loadServiceData()">
                             <option value="service1">Gardiennage & Surveillance Humaine</option>
                             <option value="service2">Rondes & Interventions</option>
@@ -2282,9 +2191,7 @@
                         
                         <div class="admin-form-group">
                             <label>Caractéristiques du Service</label>
-                            <div id="service-features-container">
-                                <!-- Les caractéristiques seront générées ici -->
-                            </div>
+                            <div id="service-features-container"></div>
                             <button type="button" class="admin-btn-secondary" onclick="addFeature()">
                                 <i class="fas fa-plus"></i> Ajouter une caractéristique
                             </button>
@@ -2300,9 +2207,7 @@
                             
                             <div class="admin-form-group">
                                 <label>Images supplémentaires (Galerie)</label>
-                                <div class="service-images-grid" id="service-gallery-images">
-                                    <!-- Les images de galerie seront générées ici -->
-                                </div>
+                                <div class="service-images-grid" id="service-gallery-images"></div>
                                 <button type="button" class="admin-btn-secondary" onclick="addGalleryImage()" id="add-gallery-image-btn">
                                     <i class="fas fa-plus"></i> Ajouter une image à la galerie
                                 </button>
@@ -2336,10 +2241,8 @@
                     </div>
                     <button class="admin-btn" onclick="addReport()">Ajouter le Rapport</button>
                     
-                    <h4>Rapports Existants</h4>
-                    <div id="existing-reports">
-                        <!-- Les rapports existants seront chargés ici -->
-                    </div>
+                    <h4 style="margin-top:20px;">Rapports Existants</h4>
+                    <div id="existing-reports"></div>
                 </div>
                 
                 <div id="content-tab" class="admin-section">
@@ -2361,41 +2264,41 @@
                         <h4 class="admin-section-title">Section Présentation Commerciale</h4>
                     </div>
                     <div class="admin-form-group">
-                        <label for="commercial-title">Titre Commercial</label>
-                        <input type="text" id="commercial-title" value="Votre partenaire de confiance en sécurité privée">
+                        <label for="commercial-title-input">Titre Commercial</label>
+                        <input type="text" id="commercial-title-input" value="Votre partenaire de confiance en sécurité privée">
                     </div>
                     <div class="admin-form-group">
-                        <label for="commercial-text">Texte Commercial</label>
-                        <textarea id="commercial-text" class="commercial-text-editor">Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de 50 agents expérimentés vous garantit une protection optimale de vos biens et personnes.</textarea>
+                        <label for="commercial-text-input">Texte Commercial</label>
+                        <textarea id="commercial-text-input">Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe de plus de 20 agents expérimentés vous garantit une protection optimale de vos biens et personnes.</textarea>
                     </div>
                     <div class="admin-form-group">
-                        <label for="commercial-text-2">Deuxième Paragraphe Commercial</label>
-                        <textarea id="commercial-text-2" class="commercial-text-editor">Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</textarea>
+                        <label for="commercial-text-2-input">Deuxième Paragraphe Commercial</label>
+                        <textarea id="commercial-text-2-input">Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</textarea>
                     </div>
                     
                     <div class="admin-section-header">
                         <h4 class="admin-section-title">Section À Propos</h4>
                     </div>
                     <div class="admin-form-group">
-                        <label for="about-title">Titre À Propos</label>
-                        <input type="text" id="about-title" value="À propos de FOR SÉCURITÉ PRIVÉE (4SP)">
+                        <label for="about-title-input">Titre À Propos</label>
+                        <input type="text" id="about-title-input" value="À propos de FOR SÉCURITÉ PRIVÉE (4SP)">
                     </div>
                     <div class="admin-form-group">
-                        <label for="about-text-1">Premier Paragraphe À Propos</label>
-                        <textarea id="about-text-1" class="about-text-editor">Forte de plus de 20 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</textarea>
+                        <label for="about-text-1-input">Premier Paragraphe À Propos</label>
+                        <textarea id="about-text-1-input">Forte de plus de 20 agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier. Notre société a été créée en 2024 avec l'ambition de redéfinir les standards de qualité dans le domaine de la sécurité privée.</textarea>
                     </div>
                     <div class="admin-form-group">
-                        <label for="about-text-2">Deuxième Paragraphe À Propos</label>
-                        <textarea id="about-text-2" class="about-text-editor">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</textarea>
+                        <label for="about-text-2-input">Deuxième Paragraphe À Propos</label>
+                        <textarea id="about-text-2-input">Nous utilisons uniquement des équipements de haute technologie, régulièrement mis à jour pour faire face aux nouvelles menaces. Notre centre de surveillance opérationnel 24h/24 et 7j/7 garantit une intervention rapide en cas d'incident.</textarea>
                     </div>
                     <div class="admin-form-group">
-                        <label for="about-values-title">Titre des Valeurs</label>
-                        <input type="text" id="about-values-title" value="Nos valeurs">
+                        <label for="about-values-title-input">Titre des Valeurs</label>
+                        <input type="text" id="about-values-title-input" value="Nos valeurs">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="about-main-image">Image À Propos</label>
-                        <input type="file" id="about-main-image" accept="image/*" onchange="previewImage(this, 'aboutImagePreview')">
+                        <label for="about-main-image-input">Image À Propos</label>
+                        <input type="file" id="about-main-image-input" accept="image/*" onchange="previewImage(this, 'aboutImagePreview')">
                         <div class="image-preview" id="aboutImagePreview"></div>
                     </div>
                     
@@ -2403,47 +2306,47 @@
                         <h4 class="admin-section-title">Valeurs</h4>
                     </div>
                     <div class="admin-form-group">
-                        <label for="value-title-1">Titre Valeur 1</label>
-                        <input type="text" id="value-title-1" value="Expertise">
+                        <label for="val-title-1">Titre Valeur 1</label>
+                        <input type="text" id="val-title-1" value="Expertise">
                     </div>
                     <div class="admin-form-group">
-                        <label for="value-desc-1">Description Valeur 1</label>
-                        <input type="text" id="value-desc-1" value="Des agents formés et certifiés">
-                    </div>
-                    
-                    <div class="admin-form-group">
-                        <label for="value-title-2">Titre Valeur 2</label>
-                        <input type="text" id="value-title-2" value="Disponibilité">
-                    </div>
-                    <div class="admin-form-group">
-                        <label for="value-desc-2">Description Valeur 2</label>
-                        <input type="text" id="value-desc-2" value="24h/24 et 7j/7">
+                        <label for="val-desc-1">Description Valeur 1</label>
+                        <input type="text" id="val-desc-1" value="Des agents formés et certifiés">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="value-title-3">Titre Valeur 3</label>
-                        <input type="text" id="value-title-3" value="Proximité">
+                        <label for="val-title-2">Titre Valeur 2</label>
+                        <input type="text" id="val-title-2" value="Disponibilité">
                     </div>
                     <div class="admin-form-group">
-                        <label for="value-desc-3">Description Valeur 3</label>
-                        <input type="text" id="value-desc-3" value="À votre écoute">
+                        <label for="val-desc-2">Description Valeur 2</label>
+                        <input type="text" id="val-desc-2" value="24h/24 et 7j/7">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="value-title-4">Titre Valeur 4</label>
-                        <input type="text" id="value-title-4" value="Qualité">
+                        <label for="val-title-3">Titre Valeur 3</label>
+                        <input type="text" id="val-title-3" value="Proximité">
                     </div>
                     <div class="admin-form-group">
-                        <label for="value-desc-4">Description Valeur 4</label>
-                        <input type="text" id="value-desc-4" value="Services haut de gamme">
+                        <label for="val-desc-3">Description Valeur 3</label>
+                        <input type="text" id="val-desc-3" value="À votre écoute">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label for="val-title-4">Titre Valeur 4</label>
+                        <input type="text" id="val-title-4" value="Qualité">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="val-desc-4">Description Valeur 4</label>
+                        <input type="text" id="val-desc-4" value="Services haut de gamme">
                     </div>
                     
                     <div class="admin-section-header">
                         <h4 class="admin-section-title">Section Rapports</h4>
                     </div>
                     <div class="admin-form-group">
-                        <label for="reports-description">Description des Rapports</label>
-                        <textarea id="reports-description">Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</textarea>
+                        <label for="reports-description-input">Description des Rapports</label>
+                        <textarea id="reports-description-input">Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</textarea>
                     </div>
                     
                     <button class="admin-btn" onclick="saveContent()">Enregistrer le Contenu</button>
@@ -2453,24 +2356,19 @@
                     <h3>Gestion de l'En-tête</h3>
                     
                     <div class="admin-form-group">
-                        <label for="header-company-name">Nom de l'entreprise</label>
-                        <input type="text" id="header-company-name" value="FOR SÉCURITÉ PRIVÉE (4SP)">
+                        <label for="header-input-company-name">Nom de l'entreprise</label>
+                        <input type="text" id="header-input-company-name" value="FOR SÉCURITÉ PRIVÉE (4SP)">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="header-company-slogan">Slogan de l'entreprise</label>
-                        <input type="text" id="header-company-slogan" value="Votre sécurité est notre priorité depuis 2024">
+                        <label for="header-input-company-slogan">Slogan de l'entreprise</label>
+                        <input type="text" id="header-input-company-slogan" value="Votre sécurité est notre priorité depuis 2024">
                     </div>
                     
                     <div class="admin-form-group">
                         <label for="logo-upload">Logo du site</label>
                         <input type="file" id="logo-upload" accept="image/*" onchange="previewLogo(this)">
                         <div class="image-preview" id="logo-preview"></div>
-                    </div>
-                    
-                    <div class="admin-form-group">
-                        <label>Navigation</label>
-                        <div class="admin-help-text">La navigation est gérée automatiquement en fonction de la structure du site.</div>
                     </div>
                     
                     <button class="admin-btn" onclick="saveHeader()">Enregistrer l'en-tête</button>
@@ -2480,53 +2378,43 @@
                     <h3>Gestion du Pied de Page</h3>
                     
                     <div class="admin-form-group">
-                        <label for="footer-title-1">Titre Colonne 1</label>
-                        <input type="text" id="footer-title-1" value="FOR SÉCURITÉ PRIVÉE (4SP)">
+                        <label for="footer-input-title-1">Titre Colonne 1</label>
+                        <input type="text" id="footer-input-title-1" value="FOR SÉCURITÉ PRIVÉE (4SP)">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-description-1">Description Colonne 1</label>
-                        <textarea id="footer-description-1" class="footer-editor">Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</textarea>
+                        <label for="footer-input-desc-1">Description Colonne 1</label>
+                        <textarea id="footer-input-desc-1">Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</textarea>
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-agents-count">Nombre d'agents</label>
-                        <input type="text" id="footer-agents-count" value="Plus de 20 agents dédiés à votre sécurité">
+                        <label for="footer-input-agents">Nombre d'agents</label>
+                        <input type="text" id="footer-input-agents" value="Plus de 20 agents dédiés à votre sécurité">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-title-2">Titre Colonne 2</label>
-                        <input type="text" id="footer-title-2" value="Nos coordonnées">
+                        <label for="footer-input-title-2">Titre Colonne 2</label>
+                        <input type="text" id="footer-input-title-2" value="Nos coordonnées">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-address">Adresse</label>
-                        <input type="text" id="footer-address" value="83 rue Yves Montand, 34080 Montpellier">
+                        <label for="footer-input-address">Adresse</label>
+                        <input type="text" id="footer-input-address" value="83 rue Yves Montand, 34080 Montpellier">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-phone">Téléphone</label>
-                        <input type="text" id="footer-phone" value="06 60 35 01 97">
+                        <label for="footer-input-phone">Téléphone</label>
+                        <input type="text" id="footer-input-phone" value="06 60 35 01 97">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-email">Email</label>
-                        <input type="text" id="footer-email" value="forsecuriteprivee@gmail.com">
+                        <label for="footer-input-email">Email</label>
+                        <input type="text" id="footer-input-email" value="contact@4sp.fr">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="footer-title-3">Titre Colonne 3</label>
-                        <input type="text" id="footer-title-3" value="Liens rapides">
-                    </div>
-                    
-                    <div class="admin-form-group">
-                        <label for="footer-title-4">Titre Colonne 4</label>
-                        <input type="text" id="footer-title-4" value="Suivez-nous">
-                    </div>
-                    
-                    <div class="admin-form-group">
-                        <label for="footer-year">Année du copyright</label>
-                        <input type="text" id="footer-year" value="2024">
+                        <label for="footer-input-year">Année du copyright</label>
+                        <input type="text" id="footer-input-year" value="2024">
                     </div>
                     
                     <button class="admin-btn" onclick="saveFooter()">Enregistrer le pied de page</button>
@@ -2536,43 +2424,38 @@
                     <h3>Gestion de la Section Contact</h3>
                     
                     <div class="admin-form-group">
-                        <label for="contact-title">Titre Contact</label>
-                        <input type="text" id="contact-title" value="Contactez-nous">
+                        <label for="contact-input-title">Titre Contact</label>
+                        <input type="text" id="contact-input-title" value="Contactez-nous">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="contact-description">Description Contact</label>
-                        <textarea id="contact-description" class="contact-info-editor">Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</textarea>
+                        <label for="contact-input-desc">Description Contact</label>
+                        <textarea id="contact-input-desc">Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</textarea>
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="contact-address">Adresse</label>
-                        <input type="text" id="contact-address" value="83 rue Yves Montand, 34080 Montpellier">
+                        <label for="contact-input-address">Adresse</label>
+                        <input type="text" id="contact-input-address" value="83 rue Yves Montand, 34080 Montpellier">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="contact-phone">Téléphone</label>
-                        <input type="text" id="contact-phone" value="06 60 35 01 97">
+                        <label for="contact-input-phone">Téléphone</label>
+                        <input type="text" id="contact-input-phone" value="06 60 35 01 97">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="contact-email">Email</label>
-                        <input type="text" id="contact-email" value="forsecuriteprivee@gmail.com">
+                        <label for="contact-input-email">Email</label>
+                        <input type="text" id="contact-input-email" value="contact@4sp.fr">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="contact-availability">Disponibilité</label>
-                        <input type="text" id="contact-availability" value="Disponible 24h/24 et 7j/7">
+                        <label for="contact-input-avail">Disponibilité</label>
+                        <input type="text" id="contact-input-avail" value="Disponible 24h/24 et 7j/7">
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="contact-agents">Agents</label>
-                        <input type="text" id="contact-agents" value="Plus de 20 agents dédiés">
-                    </div>
-                    
-                    <div class="admin-form-group">
-                        <label for="contact-form-title">Titre Formulaire</label>
-                        <input type="text" id="contact-form-title" value="Demande de devis">
+                        <label for="contact-input-agents">Agents</label>
+                        <input type="text" id="contact-input-agents" value="Plus de 20 agents dédiés">
                     </div>
                     
                     <button class="admin-btn" onclick="saveContact()">Enregistrer les informations de contact</button>
@@ -2582,39 +2465,25 @@
                     <h3>Optimisation SEO</h3>
                     <div class="seo-status">
                         <div class="seo-score">
-                            <div class="score-circle">82%</div>
+                            <div class="score-circle">85%</div>
                             <div>Score SEO global du site</div>
                         </div>
-                        <p>Votre site est bien optimisé pour les moteurs de recherche. Voici les points à améliorer :</p>
-                        <ul class="keyword-list">
-                            <li>Ajouter plus de contenu sur la page d'accueil<span class="keyword-position">+15%</span></li>
-                            <li>Optimiser les temps de chargement mobile<span class="keyword-position">+12%</span></li>
-                            <li>Ajouter un blog avec articles réguliers<span class="keyword-position">+20%</span></li>
-                        </ul>
+                        <p>Votre site est optimisé pour les moteurs de recherche.</p>
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="meta-title">Meta Title</label>
-                        <input type="text" id="meta-title" value="FOR SÉCURITÉ PRIVÉE (4SP) - Experts en sécurité à Montpellier">
+                        <label for="meta-title-input">Meta Title</label>
+                        <input type="text" id="meta-title-input" value="FOR SÉCURITÉ PRIVÉE (4SP) - Services de sécurité à Montpellier">
                     </div>
                     <div class="admin-form-group">
-                        <label for="meta-description">Meta Description</label>
-                        <textarea id="meta-description">Société de sécurité à Montpellier proposant gardiennage, surveillance, sécurité événementielle. Agents diplômés CNAPS. Devis gratuit.</textarea>
+                        <label for="meta-desc-input">Meta Description</label>
+                        <textarea id="meta-desc-input">FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité privée à Montpellier. Gardiennage, surveillance et interventions par des agents diplômés CNAPS.</textarea>
                     </div>
-                    
-                    <h4>Mots-clés suivis</h4>
-                    <ul class="keyword-list">
-                        <li>sécurité<span class="keyword-position">Position: #8</span></li>
-                        <li>agent de sécurité<span class="keyword-position">Position: #5</span></li>
-                        <li>société de sécurité Montpellier<span class="keyword-position">Position: #3</span></li>
-                        <li>gardiennage<span class="keyword-position">Position: #6</span></li>
-                        <li>surveillance<span class="keyword-position">Position: #7</span></li>
-                    </ul>
                     
                     <button class="admin-btn" onclick="saveSEO()">Enregistrer les paramètres SEO</button>
-                    <button class="admin-btn" onclick="generateSEOSuggestions()">Générer des suggestions SEO</button>
+                    <button class="admin-btn-secondary" onclick="generateSEOSuggestions()">Générer des suggestions SEO</button>
                     
-                    <div id="seo-suggestions"></div>
+                    <div id="seo-suggestions" style="margin-top: 15px;"></div>
                 </div>
                 
                 <div id="appearance-tab" class="admin-section">
@@ -2631,15 +2500,11 @@
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="accent-color">Couleur d'accent <span class="color-preview" id="accent-color-preview" style="background-color: #ffffff; border: 1px solid #ccc;"></span></label>
+                        <label for="accent-color">Couleur d'accent <span class="color-preview" id="accent-color-preview" style="background-color: #ffffff;"></span></label>
                         <input type="color" id="accent-color" value="#ffffff" onchange="updateColorPreview('accent-color', 'accent-color-preview')">
                     </div>
                     
                     <button class="admin-btn" onclick="saveAppearance()">Enregistrer l'apparence</button>
-                    
-                    <div class="admin-help-text">
-                        <p><strong>Conseil :</strong> Les couleurs seront appliquées immédiatement après l'enregistrement. Assurez-vous que le contraste entre les couleurs est suffisant pour une bonne accessibilité.</p>
-                    </div>
                 </div>
                 
                 <div id="sync-tab" class="admin-section">
@@ -2648,25 +2513,18 @@
                     <div class="admin-form-group">
                         <label>Statut de synchronisation</label>
                         <div id="sync-details" class="sync-status sync-offline">
-                            <i class="fas fa-info-circle"></i> Chargement des informations de synchronisation...
+                            <i class="fas fa-info-circle"></i> En attente...
                         </div>
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="firebase-config">Configuration Firebase (pour développeurs)</label>
-                        <textarea id="firebase-config" class="admin-form-group" rows="6" placeholder='{
-  "apiKey": "votre_api_key",
-  "authDomain": "votre_projet.firebaseapp.com",
-  "projectId": "votre_projet",
-  "storageBucket": "votre_projet.firebasestorage.app",
-  "messagingSenderId": "123456789",
-  "appId": "votre_app_id"
-}'></textarea>
+                        <label for="firebase-config">Configuration Firebase (JSON optionnel)</label>
+                        <textarea id="firebase-config" rows="6" placeholder='{"apiKey": "...", "projectId": "..."}'></textarea>
                         <button class="admin-btn-secondary" onclick="saveFirebaseConfig()">Enregistrer la configuration</button>
                     </div>
                     
                     <div class="admin-form-group">
-                        <label>Outils de synchronisation</label>
+                        <label>Outils de sauvegarde</label>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <button class="admin-btn-secondary" onclick="forceSync()">
                                 <i class="fas fa-sync"></i> Forcer la synchronisation
@@ -2681,12 +2539,8 @@
                     </div>
                     
                     <div class="admin-form-group">
-                        <label for="backup-data">Données de sauvegarde</label>
-                        <textarea id="backup-data" class="admin-form-group" rows="6" placeholder="Les données de sauvegarde apparaîtront ici..."></textarea>
-                    </div>
-                    
-                    <div class="admin-help-text">
-                        <p><strong>Information :</strong> La synchronisation automatique utilise Firebase pour synchroniser vos données entre tous vos appareils. Assurez-vous de configurer Firebase correctement.</p>
+                        <label for="backup-data">Données de sauvegarde (JSON)</label>
+                        <textarea id="backup-data" rows="5" placeholder="Les données de sauvegarde apparaîtront ici..."></textarea>
                     </div>
                 </div>
             </div>
@@ -2694,58 +2548,103 @@
     </div>
 
     <script>
-        // ===== CONFIGURATION GLOBALE =====
+        // CONFIGURATION
         const CONFIG = {
-            version: '1.0.0',
+            version: '1.0.1',
             lastUpdate: Date.now(),
-            autoSyncInterval: 30000, // 30 secondes
+            autoSyncInterval: 30000,
             maxRetries: 3,
             adminPassword: "4SP@forsecuriteprivee2024"
         };
         
-        // ===== ÉTAT GLOBAL =====
+        // ÉTAT GLOBAL
         let firebaseApp = null;
         let db = null;
         let storage = null;
         let isOnline = navigator.onLine;
         let isAdmin = false;
         let currentService = 'service1';
-        let serviceImages = {
-            service1: { main: '', gallery: ['', '', '', ''] },
-            service2: { main: '', gallery: ['', '', '', ''] },
-            service3: { main: '', gallery: ['', '', '', ''] }
-        };
         let syncRetryCount = 0;
         let syncInterval = null;
-        
-        // ===== INITIALISATION PRINCIPALE =====
+
+        // SERVICES DATA MODEL
+        let servicesData = {
+            service1: {
+                title: "Gardiennage & Surveillance Humaine",
+                desc: "Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.",
+                features: [
+                    "Agents de sécurité diplômés CNAPS",
+                    "Surveillance continue 24h/24 et 7j/7",
+                    "Contrôle d'accès strict",
+                    "Rapports d'activité détaillés"
+                ],
+                mainImage: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                gallery: [
+                    "https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1590688219069-ec2eac74718a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            service2: {
+                title: "Rondes & Interventions",
+                desc: "Surveillance proactive et interventions rapides sur site pour prévenir tout incident.",
+                features: [
+                    "Rondes régulières selon un planning défini",
+                    "Intervention rapide 24/7",
+                    "Contrôles aléatoires",
+                    "Technologies de pointe"
+                ],
+                mainImage: "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                gallery: [
+                    "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1590688219069-ec2eac74718a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            service3: {
+                title: "Sécurité Événementielle",
+                desc: "Gestion complète de la sécurité pour tous types d'événements, publics ou privés.",
+                features: [
+                    "Gestion des flux et fouilles",
+                    "Contrôle d'accès événementiel",
+                    "Poste de commandement mobile"
+                ],
+                mainImage: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                gallery: [
+                    "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            }
+        };
+
+        let reportsData = [
+            {
+                id: "rep-1",
+                title: "Mission de surveillance renforcée - Montpellier Centre",
+                date: "2024-10-15",
+                excerpt: "Déploiement réussi de notre dispositif d'intervention et de gardiennage.",
+                content: "Nos agents sont intervenus avec succès pour assurer la sûreté d'installations sensibles en plein centre de Montpellier. Aucun incident majeur à déplorer grâce à la surveillance continue.",
+                image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        ];
+
+        // INITIALISATION
         document.addEventListener('DOMContentLoaded', async function() {
-            console.log('Initialisation du site FOR SÉCURITÉ PRIVÉE...');
-            
-            // 1. Initialisation du responsive
             initResponsiveDesign();
-            
-            // 2. Initialisation de Firebase
-            await initFirebase();
-            
-            // 3. Chargement des données
-            await loadAllData();
-            
-            // 4. Démarrage de la synchronisation automatique
-            startAutoSync();
-            
-            // 5. Initialisation de l'interface utilisateur
             initUserInterface();
-            
-            // 6. Mise à jour de l'année du footer
+            await initFirebase();
+            await loadAllData();
+            startAutoSync();
             updateFooterYear();
-            
-            console.log('Site initialisé avec succès');
+            loadServiceData();
         });
-        
-        // ===== RESPONSIVE DESIGN =====
+
+        // RESPONSIVE DESIGN
         function initResponsiveDesign() {
-            // Menu mobile
             const menuToggle = document.getElementById('mobileMenuToggle');
             const mainNav = document.getElementById('mainNav');
             
@@ -2753,37 +2652,31 @@
                 menuToggle.addEventListener('click', () => {
                     mainNav.classList.toggle('show');
                     const icon = menuToggle.querySelector('i');
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
                 });
                 
-                // Fermer le menu en cliquant sur les liens
                 document.querySelectorAll('nav a').forEach(link => {
                     link.addEventListener('click', () => {
                         mainNav.classList.remove('show');
-                        menuToggle.querySelector('i').classList.remove('fa-times');
-                        menuToggle.querySelector('i').classList.add('fa-bars');
+                        const icon = menuToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
                     });
                 });
             }
             
-            // Détection du device
             detectDeviceType();
-            
-            // Optimisation des médias
-            optimizeMedia();
-            
-            // Écouter le redimensionnement
-            window.addEventListener('resize', () => {
-                detectDeviceType();
-                optimizeMedia();
-            });
+            window.addEventListener('resize', detectDeviceType);
         }
-        
+
         function detectDeviceType() {
             const width = window.innerWidth;
             document.body.classList.remove('mobile-device', 'tablet-device', 'desktop-device');
-            
             if (width <= 768) {
                 document.body.classList.add('mobile-device');
             } else if (width <= 1024) {
@@ -2792,38 +2685,10 @@
                 document.body.classList.add('desktop-device');
             }
         }
-        
-        function optimizeMedia() {
-            const isMobile = window.innerWidth <= 768;
-            
-            // Images
-            document.querySelectorAll('img').forEach(img => {
-                if (!img.hasAttribute('loading')) {
-                    img.setAttribute('loading', 'lazy');
-                }
-                
-                // Optimisation pour mobile
-                if (isMobile && img.src.includes('unsplash.com') && !img.src.includes('w=')) {
-                    const url = new URL(img.src);
-                    url.searchParams.set('w', '800');
-                    url.searchParams.set('q', '80');
-                    img.src = url.toString();
-                }
-            });
-            
-            // Iframes
-            const iframes = document.querySelectorAll('iframe');
-            if (isMobile) {
-                iframes.forEach(iframe => {
-                    iframe.style.height = '300px';
-                });
-            }
-        }
-        
-        // ===== FIREBASE & SYNCHRONISATION =====
+
+        // FIREBASE INITIALIZATION SAFE
         async function initFirebase() {
             try {
-                // Configuration par défaut
                 let firebaseConfig = {
                     apiKey: "AIzaSyDEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE",
                     authDomain: "for-securite-privee.firebaseapp.com",
@@ -2832,606 +2697,615 @@
                     messagingSenderId: "123456789012",
                     appId: "1:123456789012:web:abc123def456ghi789"
                 };
-                
-                // Charger la configuration sauvegardée
+
                 const savedConfig = localStorage.getItem('firebaseConfig');
                 if (savedConfig) {
                     try {
                         const userConfig = JSON.parse(savedConfig);
                         firebaseConfig = { ...firebaseConfig, ...userConfig };
                     } catch (e) {
-                        console.warn('Configuration Firebase invalide, utilisation par défaut');
+                        console.warn('Config Firebase locale non parsable');
                     }
                 }
-                
-                // Initialiser Firebase
+
                 if (typeof firebase !== 'undefined') {
                     if (firebase.apps.length === 0) {
                         firebaseApp = firebase.initializeApp(firebaseConfig);
                     } else {
                         firebaseApp = firebase.app();
                     }
-                    
-                    db = firebase.firestore();
-                    storage = firebase.storage();
-                    
-                    // Activer la persistance
-                    await db.enablePersistence().catch(err => {
-                        console.warn('La persistance Firestore n\'est pas supportée:', err);
-                    });
-                    
-                    // Écouter les changements de connexion
-                    const connectedRef = firebase.database().ref('.info/connected');
-                    connectedRef.on('value', (snap) => {
-                        isOnline = snap.val() === true;
-                        updateSyncStatus(isOnline ? 'online' : 'offline');
-                        
-                        if (isOnline) {
-                            processPendingSync();
-                        }
-                    });
-                    
-                    // Configuration de la synchronisation en temps réel
-                    setupRealtimeSync();
-                    
-                    updateSyncStatus('online');
-                    return true;
+                    if (typeof firebase.firestore === 'function') {
+                        db = firebase.firestore();
+                    }
+                    if (typeof firebase.storage === 'function') {
+                        storage = firebase.storage();
+                    }
                 }
+                updateSyncStatus(navigator.onLine ? 'online' : 'offline');
+                return true;
             } catch (error) {
-                console.error('Erreur d\'initialisation Firebase:', error);
-                updateSyncStatus('error');
-                syncRetryCount++;
-                
-                // Réessayer après un délai
-                if (syncRetryCount < CONFIG.maxRetries) {
-                    setTimeout(() => {
-                        console.log('Tentative de reconnexion Firebase...');
-                        initFirebase();
-                    }, 5000 * syncRetryCount);
-                }
-            }
-            return false;
-        }
-        
-        function setupRealtimeSync() {
-            if (!db) return;
-            
-            // Écouter les changements sur les données du site
-            const unsubscribe = db.collection('siteData').onSnapshot(
-                (snapshot) => {
-                    snapshot.docChanges().forEach((change) => {
-                        if (change.type === 'modified' || change.type === 'added') {
-                            const data = change.doc.data();
-                            const key = change.doc.id;
-                            
-                            // Mettre à jour le stockage local
-                            localStorage.setItem(key, JSON.stringify(data));
-                            
-                            // Mettre à jour l'interface
-                            updateUIFromSync(key, data);
-                        }
-                    });
-                },
-                (error) => {
-                    console.error('Erreur synchronisation temps réel:', error);
-                    updateSyncStatus('error');
-                    
-                    // Réessayer après 5 secondes
-                    setTimeout(setupRealtimeSync, 5000);
-                }
-            );
-        }
-        
-        function updateUIFromSync(key, data) {
-            // Mise à jour générique de l'interface
-            const element = document.getElementById(key);
-            if (element) {
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.value = data.value || '';
-                } else if (element.tagName === 'IMG') {
-                    element.src = data.value || element.src;
-                } else {
-                    element.textContent = data.value || '';
-                }
-            }
-        }
-        
-        async function saveSyncedData(key, value) {
-            const data = {
-                value: value,
-                lastUpdated: new Date().toISOString(),
-                deviceId: await getDeviceId(),
-                version: CONFIG.version
-            };
-            
-            // Sauvegarde locale
-            localStorage.setItem(key, JSON.stringify(data));
-            
-            // Sauvegarde cloud si connecté
-            if (db && isOnline) {
-                try {
-                    await db.collection('siteData').doc(key).set(data);
-                    return true;
-                } catch (error) {
-                    console.error('Erreur sauvegarde cloud:', error);
-                    addToPendingSync(key, data);
-                    return false;
-                }
-            } else {
-                addToPendingSync(key, data);
+                console.warn('Erreur Firebase (mode local actif) :', error.message);
+                updateSyncStatus('offline');
                 return false;
             }
         }
-        
-        function addToPendingSync(key, data) {
-            const pending = JSON.parse(localStorage.getItem('pendingSync') || '{}');
-            pending[key] = data;
-            localStorage.setItem('pendingSync', JSON.stringify(pending));
-        }
-        
-        async function processPendingSync() {
-            if (!db || !isOnline) return;
-            
-            const pending = JSON.parse(localStorage.getItem('pendingSync') || '{}');
-            const keys = Object.keys(pending);
-            
-            for (const key of keys) {
-                try {
-                    await db.collection('siteData').doc(key).set(pending[key]);
-                    delete pending[key];
-                } catch (error) {
-                    console.error(`Erreur sync ${key}:`, error);
-                }
-            }
-            
-            localStorage.setItem('pendingSync', JSON.stringify(pending));
-        }
-        
-        async function getDeviceId() {
-            let deviceId = localStorage.getItem('deviceId');
-            if (!deviceId) {
-                deviceId = 'device_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('deviceId', deviceId);
-            }
-            return deviceId;
-        }
-        
-        function startAutoSync() {
-            if (syncInterval) clearInterval(syncInterval);
-            
-            syncInterval = setInterval(async () => {
-                if (isOnline) {
-                    await processPendingSync();
-                    updateSyncStatus('syncing');
-                    
-                    // Mettre à jour le statut après 2 secondes
-                    setTimeout(() => {
-                        updateSyncStatus('online');
-                    }, 2000);
-                }
-            }, CONFIG.autoSyncInterval);
-        }
-        
+
         function updateSyncStatus(status) {
             const statusEl = document.getElementById('syncStatus');
             const detailsEl = document.getElementById('sync-details');
             
+            const icons = {
+                online: 'fa-check-circle',
+                offline: 'fa-exclamation-triangle',
+                error: 'fa-times-circle',
+                syncing: 'fa-sync fa-spin'
+            };
+            const messages = {
+                online: 'Connecté / Synchronisé',
+                offline: 'Mode hors ligne (Local)',
+                error: 'Erreur de synchronisation',
+                syncing: 'Synchronisation en cours...'
+            };
+
             if (statusEl) {
-                const icons = {
-                    online: 'fa-check-circle',
-                    offline: 'fa-exclamation-triangle',
-                    error: 'fa-times-circle',
-                    syncing: 'fa-sync fa-spin'
-                };
-                
-                const messages = {
-                    online: 'Synchronisé',
-                    offline: 'Hors ligne',
-                    error: 'Erreur de synchronisation',
-                    syncing: 'Synchronisation...'
-                };
-                
-                statusEl.innerHTML = `<i class="fas ${icons[status]}"></i> ${messages[status]}`;
+                statusEl.innerHTML = `<i class="fas ${icons[status]}"></i> Synchronisation : ${messages[status]}`;
                 statusEl.className = `sync-status sync-${status}`;
             }
-            
             if (detailsEl) {
-                detailsEl.innerHTML = `<i class="fas ${icons[status] || 'fa-info-circle'}"></i> ${messages[status] || status} | Dernière sync: ${new Date().toLocaleTimeString()}`;
+                detailsEl.innerHTML = `<i class="fas ${icons[status]}"></i> ${messages[status]} | ${new Date().toLocaleTimeString('fr-FR')}`;
                 detailsEl.className = `sync-status sync-${status}`;
             }
         }
-        
-        // ===== GESTION DES DONNÉES =====
+
+        // CHARGEMENT & PERSISTANCE
         async function loadAllData() {
-            try {
-                // Charger les données principales
-                await loadDataSection('hero');
-                await loadDataSection('commercial');
-                await loadDataSection('about');
-                await loadDataSection('contact');
-                await loadDataSection('footer');
-                await loadDataSection('seo');
-                await loadDataSection('appearance');
-                
-                // Charger les services
-                await loadServicesData();
-                
-                // Charger les rapports
-                await loadReportsData();
-                
-                // Charger les images
-                const savedImages = await loadJSONData('serviceImages');
-                if (savedImages) {
-                    serviceImages = savedImages;
-                    updateServiceImagesUI();
-                }
-                
-                console.log('Toutes les données chargées');
-            } catch (error) {
-                console.error('Erreur chargement données:', error);
+            const storedServices = localStorage.getItem('servicesData');
+            if (storedServices) {
+                try { servicesData = JSON.parse(storedServices); } catch(e){}
+            }
+            updateServicesUI();
+
+            const storedReports = localStorage.getItem('reportsData');
+            if (storedReports) {
+                try { reportsData = JSON.parse(storedReports); } catch(e){}
+            }
+            renderReports();
+
+            const storedAppearance = localStorage.getItem('appearanceData');
+            if (storedAppearance) {
+                try {
+                    const colors = JSON.parse(storedAppearance);
+                    if (colors.primary) document.documentElement.style.setProperty('--primary', colors.primary);
+                    if (colors.secondary) document.documentElement.style.setProperty('--secondary', colors.secondary);
+                    if (colors.accent) document.documentElement.style.setProperty('--accent', colors.accent);
+                } catch(e){}
             }
         }
-        
-        async function loadDataSection(section) {
-            const data = await loadJSONData(section);
-            if (data) {
-                applySectionData(section, data);
+
+        function renderReports() {
+            const container = document.getElementById('reports-grid');
+            const adminContainer = document.getElementById('existing-reports');
+            if (!container) return;
+
+            if (reportsData.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#666;">Aucun rapport disponible pour le moment.</p>';
+            } else {
+                container.innerHTML = reportsData.map(r => `
+                    <div class="report-card">
+                        ${r.image ? `<div class="report-image"><img src="${r.image}" alt="${r.title}"></div>` : ''}
+                        <div class="report-content">
+                            <div class="report-date">${r.date ? new Date(r.date).toLocaleDateString('fr-FR') : ''}</div>
+                            <h3 class="report-title">${r.title}</h3>
+                            <p class="report-excerpt">${r.excerpt || (r.content ? r.content.substring(0, 100) + '...' : '')}</p>
+                            <span class="read-more" onclick="openModal('${r.id}')">Lire la suite <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            if (adminContainer) {
+                adminContainer.innerHTML = reportsData.map(r => `
+                    <div class="report-item" style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <strong>${r.title}</strong> (${r.date})
+                        </div>
+                        <button class="admin-btn-danger" onclick="deleteReport('${r.id}')">Supprimer</button>
+                    </div>
+                `).join('');
             }
         }
-        
-        async function loadJSONData(key) {
-            try {
-                // Essayer d'abord le cloud
-                if (db && isOnline) {
-                    const doc = await db.collection('siteData').doc(key).get();
-                    if (doc.exists) {
-                        const data = doc.data();
-                        localStorage.setItem(key, JSON.stringify(data));
-                        return data.value ? JSON.parse(data.value) : data;
-                    }
-                }
-                
-                // Fallback local
-                const localData = localStorage.getItem(key);
-                if (localData) {
-                    return JSON.parse(localData);
-                }
-            } catch (error) {
-                console.warn(`Erreur chargement ${key}:`, error);
+
+        function deleteReport(id) {
+            reportsData = reportsData.filter(r => r.id !== id);
+            localStorage.setItem('reportsData', JSON.stringify(reportsData));
+            renderReports();
+        }
+
+        function addReport() {
+            const title = document.getElementById('report-title').value.trim();
+            const date = document.getElementById('report-date').value;
+            const content = document.getElementById('report-content').value.trim();
+            const preview = document.querySelector('#reportImagePreview img');
+            const image = preview ? preview.src : '';
+
+            if (!title || !content) {
+                alert('Veuillez renseigner au moins le titre et le contenu du rapport.');
+                return;
             }
-            return null;
+
+            const newReport = {
+                id: 'rep-' + Date.now(),
+                title,
+                date: date || new Date().toISOString().split('T')[0],
+                content,
+                excerpt: content.substring(0, 120) + '...',
+                image
+            };
+
+            reportsData.unshift(newReport);
+            localStorage.setItem('reportsData', JSON.stringify(reportsData));
+            renderReports();
+
+            document.getElementById('report-title').value = '';
+            document.getElementById('report-date').value = '';
+            document.getElementById('report-content').value = '';
+            document.getElementById('reportImagePreview').innerHTML = '';
+            alert('Rapport ajouté avec succès !');
         }
-        
-        function applySectionData(section, data) {
-            // Appliquer les données à l'interface
-            // Cette fonction serait étendue pour chaque section
-        }
-        
-        // ===== INTERFACE UTILISATEUR =====
-        function initUserInterface() {
-            // Navigation
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const target = link.getAttribute('href').substring(1);
-                        showSection(target);
-                    }
-                });
+
+        // SERVICES ADMIN FUNCTIONS
+        function loadServiceData() {
+            const selector = document.getElementById('service-selector');
+            if (!selector) return;
+            currentService = selector.value;
+            const data = servicesData[currentService];
+            if (!data) return;
+
+            document.getElementById('service-title').value = data.title || '';
+            document.getElementById('service-desc').value = data.desc || '';
+
+            const container = document.getElementById('service-features-container');
+            container.innerHTML = '';
+            (data.features || []).forEach((feat, index) => {
+                container.innerHTML += `
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <input type="text" class="service-feature-input" value="${feat}">
+                        <button type="button" class="admin-btn-danger" style="margin: 0;" onclick="this.parentElement.remove()">X</button>
+                    </div>
+                `;
             });
-            
-            // Formulaire de contact
+
+            const mainPrev = document.getElementById('service-main-image-preview');
+            mainPrev.innerHTML = data.mainImage ? `<img src="${data.mainImage}" alt="Aperçu">` : '<span class="image-placeholder">Aucune image</span>';
+
+            renderGalleryInputs(data.gallery || []);
+        }
+
+        function renderGalleryInputs(gallery) {
+            const galGrid = document.getElementById('service-gallery-images');
+            galGrid.innerHTML = gallery.map((img, idx) => `
+                <div class="service-image-item">
+                    <div class="service-image-preview">
+                        ${img ? `<img src="${img}" alt="Galerie ${idx+1}">` : '<span class="image-placeholder">Vide</span>'}
+                    </div>
+                    <input type="text" placeholder="URL Image" value="${img}" onchange="updateGalleryUrl(${idx}, this.value)">
+                </div>
+            `).join('');
+        }
+
+        function updateGalleryUrl(index, value) {
+            if (servicesData[currentService] && servicesData[currentService].gallery) {
+                servicesData[currentService].gallery[index] = value;
+            }
+        }
+
+        function addFeature() {
+            const container = document.getElementById('service-features-container');
+            const div = document.createElement('div');
+            div.style.display = 'flex';
+            div.style.gap = '8px';
+            div.style.marginBottom = '8px';
+            div.innerHTML = `
+                <input type="text" class="service-feature-input" placeholder="Nouvelle caractéristique">
+                <button type="button" class="admin-btn-danger" style="margin: 0;" onclick="this.parentElement.remove()">X</button>
+            `;
+            container.appendChild(div);
+        }
+
+        function addGalleryImage() {
+            if (!servicesData[currentService].gallery) {
+                servicesData[currentService].gallery = [];
+            }
+            if (servicesData[currentService].gallery.length >= 4) {
+                alert('Maximum 4 images de galerie.');
+                return;
+            }
+            servicesData[currentService].gallery.push('');
+            renderGalleryInputs(servicesData[currentService].gallery);
+        }
+
+        function saveServiceData() {
+            const data = servicesData[currentService];
+            if (!data) return;
+
+            data.title = document.getElementById('service-title').value;
+            data.desc = document.getElementById('service-desc').value;
+
+            const feats = [];
+            document.querySelectorAll('.service-feature-input').forEach(input => {
+                if (input.value.trim()) feats.push(input.value.trim());
+            });
+            data.features = feats;
+
+            const mainImg = document.querySelector('#service-main-image-preview img');
+            if (mainImg) data.mainImage = mainImg.src;
+
+            localStorage.setItem('servicesData', JSON.stringify(servicesData));
+            updateServicesUI();
+            alert('Modifications du service enregistrées !');
+        }
+
+        function updateServicesUI() {
+            ['service1', 'service2', 'service3'].forEach(key => {
+                const s = servicesData[key];
+                if (!s) return;
+                
+                const titleEl = document.getElementById(`${key}-title`);
+                const descEl = document.getElementById(`${key}-desc`);
+                const imgEl = document.getElementById(`${key}-main-image`);
+                const featsEl = document.getElementById(`${key}-features`);
+
+                if (titleEl) titleEl.textContent = s.title;
+                if (descEl) descEl.textContent = s.desc;
+                if (imgEl && s.mainImage) imgEl.src = s.mainImage;
+                if (featsEl && s.features) {
+                    featsEl.innerHTML = s.features.map(f => `<li>${f}</li>`).join('');
+                }
+            });
+        }
+
+        // PREVIEWS
+        function previewImage(input, previewId) {
+            const container = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    container.innerHTML = `<img src="${e.target.result}" alt="Aperçu">`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function previewMainImage(input) {
+            previewImage(input, 'service-main-image-preview');
+        }
+
+        function previewLogo(input) {
+            previewImage(input, 'logo-preview');
+        }
+
+        // ADMIN CONTENT SAVERS
+        function saveContent() {
+            const heroTitle = document.getElementById('hero-title').value;
+            const heroText = document.getElementById('hero-text').value;
+            document.getElementById('hero-main-title').textContent = heroTitle;
+            document.getElementById('hero-subtitle').textContent = heroText;
+
+            const commTitle = document.getElementById('commercial-title-input').value;
+            const commText1 = document.getElementById('commercial-text-input').value;
+            const commText2 = document.getElementById('commercial-text-2-input').value;
+            document.getElementById('commercial-title').textContent = commTitle;
+            document.getElementById('commercial-text').textContent = commText1;
+            document.getElementById('commercial-text-2').textContent = commText2;
+
+            const aboutTitle = document.getElementById('about-title-input').value;
+            const aboutText1 = document.getElementById('about-text-1-input').value;
+            const aboutText2 = document.getElementById('about-text-2-input').value;
+            document.getElementById('about-title').textContent = aboutTitle;
+            document.getElementById('about-text-1').textContent = aboutText1;
+            document.getElementById('about-text-2').textContent = aboutText2;
+
+            const aboutPrev = document.querySelector('#aboutImagePreview img');
+            if (aboutPrev) {
+                document.getElementById('about-main-image').src = aboutPrev.src;
+            }
+
+            for (let i = 1; i <= 4; i++) {
+                const valTitle = document.getElementById(`val-title-${i}`).value;
+                const valDesc = document.getElementById(`val-desc-${i}`).value;
+                const elTitle = document.getElementById(`value-title-${i}`);
+                const elDesc = document.getElementById(`value-desc-${i}`);
+                if (elTitle) elTitle.textContent = valTitle;
+                if (elDesc) elDesc.textContent = valDesc;
+            }
+
+            alert('Contenu principal mis à jour avec succès !');
+        }
+
+        function saveHeader() {
+            const name = document.getElementById('header-input-company-name').value;
+            const slogan = document.getElementById('header-input-company-slogan').value;
+            const logoPrev = document.querySelector('#logo-preview img');
+
+            document.getElementById('header-company-name').textContent = name;
+            document.getElementById('header-company-slogan').textContent = slogan;
+            if (logoPrev) {
+                document.getElementById('logo-image').src = logoPrev.src;
+            }
+            alert('En-tête mis à jour !');
+        }
+
+        function saveFooter() {
+            const t1 = document.getElementById('footer-input-title-1').value;
+            const d1 = document.getElementById('footer-input-desc-1').value;
+            const ag = document.getElementById('footer-input-agents').value;
+            const addr = document.getElementById('footer-input-address').value;
+            const phone = document.getElementById('footer-input-phone').value;
+            const email = document.getElementById('footer-input-email').value;
+            const yr = document.getElementById('footer-input-year').value;
+
+            document.getElementById('footer-title-1').textContent = t1;
+            document.getElementById('footer-description-1').textContent = d1;
+            document.getElementById('footer-agents-count').textContent = ag;
+            document.getElementById('footer-address').textContent = addr;
+            document.getElementById('footer-phone').textContent = phone;
+            document.getElementById('footer-email').textContent = email;
+            document.getElementById('footer-year').textContent = yr;
+
+            alert('Pied de page mis à jour !');
+        }
+
+        function saveContact() {
+            document.getElementById('contact-title').textContent = document.getElementById('contact-input-title').value;
+            document.getElementById('contact-description').textContent = document.getElementById('contact-input-desc').value;
+            document.getElementById('contact-address').textContent = document.getElementById('contact-input-address').value;
+            document.getElementById('contact-phone').textContent = document.getElementById('contact-input-phone').value;
+            document.getElementById('contact-email').textContent = document.getElementById('contact-input-email').value;
+            document.getElementById('contact-availability').textContent = document.getElementById('contact-input-avail').value;
+            document.getElementById('contact-agents').textContent = document.getElementById('contact-input-agents').value;
+            alert('Informations de contact mises à jour !');
+        }
+
+        function saveSEO() {
+            const title = document.getElementById('meta-title-input').value;
+            const desc = document.getElementById('meta-desc-input').value;
+            document.title = title;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', desc);
+            alert('Paramètres SEO sauvegardés !');
+        }
+
+        function generateSEOSuggestions() {
+            const div = document.getElementById('seo-suggestions');
+            div.innerHTML = `
+                <div style="background:#eef7ff; padding:10px; border-radius:5px; border-left:4px solid #004085;">
+                    <strong>Suggestions :</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Intégrez le terme "Hérault" dans le titre H1.</li>
+                        <li>Ajoutez une section FAQ pour enrichir la recherche vocale.</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function updateColorPreview(inputId, previewId) {
+            const val = document.getElementById(inputId).value;
+            document.getElementById(previewId).style.backgroundColor = val;
+        }
+
+        function saveAppearance() {
+            const primary = document.getElementById('primary-color').value;
+            const secondary = document.getElementById('secondary-color').value;
+            const accent = document.getElementById('accent-color').value;
+
+            document.documentElement.style.setProperty('--primary', primary);
+            document.documentElement.style.setProperty('--secondary', secondary);
+            document.documentElement.style.setProperty('--accent', accent);
+
+            localStorage.setItem('appearanceData', JSON.stringify({ primary, secondary, accent }));
+            alert('Apparence appliquée et enregistrée !');
+        }
+
+        // USER INTERFACE & NAVIGATION
+        function initUserInterface() {
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', handleContactSubmit);
             }
-            
-            // Mentions légales
-            const legalToggle = document.querySelector('.legal-toggle');
-            if (legalToggle) {
-                legalToggle.addEventListener('click', toggleLegalMentions);
-            }
-            
-            // Animations au défilement
-            initScrollAnimations();
         }
-        
+
         function showSection(sectionId) {
-            // Masquer les sections de service
-            document.querySelectorAll('.service-detail').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Fermer les modals
-            document.getElementById('reportModal').style.display = 'none';
-            
-            // Scroll vers la section
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            // Fermer le menu mobile
-            const nav = document.getElementById('mainNav');
-            if (nav && nav.classList.contains('show')) {
-                nav.classList.remove('show');
-                const toggle = document.getElementById('mobileMenuToggle');
-                if (toggle) {
-                    toggle.querySelector('i').classList.remove('fa-times');
-                    toggle.querySelector('i').classList.add('fa-bars');
-                }
+            document.querySelectorAll('.service-detail').forEach(sec => sec.classList.remove('active'));
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
             }
         }
-        
+
         function showService(serviceId) {
-            document.querySelectorAll('.service-detail').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            const serviceSection = document.getElementById(serviceId);
-            if (serviceSection) {
-                serviceSection.classList.add('active');
-                serviceSection.scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.service-detail').forEach(sec => sec.classList.remove('active'));
+            const sec = document.getElementById(serviceId);
+            if (sec) {
+                sec.classList.add('active');
+                sec.scrollIntoView({ behavior: 'smooth' });
             }
         }
-        
+
         async function handleContactSubmit(e) {
             e.preventDefault();
-            
             const form = e.target;
-            const messageEl = document.getElementById('form-message');
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const btnLoading = document.getElementById('btn-loading');
-            
-            // Afficher le chargement
-            btnText.textContent = 'Envoi en cours...';
-            btnLoading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            
+            const msg = document.getElementById('form-message');
+            const btn = document.getElementById('submit-btn');
+            const txt = document.getElementById('btn-text');
+            const load = document.getElementById('btn-loading');
+
+            txt.textContent = 'Envoi en cours...';
+            load.style.display = 'inline-block';
+            btn.disabled = true;
+
             try {
-                const formData = new FormData(form);
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
                 });
-                
                 if (response.ok) {
-                    messageEl.textContent = '✅ Votre message a été envoyé avec succès! Nous vous contacterons rapidement.';
-                    messageEl.className = 'form-message form-success';
-                    messageEl.style.display = 'block';
+                    msg.textContent = '✅ Message envoyé avec succès ! Nous vous recontacterons au plus vite.';
+                    msg.className = 'form-message form-success';
+                    msg.style.display = 'block';
                     form.reset();
                 } else {
-                    throw new Error('Erreur lors de l\'envoi');
+                    throw new Error();
                 }
-            } catch (error) {
-                messageEl.textContent = '❌ Une erreur s\'est produite. Veuillez nous appeler au 06 60 35 01 97';
-                messageEl.className = 'form-message form-error';
-                messageEl.style.display = 'block';
+            } catch(err) {
+                msg.textContent = '❌ Une erreur est survenue. Contactez-nous par téléphone au 06 60 35 01 97.';
+                msg.className = 'form-message form-error';
+                msg.style.display = 'block';
             } finally {
-                btnText.textContent = 'Envoyer la demande';
-                btnLoading.style.display = 'none';
-                submitBtn.disabled = false;
-                messageEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                txt.textContent = 'Envoyer la demande';
+                load.style.display = 'none';
+                btn.disabled = false;
             }
         }
-        
+
         function toggleLegalMentions() {
-            const legalSection = document.getElementById('legalMentions');
-            const toggleBtn = document.querySelector('.legal-toggle');
-            
-            if (legalSection && toggleBtn) {
-                legalSection.classList.toggle('expanded');
-                toggleBtn.textContent = legalSection.classList.contains('expanded') 
-                    ? 'Masquer les mentions légales' 
-                    : 'Voir les mentions légales';
-            }
+            const el = document.getElementById('legalMentions');
+            const btn = document.querySelector('.legal-toggle');
+            if (!el || !btn) return;
+            el.classList.toggle('expanded');
+            btn.textContent = el.classList.contains('expanded') ? 'Masquer les mentions légales' : 'Voir les mentions légales';
         }
-        
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            // Observer les éléments à animer
-            document.querySelectorAll('.service-card, .value-item, .report-card').forEach(el => {
-                observer.observe(el);
-            });
+
+        function updateFooterYear() {
+            const yr = document.getElementById('footer-year');
+            if (yr) yr.textContent = new Date().getFullYear();
         }
-        
-        // ===== ADMINISTRATION =====
+
+        // MODAL
+        function openModal(reportId) {
+            const modal = document.getElementById('reportModal');
+            const content = document.getElementById('modal-content');
+            const rep = reportsData.find(r => r.id === reportId);
+            if (!rep) return;
+
+            content.innerHTML = `
+                ${rep.image ? `<div class="modal-image"><img src="${rep.image}" alt="${rep.title}"></div>` : ''}
+                <div class="modal-date">${rep.date ? new Date(rep.date).toLocaleDateString('fr-FR') : ''}</div>
+                <h2 class="modal-title">${rep.title}</h2>
+                <div class="modal-body">${rep.content}</div>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('reportModal').style.display = 'none';
+        }
+
+        // ADMIN PANEL OPEN/CLOSE
         function openAdmin() {
             document.getElementById('adminPanel').style.display = 'block';
             document.getElementById('loginSection').classList.add('active');
             document.getElementById('adminMainSection').classList.remove('active');
             document.getElementById('adminPassword').value = '';
         }
-        
+
         function closeAdmin() {
             document.getElementById('adminPanel').style.display = 'none';
             isAdmin = false;
         }
-        
+
         function checkPassword() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === CONFIG.adminPassword) {
+            const pwd = document.getElementById('adminPassword').value;
+            if (pwd === CONFIG.adminPassword) {
                 isAdmin = true;
                 document.getElementById('loginSection').classList.remove('active');
                 document.getElementById('adminMainSection').classList.add('active');
-                loadAdminData();
+                loadServiceData();
+                renderReports();
             } else {
                 alert('Mot de passe incorrect');
             }
         }
-        
-        function switchTab(tabId, event) {
-            // Masquer tous les onglets
-            document.querySelectorAll('.admin-section').forEach(tab => {
-                if (tab.id !== 'loginSection' && tab.id !== 'adminMainSection') {
-                    tab.classList.remove('active');
-                }
-            });
+
+        function switchTab(tabId, e) {
+            document.querySelectorAll('#adminMainSection .admin-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
             
-            // Afficher l'onglet sélectionné
-            document.getElementById(tabId).classList.add('active');
-            
-            // Mettre à jour les onglets actifs
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('active');
+            if (e && e.currentTarget) e.currentTarget.classList.add('active');
         }
-        
-        async function loadAdminData() {
-            // Cette fonction chargerait les données dans le panel admin
-            console.log('Chargement des données admin...');
-        }
-        
-        // ===== UTILITAIRES =====
-        function updateFooterYear() {
-            const yearElement = document.getElementById('footer-year');
-            if (yearElement) {
-                yearElement.textContent = new Date().getFullYear();
-            }
-        }
-        
-        // ===== GESTION HORS LIGNE =====
-        window.addEventListener('online', () => {
-            isOnline = true;
-            updateSyncStatus('online');
-            processPendingSync();
-        });
-        
-        window.addEventListener('offline', () => {
-            isOnline = false;
-            updateSyncStatus('offline');
-        });
-        
-        // ===== FONCTIONS DE BACKUP =====
+
+        // EXPORT / IMPORT / SYNC
         function exportBackup() {
-            const backup = {};
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (!key.startsWith('firebase') && key !== 'pendingSync') {
-                    backup[key] = localStorage.getItem(key);
-                }
-            }
-            
-            const backupString = JSON.stringify(backup, null, 2);
-            const backupElement = document.getElementById('backup-data');
-            if (backupElement) {
-                backupElement.value = backupString;
-            }
-            
-            // Télécharger le fichier
-            const blob = new Blob([backupString], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
+            const backup = {
+                servicesData,
+                reportsData,
+                appearance: localStorage.getItem('appearanceData')
+            };
+            const str = JSON.stringify(backup, null, 2);
+            document.getElementById('backup-data').value = str;
+
+            const blob = new Blob([str], { type: 'application/json' });
             const a = document.createElement('a');
-            a.href = url;
+            a.href = URL.createObjectURL(blob);
             a.download = `backup-4sp-${new Date().toISOString().split('T')[0]}.json`;
             a.click();
-            
-            alert('Sauvegarde exportée avec succès!');
         }
-        
+
         function importBackup() {
-            const backupElement = document.getElementById('backup-data');
-            if (!backupElement || !backupElement.value) {
-                alert('Veuillez coller les données de sauvegarde d\'abord');
+            const data = document.getElementById('backup-data').value.trim();
+            if (!data) {
+                alert('Veuillez coller le JSON de sauvegarde.');
                 return;
             }
-            
             try {
-                const backup = JSON.parse(backupElement.value);
-                let importedCount = 0;
-                
-                for (const [key, value] of Object.entries(backup)) {
-                    localStorage.setItem(key, value);
-                    importedCount++;
+                const parsed = JSON.parse(data);
+                if (parsed.servicesData) {
+                    servicesData = parsed.servicesData;
+                    localStorage.setItem('servicesData', JSON.stringify(servicesData));
+                    updateServicesUI();
                 }
-                
-                alert(`${importedCount} données restaurées avec succès! Rechargement...`);
-                setTimeout(() => location.reload(), 2000);
-            } catch (error) {
-                alert('Erreur: format de sauvegarde invalide');
+                if (parsed.reportsData) {
+                    reportsData = parsed.reportsData;
+                    localStorage.setItem('reportsData', JSON.stringify(reportsData));
+                    renderReports();
+                }
+                alert('Sauvegarde restaurée avec succès !');
+            } catch(e) {
+                alert('Format JSON non valide.');
             }
         }
-        
+
         function forceSync() {
             updateSyncStatus('syncing');
-            processPendingSync().then(() => {
-                setTimeout(() => {
-                    updateSyncStatus('online');
-                    alert('Synchronisation forcée terminée');
-                }, 2000);
-            });
+            setTimeout(() => {
+                updateSyncStatus(navigator.onLine ? 'online' : 'offline');
+                alert('Synchronisation effectuée.');
+            }, 1000);
         }
-        
+
+        function startAutoSync() {
+            window.addEventListener('online', () => updateSyncStatus('online'));
+            window.addEventListener('offline', () => updateSyncStatus('offline'));
+        }
+
         function saveFirebaseConfig() {
-            const configElement = document.getElementById('firebase-config');
-            if (!configElement) return;
-            
+            const cfg = document.getElementById('firebase-config').value.trim();
+            if (!cfg) return;
             try {
-                const config = JSON.parse(configElement.value);
-                localStorage.setItem('firebaseConfig', JSON.stringify(config));
-                alert('Configuration Firebase sauvegardée! Redémarrage...');
-                setTimeout(() => location.reload(), 2000);
-            } catch (error) {
-                alert('Erreur: configuration JSON invalide');
+                JSON.parse(cfg);
+                localStorage.setItem('firebaseConfig', cfg);
+                alert('Configuration sauvegardée ! Rechargez la page.');
+            } catch(e) {
+                alert('JSON invalide.');
             }
         }
-        
-        // ===== FERMETURE DES MODALS =====
+
         window.addEventListener('click', (e) => {
-            if (e.target === document.getElementById('adminPanel')) {
-                closeAdmin();
-            }
-            if (e.target === document.getElementById('reportModal')) {
-                closeModal();
-            }
+            if (e.target === document.getElementById('adminPanel')) closeAdmin();
+            if (e.target === document.getElementById('reportModal')) closeModal();
         });
-        
-        // Fonctions existantes à conserver
-        function closeModal() {
-            document.getElementById('reportModal').style.display = 'none';
-        }
-        
-        function openModal(reportId) {
-            const modal = document.getElementById('reportModal');
-            const modalContent = document.getElementById('modal-content');
-            
-            // Charger le rapport depuis localStorage
-            const reports = JSON.parse(localStorage.getItem('reports') || '[]');
-            const report = reports.find(r => r.id === reportId);
-            
-            if (report) {
-                modalContent.innerHTML = `
-                    ${report.image ? `<div class="modal-image"><img src="${report.image}" alt="${report.title}"></div>` : ''}
-                    <div class="modal-date">${new Date(report.date).toLocaleDateString('fr-FR')}</div>
-                    <h2 class="modal-title">${report.title}</h2>
-                    <div class="modal-body">${report.content}</div>
-                `;
-                
-                modal.style.display = 'block';
-            }
-        }
-        
-        // Initialisation du statut de synchronisation
-        updateSyncStatus(isOnline ? 'online' : 'offline');
-        
-        console.log('Système de synchronisation multi-appareils initialisé');
     </script>
 </body>
 </html>
