@@ -5,42 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">FOR SÉCURITÉ PRIVÉE (4SP) - Services de sécurité à Montpellier</title>
     
+    <!-- Prévention du cache navigateur pour la fraîcheur des données -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <!-- Meta SEO -->
-    <meta name="description" id="meta-description-tag" content="FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité privée implantée à Montpellier, dans l’Hérault, assurant ses prestations sur l’ensemble du département ainsi que dans les zones de Marseille et de Nice. Plus de 20 agents diplômés CNAPS.">
-    <meta name="keywords" content="sécurité, agent de sécurité, événements, surveillance, gardiennage, ronde, intervention, société de sécurité Montpellier Hérault, alarme, caméras de surveillance">
+    <meta name="description" id="meta-description-tag" content="FOR SÉCURITÉ PRIVÉE (4SP) - Société de sécurité privée à Montpellier (34). Gardiennage, surveillance humaine, rondes, interventions et sécurité événementielle.">
+    <meta name="keywords" content="sécurité privée Montpellier, gardiennage Hérault, ronde intervention, sécurité événementielle, agent de sécurité CNAPS">
     <meta name="author" content="FOR SÉCURITÉ PRIVÉE (4SP)">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" id="og-title-tag" content="FOR SÉCURITÉ PRIVÉE (4SP) - Experts en sécurité dans l’Hérault">
-    <meta property="og:description" id="og-desc-tag" content="Société de sécurité à Montpellier proposant gardiennage, surveillance et sécurité événementielle avec des agents agréés CNAPS.">
-    <meta property="og:type" content="website">
     
     <!-- Firebase SDK Compat v8 -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     
-    <!-- Polices & Icônes -->
+    <!-- Polices & Icônes FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json" id="schema-ld-json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SecurityService",
-      "name": "FOR SÉCURITÉ PRIVÉE (4SP)",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "83 rue Yves Montand",
-        "addressLocality": "Montpellier",
-        "postalCode": "34080",
-        "addressCountry": "FR"
-      },
-      "telephone": "+33660350197",
-      "email": "contact@4sp.fr"
-    }
-    </script>
     
     <style>
         :root {
@@ -56,29 +40,10 @@
             --text-size: clamp(1rem, 2.5vw, 1.2rem);
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html { scroll-behavior: smooth; }
+        body { background-color: var(--light); color: var(--text); line-height: 1.6; overflow-x: hidden; font-size: var(--text-size); }
         
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-size: var(--text-size);
-        }
-        
-        body.mobile-device {
-            --container-padding: clamp(0.75rem, 3vw, 1.5rem);
-            --section-padding: clamp(2rem, 6vw, 4rem);
-        }
-        
-        /* En-tête */
         header {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
             color: var(--accent);
@@ -92,11 +57,7 @@
             z-index: 1000;
         }
         
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        
+        .logo-container { display: flex; align-items: center; }
         .logo {
             width: clamp(65px, 9vw, 95px);
             height: clamp(65px, 9vw, 95px);
@@ -110,36 +71,11 @@
             overflow: hidden;
             flex-shrink: 0;
         }
+        .logo img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+        .company-name { font-size: clamp(1.1rem, 3.5vw, 1.7rem); font-weight: 800; color: var(--accent); line-height: 1.2; }
+        .company-slogan { font-size: clamp(0.75rem, 2vw, 0.95rem); opacity: 0.9; font-weight: 300; color: var(--accent); }
         
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 4px;
-        }
-        
-        .company-name {
-            font-size: clamp(1.1rem, 3.5vw, 1.7rem);
-            font-weight: 800;
-            color: var(--accent);
-            line-height: 1.2;
-        }
-        
-        .company-slogan {
-            font-size: clamp(0.75rem, 2vw, 0.95rem);
-            opacity: 0.9;
-            font-weight: 300;
-            color: var(--accent);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            gap: 0.5rem;
-        }
-        
+        nav ul { display: flex; list-style: none; flex-wrap: wrap; justify-content: flex-end; gap: 0.5rem; }
         nav ul li a {
             color: var(--accent);
             text-decoration: none;
@@ -150,22 +86,9 @@
             font-size: clamp(0.85rem, 2.2vw, 1.05rem);
             white-space: nowrap;
         }
+        nav ul li a:hover { background-color: var(--primary); }
+        .mobile-menu-toggle { display: none; background: transparent; border: none; color: var(--accent); font-size: 1.6rem; cursor: pointer; padding: 0.5rem; }
         
-        nav ul li a:hover {
-            background-color: var(--primary);
-        }
-        
-        .mobile-menu-toggle {
-            display: none;
-            background: transparent;
-            border: none;
-            color: var(--accent);
-            font-size: 1.6rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-        
-        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
             min-height: 85vh;
@@ -177,31 +100,9 @@
             color: var(--accent);
             padding: var(--section-padding) var(--container-padding);
         }
-        
-        .hero-content {
-            max-width: min(900px, 92vw);
-            animation: fadeIn 1.2s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hero h1 {
-            font-size: clamp(2rem, 6.5vw, 3.3rem);
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-        }
-        
-        .hero p {
-            font-size: clamp(1.1rem, 3.5vw, 1.6rem);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-        }
+        .hero-content { max-width: min(900px, 92vw); }
+        .hero h1 { font-size: clamp(2rem, 6.5vw, 3.3rem); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); }
+        .hero p { font-size: clamp(1.1rem, 3.5vw, 1.6rem); margin-bottom: 2rem; font-weight: 300; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); }
         
         .btn {
             display: inline-block;
@@ -219,82 +120,19 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
+        .btn:hover { background: #b80510; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(227, 6, 19, 0.4); }
         
-        .btn:hover {
-            background: #b80510;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(227, 6, 19, 0.4);
-        }
+        .commercial-presentation { padding: var(--section-padding) var(--container-padding); text-align: center; background: var(--accent); }
+        .commercial-content { max-width: min(1000px, 92vw); margin: 0 auto; }
+        .commercial-content h2 { font-size: var(--heading-size); color: var(--secondary); margin-bottom: 1.5rem; font-weight: 700; }
+        .commercial-content p { font-size: clamp(1rem, 2.5vw, 1.25rem); margin-bottom: 1.5rem; color: var(--text); line-height: 1.8; }
+        .highlight { color: var(--primary); font-weight: 700; }
         
-        .btn i { margin-left: 8px; }
+        .services { padding: var(--section-padding) var(--container-padding); text-align: center; background: var(--light); }
+        .section-title { font-size: var(--heading-size); margin-bottom: 3rem; color: var(--secondary); position: relative; display: inline-block; font-weight: 700; }
+        .section-title::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--primary); border-radius: 2px; }
         
-        /* Présentation Commerciale */
-        .commercial-presentation {
-            padding: var(--section-padding) var(--container-padding);
-            text-align: center;
-            background: var(--accent);
-        }
-        
-        .commercial-content {
-            max-width: min(1000px, 92vw);
-            margin: 0 auto;
-        }
-        
-        .commercial-content h2 {
-            font-size: var(--heading-size);
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .commercial-content p {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            margin-bottom: 1.5rem;
-            color: var(--text);
-            line-height: 1.8;
-        }
-        
-        .highlight {
-            color: var(--primary);
-            font-weight: 700;
-        }
-        
-        /* Services Section */
-        .services {
-            padding: var(--section-padding) var(--container-padding);
-            text-align: center;
-            background: var(--light);
-        }
-        
-        .section-title {
-            font-size: var(--heading-size);
-            margin-bottom: 3rem;
-            color: var(--secondary);
-            position: relative;
-            display: inline-block;
-            font-weight: 700;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-            gap: clamp(1.5rem, 3.5vw, 2.5rem);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(1.5rem, 3.5vw, 2.5rem); max-width: 1200px; margin: 0 auto; }
         .service-card {
             background: var(--accent);
             border-radius: 14px;
@@ -306,88 +144,19 @@
             flex-direction: column;
             text-align: left;
         }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); }
+        .service-image { height: 220px; overflow: hidden; background: #222; }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; }
+        .service-content { padding: clamp(1.2rem, 3vw, 2rem); display: flex; flex-direction: column; flex-grow: 1; }
+        .service-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .service-card h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 0.8rem; color: var(--secondary); font-weight: 700; }
+        .service-card p { margin-bottom: 1.2rem; color: #555; font-size: 0.95rem; flex-grow: 1; }
+        .service-features { list-style: none; margin-bottom: 1.5rem; }
+        .service-features li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; color: #444; font-size: 0.9rem; }
+        .service-features li:before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
         
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-        }
-        
-        .service-image {
-            height: 220px;
-            overflow: hidden;
-            background: #222;
-        }
-        
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .service-card:hover .service-image img {
-            transform: scale(1.06);
-        }
-        
-        .service-content {
-            padding: clamp(1.2rem, 3vw, 2rem);
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .service-card h3 {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-        
-        .service-card p {
-            margin-bottom: 1.2rem;
-            color: #555;
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-        
-        .service-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-        
-        .service-features li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #444;
-            font-size: 0.9rem;
-        }
-        
-        .service-features li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        /* Détails Prestations */
-        .service-detail {
-            display: none;
-            padding: var(--section-padding) var(--container-padding);
-            background: var(--accent);
-        }
-        
-        .service-detail.active {
-            display: block;
-        }
-        
+        .service-detail { display: none; padding: var(--section-padding) var(--container-padding); background: var(--accent); }
+        .service-detail.active { display: block; }
         .service-hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), #111;
             padding: clamp(2rem, 5vw, 3.5rem) var(--container-padding);
@@ -398,613 +167,106 @@
             background-size: cover;
             background-position: center;
         }
+        .service-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .service-benefits { background: var(--light); padding: 2rem; border-radius: 12px; }
+        .benefits-list { list-style: none; margin: 1.5rem 0; }
+        .benefits-list li { margin-bottom: 0.8rem; padding-left: 1.8rem; position: relative; }
+        .benefits-list li:before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .service-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .gallery-item { border-radius: 8px; overflow: hidden; height: 160px; background: #eee; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
         
-        .service-detail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .activity-reports { padding: var(--section-padding) var(--container-padding); background: var(--accent); }
+        .reports-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr)); gap: 2rem; margin-top: 2.5rem; text-align: left; }
+        .report-card { background: var(--light); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06); display: flex; flex-direction: column; }
+        .report-image { height: 180px; overflow: hidden; background: #ddd; }
+        .report-image img { width: 100%; height: 100%; object-fit: cover; }
+        .report-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .report-date { color: var(--primary); font-weight: 600; font-size: 0.85rem; margin-bottom: 0.4rem; }
+        .report-title { font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--secondary); font-weight: 700; }
+        .report-excerpt { color: #666; font-size: 0.95rem; margin-bottom: 1rem; flex-grow: 1; }
+        .read-more { color: var(--primary); font-weight: 600; cursor: pointer; border: none; background: none; font-size: 0.95rem; }
         
-        .service-benefits {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 12px;
-        }
+        .about { padding: var(--section-padding) var(--container-padding); background: var(--light); }
+        .about-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 3rem; align-items: center; }
+        .about-text h2 { font-size: var(--heading-size); color: var(--secondary); margin-bottom: 1.5rem; font-weight: 700; }
+        .about-text p { margin-bottom: 1.2rem; line-height: 1.8; color: var(--text); }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: 1.2rem; margin-top: 2rem; }
+        .value-item { background: var(--accent); padding: 1.2rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); text-align: center; }
+        .value-item i { font-size: 2rem; color: var(--primary); margin-bottom: 0.8rem; }
+        .value-item h4 { font-size: 1.05rem; color: var(--secondary); margin-bottom: 0.4rem; }
+        .value-item p { font-size: 0.85rem; color: #666; margin-bottom: 0; }
+        .about-image { border-radius: 14px; overflow: hidden; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); }
+        .about-image img { width: 100%; height: auto; display: block; }
         
-        .benefits-list {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
+        .contact { padding: var(--section-padding) var(--container-padding); background: linear-gradient(to right, var(--secondary), var(--dark)); color: var(--accent); }
+        .contact-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 3rem; }
+        .contact-info h2 { font-size: var(--heading-size); margin-bottom: 1.5rem; font-weight: 700; }
+        .contact-details { list-style: none; margin-top: 2rem; }
+        .contact-details li { margin-bottom: 1.2rem; display: flex; align-items: center; font-size: 1.05rem; }
+        .contact-details i { font-size: 1.3rem; color: var(--primary); margin-right: 1.2rem; width: 25px; }
         
-        .benefits-list li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.8rem;
-            position: relative;
-        }
+        .contact-form { background: var(--accent); padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: 14px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); color: var(--text); }
+        .contact-form h3 { color: var(--secondary); font-size: 1.6rem; margin-bottom: 1.5rem; text-align: center; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; color: var(--dark); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.85rem; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-message { padding: 10px; margin-bottom: 1rem; border-radius: 6px; display: none; font-size: 0.9rem; }
+        .form-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .form-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         
-        .benefits-list li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
+        .map-container { margin-top: 4rem; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .map-container iframe { width: 100%; height: 350px; border: none; display: block; }
         
-        .service-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
-        .gallery-item {
-            border-radius: 8px;
-            overflow: hidden;
-            height: 160px;
-            background: #eee;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Rapports d'Activité */
-        .activity-reports {
-            padding: var(--section-padding) var(--container-padding);
-            background: var(--accent);
-        }
-        
-        .reports-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .reports-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
-            gap: 2rem;
-            margin-top: 2.5rem;
-            text-align: left;
-        }
-        
-        .report-card {
-            background: var(--light);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .report-image {
-            height: 180px;
-            overflow: hidden;
-            background: #ddd;
-        }
-        
-        .report-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .report-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .report-date {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 0.4rem;
-        }
-        
-        .report-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-        
-        .report-excerpt {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-        
-        .read-more {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 0.95rem;
-        }
-        
-        .read-more i { margin-left: 5px; }
-        
-        /* À Propos */
-        .about {
-            padding: var(--section-padding) var(--container-padding);
-            background: var(--light);
-        }
-        
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .about-text h2 {
-            font-size: var(--heading-size);
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .about-text p {
-            margin-bottom: 1.2rem;
-            line-height: 1.8;
-            color: var(--text);
-        }
-        
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-        
-        .value-item {
-            background: var(--accent);
-            padding: 1.2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        
-        .value-item i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-        }
-        
-        .value-item h4 {
-            font-size: 1.05rem;
-            color: var(--secondary);
-            margin-bottom: 0.4rem;
-        }
-        
-        .value-item p {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 0;
-        }
-        
-        .about-image {
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Contact */
-        .contact {
-            padding: var(--section-padding) var(--container-padding);
-            background: linear-gradient(to right, var(--secondary), var(--dark));
-            color: var(--accent);
-        }
-        
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-            gap: 3rem;
-        }
-        
-        .contact-info h2 {
-            font-size: var(--heading-size);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .contact-details {
-            list-style: none;
-            margin-top: 2rem;
-        }
-        
-        .contact-details li {
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            font-size: 1.05rem;
-        }
-        
-        .contact-details i {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-right: 1.2rem;
-            width: 25px;
-        }
-        
-        .contact-form {
-            background: var(--accent);
-            padding: clamp(1.5rem, 4vw, 2.5rem);
-            border-radius: 14px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-            color: var(--text);
-        }
-        
-        .contact-form h3 {
-            color: var(--secondary);
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--dark);
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.85rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .form-message {
-            padding: 10px;
-            margin-bottom: 1rem;
-            border-radius: 6px;
-            display: none;
-            font-size: 0.9rem;
-        }
-        
-        .form-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .form-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .map-container {
-            margin-top: 4rem;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 350px;
-            border: none;
-            display: block;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--secondary);
-            color: var(--accent);
-            padding: clamp(2.5rem, 5vw, 4rem) var(--container-padding) 1.5rem;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto 2.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-            gap: 2.5rem;
-            text-align: left;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.2rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 35px;
-            height: 3px;
-            background: var(--primary);
-        }
-        
-        .footer-section p, .footer-section li {
-            margin-bottom: 0.6rem;
-            opacity: 0.85;
-            font-size: 0.95rem;
-        }
-        
+        footer { background: var(--secondary); color: var(--accent); padding: clamp(2.5rem, 5vw, 4rem) var(--container-padding) 1.5rem; text-align: center; }
+        .footer-content { max-width: 1200px; margin: 0 auto 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 2.5rem; text-align: left; }
+        .footer-section h3 { font-size: 1.3rem; margin-bottom: 1.2rem; position: relative; display: inline-block; }
+        .footer-section h3::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 35px; height: 3px; background: var(--primary); }
+        .footer-section p, .footer-section li { margin-bottom: 0.6rem; opacity: 0.85; font-size: 0.95rem; }
         .footer-section ul { list-style: none; }
-        
-        .footer-section a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
+        .footer-section a { color: #ddd; text-decoration: none; }
         .footer-section a:hover { color: var(--primary); }
         
-        .social-icons {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-        
-        .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-        
-        .legal-mentions {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-            font-size: 0.8rem;
-            opacity: 0.75;
-            display: none;
-        }
-        
+        .legal-mentions { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: left; font-size: 0.8rem; opacity: 0.75; display: none; }
         .legal-mentions.expanded { display: block; }
+        .legal-toggle { background: transparent; border: none; color: var(--accent); cursor: pointer; text-decoration: underline; font-size: 0.85rem; margin-top: 1rem; }
+        .footer-bottom { padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; opacity: 0.7; }
         
-        .legal-toggle {
-            background: transparent;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            text-decoration: underline;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
+        .admin-access { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .admin-toggle { background: var(--primary); color: var(--accent); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35); font-size: 22px; border: none; }
         
-        .footer-bottom {
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.85rem;
-            opacity: 0.7;
-        }
+        .report-modal, .admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 10000; overflow-y: auto; padding: 1rem; }
+        .admin-content, .modal-content { background: white; margin: 30px auto; padding: clamp(1.2rem, 3.5vw, 2.5rem); border-radius: 12px; max-width: min(880px, 95vw); position: relative; }
+        .close-admin, .close-modal { position: absolute; top: 15px; right: 20px; font-size: 26px; cursor: pointer; color: #d9534f; border: none; background: none; }
         
-        .admin-access {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .admin-toggle {
-            background: var(--primary);
-            color: var(--accent);
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
-            font-size: 22px;
-            transition: transform 0.2s;
-        }
-        
-        .admin-toggle:hover { transform: scale(1.08); }
-        
-        /* Modal & Admin Panel */
-        .report-modal, .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 10000;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-        
-        .admin-content, .modal-content {
-            background: white;
-            margin: 30px auto;
-            padding: clamp(1.2rem, 3.5vw, 2.5rem);
-            border-radius: 12px;
-            max-width: min(880px, 95vw);
-            position: relative;
-        }
-        
-        .close-admin, .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 26px;
-            cursor: pointer;
-            color: #d9534f;
-            border: none;
-            background: none;
-        }
-        
-        .admin-tabs {
-            display: flex;
-            gap: 5px;
-            margin: 1.5rem 0;
-            border-bottom: 2px solid #eee;
-            flex-wrap: wrap;
-        }
-        
-        .admin-tab {
-            padding: 8px 16px;
-            cursor: pointer;
-            background: #f0f0f0;
-            border-radius: 6px 6px 0 0;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        
-        .admin-tab.active {
-            background: var(--primary);
-            color: white;
-        }
-        
+        .admin-tabs { display: flex; gap: 5px; margin: 1.5rem 0; border-bottom: 2px solid #eee; flex-wrap: wrap; }
+        .admin-tab { padding: 8px 16px; cursor: pointer; background: #f0f0f0; border-radius: 6px 6px 0 0; font-weight: 600; font-size: 0.9rem; }
+        .admin-tab.active { background: var(--primary); color: white; }
         .admin-section { display: none; }
         .admin-section.active { display: block; }
         
-        .admin-form-group {
-            margin-bottom: 1.2rem;
-        }
+        .admin-form-group { margin-bottom: 1.2rem; }
+        .admin-form-group label { display: block; margin-bottom: 0.3rem; font-weight: 600; font-size: 0.9rem; color: #333; }
+        .admin-form-group input, .admin-form-group textarea, .admin-form-group select { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; }
         
-        .admin-form-group label {
-            display: block;
-            margin-bottom: 0.3rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #333;
-        }
-        
-        .admin-form-group input,
-        .admin-form-group textarea,
-        .admin-form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-        
-        .admin-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
+        .admin-btn { background: var(--primary); color: white; border: none; padding: 10px 22px; border-radius: 6px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
         .admin-btn:hover { background: #b80510; }
+        .admin-btn-secondary { background: #555; color: white; border: none; padding: 7px 14px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; }
+        .admin-btn-danger { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; }
         
-        .admin-btn-secondary {
-            background: #555;
-            color: white;
-            border: none;
-            padding: 7px 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
+        .photo-card-manager { border: 1px solid #ddd; padding: 12px; border-radius: 8px; margin-bottom: 1rem; background: #fafafa; display: flex; gap: 15px; align-items: center; }
+        .photo-card-thumb { width: 90px; height: 70px; object-fit: cover; border-radius: 6px; background: #ccc; }
         
-        .admin-btn-danger {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-        
-        .photo-card-manager {
-            border: 1px solid #ddd;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            background: #fafafa;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .photo-card-thumb {
-            width: 90px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 6px;
-            background: #ccc;
-        }
-        
-        .sync-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
+        .sync-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
         .sync-online { background: #e8f5e9; color: #2e7d32; }
-        .sync-offline { background: #fff3e0; color: #e65100; }
+        .sync-offline { background: #ffebee; color: #c62828; }
         .sync-syncing { background: #e3f2fd; color: #1565c0; }
 
         @media (max-width: 768px) {
             .mobile-menu-toggle { display: block; }
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: var(--secondary);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem;
-            }
+            nav ul { display: none; flex-direction: column; width: 100%; background: var(--secondary); position: absolute; top: 100%; left: 0; padding: 1rem; }
             nav ul.show { display: flex; }
             .hero { padding: 4rem 1rem; }
             .about-content, .contact-container { grid-template-columns: 1fr; }
@@ -1016,7 +278,7 @@
     <!-- En-tête -->
     <header>
         <div class="logo-container">
-            <div class="logo" id="logo-wrapper">
+            <div class="logo">
                 <img src="https://via.placeholder.com/150x150/e30613/ffffff?text=4SP" alt="Logo 4SP" id="logo-image">
             </div>
             <div>
@@ -1051,32 +313,26 @@
     <section class="commercial-presentation">
         <div class="commercial-content">
             <h2 id="commercial-title">Votre partenaire de confiance en sécurité privée</h2>
-            <p id="commercial-text">Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe vous garantit une protection optimale de vos biens et personnes.</p>
+            <p id="commercial-text">Chez <span class="highlight">FOR SÉCURITÉ PRIVÉE (4SP)</span>, nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques.</p>
             <p id="commercial-text-2">Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité.</p>
         </div>
     </section>
 
-    <!-- Services dynamiques -->
+    <!-- Grille des Services -->
     <section id="services" class="services">
         <h2 class="section-title">Nos Services</h2>
-        <div class="services-grid" id="services-grid-container">
-            <!-- Rendu dynamique -->
-        </div>
+        <div class="services-grid" id="services-grid-container"></div>
     </section>
 
-    <!-- Conteneur Détails Prestations -->
-    <div id="service-details-container">
-        <!-- Rendu dynamique des pages détaillées -->
-    </div>
+    <!-- Détails des Services -->
+    <div id="service-details-container"></div>
 
     <!-- Rapports d'Activité -->
     <section id="reports" class="activity-reports">
         <div class="reports-container">
             <h2 class="section-title">Rapports d'Activité</h2>
             <p id="reports-description">Découvrez nos rapports d'activité réguliers pour suivre notre actualité et nos interventions.</p>
-            <div class="reports-grid" id="reports-grid">
-                <!-- Rendu dynamique -->
-            </div>
+            <div class="reports-grid" id="reports-grid"></div>
         </div>
     </section>
 
@@ -1088,10 +344,8 @@
                 <p id="about-text-1">Forte de ses agents expérimentés, FOR SÉCURITÉ PRIVÉE (4SP) est la référence en matière de sécurité dans la région de Montpellier.</p>
                 <p id="about-text-2">Nous utilisons des équipements modernes et assurons un contrôle opérationnel 24h/24 et 7j/7 pour intervenir rapidement en cas d'incident.</p>
                 
-                <h3 id="about-values-title">Nos valeurs</h3>
-                <div class="values-grid" id="values-container">
-                    <!-- Rendu dynamique des valeurs -->
-                </div>
+                <h3>Nos valeurs</h3>
+                <div class="values-grid" id="values-container"></div>
             </div>
             <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Équipe de sécurité" id="about-main-image">
@@ -1099,13 +353,12 @@
         </div>
     </section>
 
-    <!-- Contact & Formulaire -->
+    <!-- Contact -->
     <section id="contact" class="contact">
         <div class="contact-container">
             <div class="contact-info">
-                <h2 id="contact-title">Contactez-nous</h2>
-                <p id="contact-description">Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</p>
-                
+                <h2>Contactez-nous</h2>
+                <p>Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.</p>
                 <ul class="contact-details">
                     <li><i class="fas fa-map-marker-alt"></i> <span id="contact-address">83 rue Yves Montand, 34080 Montpellier</span></li>
                     <li><i class="fas fa-phone"></i> <span id="contact-phone">06 60 35 01 97</span></li>
@@ -1116,7 +369,7 @@
             </div>
             
             <div class="contact-form">
-                <h3 id="contact-form-title">Demande de devis</h3>
+                <h3>Demande de devis</h3>
                 <div id="form-message" class="form-message"></div>
                 <form id="contactForm" action="https://formspree.io/f/xeolqboy" method="POST">
                     <div class="form-group">
@@ -1145,9 +398,7 @@
                         <label for="form-content">Message *</label>
                         <textarea id="form-content" name="message" required></textarea>
                     </div> 
-                    <button type="submit" class="btn" id="submit-btn">
-                        <span id="btn-text">Envoyer la demande</span>
-                    </button>
+                    <button type="submit" class="btn" id="submit-btn"><span id="btn-text">Envoyer la demande</span></button>
                 </form>
             </div>
         </div>
@@ -1162,8 +413,8 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3 id="footer-title-1">FOR SÉCURITÉ PRIVÉE (4SP)</h3>
-                <p id="footer-description-1">Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</p>
-                <p id="footer-agents-count">Plus de 20 agents dédiés à votre sécurité</p>
+                <p>Votre partenaire de confiance pour tous vos besoins en sécurité. Protection optimale pour particuliers et professionnels.</p>
+                <p><span id="footer-agents-count">Plus de 20 agents dédiés</span></p>
             </div>
             <div class="footer-section">
                 <h3>Nos coordonnées</h3>
@@ -1181,15 +432,6 @@
                     <li><a href="#reports" onclick="navigateTo('reports'); return false;">Rapports</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Suivez-nous</h3>
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
         </div>
         
         <button class="legal-toggle" onclick="toggleLegalMentions()">Afficher/Masquer les mentions légales</button>
@@ -1205,13 +447,11 @@
         </div>
         
         <div class="admin-access">
-            <button class="admin-toggle" onclick="openAdmin()" aria-label="Administration">
-                <i class="fas fa-cog"></i>
-            </button>
+            <button class="admin-toggle" onclick="openAdmin()" aria-label="Administration"><i class="fas fa-cog"></i></button>
         </div>
     </footer>
 
-    <!-- Modal Affichage Rapport -->
+    <!-- Modal d'affichage des rapports -->
     <div class="report-modal" id="reportModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
@@ -1219,12 +459,11 @@
         </div>
     </div>
 
-    <!-- Panneau d'Administration Complet -->
+    <!-- Panneau d'Administration -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-content">
             <button class="close-admin" onclick="closeAdmin()">&times;</button>
             
-            <!-- Écran de Connexion -->
             <div id="loginSection" class="admin-section active">
                 <h2 style="text-align:center; margin-bottom:1rem;">Connexion Administrateur</h2>
                 <div style="max-width:320px; margin:0 auto; text-align:center;">
@@ -1235,7 +474,6 @@
                 </div>
             </div>
             
-            <!-- Écran Principal Administration -->
             <div id="adminMainSection" class="admin-section">
                 <h2>Administration Globale - 4SP</h2>
                 
@@ -1284,9 +522,7 @@
                     
                     <div class="admin-form-group" style="margin-top:1rem;">
                         <label for="admin-service-selector">Prestation à gérer :</label>
-                        <select id="admin-service-selector" onchange="loadAdminServiceForm()">
-                            <!-- Rempli dynamiquement -->
-                        </select>
+                        <select id="admin-service-selector" onchange="loadAdminServiceForm()"></select>
                     </div>
                     
                     <div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-bottom:1.5rem;">
@@ -1295,8 +531,8 @@
                             <input type="text" id="admin-service-title">
                         </div>
                         <div class="admin-form-group">
-                            <label>Icône FontAwesome (ex: fa-user-shield, fa-walking, fa-video) :</label>
-                            <input type="text" id="admin-service-icon" placeholder="fa-user-shield">
+                            <label>Icône FontAwesome (ex: fa-user-shield, fa-walking, fa-calendar-alt) :</label>
+                            <input type="text" id="admin-service-icon" placeholder="fa-shield-alt">
                         </div>
                         <div class="admin-form-group">
                             <label>Description courte :</label>
@@ -1319,9 +555,7 @@
                         </div>
                         
                         <h4 style="margin:1.2rem 0 0.5rem;">Photos de la Galerie</h4>
-                        <div id="admin-gallery-manager">
-                            <!-- Liste dynamique des photos avec bouton supprimer -->
-                        </div>
+                        <div id="admin-gallery-manager"></div>
                         <div style="margin-top:10px;">
                             <label style="font-weight:600; display:block; margin-bottom:5px;">Ajouter une photo à la galerie :</label>
                             <input type="file" accept="image/*" onchange="handleImageUpload(event, 800, 0.65, addServiceGalleryImage)">
@@ -1329,7 +563,7 @@
                         
                         <div style="margin-top:1.5rem; display:flex; gap:10px; flex-wrap:wrap;">
                             <button class="admin-btn" onclick="saveAdminCurrentService()"><i class="fas fa-save"></i> Enregistrer cette prestation</button>
-                            <button class="admin-btn-danger" onclick="deleteCurrentService()"><i class="fas fa-trash"></i> Supprimer définitivement cette prestation</button>
+                            <button class="admin-btn-danger" onclick="deleteCurrentService()"><i class="fas fa-trash"></i> Supprimer cette prestation</button>
                         </div>
                     </div>
                 </div>
@@ -1359,9 +593,7 @@
                     </div>
                     
                     <h3>Rapports Publiés</h3>
-                    <div id="admin-reports-list" style="margin-top:1rem;">
-                        <!-- Rempli dynamiquement avec suppression -->
-                    </div>
+                    <div id="admin-reports-list" style="margin-top:1rem;"></div>
                 </div>
                 
                 <!-- Tab Textes & Valeurs -->
@@ -1406,9 +638,7 @@
                     </div>
                     
                     <h3 style="margin-top:1.5rem;">Valeurs de l'Entreprise (4 blocs)</h3>
-                    <div id="admin-values-manager">
-                        <!-- Rempli dynamiquement -->
-                    </div>
+                    <div id="admin-values-manager"></div>
                     
                     <button class="admin-btn" style="margin-top:1rem;" onclick="saveAdminTexts()"><i class="fas fa-save"></i> Enregistrer les textes et valeurs</button>
                 </div>
@@ -1446,12 +676,10 @@
         </div>
     </div>
 
-    <!-- Moteur JavaScript Réactif & Segmenté sans restriction de taille -->
+    <!-- Moteur JavaScript Réactif & Segmenté -->
     <script>
-        // MOT DE PASSE ADMIN SÉCURISÉ (SHA-256)
         const ADMIN_HASH = "8f9a2e6fca78d070cb1e838b97d19c0cfc2e9877b4d458cbf63359d955fa63fa";
         
-        // CONFIGURATION FIREBASE PROJET 'for-securite-privee'
         const FIREBASE_CONFIG = {
             apiKey: "AIzaSyAC36fANLbOEjI-DOanP6kJ_0gNxfx-YU4",
             authDomain: "for-securite-privee.firebaseapp.com",
@@ -1461,7 +689,6 @@
             appId: "1:58213730462:web:d4cfb312288ea7f260538f"
         };
 
-        // ÉTAT PAR DÉFAUT DU SITE
         const DEFAULT_GENERAL = {
             type: "general",
             logo: "",
@@ -1473,7 +700,7 @@
             },
             commercial: {
                 title: "Votre partenaire de confiance en sécurité privée",
-                p1: "Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques. Notre équipe vous garantit une protection optimale de vos biens et personnes.",
+                p1: "Chez FOR SÉCURITÉ PRIVÉE (4SP), nous mettons à votre disposition des solutions de sécurité sur mesure, adaptées à vos besoins spécifiques.",
                 p2: "Forte de son expertise et de son professionnalisme, notre société créée à Montpellier en 2024 s'engage à vous offrir des services de qualité avec réactivité et efficacité."
             },
             about: {
@@ -1564,7 +791,6 @@
             }
         ];
 
-        // ÉTAT EN MÉMOIRE
         let stateGeneral = JSON.parse(JSON.stringify(DEFAULT_GENERAL));
         let stateServices = JSON.parse(JSON.stringify(DEFAULT_SERVICES));
         let stateReports = JSON.parse(JSON.stringify(DEFAULT_REPORTS));
@@ -1607,8 +833,6 @@
             } catch (e) {}
         }
 
-        // ÉCOUTEUR PRINCIPAL EN TEMPS RÉEL (COLLECTION COMPLÈTE '/app')
-        // Chaque élément (général, chaque service, chaque rapport) est son propre document.
         async function startMasterFirestoreListener() {
             setSyncStatus('syncing', 'Connexion en direct...');
             
@@ -1623,7 +847,6 @@
                 }
                 firestoreDb = firebase.firestore();
 
-                // Écoute de l'ensemble des documents sous la collection 'app'
                 firestoreDb.collection('app').onSnapshot((querySnapshot) => {
                     let cloudGeneral = null;
                     const cloudServices = [];
@@ -1640,7 +863,6 @@
                         }
                     });
 
-                    // Si la base est neuve/vide, on initialise les premiers documents
                     if (!cloudGeneral && !isSyncInitialized) {
                         firestoreDb.collection('app').doc('general').set(stateGeneral);
                         stateServices.forEach(s => firestoreDb.collection('app').doc('service_' + s.id).set(s));
@@ -1650,7 +872,6 @@
                         return;
                     }
 
-                    // Mise à jour de la mémoire depuis la base sans aucun conflit d'horloge
                     if (cloudGeneral) {
                         stateGeneral = Object.assign({}, DEFAULT_GENERAL, cloudGeneral);
                     }
@@ -1667,7 +888,7 @@
                     setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
                 }, (error) => {
                     console.error("Erreur Firestore Listener :", error);
-                    setSyncStatus('offline', 'Mode Hors Ligne / Règles Firestore à vérifier');
+                    setSyncStatus('offline', 'Erreur de connexion Cloud (Vérifiez l\'onglet Sécurité)');
                 });
 
             } catch (err) {
@@ -1684,7 +905,6 @@
             txt.textContent = text;
         }
 
-        // OPÉRATIONS CLOUD INDÉPENDANTES (AUCUN BLOCAGE DE TAILLE)
         async function commitGeneral() {
             saveLocalStorageCache();
             renderAll();
@@ -1705,12 +925,12 @@
             renderServices();
 
             if (firestoreDb && navigator.onLine) {
-                setSyncStatus('syncing', 'Mise à jour du service...');
+                setSyncStatus('syncing', 'Mise à jour de la prestation...');
                 try {
                     await firestoreDb.collection('app').doc('service_' + serviceObj.id).set(serviceObj);
                     setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
                 } catch (err) {
-                    alert("Erreur enregistrement service : " + err.message);
+                    alert("Erreur enregistrement prestation : " + err.message);
                 }
             }
         }
@@ -1721,12 +941,12 @@
             renderServices();
 
             if (firestoreDb && navigator.onLine) {
-                setSyncStatus('syncing', 'Suppression du service...');
+                setSyncStatus('syncing', 'Suppression de la prestation...');
                 try {
                     await firestoreDb.collection('app').doc('service_' + serviceId).delete();
                     setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
                 } catch (err) {
-                    alert("Erreur suppression service : " + err.message);
+                    alert("Erreur suppression prestation : " + err.message);
                 }
             }
         }
@@ -1762,9 +982,7 @@
             }
         }
 
-        // RENDU DE L'ENSEMBLE DU SITE PUBLIC
         function renderAll() {
-            // Logo
             const logoImg = document.getElementById('logo-image');
             if (stateGeneral.logo) {
                 logoImg.src = stateGeneral.logo;
@@ -1772,20 +990,16 @@
                 logoImg.src = "https://via.placeholder.com/150x150/e30613/ffffff?text=4SP";
             }
 
-            // Textes En-tête
             document.getElementById('header-company-name').textContent = stateGeneral.headerName || "FOR SÉCURITÉ PRIVÉE (4SP)";
             document.getElementById('header-company-slogan').textContent = stateGeneral.headerSlogan || "";
 
-            // Hero
             document.getElementById('hero-main-title').textContent = stateGeneral.hero.title;
             document.getElementById('hero-subtitle').textContent = stateGeneral.hero.subtitle;
 
-            // Présentation
             document.getElementById('commercial-title').textContent = stateGeneral.commercial.title;
             document.getElementById('commercial-text').innerHTML = stateGeneral.commercial.p1;
             document.getElementById('commercial-text-2').textContent = stateGeneral.commercial.p2;
 
-            // À propos
             document.getElementById('about-title').textContent = stateGeneral.about.title;
             document.getElementById('about-text-1').textContent = stateGeneral.about.p1;
             document.getElementById('about-text-2').textContent = stateGeneral.about.p2;
@@ -1797,7 +1011,6 @@
                 aboutImg.style.display = 'none';
             }
 
-            // Valeurs
             const valContainer = document.getElementById('values-container');
             valContainer.innerHTML = (stateGeneral.about.values || []).map(v => `
                 <div class="value-item">
@@ -1807,7 +1020,6 @@
                 </div>
             `).join('');
 
-            // Coordonnées & Footer
             document.getElementById('contact-address').textContent = stateGeneral.contact.address;
             document.getElementById('footer-address').textContent = stateGeneral.contact.address;
             document.getElementById('contact-phone').textContent = stateGeneral.contact.phone;
@@ -1816,6 +1028,7 @@
             document.getElementById('footer-email').textContent = stateGeneral.contact.email;
             document.getElementById('contact-availability').textContent = stateGeneral.contact.availability;
             document.getElementById('contact-agents').textContent = stateGeneral.contact.agents;
+            document.getElementById('footer-agents-count').textContent = stateGeneral.contact.agents;
             document.getElementById('footer-year').textContent = stateGeneral.contact.copyrightYear;
 
             renderServices();
@@ -1909,7 +1122,6 @@
             `).join('');
         }
 
-        // COMPRESSION D'IMAGE OPTIMISÉE
         function handleImageUpload(event, maxDimension, quality, callback) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1946,14 +1158,11 @@
             event.target.value = "";
         }
 
-        // ADMINISTRATION
         function populateAdminFields() {
-            // Logo
             document.getElementById('admin-logo-preview').src = stateGeneral.logo || 'https://via.placeholder.com/150x150/e30613/ffffff?text=4SP';
             document.getElementById('admin-header-name').value = stateGeneral.headerName || "";
             document.getElementById('admin-header-slogan').value = stateGeneral.headerSlogan || "";
 
-            // Sélecteur de prestations
             const selector = document.getElementById('admin-service-selector');
             const currentSelected = selector.value;
             selector.innerHTML = stateServices.map(s => `
@@ -1964,7 +1173,6 @@
             }
             loadAdminServiceForm();
 
-            // Textes
             document.getElementById('admin-hero-title').value = stateGeneral.hero.title;
             document.getElementById('admin-hero-sub').value = stateGeneral.hero.subtitle;
             document.getElementById('admin-comm-1').value = stateGeneral.commercial.p1;
@@ -1974,7 +1182,6 @@
             document.getElementById('admin-about-p2').value = stateGeneral.about.p2;
             document.getElementById('admin-about-preview').src = stateGeneral.about.image || 'https://via.placeholder.com/90x70?text=Aucune';
 
-            // Valeurs
             const valManager = document.getElementById('admin-values-manager');
             valManager.innerHTML = (stateGeneral.about.values || []).map((v, i) => `
                 <div style="background:#fff; border:1px solid #ddd; padding:10px; border-radius:6px; margin-bottom:10px;">
@@ -1987,7 +1194,6 @@
                 </div>
             `).join('');
 
-            // Coordonnées
             document.getElementById('admin-contact-addr').value = stateGeneral.contact.address;
             document.getElementById('admin-contact-tel').value = stateGeneral.contact.phone;
             document.getElementById('admin-contact-mail').value = stateGeneral.contact.email;
@@ -1998,7 +1204,6 @@
             renderAdminReportsList();
         }
 
-        // GESTION DU LOGO
         function updateSiteLogo(base64) {
             stateGeneral.logo = base64;
             document.getElementById('admin-logo-preview').src = base64;
@@ -2020,7 +1225,6 @@
             alert("Identité visuelle enregistrée et synchronisée !");
         }
 
-        // PRESTATIONS & PHOTOS
         function loadAdminServiceForm() {
             const serviceId = document.getElementById('admin-service-selector').value;
             const s = stateServices.find(item => item.id === serviceId);
@@ -2145,7 +1349,6 @@
             alert("Prestation enregistrée et synchronisée en temps réel sur tous les appareils !");
         }
 
-        // RAPPORTS
         function setReportImageDraft(base64) {
             reportDraftImage = base64;
             document.getElementById('admin-report-img-preview-box').innerHTML = `
@@ -2213,7 +1416,6 @@
             }
         }
 
-        // TEXTES, À PROPOS & VALEURS
         function updateAboutPhoto(base64) {
             stateGeneral.about.image = base64;
             document.getElementById('admin-about-preview').src = base64;
@@ -2264,7 +1466,6 @@
             alert("Coordonnées enregistrées et synchronisées !");
         }
 
-        // AUTHENTIFICATION ADMIN
         async function verifyAdminPassword() {
             const pwdInput = document.getElementById('adminPassword').value;
             const computedHash = await sha256(pwdInput);
@@ -2292,14 +1493,12 @@
         function showAdminTab(tabId, event) {
             document.querySelectorAll('#adminMainSection .admin-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-
             document.getElementById(tabId).classList.add('active');
             if (event && event.currentTarget) {
                 event.currentTarget.classList.add('active');
             }
         }
 
-        // NAVIGATION & MODALS
         function openServiceDetail(serviceId) {
             document.querySelectorAll('.service-detail').forEach(el => el.classList.remove('active'));
             const target = document.getElementById(serviceId);
