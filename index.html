@@ -98,8 +98,8 @@
         }
         
         .logo {
-            width: clamp(70px, 10vw, 110px);
-            height: clamp(70px, 10vw, 110px);
+            width: clamp(65px, 9vw, 95px);
+            height: clamp(65px, 9vw, 95px);
             background: var(--accent);
             border-radius: 12px;
             display: flex;
@@ -115,7 +115,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 5px;
+            padding: 4px;
         }
         
         .company-name {
@@ -862,7 +862,7 @@
             margin: 30px auto;
             padding: clamp(1.2rem, 3.5vw, 2.5rem);
             border-radius: 12px;
-            max-width: min(850px, 94vw);
+            max-width: min(880px, 95vw);
             position: relative;
         }
         
@@ -1219,7 +1219,7 @@
         </div>
     </div>
 
-    <!-- Panneau d'Administration -->
+    <!-- Panneau d'Administration Complet -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-content">
             <button class="close-admin" onclick="closeAdmin()">&times;</button>
@@ -1237,23 +1237,51 @@
             
             <!-- Écran Principal Administration -->
             <div id="adminMainSection" class="admin-section">
-                <h2>Administration - FOR SÉCURITÉ PRIVÉE</h2>
+                <h2>Administration Globale - 4SP</h2>
                 
                 <div id="syncBadge" class="sync-badge sync-offline">
                     <i class="fas fa-wifi"></i> <span id="syncText">Initialisation...</span>
                 </div>
                 
                 <div class="admin-tabs">
-                    <div class="admin-tab active" onclick="showAdminTab('tab-services', event)">Services & Photos</div>
+                    <div class="admin-tab active" onclick="showAdminTab('tab-branding', event)">Logo & Identité</div>
+                    <div class="admin-tab" onclick="showAdminTab('tab-services', event)">Services & Photos</div>
                     <div class="admin-tab" onclick="showAdminTab('tab-reports', event)">Rapports</div>
                     <div class="admin-tab" onclick="showAdminTab('tab-content', event)">Textes & Valeurs</div>
-                    <div class="admin-tab" onclick="showAdminTab('tab-contact', event)">Contact & Footer</div>
-                    <div class="admin-tab" onclick="showAdminTab('tab-sync', event)">Firebase / Cloud</div>
+                    <div class="admin-tab" onclick="showAdminTab('tab-contact', event)">Contact & Coordonnées</div>
                 </div>
                 
+                <!-- Tab Logo & Identité -->
+                <div id="tab-branding" class="admin-section active">
+                    <h3>Gestion du Logo et de l'En-tête</h3>
+                    <div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-top:1rem;">
+                        <h4 style="margin-bottom:0.5rem;">Logo du Site</h4>
+                        <div class="photo-card-manager">
+                            <img id="admin-logo-preview" class="photo-card-thumb" src="" alt="Aperçu Logo">
+                            <div>
+                                <input type="file" accept="image/*" onchange="handleImageUpload(event, 300, 0.85, updateSiteLogo)">
+                                <button class="admin-btn-danger" type="button" style="margin-top:6px;" onclick="deleteSiteLogo()">Rétablir le logo par défaut</button>
+                            </div>
+                        </div>
+                        <div class="admin-form-group" style="margin-top:1rem;">
+                            <label>Nom de l'entreprise :</label>
+                            <input type="text" id="admin-header-name">
+                        </div>
+                        <div class="admin-form-group">
+                            <label>Slogan :</label>
+                            <input type="text" id="admin-header-slogan">
+                        </div>
+                        <button class="admin-btn" onclick="saveAdminBranding()"><i class="fas fa-save"></i> Enregistrer l'identité</button>
+                    </div>
+                </div>
+
                 <!-- Tab Services & Photos -->
-                <div id="tab-services" class="admin-section active">
-                    <h3>Gestion des Services et de leurs Photos</h3>
+                <div id="tab-services" class="admin-section">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <h3>Gestion des Services</h3>
+                        <button class="admin-btn-secondary" onclick="createNewService()"><i class="fas fa-plus"></i> Créer une nouvelle prestation</button>
+                    </div>
+                    
                     <div class="admin-form-group" style="margin-top:1rem;">
                         <label for="admin-service-selector">Prestation à gérer :</label>
                         <select id="admin-service-selector" onchange="loadAdminServiceForm()">
@@ -1265,6 +1293,10 @@
                         <div class="admin-form-group">
                             <label>Titre de la prestation :</label>
                             <input type="text" id="admin-service-title">
+                        </div>
+                        <div class="admin-form-group">
+                            <label>Icône FontAwesome (ex: fa-user-shield, fa-walking, fa-video) :</label>
+                            <input type="text" id="admin-service-icon" placeholder="fa-user-shield">
                         </div>
                         <div class="admin-form-group">
                             <label>Description courte :</label>
@@ -1279,7 +1311,7 @@
                         <div class="photo-card-manager">
                             <img id="admin-service-main-img-preview" class="photo-card-thumb" src="" alt="Aperçu principal">
                             <div style="flex-grow:1;">
-                                <input type="file" accept="image/*" onchange="handleImageUpload(event, updateServiceMainImage)">
+                                <input type="file" accept="image/*" onchange="handleImageUpload(event, 800, 0.65, updateServiceMainImage)">
                                 <div style="margin-top:5px;">
                                     <button class="admin-btn-danger" type="button" onclick="deleteServiceMainImage()">Supprimer la photo</button>
                                 </div>
@@ -1292,19 +1324,20 @@
                         </div>
                         <div style="margin-top:10px;">
                             <label style="font-weight:600; display:block; margin-bottom:5px;">Ajouter une photo à la galerie :</label>
-                            <input type="file" accept="image/*" onchange="handleImageUpload(event, addServiceGalleryImage)">
+                            <input type="file" accept="image/*" onchange="handleImageUpload(event, 800, 0.65, addServiceGalleryImage)">
                         </div>
                         
-                        <div style="margin-top:1.5rem;">
+                        <div style="margin-top:1.5rem; display:flex; gap:10px; flex-wrap:wrap;">
                             <button class="admin-btn" onclick="saveAdminCurrentService()"><i class="fas fa-save"></i> Enregistrer cette prestation</button>
+                            <button class="admin-btn-danger" onclick="deleteCurrentService()"><i class="fas fa-trash"></i> Supprimer définitivement cette prestation</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Tab Rapports -->
                 <div id="tab-reports" class="admin-section">
-                    <h3>Ajouter un Nouveau Rapport</h3>
-                    <div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-bottom:1.5rem;">
+                    <h3>Ajouter un Nouveau Rapport d'Activité</h3>
+                    <div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-bottom:1.5rem; margin-top:1rem;">
                         <div class="admin-form-group">
                             <label>Titre :</label>
                             <input type="text" id="admin-report-title">
@@ -1319,7 +1352,7 @@
                         </div>
                         <div class="admin-form-group">
                             <label>Photo du rapport :</label>
-                            <input type="file" accept="image/*" id="admin-report-file" onchange="handleImageUpload(event, setReportImageDraft)">
+                            <input type="file" accept="image/*" id="admin-report-file" onchange="handleImageUpload(event, 800, 0.65, setReportImageDraft)">
                             <div id="admin-report-img-preview-box" style="margin-top:8px;"></div>
                         </div>
                         <button class="admin-btn" onclick="submitNewReport()"><i class="fas fa-plus"></i> Publier le rapport</button>
@@ -1331,11 +1364,11 @@
                     </div>
                 </div>
                 
-                <!-- Tab Textes -->
+                <!-- Tab Textes & Valeurs -->
                 <div id="tab-content" class="admin-section">
-                    <h3>Textes Principaux</h3>
-                    <div class="admin-form-group">
-                        <label>Titre Hero :</label>
+                    <h3>Textes de Présentation</h3>
+                    <div class="admin-form-group" style="margin-top:1rem;">
+                        <label>Titre Hero (Accueil) :</label>
                         <input type="text" id="admin-hero-title">
                     </div>
                     <div class="admin-form-group">
@@ -1351,23 +1384,40 @@
                         <textarea id="admin-comm-2" rows="3"></textarea>
                     </div>
                     
-                    <h3 style="margin-top:1.5rem;">Photo Section "À Propos"</h3>
+                    <h3 style="margin-top:1.5rem;">Section "À Propos" & Photo</h3>
+                    <div class="admin-form-group">
+                        <label>Titre À Propos :</label>
+                        <input type="text" id="admin-about-title">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Paragraphe 1 :</label>
+                        <textarea id="admin-about-p1" rows="3"></textarea>
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Paragraphe 2 :</label>
+                        <textarea id="admin-about-p2" rows="3"></textarea>
+                    </div>
                     <div class="photo-card-manager">
                         <img id="admin-about-preview" class="photo-card-thumb" src="" alt="À propos">
                         <div>
-                            <input type="file" accept="image/*" onchange="handleImageUpload(event, updateAboutPhoto)">
+                            <input type="file" accept="image/*" onchange="handleImageUpload(event, 800, 0.65, updateAboutPhoto)">
                             <button class="admin-btn-danger" type="button" style="margin-top:5px;" onclick="deleteAboutPhoto()">Supprimer la photo</button>
                         </div>
                     </div>
                     
-                    <button class="admin-btn" onclick="saveAdminTexts()"><i class="fas fa-save"></i> Enregistrer les textes</button>
+                    <h3 style="margin-top:1.5rem;">Valeurs de l'Entreprise (4 blocs)</h3>
+                    <div id="admin-values-manager">
+                        <!-- Rempli dynamiquement -->
+                    </div>
+                    
+                    <button class="admin-btn" style="margin-top:1rem;" onclick="saveAdminTexts()"><i class="fas fa-save"></i> Enregistrer les textes et valeurs</button>
                 </div>
                 
-                <!-- Tab Contact & Footer -->
+                <!-- Tab Contact & Coordonnées -->
                 <div id="tab-contact" class="admin-section">
                     <h3>Coordonnées & Pied de Page</h3>
-                    <div class="admin-form-group">
-                        <label>Adresse :</label>
+                    <div class="admin-form-group" style="margin-top:1rem;">
+                        <label>Adresse postale :</label>
                         <input type="text" id="admin-contact-addr">
                     </div>
                     <div class="admin-form-group">
@@ -1375,7 +1425,7 @@
                         <input type="text" id="admin-contact-tel">
                     </div>
                     <div class="admin-form-group">
-                        <label>Email :</label>
+                        <label>Email de contact :</label>
                         <input type="email" id="admin-contact-mail">
                     </div>
                     <div class="admin-form-group">
@@ -1383,37 +1433,40 @@
                         <input type="text" id="admin-contact-avail">
                     </div>
                     <div class="admin-form-group">
+                        <label>Nombre d'agents affiché :</label>
+                        <input type="text" id="admin-contact-agents">
+                    </div>
+                    <div class="admin-form-group">
                         <label>Année du Copyright :</label>
                         <input type="text" id="admin-footer-yr">
                     </div>
                     <button class="admin-btn" onclick="saveAdminContact()"><i class="fas fa-save"></i> Enregistrer les coordonnées</button>
                 </div>
-                
-                <!-- Tab Firebase / Synchronisation Cloud -->
-                <div id="tab-sync" class="admin-section">
-                    <h3>Synchronisation Multi-Appareils (Firebase Firestore)</h3>
-                    <p style="font-size:0.9rem; color:#555; margin-bottom:1rem;">
-                        La synchronisation est reliée directement à votre projet Firebase <strong>for-securite-privee</strong>.
-                    </p>
-                    <div class="admin-form-group">
-                        <label>Clé d'API Web (apiKey) :</label>
-                        <input type="text" id="admin-custom-api-key" value="AIzaSyAC36fANLbOEjI-DOanP6kJ_0gNxfx-YU4">
-                    </div>
-                    <button class="admin-btn" onclick="saveCustomApiKey()"><i class="fas fa-cloud-upload-alt"></i> Mettre à jour la clé API</button>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Logique JavaScript Unifiée & Réactive -->
+    <!-- Moteur JavaScript Réactif & Segmenté sans restriction de taille -->
     <script>
-        // MOT DE PASSE ADMIN
+        // MOT DE PASSE ADMIN SÉCURISÉ (SHA-256)
         const ADMIN_HASH = "8f9a2e6fca78d070cb1e838b97d19c0cfc2e9877b4d458cbf63359d955fa63fa";
         
-        // MODÈLE DE DONNÉES PAR DÉFAUT
-        const DEFAULT_APP_STATE = {
-            version: 2,
-            updatedAt: Date.now(),
+        // CONFIGURATION FIREBASE PROJET 'for-securite-privee'
+        const FIREBASE_CONFIG = {
+            apiKey: "AIzaSyAC36fANLbOEjI-DOanP6kJ_0gNxfx-YU4",
+            authDomain: "for-securite-privee.firebaseapp.com",
+            projectId: "for-securite-privee",
+            storageBucket: "for-securite-privee.firebasestorage.app",
+            messagingSenderId: "58213730462",
+            appId: "1:58213730462:web:d4cfb312288ea7f260538f"
+        };
+
+        // ÉTAT PAR DÉFAUT DU SITE
+        const DEFAULT_GENERAL = {
+            type: "general",
+            logo: "",
+            headerName: "FOR SÉCURITÉ PRIVÉE (4SP)",
+            headerSlogan: "Votre sécurité est notre priorité depuis 2024",
             hero: {
                 title: "Experts en Sécurité à Montpellier",
                 subtitle: "Plus de 20 agents dédiés à votre protection 24h/24 et 7j/7"
@@ -1436,222 +1489,334 @@
                 ]
             },
             contact: {
-                title: "Contactez-nous",
-                description: "Notre équipe est à votre disposition pour répondre à toutes vos questions et vous proposer des solutions adaptées à vos besoins en sécurité.",
                 address: "83 rue Yves Montand, 34080 Montpellier",
                 phone: "06 60 35 01 97",
                 email: "contact@4sp.fr",
                 availability: "Disponible 24h/24 et 7j/7",
                 agents: "Plus de 20 agents dédiés",
                 copyrightYear: "2026"
-            },
-            services: [
-                {
-                    id: "gardiennage",
-                    title: "Gardiennage & Surveillance Humaine",
-                    desc: "Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.",
-                    icon: "fa-user-shield",
-                    mainImage: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    features: [
-                        "Agents de sécurité diplômés CNAPS",
-                        "Surveillance continue 24h/24 et 7j/7",
-                        "Contrôle d'accès strict",
-                        "Rapports d'activité détaillés"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                        "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                    ]
-                },
-                {
-                    id: "rondes",
-                    title: "Rondes & Interventions",
-                    desc: "Surveillance proactive et interventions rapides sur site pour prévenir tout incident.",
-                    icon: "fa-walking",
-                    mainImage: "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    features: [
-                        "Rondes régulières et inopinées",
-                        "Intervention rapide 24h/24",
-                        "Contrôles par badges et QR codes",
-                        "Rapports immédiats"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                    ]
-                },
-                {
-                    id: "evenementiel",
-                    title: "Sécurité Événementielle",
-                    desc: "Gestion complète de la sécurité pour tous types d'événements, publics ou privés.",
-                    icon: "fa-calendar-alt",
-                    mainImage: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    features: [
-                        "Gestion des foules et filtrage",
-                        "Palpations et contrôle d'accès",
-                        "Coordination avec les secours",
-                        "Poste de commandement mobile"
-                    ],
-                    gallery: [
-                        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                    ]
-                }
-            ],
-            reports: [
-                {
-                    id: "rep-1",
-                    title: "Dispositif renforcé - Montpellier Centre",
-                    date: "2026-03-10",
-                    content: "Nos équipes ont assuré la sécurisation complète d'un complexe commercial et institutionnel à Montpellier, avec contrôle strict des accès et rondes préventives.",
-                    image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                }
-            ]
+            }
         };
 
-        let appState = JSON.parse(JSON.stringify(DEFAULT_APP_STATE));
+        const DEFAULT_SERVICES = [
+            {
+                type: "service",
+                id: "gardiennage",
+                title: "Gardiennage & Surveillance Humaine",
+                desc: "Protection optimale pour vos biens et personnes avec nos agents de sécurité diplômés CNAPS.",
+                icon: "fa-user-shield",
+                mainImage: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                features: [
+                    "Agents de sécurité diplômés CNAPS",
+                    "Surveillance continue 24h/24 et 7j/7",
+                    "Contrôle d'accès strict",
+                    "Rapports d'activité détaillés"
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1590065480004-6f5f471f2c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            {
+                type: "service",
+                id: "rondes",
+                title: "Rondes & Interventions",
+                desc: "Surveillance proactive et interventions rapides sur site pour prévenir tout incident.",
+                icon: "fa-walking",
+                mainImage: "https://images.unsplash.com/photo-1593105544552-5f75f5d0d54a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                features: [
+                    "Rondes régulières et inopinées",
+                    "Intervention rapide 24h/24",
+                    "Contrôles par badges et QR codes",
+                    "Rapports immédiats"
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            },
+            {
+                type: "service",
+                id: "evenementiel",
+                title: "Sécurité Événementielle",
+                desc: "Gestion complète de la sécurité pour tous types d'événements, publics ou privés.",
+                icon: "fa-calendar-alt",
+                mainImage: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                features: [
+                    "Gestion des foules et filtrage",
+                    "Palpations et contrôle d'accès",
+                    "Coordination avec les secours",
+                    "Poste de commandement mobile"
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
+            }
+        ];
+
+        const DEFAULT_REPORTS = [
+            {
+                type: "report",
+                id: "rep-1",
+                title: "Dispositif renforcé - Montpellier Centre",
+                date: "2026-03-10",
+                content: "Nos équipes ont assuré la sécurisation complète d'un complexe commercial et institutionnel à Montpellier, avec contrôle strict des accès et rondes préventives.",
+                image: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        ];
+
+        // ÉTAT EN MÉMOIRE
+        let stateGeneral = JSON.parse(JSON.stringify(DEFAULT_GENERAL));
+        let stateServices = JSON.parse(JSON.stringify(DEFAULT_SERVICES));
+        let stateReports = JSON.parse(JSON.stringify(DEFAULT_REPORTS));
         let firestoreDb = null;
         let reportDraftImage = "";
+        let isSyncInitialized = false;
 
         async function sha256(str) {
             const buf = new TextEncoder().encode(str);
             const hashBuf = await crypto.subtle.digest('SHA-256', buf);
-            const hashArr = Array.from(new Uint8Array(hashBuf));
-            return hashArr.map(b => b.toString(16).padStart(2, '0')).join('');
+            return Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
             initMenu();
             initContactForm();
-            loadLocalCache();
-            await initCloudSync();
+            loadLocalStorageCache();
             renderAll();
+            await startMasterFirestoreListener();
         });
 
-        function loadLocalCache() {
+        function loadLocalStorageCache() {
             try {
-                const cached = localStorage.getItem('4sp_app_state');
-                if (cached) {
-                    const parsed = JSON.parse(cached);
-                    if (parsed && parsed.version) {
-                        appState = parsed;
-                    }
-                }
+                const g = localStorage.getItem('4sp_cache_general');
+                if (g) stateGeneral = JSON.parse(g);
+                const s = localStorage.getItem('4sp_cache_services');
+                if (s) stateServices = JSON.parse(s);
+                const r = localStorage.getItem('4sp_cache_reports');
+                if (r) stateReports = JSON.parse(r);
             } catch (e) {
-                console.warn('Erreur lecture cache local :', e);
+                console.warn("Erreur lecture cache local :", e);
             }
         }
 
-        async function initCloudSync() {
-            setSyncStatus('syncing', 'Connexion au serveur...');
-            
-            // Clé API et configuration Firebase directes
-            const apiKey = localStorage.getItem('4sp_custom_api_key') || "AIzaSyAC36fANLbOEjI-DOanP6kJ_0gNxfx-YU4";
-            
-            const firebaseConfig = {
-                apiKey: apiKey,
-                authDomain: "for-securite-privee.firebaseapp.com",
-                projectId: "for-securite-privee",
-                storageBucket: "for-securite-privee.firebasestorage.app",
-                messagingSenderId: "58213730462",
-                appId: "1:58213730462:web:d4cfb312288ea7f260538f"
-            };
+        function saveLocalStorageCache() {
+            try {
+                localStorage.setItem('4sp_cache_general', JSON.stringify(stateGeneral));
+                localStorage.setItem('4sp_cache_services', JSON.stringify(stateServices));
+                localStorage.setItem('4sp_cache_reports', JSON.stringify(stateReports));
+            } catch (e) {}
+        }
 
-            if (typeof firebase !== 'undefined') {
-                try {
-                    if (firebase.apps.length === 0) {
-                        firebase.initializeApp(firebaseConfig);
-                    }
-                    firestoreDb = firebase.firestore();
-
-                    // Synchronisation temps réel automatique
-                    firestoreDb.collection('app').doc('state').onSnapshot((doc) => {
-                        if (doc.exists) {
-                            const cloudData = doc.data();
-                            if (cloudData && cloudData.updatedAt && cloudData.updatedAt > (appState.updatedAt || 0)) {
-                                appState = cloudData;
-                                localStorage.setItem('4sp_app_state', JSON.stringify(appState));
-                                renderAll();
-                            }
-                            setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
-                        } else {
-                            firestoreDb.collection('app').doc('state').set(appState);
-                            setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
-                        }
-                    }, (err) => {
-                        console.warn('Mode local actif :', err);
-                        setSyncStatus('offline', 'Mode Local actif');
-                    });
-                    return;
-                } catch (e) {
-                    console.error('Erreur initialisation Firebase :', e);
-                }
+        // ÉCOUTEUR PRINCIPAL EN TEMPS RÉEL (COLLECTION COMPLÈTE '/app')
+        // Chaque élément (général, chaque service, chaque rapport) est son propre document.
+        async function startMasterFirestoreListener() {
+            setSyncStatus('syncing', 'Connexion en direct...');
+            
+            if (typeof firebase === 'undefined') {
+                setSyncStatus('offline', 'Firebase SDK inaccessible');
+                return;
             }
-            
-            setSyncStatus('offline', 'Mode Local actif');
+
+            try {
+                if (firebase.apps.length === 0) {
+                    firebase.initializeApp(FIREBASE_CONFIG);
+                }
+                firestoreDb = firebase.firestore();
+
+                // Écoute de l'ensemble des documents sous la collection 'app'
+                firestoreDb.collection('app').onSnapshot((querySnapshot) => {
+                    let cloudGeneral = null;
+                    const cloudServices = [];
+                    const cloudReports = [];
+
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        if (doc.id === 'general') {
+                            cloudGeneral = data;
+                        } else if (data.type === 'service' || doc.id.startsWith('service_')) {
+                            cloudServices.push(data);
+                        } else if (data.type === 'report' || doc.id.startsWith('report_')) {
+                            cloudReports.push(data);
+                        }
+                    });
+
+                    // Si la base est neuve/vide, on initialise les premiers documents
+                    if (!cloudGeneral && !isSyncInitialized) {
+                        firestoreDb.collection('app').doc('general').set(stateGeneral);
+                        stateServices.forEach(s => firestoreDb.collection('app').doc('service_' + s.id).set(s));
+                        stateReports.forEach(r => firestoreDb.collection('app').doc('report_' + r.id).set(r));
+                        isSyncInitialized = true;
+                        setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
+                        return;
+                    }
+
+                    // Mise à jour de la mémoire depuis la base sans aucun conflit d'horloge
+                    if (cloudGeneral) {
+                        stateGeneral = Object.assign({}, DEFAULT_GENERAL, cloudGeneral);
+                    }
+                    if (cloudServices.length > 0) {
+                        stateServices = cloudServices;
+                    }
+                    if (querySnapshot.docs.some(d => d.data().type === 'report' || d.id.startsWith('report_'))) {
+                        stateReports = cloudReports;
+                    }
+
+                    isSyncInitialized = true;
+                    saveLocalStorageCache();
+                    renderAll();
+                    setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
+                }, (error) => {
+                    console.error("Erreur Firestore Listener :", error);
+                    setSyncStatus('offline', 'Mode Hors Ligne / Règles Firestore à vérifier');
+                });
+
+            } catch (err) {
+                console.error("Erreur d'initialisation Firebase :", err);
+                setSyncStatus('offline', 'Mode Local actif');
+            }
         }
 
         function setSyncStatus(status, text) {
             const badge = document.getElementById('syncBadge');
             const txt = document.getElementById('syncText');
             if (!badge || !txt) return;
-
             badge.className = 'sync-badge sync-' + status;
             txt.textContent = text;
         }
 
-        async function commitState(actionName = "Mise à jour") {
-            appState.updatedAt = Date.now();
-            localStorage.setItem('4sp_app_state', JSON.stringify(appState));
+        // OPÉRATIONS CLOUD INDÉPENDANTES (AUCUN BLOCAGE DE TAILLE)
+        async function commitGeneral() {
+            saveLocalStorageCache();
             renderAll();
 
             if (firestoreDb && navigator.onLine) {
-                setSyncStatus('syncing', 'Propagation en cours...');
+                setSyncStatus('syncing', 'Propagation générale...');
                 try {
-                    await firestoreDb.collection('app').doc('state').set(appState);
+                    await firestoreDb.collection('app').doc('general').set(stateGeneral);
                     setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
                 } catch (err) {
-                    console.error('Échec mise à jour Firestore :', err);
-                    setSyncStatus('offline', 'Enregistré localement');
+                    alert("Erreur de sauvegarde générale : " + err.message);
                 }
             }
         }
 
+        async function commitSingleService(serviceObj) {
+            saveLocalStorageCache();
+            renderServices();
+
+            if (firestoreDb && navigator.onLine) {
+                setSyncStatus('syncing', 'Mise à jour du service...');
+                try {
+                    await firestoreDb.collection('app').doc('service_' + serviceObj.id).set(serviceObj);
+                    setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
+                } catch (err) {
+                    alert("Erreur enregistrement service : " + err.message);
+                }
+            }
+        }
+
+        async function deleteServiceDocument(serviceId) {
+            stateServices = stateServices.filter(s => s.id !== serviceId);
+            saveLocalStorageCache();
+            renderServices();
+
+            if (firestoreDb && navigator.onLine) {
+                setSyncStatus('syncing', 'Suppression du service...');
+                try {
+                    await firestoreDb.collection('app').doc('service_' + serviceId).delete();
+                    setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
+                } catch (err) {
+                    alert("Erreur suppression service : " + err.message);
+                }
+            }
+        }
+
+        async function commitSingleReport(reportObj) {
+            saveLocalStorageCache();
+            renderReports();
+
+            if (firestoreDb && navigator.onLine) {
+                setSyncStatus('syncing', 'Publication du rapport...');
+                try {
+                    await firestoreDb.collection('app').doc('report_' + reportObj.id).set(reportObj);
+                    setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
+                } catch (err) {
+                    alert("Erreur publication rapport : " + err.message);
+                }
+            }
+        }
+
+        async function deleteReportDocument(reportId) {
+            stateReports = stateReports.filter(r => r.id !== reportId);
+            saveLocalStorageCache();
+            renderReports();
+
+            if (firestoreDb && navigator.onLine) {
+                setSyncStatus('syncing', 'Suppression du rapport...');
+                try {
+                    await firestoreDb.collection('app').doc('report_' + reportId).delete();
+                    setSyncStatus('online', 'Synchronisé en temps réel (Cloud)');
+                } catch (err) {
+                    alert("Erreur suppression rapport : " + err.message);
+                }
+            }
+        }
+
+        // RENDU DE L'ENSEMBLE DU SITE PUBLIC
         function renderAll() {
-            document.getElementById('hero-main-title').textContent = appState.hero.title;
-            document.getElementById('hero-subtitle').textContent = appState.hero.subtitle;
+            // Logo
+            const logoImg = document.getElementById('logo-image');
+            if (stateGeneral.logo) {
+                logoImg.src = stateGeneral.logo;
+            } else {
+                logoImg.src = "https://via.placeholder.com/150x150/e30613/ffffff?text=4SP";
+            }
 
-            document.getElementById('commercial-title').textContent = appState.commercial.title;
-            document.getElementById('commercial-text').innerHTML = appState.commercial.p1;
-            document.getElementById('commercial-text-2').textContent = appState.commercial.p2;
+            // Textes En-tête
+            document.getElementById('header-company-name').textContent = stateGeneral.headerName || "FOR SÉCURITÉ PRIVÉE (4SP)";
+            document.getElementById('header-company-slogan').textContent = stateGeneral.headerSlogan || "";
 
-            document.getElementById('about-title').textContent = appState.about.title;
-            document.getElementById('about-text-1').textContent = appState.about.p1;
-            document.getElementById('about-text-2').textContent = appState.about.p2;
+            // Hero
+            document.getElementById('hero-main-title').textContent = stateGeneral.hero.title;
+            document.getElementById('hero-subtitle').textContent = stateGeneral.hero.subtitle;
+
+            // Présentation
+            document.getElementById('commercial-title').textContent = stateGeneral.commercial.title;
+            document.getElementById('commercial-text').innerHTML = stateGeneral.commercial.p1;
+            document.getElementById('commercial-text-2').textContent = stateGeneral.commercial.p2;
+
+            // À propos
+            document.getElementById('about-title').textContent = stateGeneral.about.title;
+            document.getElementById('about-text-1').textContent = stateGeneral.about.p1;
+            document.getElementById('about-text-2').textContent = stateGeneral.about.p2;
             const aboutImg = document.getElementById('about-main-image');
-            if (appState.about.image) {
-                aboutImg.src = appState.about.image;
+            if (stateGeneral.about.image) {
+                aboutImg.src = stateGeneral.about.image;
                 aboutImg.style.display = 'block';
             } else {
                 aboutImg.style.display = 'none';
             }
 
+            // Valeurs
             const valContainer = document.getElementById('values-container');
-            valContainer.innerHTML = appState.about.values.map(v => `
+            valContainer.innerHTML = (stateGeneral.about.values || []).map(v => `
                 <div class="value-item">
-                    <i class="fas ${v.icon}"></i>
+                    <i class="fas ${escapeHtml(v.icon || 'fa-star')}"></i>
                     <h4>${escapeHtml(v.title)}</h4>
                     <p>${escapeHtml(v.desc)}</p>
                 </div>
             `).join('');
 
-            document.getElementById('contact-address').textContent = appState.contact.address;
-            document.getElementById('footer-address').textContent = appState.contact.address;
-            document.getElementById('contact-phone').textContent = appState.contact.phone;
-            document.getElementById('footer-phone').textContent = appState.contact.phone;
-            document.getElementById('contact-email').textContent = appState.contact.email;
-            document.getElementById('footer-email').textContent = appState.contact.email;
-            document.getElementById('contact-availability').textContent = appState.contact.availability;
-            document.getElementById('contact-agents').textContent = appState.contact.agents;
-            document.getElementById('footer-year').textContent = appState.contact.copyrightYear;
+            // Coordonnées & Footer
+            document.getElementById('contact-address').textContent = stateGeneral.contact.address;
+            document.getElementById('footer-address').textContent = stateGeneral.contact.address;
+            document.getElementById('contact-phone').textContent = stateGeneral.contact.phone;
+            document.getElementById('footer-phone').textContent = stateGeneral.contact.phone;
+            document.getElementById('contact-email').textContent = stateGeneral.contact.email;
+            document.getElementById('footer-email').textContent = stateGeneral.contact.email;
+            document.getElementById('contact-availability').textContent = stateGeneral.contact.availability;
+            document.getElementById('contact-agents').textContent = stateGeneral.contact.agents;
+            document.getElementById('footer-year').textContent = stateGeneral.contact.copyrightYear;
 
             renderServices();
             renderReports();
@@ -1665,24 +1830,24 @@
             const grid = document.getElementById('services-grid-container');
             const detailsContainer = document.getElementById('service-details-container');
             
-            grid.innerHTML = appState.services.map(s => `
+            grid.innerHTML = stateServices.map(s => `
                 <div class="service-card" onclick="openServiceDetail('${s.id}')">
                     <div class="service-image">
                         ${s.mainImage ? `<img src="${s.mainImage}" alt="${escapeHtml(s.title)}">` : '<div style="height:100%; display:flex; align-items:center; justify-content:center; color:#999;">Aucune photo</div>'}
                     </div>
                     <div class="service-content">
-                        <div class="service-icon"><i class="fas ${s.icon}"></i></div>
+                        <div class="service-icon"><i class="fas ${escapeHtml(s.icon || 'fa-shield-alt')}"></i></div>
                         <h3>${escapeHtml(s.title)}</h3>
                         <p>${escapeHtml(s.desc)}</p>
                         <ul class="service-features">
-                            ${s.features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
+                            ${(s.features || []).map(f => `<li>${escapeHtml(f)}</li>`).join('')}
                         </ul>
                         <button class="btn" style="margin-top:auto;" onclick="openServiceDetail('${s.id}'); event.stopPropagation();">En savoir plus</button>
                     </div>
                 </div>
             `).join('');
 
-            detailsContainer.innerHTML = appState.services.map(s => `
+            detailsContainer.innerHTML = stateServices.map(s => `
                 <section id="${s.id}" class="service-detail">
                     <div class="service-hero" style="${s.mainImage ? `background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${s.mainImage}');` : ''}">
                         <h2>${escapeHtml(s.title)}</h2>
@@ -1691,10 +1856,10 @@
                     <div class="service-detail-grid">
                         <div>
                             <h3>Notre engagement opérationnel</h3>
-                            <p style="margin: 1rem 0;">Nous déployons des agents qualifiés et certifiés pour répondre avec rigueur à toutes les exigences de ce service.</p>
+                            <p style="margin: 1rem 0;">Nous déployons des agents qualifiés et certifiés pour répondre avec rigueur à toutes les exigences de cette prestation.</p>
                             <h4>Prestations incluses :</h4>
                             <ul class="benefits-list">
-                                ${s.features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
+                                ${(s.features || []).map(f => `<li>${escapeHtml(f)}</li>`).join('')}
                             </ul>
                         </div>
                         <div class="service-benefits">
@@ -1702,7 +1867,7 @@
                             <ul class="benefits-list">
                                 <li>Agents agréés CNAPS</li>
                                 <li>Interventions rapides 24/7</li>
-                                <li>Rapports de mission systématiques</li>
+                                <li>Rapports d'activité quotidiens</li>
                             </ul>
                             <a href="#contact" class="btn" onclick="navigateTo('contact')">Demander un devis</a>
                         </div>
@@ -1726,25 +1891,26 @@
 
         function renderReports() {
             const container = document.getElementById('reports-grid');
-            if (appState.reports.length === 0) {
+            if (stateReports.length === 0) {
                 container.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#777;">Aucun rapport publié.</p>';
                 return;
             }
 
-            container.innerHTML = appState.reports.map(r => `
+            container.innerHTML = stateReports.map(r => `
                 <div class="report-card">
-                    ${r.image ? `<img src="${r.image}" alt="${escapeHtml(r.title)}"></div>` : ''}
+                    ${r.image ? `<div class="report-image"><img src="${r.image}" alt="${escapeHtml(r.title)}"></div>` : ''}
                     <div class="report-content">
                         <div class="report-date">${r.date ? new Date(r.date).toLocaleDateString('fr-FR') : ''}</div>
                         <h3 class="report-title">${escapeHtml(r.title)}</h3>
-                        <p class="report-excerpt">${escapeHtml(r.content.substring(0, 110))}...</p>
+                        <p class="report-excerpt">${escapeHtml((r.content || "").substring(0, 110))}...</p>
                         <button class="read-more" onclick="showReportModal('${r.id}')">Lire le compte-rendu <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function handleImageUpload(event, callback) {
+        // COMPRESSION D'IMAGE OPTIMISÉE
+        function handleImageUpload(event, maxDimension, quality, callback) {
             const file = event.target.files[0];
             if (!file) return;
 
@@ -1755,15 +1921,14 @@
                     const canvas = document.createElement('canvas');
                     let width = img.width;
                     let height = img.height;
-                    const maxDim = 1280;
 
-                    if (width > maxDim || height > maxDim) {
+                    if (width > maxDimension || height > maxDimension) {
                         if (width > height) {
-                            height = Math.round((height * maxDim) / width);
-                            width = maxDim;
+                            height = Math.round((height * maxDimension) / width);
+                            width = maxDimension;
                         } else {
-                            width = Math.round((width * maxDim) / height);
-                            height = maxDim;
+                            width = Math.round((width * maxDimension) / height);
+                            height = maxDimension;
                         }
                     }
 
@@ -1772,8 +1937,8 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.80);
-                    callback(compressedDataUrl);
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                    callback(compressedBase64);
                 };
                 img.src = e.target.result;
             };
@@ -1781,41 +1946,90 @@
             event.target.value = "";
         }
 
+        // ADMINISTRATION
         function populateAdminFields() {
+            // Logo
+            document.getElementById('admin-logo-preview').src = stateGeneral.logo || 'https://via.placeholder.com/150x150/e30613/ffffff?text=4SP';
+            document.getElementById('admin-header-name').value = stateGeneral.headerName || "";
+            document.getElementById('admin-header-slogan').value = stateGeneral.headerSlogan || "";
+
+            // Sélecteur de prestations
             const selector = document.getElementById('admin-service-selector');
-            selector.innerHTML = appState.services.map(s => `
+            const currentSelected = selector.value;
+            selector.innerHTML = stateServices.map(s => `
                 <option value="${s.id}">${escapeHtml(s.title)}</option>
             `).join('');
-            
+            if (currentSelected && stateServices.some(s => s.id === currentSelected)) {
+                selector.value = currentSelected;
+            }
             loadAdminServiceForm();
 
-            document.getElementById('admin-hero-title').value = appState.hero.title;
-            document.getElementById('admin-hero-sub').value = appState.hero.subtitle;
-            document.getElementById('admin-comm-1').value = appState.commercial.p1;
-            document.getElementById('admin-comm-2').value = appState.commercial.p2;
-            
-            const aboutPrev = document.getElementById('admin-about-preview');
-            aboutPrev.src = appState.about.image || 'https://via.placeholder.com/90x70?text=Aucune';
+            // Textes
+            document.getElementById('admin-hero-title').value = stateGeneral.hero.title;
+            document.getElementById('admin-hero-sub').value = stateGeneral.hero.subtitle;
+            document.getElementById('admin-comm-1').value = stateGeneral.commercial.p1;
+            document.getElementById('admin-comm-2').value = stateGeneral.commercial.p2;
+            document.getElementById('admin-about-title').value = stateGeneral.about.title;
+            document.getElementById('admin-about-p1').value = stateGeneral.about.p1;
+            document.getElementById('admin-about-p2').value = stateGeneral.about.p2;
+            document.getElementById('admin-about-preview').src = stateGeneral.about.image || 'https://via.placeholder.com/90x70?text=Aucune';
 
-            document.getElementById('admin-contact-addr').value = appState.contact.address;
-            document.getElementById('admin-contact-tel').value = appState.contact.phone;
-            document.getElementById('admin-contact-mail').value = appState.contact.email;
-            document.getElementById('admin-contact-avail').value = appState.contact.availability;
-            document.getElementById('admin-footer-yr').value = appState.contact.copyrightYear;
+            // Valeurs
+            const valManager = document.getElementById('admin-values-manager');
+            valManager.innerHTML = (stateGeneral.about.values || []).map((v, i) => `
+                <div style="background:#fff; border:1px solid #ddd; padding:10px; border-radius:6px; margin-bottom:10px;">
+                    <strong>Valeur #${i + 1}</strong>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:5px;">
+                        <input type="text" id="admin-val-title-${i}" value="${escapeHtml(v.title)}" placeholder="Titre">
+                        <input type="text" id="admin-val-icon-${i}" value="${escapeHtml(v.icon)}" placeholder="Icône FontAwesome (fa-star)">
+                    </div>
+                    <input type="text" id="admin-val-desc-${i}" value="${escapeHtml(v.desc)}" placeholder="Description" style="margin-top:5px;">
+                </div>
+            `).join('');
+
+            // Coordonnées
+            document.getElementById('admin-contact-addr').value = stateGeneral.contact.address;
+            document.getElementById('admin-contact-tel').value = stateGeneral.contact.phone;
+            document.getElementById('admin-contact-mail').value = stateGeneral.contact.email;
+            document.getElementById('admin-contact-avail').value = stateGeneral.contact.availability;
+            document.getElementById('admin-contact-agents').value = stateGeneral.contact.agents;
+            document.getElementById('admin-footer-yr').value = stateGeneral.contact.copyrightYear;
 
             renderAdminReportsList();
-            
-            document.getElementById('admin-custom-api-key').value = localStorage.getItem('4sp_custom_api_key') || "AIzaSyAC36fANLbOEjI-DOanP6kJ_0gNxfx-YU4";
         }
 
+        // GESTION DU LOGO
+        function updateSiteLogo(base64) {
+            stateGeneral.logo = base64;
+            document.getElementById('admin-logo-preview').src = base64;
+            commitGeneral();
+        }
+
+        function deleteSiteLogo() {
+            if (confirm("Rétablir le logo 4SP par défaut ?")) {
+                stateGeneral.logo = "";
+                document.getElementById('admin-logo-preview').src = 'https://via.placeholder.com/150x150/e30613/ffffff?text=4SP';
+                commitGeneral();
+            }
+        }
+
+        function saveAdminBranding() {
+            stateGeneral.headerName = document.getElementById('admin-header-name').value.trim();
+            stateGeneral.headerSlogan = document.getElementById('admin-header-slogan').value.trim();
+            commitGeneral();
+            alert("Identité visuelle enregistrée et synchronisée !");
+        }
+
+        // PRESTATIONS & PHOTOS
         function loadAdminServiceForm() {
             const serviceId = document.getElementById('admin-service-selector').value;
-            const s = appState.services.find(item => item.id === serviceId);
+            const s = stateServices.find(item => item.id === serviceId);
             if (!s) return;
 
             document.getElementById('admin-service-title').value = s.title;
+            document.getElementById('admin-service-icon').value = s.icon || 'fa-shield-alt';
             document.getElementById('admin-service-desc').value = s.desc;
-            document.getElementById('admin-service-features').value = s.features.join('\n');
+            document.getElementById('admin-service-features').value = (s.features || []).join('\n');
 
             const mainImgPrev = document.getElementById('admin-service-main-img-preview');
             mainImgPrev.src = s.mainImage || 'https://via.placeholder.com/90x70?text=Aucune';
@@ -1826,9 +2040,9 @@
             } else {
                 galContainer.innerHTML = s.gallery.map((imgUrl, idx) => `
                     <div class="photo-card-manager">
-                        <img class="photo-card-thumb" src="${imgUrl}" alt="Photo ${idx+1}">
+                        <img class="photo-card-thumb" src="${imgUrl}" alt="Photo ${idx + 1}">
                         <div style="flex-grow:1;">
-                            <span style="font-size:0.85rem; color:#555;">Photo #${idx+1}</span>
+                            <span style="font-size:0.85rem; color:#555;">Photo #${idx + 1}</span>
                         </div>
                         <button class="admin-btn-danger" type="button" onclick="deleteServiceGalleryImage(${idx})">Supprimer cette photo</button>
                     </div>
@@ -1836,72 +2050,107 @@
             }
         }
 
-        function updateServiceMainImage(dataUrl) {
-            const serviceId = document.getElementById('admin-service-selector').value;
-            const s = appState.services.find(item => item.id === serviceId);
-            if (!s) return;
+        function createNewService() {
+            const title = prompt("Titre de la nouvelle prestation :");
+            if (!title) return;
 
-            s.mainImage = dataUrl;
-            document.getElementById('admin-service-main-img-preview').src = dataUrl;
-            commitState("Remplacement de l'image principale");
+            const id = "service_" + Date.now();
+            const newService = {
+                type: "service",
+                id: id,
+                title: title.trim(),
+                desc: "Description de la nouvelle prestation.",
+                icon: "fa-shield-alt",
+                mainImage: "",
+                features: ["Agents qualifiés CNAPS", "Disponibilité 24/7"],
+                gallery: []
+            };
+
+            stateServices.push(newService);
+            commitSingleService(newService);
+            populateAdminFields();
+            document.getElementById('admin-service-selector').value = id;
+            loadAdminServiceForm();
+            alert("Nouvelle prestation créée et synchronisée !");
+        }
+
+        function deleteCurrentService() {
+            const serviceId = document.getElementById('admin-service-selector').value;
+            if (stateServices.length <= 1) {
+                alert("Vous devez conserver au moins un service.");
+                return;
+            }
+            if (confirm("Voulez-vous supprimer définitivement cette prestation et toutes ses photos sur tous les appareils ?")) {
+                deleteServiceDocument(serviceId);
+                populateAdminFields();
+                alert("Prestation supprimée avec succès !");
+            }
+        }
+
+        function updateServiceMainImage(base64) {
+            const serviceId = document.getElementById('admin-service-selector').value;
+            const s = stateServices.find(item => item.id === serviceId);
+            if (!s) return;
+            s.mainImage = base64;
+            document.getElementById('admin-service-main-img-preview').src = base64;
+            commitSingleService(s);
         }
 
         function deleteServiceMainImage() {
             const serviceId = document.getElementById('admin-service-selector').value;
-            const s = appState.services.find(item => item.id === serviceId);
+            const s = stateServices.find(item => item.id === serviceId);
             if (!s) return;
-
-            if (confirm("Confirmez-vous la suppression de la photo principale de ce service ?")) {
+            if (confirm("Supprimer la photo principale ?")) {
                 s.mainImage = "";
                 document.getElementById('admin-service-main-img-preview').src = 'https://via.placeholder.com/90x70?text=Aucune';
-                commitState("Suppression image principale");
+                commitSingleService(s);
             }
         }
 
-        function addServiceGalleryImage(dataUrl) {
+        function addServiceGalleryImage(base64) {
             const serviceId = document.getElementById('admin-service-selector').value;
-            const s = appState.services.find(item => item.id === serviceId);
+            const s = stateServices.find(item => item.id === serviceId);
             if (!s) return;
-
             if (!s.gallery) s.gallery = [];
-            s.gallery.push(dataUrl);
-            commitState("Ajout d'une photo à la galerie");
+            s.gallery.push(base64);
+            commitSingleService(s);
             loadAdminServiceForm();
         }
 
         function deleteServiceGalleryImage(index) {
             const serviceId = document.getElementById('admin-service-selector').value;
-            const s = appState.services.find(item => item.id === serviceId);
+            const s = stateServices.find(item => item.id === serviceId);
             if (!s || !s.gallery) return;
-
-            if (confirm("Supprimer cette photo de la galerie ?")) {
+            if (confirm("Supprimer cette photo de la galerie sur tous les appareils ?")) {
                 s.gallery.splice(index, 1);
-                commitState("Suppression d'une photo de galerie");
+                commitSingleService(s);
                 loadAdminServiceForm();
             }
         }
 
         function saveAdminCurrentService() {
             const serviceId = document.getElementById('admin-service-selector').value;
-            const s = appState.services.find(item => item.id === serviceId);
+            const s = stateServices.find(item => item.id === serviceId);
             if (!s) return;
 
             s.title = document.getElementById('admin-service-title').value.trim();
+            s.icon = document.getElementById('admin-service-icon').value.trim() || 'fa-shield-alt';
             s.desc = document.getElementById('admin-service-desc').value.trim();
             s.features = document.getElementById('admin-service-features').value
                 .split('\n')
                 .map(f => f.trim())
                 .filter(f => f.length > 0);
 
-            commitState("Mise à jour des informations du service");
-            alert("Prestation enregistrée et synchronisée !");
+            commitSingleService(s);
+            alert("Prestation enregistrée et synchronisée en temps réel sur tous les appareils !");
         }
 
-        function setReportImageDraft(dataUrl) {
-            reportDraftImage = dataUrl;
+        // RAPPORTS
+        function setReportImageDraft(base64) {
+            reportDraftImage = base64;
             document.getElementById('admin-report-img-preview-box').innerHTML = `
-                <img src="${dataUrl}" style="height:60px; border-radius:4px;" alt="Aperçu">
-                <button type="button" class="admin-btn-danger" style="margin-left:8px;" onclick="reportDraftImage=''; this.parentElement.innerHTML='';">Supprimer</button>
+                <img src="${base64}" style="height:60px; border-radius:4px;" alt="Aperçu">
+                <button type="button" class="admin-btn-danger" style="margin-left:8px;" onclick="reportDraftImage=''; this.parentElement.innerHTML='';">Supprimer la photo</button>
             `;
         }
 
@@ -1911,20 +2160,21 @@
             const content = document.getElementById('admin-report-content').value.trim();
 
             if (!title || !content) {
-                alert("Veuillez remplir au moins le titre et le contenu du rapport.");
+                alert("Veuillez renseigner au moins le titre et le contenu du rapport.");
                 return;
             }
 
             const newReport = {
-                id: 'rep-' + Date.now(),
+                type: "report",
+                id: 'rep_' + Date.now(),
                 title: title,
                 date: date || new Date().toISOString().split('T')[0],
                 content: content,
                 image: reportDraftImage || ""
             };
 
-            appState.reports.unshift(newReport);
-            commitState("Ajout d'un nouveau rapport");
+            stateReports.unshift(newReport);
+            commitSingleReport(newReport);
 
             document.getElementById('admin-report-title').value = '';
             document.getElementById('admin-report-date').value = '';
@@ -1934,17 +2184,17 @@
             reportDraftImage = "";
 
             renderAdminReportsList();
-            alert("Rapport publié et synchronisé avec succès !");
+            alert("Rapport publié et synchronisé en temps réel sur tous les appareils !");
         }
 
         function renderAdminReportsList() {
             const container = document.getElementById('admin-reports-list');
-            if (appState.reports.length === 0) {
+            if (stateReports.length === 0) {
                 container.innerHTML = '<p style="color:#777;">Aucun rapport enregistré.</p>';
                 return;
             }
 
-            container.innerHTML = appState.reports.map(r => `
+            container.innerHTML = stateReports.map(r => `
                 <div class="photo-card-manager">
                     ${r.image ? `<img class="photo-card-thumb" src="${r.image}" alt="${escapeHtml(r.title)}">` : '<div class="photo-card-thumb" style="display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#777;">Sans image</div>'}
                     <div style="flex-grow:1;">
@@ -1957,61 +2207,64 @@
         }
 
         function deleteReportItem(reportId) {
-            if (confirm("Voulez-vous supprimer définitivement ce rapport ?")) {
-                appState.reports = appState.reports.filter(r => r.id !== reportId);
-                commitState("Suppression d'un rapport");
+            if (confirm("Supprimer définitivement ce rapport sur tous les appareils ?")) {
+                deleteReportDocument(reportId);
                 renderAdminReportsList();
             }
         }
 
-        function updateAboutPhoto(dataUrl) {
-            appState.about.image = dataUrl;
-            document.getElementById('admin-about-preview').src = dataUrl;
-            commitState("Remplacement photo À propos");
+        // TEXTES, À PROPOS & VALEURS
+        function updateAboutPhoto(base64) {
+            stateGeneral.about.image = base64;
+            document.getElementById('admin-about-preview').src = base64;
+            commitGeneral();
         }
 
         function deleteAboutPhoto() {
             if (confirm("Supprimer la photo de la section À Propos ?")) {
-                appState.about.image = "";
+                stateGeneral.about.image = "";
                 document.getElementById('admin-about-preview').src = 'https://via.placeholder.com/90x70?text=Aucune';
-                commitState("Suppression photo À propos");
+                commitGeneral();
             }
         }
 
         function saveAdminTexts() {
-            appState.hero.title = document.getElementById('admin-hero-title').value.trim();
-            appState.hero.subtitle = document.getElementById('admin-hero-sub').value.trim();
-            appState.commercial.p1 = document.getElementById('admin-comm-1').value.trim();
-            appState.commercial.p2 = document.getElementById('admin-comm-2').value.trim();
+            stateGeneral.hero.title = document.getElementById('admin-hero-title').value.trim();
+            stateGeneral.hero.subtitle = document.getElementById('admin-hero-sub').value.trim();
+            stateGeneral.commercial.p1 = document.getElementById('admin-comm-1').value.trim();
+            stateGeneral.commercial.p2 = document.getElementById('admin-comm-2').value.trim();
+            stateGeneral.about.title = document.getElementById('admin-about-title').value.trim();
+            stateGeneral.about.p1 = document.getElementById('admin-about-p1').value.trim();
+            stateGeneral.about.p2 = document.getElementById('admin-about-p2').value.trim();
 
-            commitState("Mise à jour des textes");
-            alert("Textes enregistrés et synchronisés !");
+            for (let i = 0; i < (stateGeneral.about.values || []).length; i++) {
+                const t = document.getElementById(`admin-val-title-${i}`);
+                const ic = document.getElementById(`admin-val-icon-${i}`);
+                const d = document.getElementById(`admin-val-desc-${i}`);
+                if (t && ic && d) {
+                    stateGeneral.about.values[i].title = t.value.trim();
+                    stateGeneral.about.values[i].icon = ic.value.trim();
+                    stateGeneral.about.values[i].desc = d.value.trim();
+                }
+            }
+
+            commitGeneral();
+            alert("Textes et valeurs enregistrés et synchronisés !");
         }
 
         function saveAdminContact() {
-            appState.contact.address = document.getElementById('admin-contact-addr').value.trim();
-            appState.contact.phone = document.getElementById('admin-contact-tel').value.trim();
-            appState.contact.email = document.getElementById('admin-contact-mail').value.trim();
-            appState.contact.availability = document.getElementById('admin-contact-avail').value.trim();
-            appState.contact.copyrightYear = document.getElementById('admin-footer-yr').value.trim();
+            stateGeneral.contact.address = document.getElementById('admin-contact-addr').value.trim();
+            stateGeneral.contact.phone = document.getElementById('admin-contact-tel').value.trim();
+            stateGeneral.contact.email = document.getElementById('admin-contact-mail').value.trim();
+            stateGeneral.contact.availability = document.getElementById('admin-contact-avail').value.trim();
+            stateGeneral.contact.agents = document.getElementById('admin-contact-agents').value.trim();
+            stateGeneral.contact.copyrightYear = document.getElementById('admin-footer-yr').value.trim();
 
-            commitState("Mise à jour des coordonnées");
+            commitGeneral();
             alert("Coordonnées enregistrées et synchronisées !");
         }
 
-        function saveCustomApiKey() {
-            const key = document.getElementById('admin-custom-api-key').value.trim();
-            if (key) {
-                localStorage.setItem('4sp_custom_api_key', key);
-                alert("Clé API enregistrée ! Rechargement pour activation...");
-                location.reload();
-            } else {
-                localStorage.removeItem('4sp_custom_api_key');
-                alert("Clé API retirée. Retour en mode local.");
-                location.reload();
-            }
-        }
-
+        // AUTHENTIFICATION ADMIN
         async function verifyAdminPassword() {
             const pwdInput = document.getElementById('adminPassword').value;
             const computedHash = await sha256(pwdInput);
@@ -2046,6 +2299,7 @@
             }
         }
 
+        // NAVIGATION & MODALS
         function openServiceDetail(serviceId) {
             document.querySelectorAll('.service-detail').forEach(el => el.classList.remove('active'));
             const target = document.getElementById(serviceId);
@@ -2056,14 +2310,14 @@
         }
 
         function showReportModal(reportId) {
-            const rep = appState.reports.find(r => r.id === reportId);
+            const rep = stateReports.find(r => r.id === reportId);
             if (!rep) return;
 
             document.getElementById('modal-report-body').innerHTML = `
                 ${rep.image ? `<img src="${rep.image}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:1rem;" alt="${escapeHtml(rep.title)}">` : ''}
                 <div style="color:var(--primary); font-weight:600; margin-bottom:0.5rem;">${rep.date ? new Date(rep.date).toLocaleDateString('fr-FR') : ''}</div>
                 <h2 style="color:var(--secondary); margin-bottom:1rem;">${escapeHtml(rep.title)}</h2>
-                <div style="line-height:1.8; color:#333;">${escapeHtml(rep.content).replace(/\n/g, '<br>')}</div>
+                <div style="line-height:1.8; color:#333;">${escapeHtml(rep.content || "").replace(/\n/g, '<br>')}</div>
             `;
             document.getElementById('reportModal').style.display = 'block';
         }
